@@ -1,14 +1,32 @@
 # Stembase
  File tagging system
+	## 2022.12.27		version 0.0.2
+	- Function implementation
+	
+	
+	### Added
+	1. Add new function Dark Mode
+		#### Main
+			1. Toggle button can switch theme color between dark tone and light tone
+			2. Each tone can be edited by modified css
+		#### Reset
+			1. Reset to system default color >> light
+	2. Ensure app is completely off
+	3. Ensure app cannot be executed when it already is
+		
+	## 2022.12.27		version 0.0.11
+	- Patch
+	
+	### Added
+	1. Add new file lod.md to replace README.md as changelog
+	
+	### Changed
+	1. README.md is transfered from changelog into summary
 
-	## 2022.12.26		version 0.0.2
-		### Side function implement
-		
-	1. Add 	
-------
 	## 2022.12.26		version 0.0.1
-		### Infrastructure building
-		
+	- Infrastructure building
+	
+	### Added	
 	1. Add Setting.js works as system variables and function storage 
 		1.1 Add TemplateDir to assign html path
 		1.2 Add StaticDir to assign static files path
@@ -28,5 +46,3 @@
 	
 	3. Move and rename files to implement #2
 		-- finished
-		
-	
