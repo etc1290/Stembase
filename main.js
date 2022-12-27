@@ -5,19 +5,23 @@ const fs = require('fs')
 // Import System Variable here
 var env=require('./Setting.js')
 
-console.log(env.TemplateDir)
+
+// WindowsCreator
 const createWindow = () => {
     const win = new BrowserWindow({
-        width: 800,
-        height: 600,
+        width: 1280,
+        height: 960,
         webPreferences: {
             preload: path.join(__dirname, 'preload.js'),
         },
     })
     win.webContents.openDevTools()
+    win.loadFile(env.TemplateDir + 'index.html')	
+
+// FileSystem	
     const files = fs.readdirSync('./');
-    ipcMain.handle('main', () => files)
-    win.loadFile(env.TemplateDir + 'index.html')
+    ipcMain.handle('fs-main', () => files)
+
 }
 
 
