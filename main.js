@@ -4,15 +4,11 @@ const fs = require('fs')
 
 // Import System Variable here
 var env=require('./Setting.js')
-
-<<<<<<< Updated upstream
 console.log(env.TemplateDir)
-=======
 
 // WindowsCreator
 //--- Window create function
 
->>>>>>> Stashed changes
 const createWindow = () => {
     const win = new BrowserWindow({
         width: 800,
@@ -23,13 +19,6 @@ const createWindow = () => {
     })
     win.webContents.openDevTools()
     const files = fs.readdirSync('./');
-<<<<<<< Updated upstream
-    ipcMain.handle('main', () => files)
-    win.loadFile(env.TemplateDir + 'index.html')
-}
-
-
-=======
     ipcMain.handle('fs-main',	() => files)
 	
 // DarkMode
@@ -51,7 +40,6 @@ const createWindow = () => {
 	})
 }
     
->>>>>>> Stashed changes
 app.whenReady().then(() => {
     createWindow()
 })
