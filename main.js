@@ -10,6 +10,10 @@ var env=require('./Setting.js')
 //--- Window create function
 console.log(env.TemplateDir)
 
+// WindowsCreator
+//--- Window create function
+
+
 const createWindow = () => {
     const win = new BrowserWindow({
         width: 1280,
@@ -20,6 +24,11 @@ const createWindow = () => {
         },
     })
     win.webContents.openDevTools()
+    const files = fs.readdirSync('./');
+    ipcMain.handle('main', () => files)
+    win.loadFile(env.TemplateDir + 'index.html')
+}
+
 
     win.loadFile(env.TemplateDir + 'index.html')	
 
@@ -44,8 +53,7 @@ const createWindow = () => {
 	ipcMain.handle('dm-reset',	() =>{
 		nativeTheme.themeSource = 'system'
 	})
-
-    
+}
 app.whenReady().then(() => {
     createWindow()
 	// Prevent from multiple windows create
