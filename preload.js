@@ -2,19 +2,15 @@ const { contextBridge, ipcRenderer } = require('electron')
 
 // Testing function
 contextBridge.exposeInMainWorld('versions', {
-    node: 		()=> process.versions.node,
-    chrome: 	()=> process.versions.chrome,
-    electron: 	()=> process.versions.electron,
-
+    node: 		() => process.versions.node,
+    chrome: 	() => process.versions.chrome,
+    electron: 	() => process.versions.electron,
 })
 
 // FileSystem
 contextBridge.exposeInMainWorld('dir', {
-
-    main: 		()=> ipcRenderer.invoke('fs-main')
+    main: 		() => ipcRenderer.invoke('fs-main')
 })
-
-
 
 // DarkMode
 contextBridge.exposeInMainWorld('dm', {

@@ -2,7 +2,7 @@
  File tagging system
 	## 2022.12.27		version 0.0.2
 	- Function implementation
-	
+	- Patch
 	
 	### Added
 	1. Add new function Dark Mode
