@@ -46,15 +46,6 @@ const createWindow = () => {
 	})
 
     
-	
-//--- Main function
-//--- FileSystem 
-	const files = fs.readdirSync('./');
-    ipcMain.handle('fs-main', () => files)
-	win.loadFile(env.TemplateDir + 'index.html')
-}
-
-
 app.whenReady().then(() => {
     createWindow()
 	// Prevent from multiple windows create
