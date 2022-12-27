@@ -1,6 +1,11 @@
 # Stembase
  File tagging system
 
+	## 2022.12.26		version 0.0.2
+		### Side function implement
+		
+	1. Add 	
+------
 	## 2022.12.26		version 0.0.1
 		### Infrastructure building
 		
@@ -23,3 +28,5 @@
 	
 	3. Move and rename files to implement #2
 		-- finished
+		
+	
