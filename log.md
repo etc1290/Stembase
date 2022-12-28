@@ -1,5 +1,13 @@
 # Stembase
  File tagging system
+ 
+	## 2022.12.28		version 0.0.21
+	- Patch
+	- Bug Fix 
+	
+	### Fixed
+	1. Correct the missing braces deleted by Git Hub
+	
 	## 2022.12.27		version 0.0.2
 	- Function implementation
 	

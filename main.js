@@ -44,7 +44,7 @@ const createWindow = () => {
 	ipcMain.handle('dm-reset',	() =>{
 		nativeTheme.themeSource = 'system'
 	})
-
+}
     
 app.whenReady().then(() => {
     createWindow()
