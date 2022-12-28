@@ -6,14 +6,11 @@ information.innerText = `This app is using Chrome (v${versions.chrome()}), Node.
 // FileSystem
 const func = async () => {
     const response = await window.fs.main()
-	let updateDiv = document.querySelector('div[id=fs-main]')
-	let fsPlaceholder = document.querySelector('p[id=fs-text]')
-	fsPlaceholder.remove()
-	response.forEach(i=>{
-		i = `<button class='fs-data'>` + i + `</button>`
-		console.log(i)
-		updateDiv.insertAdjacentHTML('beforeend',i)
+    console.log(response)
+	response.forEach(function (item, i){
+		document.getElementById('fs-dir').innerHTML += '<h2>' + item + '</h2>'
 	})
+	
 }
 
 func()
@@ -30,3 +27,7 @@ document.getElementById('dm-reset').addEventListener('click', async () =>{
 	document.getElementById('dm-text').innerHTML = 'System'
 })	
 
+// Directory response
+document.getElementById('fs-openDir').addEventListener('click', async () => {
+	await window.fs.getDir().then(console.log("response"))
+})

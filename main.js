@@ -1,4 +1,4 @@
-const { app, BrowserWindow, ipcMain, nativeTheme } = require('electron')
+const { app, BrowserWindow, ipcMain, nativeTheme, dialog } = require('electron')
 const path = require('path')
 const fs = require('fs')
 
@@ -26,6 +26,20 @@ const createWindow = () => {
 // FileSystem	
     const files = fs.readdirSync('./');
     ipcMain.handle('fs-main',	() => files)
+	
+	//Open folder Test
+	ipcMain.handle('fs-getDir', () => {
+		dialog.showOpenDialog(win, {
+			properties: ['openFile', 'openDirectory']
+		}).then(result => {
+			console.log(result.canceled)
+			if (result.canceled) return
+			console.log(result.filePaths)
+			return result.filePaths
+		}).catch(err => {
+			console.log(err)
+		})
+})
 	
 // DarkMode
 	// Main: toggle
