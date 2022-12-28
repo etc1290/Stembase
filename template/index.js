@@ -5,8 +5,15 @@ information.innerText = `This app is using Chrome (v${versions.chrome()}), Node.
 
 // FileSystem
 const func = async () => {
-    const response = await window.dir.main()
-    console.log(response)
+    const response = await window.fs.main()
+	let updateDiv = document.querySelector('div[id=fs-main]')
+	let fsPlaceholder = document.querySelector('p[id=fs-text]')
+	fsPlaceholder.remove()
+	response.forEach(i=>{
+		i = `<button class='fs-data'>` + i + `</button>`
+		console.log(i)
+		updateDiv.insertAdjacentHTML('beforeend',i)
+	})
 }
 
 func()
