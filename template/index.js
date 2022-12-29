@@ -10,7 +10,7 @@ const fsfunc = async (v) => {
 	let updateDiv = document.querySelector('div[id=fs-main]')
 	updateDiv.innerHTML=''
 	response.forEach(i=>{
-		i = `<button class='fs-data'>` + i + `</button>`
+		i = `<button class='fs-data'>` + i + `</button><br>`
 		updateDiv.insertAdjacentHTML('beforeend',i)
 	})
 

@@ -3,6 +3,13 @@
 
 
 ---
+	## 2022.12.29		version 0.0.51
+	- Design changelog
+	### Added
+	1. Add line break between buttons in index.js
+		-- finished
+	
+---
 	## 2022.12.29		version 0.0.5
 	- Function implementation
 	- Coding re-arrangement
@@ -22,7 +29,7 @@
 	3. Remove fs-path codes because of it's deprecation
 		--finished
 	4. Change the default texts display of fs-path in index.html
-		
+		--finished
 ---
 	## 2022.12.29		version 0.0.4
 	- Function implementation
