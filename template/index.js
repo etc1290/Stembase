@@ -6,6 +6,7 @@ information.innerText = `This app is using Chrome (v${versions.chrome()}), Node.
 // FileSystem
 	//Main: Show filenames
 const func = async () => {
+	
 	const response = await window.fs.main()
 	let updateDiv = document.querySelector('div[id=fs-main]')
 	let fsPlaceholder = document.querySelector('p[id=fs-text]')
@@ -15,6 +16,7 @@ const func = async () => {
 		console.log(i)
 		updateDiv.insertAdjacentHTML('beforeend',i)
 	})
+	
 	/*
     const response = await window.fs.main()
 	response.forEach(function (item, i){

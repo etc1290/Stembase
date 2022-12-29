@@ -2,7 +2,7 @@
  File tagging system
  
 	## 2022.12.29		version 0.0.31
-	- Function implementation and merge
+	- Merge
 	
 	### Added
 	1. Add fs-path in html for display current selected folder and debug
@@ -10,6 +10,9 @@
 	### Changed 
 	1. Remove fs-dir in index.html because it's redundant compare to fs-text
 		1.1 fs-text is under fs-main, it's a more organized and efficient arrangement with focused purpose
+	2. Replace innerHTML with insertAdjacentHTML for faster and juicy
+		2.1 Each time innerHTML runs it has to serialise all the existing contents of element and then reparse the whole lot
+		2.2 insertAdjacent is only parsing each time and then attaching the small document fragment to the Document Object Model
 ---	
 	## 2022.12.28		version 0.0.3
 	- Function implementation
