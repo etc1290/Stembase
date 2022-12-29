@@ -26,7 +26,18 @@ const createWindow = () => {
     const files = fs.readdirSync('./');
     ipcMain.handle('fs-main',	() => files)
 	
+	//Side: test
+	//const homeDir = 100
+	const homeDir = app.getPath('exe')
+	ipcMain.handle('fs-path', 	() => homeDir)
+	
 	//Side: File browser
+	ipcMain.handle('fs-getDir', () => {
+		const fsobject =dialog.showOpenDialogSync(win, {
+			properties: ['openDirectory']
+		})
+		return fsobject
+	/*
 	ipcMain.handle('fs-getDir', () => {
 		dialog.showOpenDialog(win, {
 			properties: ['openFile', 'openDirectory']
@@ -38,6 +49,10 @@ const createWindow = () => {
 		}).catch(err => {
 			console.log(err)
 		})
+		*/
+
+	
+
 })
 	
 // DarkMode

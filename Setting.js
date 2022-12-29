@@ -5,8 +5,8 @@
 module.exports = {
 	TemplateDir:	'./template/',
 	StaticDir:		'./static/',
+	StartDir:		'./',
 	Debugmode:		true,
-	
 }
 
 

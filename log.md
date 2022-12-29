@@ -1,18 +1,37 @@
 # Stembase
  File tagging system
- 
+
+---
+	## 2022.12.29		version 0.0.4
+	- Function implementation
+	
+	### Added
+	1. Add file browser Side function
+		1.1 Select any file and parse path to frontend
+		-- finished
+	
+	### Changed
+	1. Rename func in index.js to fsfunc for more seriously developing view
+		-- finished
+	2. Replace getElementById in index.js with querySelector for flexible and consistent
+		-- finished
+	3. Rewrite showOpenDialog to a synchronous function and remove comflicting
+		-- finished
+---
 	## 2022.12.29		version 0.0.31
 	- Merge
 	
 	### Added
 	1. Add fs-path in html for display current selected folder and debug
-	
+		-- finished
 	### Changed 
 	1. Remove fs-dir in index.html because it's redundant compare to fs-text
 		1.1 fs-text is under fs-main, it's a more organized and efficient arrangement with focused purpose
-	2. Replace innerHTML with insertAdjacentHTML for faster and juicy
+		-- finished
+	2. Replace innerHTML with insertAdjacentHTML for faster and juicy(i mean flexible)
 		2.1 Each time innerHTML runs it has to serialise all the existing contents of element and then reparse the whole lot
 		2.2 insertAdjacent is only parsing each time and then attaching the small document fragment to the Document Object Model
+		-- finished
 ---	
 	## 2022.12.28		version 0.0.3
 	- Function implementation

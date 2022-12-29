@@ -5,7 +5,7 @@ information.innerText = `This app is using Chrome (v${versions.chrome()}), Node.
 
 // FileSystem
 	//Main: Show filenames
-const func = async () => {
+const fsfunc = async () => {
 	
 	const response = await window.fs.main()
 	let updateDiv = document.querySelector('div[id=fs-main]')
@@ -16,16 +16,13 @@ const func = async () => {
 		console.log(i)
 		updateDiv.insertAdjacentHTML('beforeend',i)
 	})
-	
-	/*
-    const response = await window.fs.main()
-	response.forEach(function (item, i){
-		document.getElementById('fs-dir').innerHTML += '<h2>' + item + '</h2>'
-	})
-	*/
+	//Side: Show file pathname
+	let fspath = document.querySelector('p[id=fs-path]')
+	const fspathInit = await window.fs.path()
+	fspath.innerHTML = fspathInit
 }
 
-func()
+fsfunc()
 
 // DarkMode
 	//Main: Toggle
@@ -41,5 +38,9 @@ document.getElementById('dm-reset').addEventListener('click', async () =>{
 
 // Directory response
 document.getElementById('fs-openDir').addEventListener('click', async () => {
-	await window.fs.getDir().then(console.log("response"))
+	const fstest = await window.fs.getDir()
+	let fspath = document.querySelector('p[id=fs-path]')
+	if(typeof fstest !== 'undefined'){
+		fspath.innerHTML = fstest
+	}
 })
