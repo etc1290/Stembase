@@ -58,7 +58,6 @@ const createWindow = () => {
 // DarkMode
 	// Main: toggle
 	ipcMain.handle('dm-main',	() =>{
-		console.log(nativeTheme.shouldUseDarkColors)
 		if (nativeTheme.shouldUseDarkColors){
 			nativeTheme.themeSource = 'light'
 			

@@ -7,7 +7,7 @@
 	
 	### Added
 	1. Add file browser Side function
-		1.1 Select any file and parse path to frontend
+		1.1 Select any directory and parse path to frontend
 		-- finished
 	
 	### Changed
