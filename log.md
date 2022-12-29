@@ -1,16 +1,41 @@
 # Stembase
  File tagging system
  
+	## 2022.12.29		version 0.0.31
+	- Function implementation and merge
+	
+	### Added
+	1. Add fs-path in html for display current selected folder and debug
+	
+	### Changed 
+	1. Remove fs-dir in index.html because it's redundant compare to fs-text
+		1.1 fs-text is under fs-main, it's a more organized and efficient arrangement with focused purpose
+---	
+	## 2022.12.28		version 0.0.3
+	- Function implementation
+	
+	### Added
+	1. Add FileSystem function 
+		1.1 Parse folder content as button element to frontend
+		1.2 Auto clear all created information when initialized function
+		-- finished
+	2. Add demarcation in log.md for more cleaner paragraph separation
+		-- finished
+		
+	### Changed
+	1. Rename dir to fs for consistency and readability
+		-- finished
+---
 	## 2022.12.28		version 0.0.21
 	- Patch
 	- Bug Fix 
 	
 	### Fixed
 	1. Correct the missing braces deleted by Git Hub
-	
+		-- finished
+---		
 	## 2022.12.27		version 0.0.2
 	- Function implementation
-	
 	
 	### Added
 	1. Add new function Dark Mode
@@ -19,9 +44,12 @@
 			2. Each tone can be edited by modified css
 		#### Reset
 			1. Reset to system default color >> light
+		-- finished
 	2. Ensure app is completely off
+		-- finished
 	3. Ensure app cannot be executed when it already is
-		
+		-- finished
+---	
 	## 2022.12.27		version 0.0.11
 	- Patch
 	
@@ -30,7 +58,7 @@
 	
 	### Changed
 	1. README.md is transfered from changelog into summary
-
+---
 	## 2022.12.26		version 0.0.1
 	- Infrastructure building
 	

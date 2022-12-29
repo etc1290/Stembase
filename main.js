@@ -8,8 +8,6 @@ var env=require('./Setting.js')
 
 // WindowsCreator
 //--- Window create function
-console.log(env.TemplateDir)
-
 const createWindow = () => {
     const win = new BrowserWindow({
         width: 1280,
@@ -24,10 +22,11 @@ const createWindow = () => {
     win.loadFile(env.TemplateDir + 'index.html')	
 
 // FileSystem	
+	//Main: Show filenames
     const files = fs.readdirSync('./');
     ipcMain.handle('fs-main',	() => files)
 	
-	//Open folder Test
+	//Side: File browser
 	ipcMain.handle('fs-getDir', () => {
 		dialog.showOpenDialog(win, {
 			properties: ['openFile', 'openDirectory']
