@@ -10,9 +10,8 @@ contextBridge.exposeInMainWorld('versions', {
 
 // FileSystem
 contextBridge.exposeInMainWorld('fs', {
-    main: 		()=> ipcRenderer.invoke('fs-main'),
+    main: 		(v)=> ipcRenderer.invoke('fs-main',v),
     getDir:     ()=> ipcRenderer.invoke('fs-getDir'),
-	path:		()=> ipcRenderer.invoke('fs-path')
 })
 
 

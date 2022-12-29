@@ -1,6 +1,28 @@
 # Stembase
  File tagging system
 
+
+---
+	## 2022.12.29		version 0.0.5
+	- Function implementation
+	- Coding re-arrangement
+	
+	### Added
+	1. Add Initializer division in index.js for initialized function and code
+		-- finished
+	2. Merge fs-path function to fs-main function
+		-- finished
+	3. Connect fs-main function to fs-getDir function
+		-- finished
+	### Changed
+	1. Remove fs-text and placeholder in index.html and index.js because it's no longer need them
+		-- finished
+	2. Storage fs-main and fs-path at fs in index.html for functional dependency
+		-- finished
+	3. Remove fs-path codes because of it's deprecation
+		--finished
+	4. Change the default texts display of fs-path in index.html
+		
 ---
 	## 2022.12.29		version 0.0.4
 	- Function implementation

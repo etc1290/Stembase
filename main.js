@@ -23,16 +23,21 @@ const createWindow = () => {
 
 // FileSystem	
 	//Main: Show filenames
-    const files = fs.readdirSync('./');
-    ipcMain.handle('fs-main',	() => files)
-	
-	//Side: test
-	//const homeDir = 100
-	const homeDir = app.getPath('exe')
-	ipcMain.handle('fs-path', 	() => homeDir)
-	
+    
+    ipcMain.handle('fs-main',	(event,v) => {
+		console.log(v)
+		if(typeof v == 'undefined'){
+			return fs.readdirSync('./')
+		}else{
+			console.log(fs.readdirSync(v[0]))
+			return fs.readdirSync(v[0])
+		}
+		
+	})
+
 	//Side: File browser
 	ipcMain.handle('fs-getDir', () => {
+		
 		const fsobject =dialog.showOpenDialogSync(win, {
 			properties: ['openDirectory']
 		})
