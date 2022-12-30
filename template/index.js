@@ -4,17 +4,36 @@ const information = document.getElementById('info')
 information.innerText = `This app is using Chrome (v${versions.chrome()}), Node.js (v${versions.node()}), and Electron (v${versions.electron()})`
 
 // FileSystem
-	//Main: Show filenames
-const fsfunc = async (v) => {
-	const response = await window.fs.main(v)
+	//Main: File User Interface
+const fsfunc = async (path) => {
+		//Initialize
 	let updateDiv = document.querySelector('div[id=fs-main]')
 	updateDiv.innerHTML=''
+		//Insert file as button
+	const response = await window.fs.main(path)
 	response.forEach(i=>{
 		i = `<button class='fs-data'>` + i + `</button><br>`
 		updateDiv.insertAdjacentHTML('beforeend',i)
 	})
-
+		//Browse
+	const fsbutton = document.querySelectorAll('button[class=fs-data]')
+	fsbutton.forEach(e=>{
+		e.addEventListener('click',async()=>{
+			fsfunc(e.innerHTML)
+		})
+	})
+		//Show pathname
+		let fspath = document.querySelector('p[id=fs-path]')
+		console.log(path)
+		fspath.innerHTML = path
 }
+	// Side: Directory browser
+document.getElementById('fs-openDir').addEventListener('click', async () => {
+	
+	const fsbrowse = await window.fs.getDir()
+	fsfunc(fsbrowse)
+	
+})
 //Initailizer
 
 fsfunc()
@@ -32,12 +51,4 @@ document.getElementById('dm-reset').addEventListener('click', async () =>{
 	document.getElementById('dm-text').innerHTML = 'System'
 })	
 
-// Directory response
-document.getElementById('fs-openDir').addEventListener('click', async () => {
-	let fspath = document.querySelector('p[id=fs-path]')
-	const fsbrowse = await window.fs.getDir()
-	fsfunc(fsbrowse)
-	if(typeof fsbrowse !== 'undefined'){
-		fspath.innerHTML = fsbrowse
-	}
-})
+

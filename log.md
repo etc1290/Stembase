@@ -1,7 +1,22 @@
 # Stembase
  File tagging system
 
-
+---
+	## 2022.12.30		version 0.0.52
+	- Function implementation
+	
+	### Added
+	1. Add Button response function to fs-data class
+		-- bugged
+	2. Display path when press button
+		-- bugged
+		
+	### Changed
+	1. Put Directory response under FileSystem 
+		-- finished
+	2. Segment FileSystem main function to simplify the complexity
+		-- finished
+		
 ---
 	## 2022.12.29		version 0.0.51
 	- Design changelog
@@ -27,9 +42,9 @@
 	2. Storage fs-main and fs-path at fs in index.html for functional dependency
 		-- finished
 	3. Remove fs-path codes because of it's deprecation
-		--finished
+		-- finished
 	4. Change the default texts display of fs-path in index.html
-		--finished
+		-- finished
 ---
 	## 2022.12.29		version 0.0.4
 	- Function implementation

@@ -27,14 +27,22 @@ const createWindow = () => {
     ipcMain.handle('fs-main',	(event,v) => {
 		console.log(v)
 		if(typeof v == 'undefined'){
-			return fs.readdirSync('./')
+			console.log(env.StartDir)
+			return fs.readdirSync(env.StartDir)
+		}else if(fs.lstatSync(v).isDirectory()){
+			console.log('ssdsd')
+			console.log(fs.readdirSync(v))
+			return fs.readdirSync(v)
 		}else{
-			console.log(fs.readdirSync(v[0]))
-			return fs.readdirSync(v[0])
+			console.log('this is a file')
+			return fs.readdirSync('./')
 		}
 		
 	})
-
+	//Side: File type checker
+	ipcMain.handle('fs-type', (event,v) =>{
+		console.log(fs.lstatSync(v).isDirectory())
+	})
 	//Side: File browser
 	ipcMain.handle('fs-getDir', () => {
 		
@@ -42,21 +50,6 @@ const createWindow = () => {
 			properties: ['openDirectory']
 		})
 		return fsobject
-	/*
-	ipcMain.handle('fs-getDir', () => {
-		dialog.showOpenDialog(win, {
-			properties: ['openFile', 'openDirectory']
-		}).then(result => {
-			console.log(result.canceled)
-			if (result.canceled) return
-			console.log(result.filePaths)
-			return result.filePaths
-		}).catch(err => {
-			console.log(err)
-		})
-		*/
-
-	
 
 })
 	
