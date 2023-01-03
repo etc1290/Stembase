@@ -1,6 +1,15 @@
 # Stembase
  File tagging system
 
+
+---
+	## 2022.01.03		version 0.0.53
+	- Text Change
+	
+	### Added
+	1. Add default texts for capturing undefined look-up result in FileSystem function
+	
+
 ---
 	## 2022.12.30		version 0.0.52
 	- Function implementation

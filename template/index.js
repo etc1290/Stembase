@@ -25,7 +25,9 @@ const fsfunc = async (path) => {
 		//Show pathname
 		let fspath = document.querySelector('p[id=fs-path]')
 		console.log(path)
-		fspath.innerHTML = path
+		if (typeof path !== 'undefined'){
+			fspath.innerHTML = path
+		}
 }
 	// Side: Directory browser
 document.getElementById('fs-openDir').addEventListener('click', async () => {
