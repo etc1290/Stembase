@@ -8,6 +8,10 @@
 	
 	### Added
 	1. Add default texts for capturing undefined look-up result in FileSystem function
+		-- finished
+	2. Add new side-function fs-path into FileSystem to store and handle all path-related processing
+		-- finished
+		
 	
 
 ---

@@ -11,6 +11,7 @@ const fsfunc = async (path) => {
 	updateDiv.innerHTML=''
 		//Insert file as button
 	const response = await window.fs.main(path)
+	console.log(response)
 	response.forEach(i=>{
 		i = `<button class='fs-data'>` + i + `</button><br>`
 		updateDiv.insertAdjacentHTML('beforeend',i)
@@ -24,9 +25,9 @@ const fsfunc = async (path) => {
 	})
 		//Show pathname
 		let fspath = document.querySelector('p[id=fs-path]')
-		console.log(path)
+		const pathname = await window.fs.path(path)
 		if (typeof path !== 'undefined'){
-			fspath.innerHTML = path
+			fspath.innerHTML = pathname
 		}
 }
 	// Side: Directory browser
@@ -38,7 +39,7 @@ document.getElementById('fs-openDir').addEventListener('click', async () => {
 })
 //Initailizer
 
-fsfunc()
+fsfunc('default')
 
 
 // DarkMode

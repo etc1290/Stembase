@@ -5,7 +5,6 @@ const fs = require('fs')
 //--- Import System Variable here
 var env=require('./Setting.js')
 
-
 // WindowsCreator
 //--- Window create function
 const createWindow = () => {
@@ -26,11 +25,10 @@ const createWindow = () => {
     
     ipcMain.handle('fs-main',	(event,v) => {
 		console.log(v)
-		if(typeof v == 'undefined'){
+		if(typeof v == 'undefined' || v == 'default'){
 			console.log(env.StartDir)
 			return fs.readdirSync(env.StartDir)
 		}else if(fs.lstatSync(v).isDirectory()){
-			console.log('ssdsd')
 			console.log(fs.readdirSync(v))
 			return fs.readdirSync(v)
 		}else{
@@ -38,6 +36,12 @@ const createWindow = () => {
 			return fs.readdirSync('./')
 		}
 		
+	})
+	//Side: Store file path
+	ipcMain.handle('fs-path',	(event,v) =>{
+		if(v == 'default'){
+			return app.getAppPath()
+		}
 	})
 	//Side: File type checker
 	ipcMain.handle('fs-type', (event,v) =>{
