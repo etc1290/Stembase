@@ -23,12 +23,20 @@ const fsfunc = async (path) => {
 			fsfunc(e.innerHTML)
 		})
 	})
+
 		//Show pathname
-		let fspath = document.querySelector('p[id=fs-path]')
-		const pathname = await window.fs.path(path)
-		if (typeof path !== 'undefined'){
-			fspath.innerHTML = pathname
-		}
+	let fspath = document.querySelector('p[id=fs-path]')
+	const pathname = await window.fs.path(path)
+	console.log(pathname)
+	if(path == 'default'){
+		fspath.innerHTML = pathname
+	}else if (typeof path !== 'undefined'){
+		//Check file typeof
+		const fstype = await window.fs.type(path)
+		fspath.innerHTML += '\' + path
+	}else{
+		console.log('Exception in show pathname')
+	}
 }
 	// Side: Directory browser
 document.getElementById('fs-openDir').addEventListener('click', async () => {

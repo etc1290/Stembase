@@ -12,8 +12,11 @@
 	2. Add new side-function fs-path into FileSystem to store and handle all path-related processing
 		-- finished
 		
-	
-
+	### Processing
+	1. Add Button response function to fs-data class
+		-- bugged
+	2. Display path when press button
+		-- bugged
 ---
 	## 2022.12.30		version 0.0.52
 	- Function implementation
