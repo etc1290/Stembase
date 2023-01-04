@@ -1,7 +1,12 @@
 # Stembase
  File tagging system
 
-
+---
+	## 2022.01.04		version 0.0.54
+	- Minor bug fix
+	
+	## Fixed
+	1. Fix Backslash syntaax error forgot to fix
 ---
 	## 2022.01.03		version 0.0.53
 	- Text Change
