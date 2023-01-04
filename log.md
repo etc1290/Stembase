@@ -4,9 +4,19 @@
 ---
 	## 2022.01.04		version 0.0.54
 	- Minor bug fix
+	- Function implementation
 	
-	## Fixed
+	### Added
+	1. Add browse file function but only works in downing level
+		-- finished
+		
+	### Changed
+	1. Remove default texts of fs-path in template/index.html for smooth coding. Users cannot see it anyway 
+		-- finished
+		
+	### Fixed
 	1. Fix Backslash syntaax error forgot to fix
+		-- finished
 ---
 	## 2022.01.03		version 0.0.53
 	- Text Change

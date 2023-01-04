@@ -7,10 +7,12 @@ information.innerText = `This app is using Chrome (v${versions.chrome()}), Node.
 	//Main: File User Interface
 const fsfunc = async (path) => {
 		//Initialize
+	let fspath = document.querySelector('p[id=fs-path]')
 	let updateDiv = document.querySelector('div[id=fs-main]')
 	updateDiv.innerHTML=''
+	
 		//Insert file as button
-	const response = await window.fs.main(path)
+	const response = await window.fs.main(fspath.innerHTML + path)
 	console.log(response)
 	response.forEach(i=>{
 		i = `<button class='fs-data'>` + i + `</button><br>`
@@ -20,20 +22,20 @@ const fsfunc = async (path) => {
 	const fsbutton = document.querySelectorAll('button[class=fs-data]')
 	fsbutton.forEach(e=>{
 		e.addEventListener('click',async()=>{
-			fsfunc(e.innerHTML)
+			fsfunc('\\' + e.innerHTML)
 		})
 	})
 
 		//Show pathname
-	let fspath = document.querySelector('p[id=fs-path]')
+	//let fspath = document.querySelector('p[id=fs-path]')
 	const pathname = await window.fs.path(path)
 	console.log(pathname)
 	if(path == 'default'){
 		fspath.innerHTML = pathname
 	}else if (typeof path !== 'undefined'){
 		//Check file typeof
-		const fstype = await window.fs.type(path)
-		fspath.innerHTML += '\\' + path
+		const fstype = await window.fs.type(fspath.innerHTML + path)
+		fspath.innerHTML += path
 	}else{
 		console.log('Exception in show pathname')
 	}
