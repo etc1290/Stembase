@@ -13,7 +13,6 @@ const fsfunc = async (path) => {
 	
 		//Insert file as button
 	const response = await window.fs.main(fspath.innerHTML + path)
-	console.log(response)
 	response.forEach(i=>{
 		i = `<button class='fs-data'>` + i + `</button><br>`
 		updateDiv.insertAdjacentHTML('beforeend',i)
@@ -27,9 +26,7 @@ const fsfunc = async (path) => {
 	})
 
 		//Show pathname
-	//let fspath = document.querySelector('p[id=fs-path]')
 	const pathname = await window.fs.path(path)
-	console.log(pathname)
 	if(path == 'default'){
 		fspath.innerHTML = pathname
 	}else if (typeof path !== 'undefined'){
@@ -54,11 +51,26 @@ document.getElementById('fs-openDir').addEventListener('click', async () => {
 	fsfunc(fsbrowse)
 	
 })
-//Initailizer
+	// Side: Home 
+document.getElementById('fs-home').addEventListener('click', async () =>{
+	document.querySelector('p[id=fs-path]').innerHTML=''	
+	fsfunc('default')
+})
 
-fsfunc('default')
-
-
+	// Side: Uplevel
+document.getElementById('fs-up').addEventListener('click', async () =>{
+	const nowPath = document.querySelector('p[id=fs-path]')
+	const newPath = nowPath.innerHTML.split('\\').slice(0,-1).join('\\')
+	nowPath.innerHTML=''
+	console.log(newPath)
+	if(newPath == 'C:'){
+		fsfunc('C:\\')
+	}else if (newPath){
+		fsfunc(newPath)
+	}else{
+		document.getElementById('fs-info').innerHTML = 'Error in FS Up level'
+	}
+})
 // DarkMode
 	//Main: Toggle
 document.getElementById('dm-main').addEventListener('click', async () =>{
@@ -70,5 +82,11 @@ document.getElementById('dm-reset').addEventListener('click', async () =>{
 	await window.dm.reset()
 	document.getElementById('dm-text').innerHTML = 'System'
 })	
+
+//Initailizer
+fsfunc('default')
+
+
+
 
 

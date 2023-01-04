@@ -1,6 +1,31 @@
 # Stembase
  File tagging system
-
+---
+	## 2022.01.04		version 0.0.7
+	- Coding re-arrangement
+	- Function implementation
+	
+	### Added
+	1. Add Home and Up Level button in template/index.html
+		-- finished
+	2. Add Home function in template/index.js
+		-- finished
+	3. Add fs-info in template/index.html for displaying message like error
+		-- finished
+	4. Add Uplevel function in template/index.js
+		-- finished
+		
+	### Changed
+	1. Move DarkMode in template/index.js from below to above the Initializer for consistent spacing
+		-- finished
+	2. Remove some debug code
+		-- finished
+		
+	### Precessing
+	1. Add Button response function to fs-data class
+		-- bugged
+	2. Display path when press button
+		-- bugged		
 ---
 	## 2022.01.04		version 0.0.6
 	- Minor bug fix
