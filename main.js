@@ -26,14 +26,16 @@ const createWindow = () => {
     ipcMain.handle('fs-main',	(event,v) => {
 		console.log(v)
 		if(typeof v == 'undefined' || v == 'default'){
-			console.log(env.StartDir)
+			
 			return fs.readdirSync(env.StartDir)
 		}else if(fs.lstatSync(v).isDirectory()){
-			console.log(fs.readdirSync(v))
+			
 			return fs.readdirSync(v)
 		}else{
 			console.log('this is a file')
-			return fs.readdirSync('./')
+			const pathList = v.split('\\').slice(0,-1).join('\\')
+			
+			return fs.readdirSync(pathList)
 		}
 		
 	})

@@ -37,8 +37,7 @@ const fsfunc = async (path) => {
 		
 		const fstype = await window.fs.type(fspath.innerHTML + path)
 		console.log(fstype)
-		if (fstype){
-			
+		if (fstype){			
 			fspath.innerHTML += path
 		}else{
 			console.log('this is a file')

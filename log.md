@@ -2,7 +2,7 @@
  File tagging system
 
 ---
-	## 2022.01.04		version 0.0.54
+	## 2022.01.04		version 0.0.6
 	- Minor bug fix
 	- Function implementation: Browse down level, File or directory check
 	
@@ -12,6 +12,8 @@
 		
 	### Changed
 	1. Remove default texts of fs-path in template/index.html for smooth coding. Users cannot see it anyway 
+		-- finished
+	2. Remove some debug code
 		-- finished
 		
 	### Fixed
