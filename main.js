@@ -45,7 +45,7 @@ const createWindow = () => {
 	})
 	//Side: File type checker
 	ipcMain.handle('fs-type', (event,v) =>{
-		console.log(fs.lstatSync(v).isDirectory())
+		return(fs.lstatSync(v).isDirectory())
 	})
 	//Side: File browser
 	ipcMain.handle('fs-getDir', () => {

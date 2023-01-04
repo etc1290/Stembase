@@ -34,8 +34,16 @@ const fsfunc = async (path) => {
 		fspath.innerHTML = pathname
 	}else if (typeof path !== 'undefined'){
 		//Check file typeof
+		
 		const fstype = await window.fs.type(fspath.innerHTML + path)
-		fspath.innerHTML += path
+		console.log(fstype)
+		if (fstype){
+			
+			fspath.innerHTML += path
+		}else{
+			console.log('this is a file')
+		}
+		
 	}else{
 		console.log('Exception in show pathname')
 	}

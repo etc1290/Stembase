@@ -4,7 +4,7 @@
 ---
 	## 2022.01.04		version 0.0.54
 	- Minor bug fix
-	- Function implementation
+	- Function implementation: Browse down level, File or directory check
 	
 	### Added
 	1. Add browse file function but only works in downing level
@@ -17,6 +17,12 @@
 	### Fixed
 	1. Fix Backslash syntaax error forgot to fix
 		-- finished
+	
+	### Processing
+	1. Add Button response function to fs-data class
+		-- bugged
+	2. Display path when press button
+		-- bugged
 ---
 	## 2022.01.03		version 0.0.53
 	- Text Change
