@@ -9,19 +9,21 @@ const fsfunc = async (path) => {
 		//Initialize
 	let fspath = document.querySelector('p[id=fs-path]')
 	let updateDiv = document.querySelector('div[id=fs-main]')
+		//Permanent record of current path
+	const nowPath = fspath.innerHTML
 	updateDiv.innerHTML=''
-	
+	fspath.innerHTML=''
 		//Insert file as button
-	const response = await window.fs.main(fspath.innerHTML + path)
+	const response = await window.fs.main(path)
 	response.forEach(i=>{
 		i = `<button class='fs-data'>` + i + `</button><br>`
 		updateDiv.insertAdjacentHTML('beforeend',i)
 	})
-		//Browse
+		//Button function
 	const fsbutton = document.querySelectorAll('button[class=fs-data]')
 	fsbutton.forEach(e=>{
 		e.addEventListener('click',async()=>{
-			fsfunc('\\' + e.innerHTML)
+			fsfunc(fspath.innerHTML + '\\' + e.innerHTML)
 		})
 	})
 
@@ -30,30 +32,35 @@ const fsfunc = async (path) => {
 	if(path == 'default'){
 		fspath.innerHTML = pathname
 	}else if (typeof path !== 'undefined'){
-		//Check file typeof
 		
+		//Check file typeof		
 		const fstype = await window.fs.type(fspath.innerHTML + path)
-		console.log(fstype)
 		if (fstype){			
 			fspath.innerHTML += path
 		}else{
 			console.log('this is a file')
+			fspath.innerHTML = nowPath
 		}
 		
 	}else{
 		console.log('Exception in show pathname')
 	}
 }
+	// Side: Clear path text
+const fsclear = (path) =>{
+	document.querySelector('p[id=fs-path]').innerHTML=''
+}
 	// Side: Directory browser
 document.getElementById('fs-openDir').addEventListener('click', async () => {
-	
+	//fsclear()
 	const fsbrowse = await window.fs.getDir()
-	fsfunc(fsbrowse)
+	fsfunc(fsbrowse[0])
 	
 })
 	// Side: Home 
 document.getElementById('fs-home').addEventListener('click', async () =>{
-	document.querySelector('p[id=fs-path]').innerHTML=''	
+	//fsclear()
+	//document.querySelector('p[id=fs-path]').innerHTML=''	
 	fsfunc('default')
 })
 
@@ -61,7 +68,8 @@ document.getElementById('fs-home').addEventListener('click', async () =>{
 document.getElementById('fs-up').addEventListener('click', async () =>{
 	const nowPath = document.querySelector('p[id=fs-path]')
 	const newPath = nowPath.innerHTML.split('\\').slice(0,-1).join('\\')
-	nowPath.innerHTML=''
+	//nowPath.innerHTML=''
+	//fsclear()
 	console.log(newPath)
 	if(newPath == 'C:'){
 		fsfunc('C:\\')

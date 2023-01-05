@@ -4,7 +4,7 @@ const fs = require('fs')
 
 //--- Import System Variable here
 var env=require('./Setting.js')
-
+console.log(env.apple)
 // WindowsCreator
 //--- Window create function
 const createWindow = () => {

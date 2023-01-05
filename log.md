@@ -1,5 +1,28 @@
 # Stembase
  File tagging system
+ 
+ 
+---
+	## 2022.01.05		version 0.0.8
+	- Code re-arrangement
+	- Bug fix
+	- Function implementation
+	
+	### Added 
+	1. Add nowPath in template/index.js to store current path information for realizing complete file system function
+		-- finished
+		
+	### Changed
+	1. Move reset fs-path codes in fs-openDir, fs-home, fs-up, fs-button to fsfunc for dry handle
+		-- finished
+	
+	### Fixed
+	1. Add Button response function to fs-data class
+		-- finished
+	2. fs-openDir is deprecated because the mechanism change in fsfunc
+		-- finished
+		
+
 ---
 	## 2022.01.04		version 0.0.7
 	- Coding re-arrangement
