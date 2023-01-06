@@ -92,7 +92,7 @@ document.getElementById('dm-reset').addEventListener('click', async () =>{
 //Test function
 btn.addEventListener('click', async () => {
 	const filePath = await window.versions.fileTree()
-	console.log(filePath) 
+	console.log(JSON.parse(filePath)) 
   })
 
 //Initailizer
