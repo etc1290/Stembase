@@ -94,11 +94,12 @@ const createWindow = () => {
     
 app.whenReady().then(() => {
 	//Test function
-	ipcMain.handle('fileTree',	() =>{
-		fileTree.build();
-		const data = fileTree
+	ipcMain.handle('fileTree',async	() =>{
+		fileTree.build()
+		const data = await fileTree
 		console.log(data)
-		return data
+		return JSON.stringify(data)
+		
 	})
 
     createWindow()
