@@ -5,6 +5,7 @@ contextBridge.exposeInMainWorld('versions', {
     node: 		()=> process.versions.node,
     chrome: 	()=> process.versions.chrome,
 	test:		()=> ipcRenderer.invoke('test'),
+    fileTree:	()=> ipcRenderer.invoke('fileTree'),
     electron: 	()=> process.versions.electron,
 
 })
@@ -24,4 +25,6 @@ contextBridge.exposeInMainWorld('dm', {
 	main:		() => ipcRenderer.invoke('dm-main'),
 	reset:		() => ipcRenderer.invoke('dm-reset')
 })
+
+
 
