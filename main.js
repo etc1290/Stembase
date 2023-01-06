@@ -4,13 +4,11 @@ const fs = require('fs')
 
 //--- Import System Variable here
 var env=require('./Setting.js')
-
 //test
 const {JsonDB,Config} = require('node-json-db');
 var db = new JsonDB(new Config('Stemconfig',true,true,'/'))
-db.delete('/apple')
-db.delete('/fruit')
-//console.log(db.getData('/apple'))
+db.push('/apple',100)
+console.log(db.getData('/apple'))
 // WindowsCreator
 //--- Window create function
 const createWindow = () => {
