@@ -3,6 +3,24 @@
  
  
 ---
+	## 2022.01.06		version 0.0.81
+	- Database implementation
+	
+	### Added 
+	1. Build a json-based database(Stemconfig.json) to store enviroment variable.
+		-- finished
+	2. Add Testing channel 'test' in Testing function for further developing
+		-- finished
+		
+	### Changed
+	1. Move all data in Setting.js to Stemconfig.json 
+		-- finished
+	2. Change all codes related to old Setting.js to apply new database setting
+		-- processing
+	3. Remove Setting.js
+		-- processing
+		
+---
 	## 2022.01.05		version 0.0.8
 	- Code re-arrangement
 	- Bug fix

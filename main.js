@@ -5,10 +5,8 @@ const fs = require('fs')
 //--- Import System Variable here
 var env=require('./Setting.js')
 //test
-const {JsonDB,Config} = require('node-json-db');
-var db = new JsonDB(new Config('Stemconfig',true,true,'/'))
-db.push('/apple',100)
-console.log(db.getData('/apple'))
+
+
 // WindowsCreator
 //--- Window create function
 const createWindow = () => {
@@ -78,6 +76,14 @@ const createWindow = () => {
 	// Side: Reset to system
 	ipcMain.handle('dm-reset',	() =>{
 		nativeTheme.themeSource = 'system'
+	})
+// Test function 
+	// Main: Experimental Exam
+	ipcMain.handle('test',		() =>{
+		const {JsonDB,Config} = require('node-json-db');
+		var db = new JsonDB(new Config('Stemconfig',true,true,'/'))
+		console.log('dsdsds')
+		return db.getData('/apple')
 	})
 }
     

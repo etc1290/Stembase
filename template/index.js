@@ -2,7 +2,10 @@
 // Testing function
 const information = document.getElementById('info')
 information.innerText = `This app is using Chrome (v${versions.chrome()}), Node.js (v${versions.node()}), and Electron (v${versions.electron()})`
-
+const testfunc = async()=>{
+	console.log(await window.versions.test())
+}
+testfunc()
 // FileSystem
 	//Main: File User Interface
 const fsfunc = async (path) => {
@@ -52,15 +55,12 @@ const fsclear = (path) =>{
 }
 	// Side: Directory browser
 document.getElementById('fs-openDir').addEventListener('click', async () => {
-	//fsclear()
 	const fsbrowse = await window.fs.getDir()
 	fsfunc(fsbrowse[0])
 	
 })
 	// Side: Home 
 document.getElementById('fs-home').addEventListener('click', async () =>{
-	//fsclear()
-	//document.querySelector('p[id=fs-path]').innerHTML=''	
 	fsfunc('default')
 })
 
@@ -68,8 +68,6 @@ document.getElementById('fs-home').addEventListener('click', async () =>{
 document.getElementById('fs-up').addEventListener('click', async () =>{
 	const nowPath = document.querySelector('p[id=fs-path]')
 	const newPath = nowPath.innerHTML.split('\\').slice(0,-1).join('\\')
-	//nowPath.innerHTML=''
-	//fsclear()
 	console.log(newPath)
 	if(newPath == 'C:'){
 		fsfunc('C:\\')
