@@ -88,8 +88,7 @@ const createWindow = () => {
 		console.log('dsdsds')
 		return db.getData('/apple')
 	})
-	console.log(JSON.stringify(db.getData('/apple')))
-
+	const ap = db.getData('/apple').then((value) => console.log(value))
 	
 }
     
