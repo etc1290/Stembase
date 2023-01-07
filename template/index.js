@@ -89,6 +89,12 @@ document.getElementById('dm-reset').addEventListener('click', async () =>{
 	document.getElementById('dm-text').innerHTML = 'System'
 })	
 
+//Test function
+btn.addEventListener('click', async () => {
+	const filePath = await window.versions.fileTree()
+	console.log(JSON.parse(filePath)) 
+  })
+
 //Initailizer
 fsfunc('default')
 

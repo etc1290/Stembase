@@ -1,9 +1,12 @@
 const { app, BrowserWindow, ipcMain, nativeTheme, dialog } = require('electron')
 const path = require('path')
 const fs = require('fs')
+const FileTree = require('./src/FileTree.js')
 
 //--- Import System Variable here
 var env=require('./Setting.js')
+var fileTree = new FileTree(__dirname)
+console.log(fileTree)
 //test
 
 
@@ -59,7 +62,7 @@ const createWindow = () => {
 		})
 		return fsobject
 
-})
+	})
 	
 // DarkMode
 	// Main: toggle
@@ -85,9 +88,20 @@ const createWindow = () => {
 		console.log('dsdsds')
 		return db.getData('/apple')
 	})
+
+	
 }
     
 app.whenReady().then(() => {
+	//Test function
+	ipcMain.handle('fileTree',async	() =>{
+		fileTree.build()
+		const data = await fileTree
+		console.log(data)
+		return JSON.stringify(data)
+		
+	})
+
     createWindow()
 	// Prevent from multiple windows create
 	app.on('activate', () => {
