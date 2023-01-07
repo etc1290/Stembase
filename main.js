@@ -2,6 +2,7 @@ const { app, BrowserWindow, ipcMain, nativeTheme, dialog } = require('electron')
 const path = require('path')
 const fs = require('fs')
 const FileTree = require('./src/FileTree.js')
+const {JsonDB,Config} = require('node-json-db');
 
 //--- Import System Variable here
 var env=require('./Setting.js')
@@ -82,13 +83,12 @@ const createWindow = () => {
 	})
 // Test function 
 	// Main: Experimental Exam
+	var db = new JsonDB(new Config('Stemconfig',true,true,'/'))
 	ipcMain.handle('test',		() =>{
-		const {JsonDB,Config} = require('node-json-db');
-		var db = new JsonDB(new Config('Stemconfig',true,true,'/'))
 		console.log('dsdsds')
 		return db.getData('/apple')
 	})
-
+	const ap = db.getData('/apple').then((value) => console.log(value))
 	
 }
     
