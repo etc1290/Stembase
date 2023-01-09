@@ -21,7 +21,7 @@ console.log(fileTree)
 
 // WindowsCreator
 //--- Window create function
-const createWindow = () => {
+const createWindow = async () => {
     const win = new BrowserWindow({
         width: env('Width'),
         height: env('Height'),
@@ -90,7 +90,9 @@ const createWindow = () => {
 	})
 // Test function 
 	// Main: Experimental Exam
-
+	var db = new JsonDB(new Config('Stemconfig',true,true,'/'))
+	var ap = await db.getData('/apple')
+	console.log(ap)
 }
     
 app.whenReady().then(() => {
