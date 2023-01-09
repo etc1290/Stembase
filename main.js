@@ -1,39 +1,46 @@
 const { app, BrowserWindow, ipcMain, nativeTheme, dialog } = require('electron')
 const path = require('path')
 const fs = require('fs')
-const FileTree = require('./src/FileTree.js')
+const FileTree = require('./static/js/FileTree.js')
 const {JsonDB,Config} = require('node-json-db');
 
 //--- Import System Variable here
-var env=require('./Setting.js')
+	// Stemconfig import
+
+const env = (v) =>{
+	const envdata = fs.readFileSync('Stemconfig.json')
+	var envarray = JSON.parse(envdata)
+	return envarray[v]
+}
+
+
+	// General Declaration
 var fileTree = new FileTree(__dirname)
 console.log(fileTree)
 //test
-
 
 // WindowsCreator
 //--- Window create function
 const createWindow = () => {
     const win = new BrowserWindow({
-        width: 1280,
-        height: 960,
+        width: env('Width'),
+        height: env('Height'),
         webPreferences: {
             preload: path.join(__dirname, 'preload.js'),
 			contextIsolation:true
         },
     })
     win.webContents.openDevTools()
-
-    win.loadFile(env.TemplateDir + 'index.html')	
-
+    win.loadFile(env('TemplateDir') + 'index.html')	
+	
 // FileSystem	
 	//Main: Show filenames
-    
+	
     ipcMain.handle('fs-main',	(event,v) => {
 		console.log(v)
 		if(typeof v == 'undefined' || v == 'default'){
 			
-			return fs.readdirSync(env.StartDir)
+			return fs.readdirSync(env('StartDir'))
 		}else if(fs.lstatSync(v).isDirectory()){
 			
 			return fs.readdirSync(v)
@@ -83,13 +90,7 @@ const createWindow = () => {
 	})
 // Test function 
 	// Main: Experimental Exam
-	var db = new JsonDB(new Config('Stemconfig',true,true,'/'))
-	ipcMain.handle('test',		() =>{
-		console.log('dsdsds')
-		return db.getData('/apple')
-	})
-	const ap = db.getData('/apple').then((value) => console.log(value))
-	
+
 }
     
 app.whenReady().then(() => {

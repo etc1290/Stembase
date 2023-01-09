@@ -3,15 +3,33 @@
  
  
 ---
+	## 2022.01.09		version 0.0.9
+	-- Config function implementation
+	
+	### Added 
+	1. Finishe Stemconfig.json environment variable import function 
+		-- finished
+	2. Add Height and Width in to Stemconfig for further window size customization
+		-- finished
+	### Changed
+	1. Move FileTree.js to static/js and remove src folder for consistency
+		-- finished
+	2. Setting.js and Setting.json are removed because they are no longer needed
+		-- finished
+	3. Change width and height in main.js into enviroment
+		-- finished
+---
 	## 2022.01.06		version 0.0.81
 	- Database implementation
+	- FileTree Function 
 	
 	### Added 
 	1. Build a json-based database(Stemconfig.json) to store enviroment variable.
 		-- finished
 	2. Add Testing channel 'test' in Testing function for further developing
 		-- finished
-		
+	3. File Tree Function implement
+		-- finished
 	### Changed
 	1. Move all data in Setting.js to Stemconfig.json 
 		-- finished

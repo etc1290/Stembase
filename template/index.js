@@ -2,10 +2,11 @@
 // Testing function
 const information = document.getElementById('info')
 information.innerText = `This app is using Chrome (v${versions.chrome()}), Node.js (v${versions.node()}), and Electron (v${versions.electron()})`
-const testfunc = async()=>{
+/*const testfunc = async()=>{
 	console.log(await window.versions.test())
 }
 testfunc()
+*/
 // FileSystem
 	//Main: File User Interface
 const fsfunc = async (path) => {
