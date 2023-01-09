@@ -32,6 +32,8 @@
 		-- finished
 	3. Change width and height in main.js into enviroment
 		-- finished
+	4. Change the way that get data from JSON file.
+		-- finished
 ---
 	## 2022.01.06		version 0.0.81
 	- Database implementation
