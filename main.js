@@ -72,7 +72,27 @@ const createWindow = () => {
 		return fsobject
 
 	})
-	
+//--- toolbar
+	// Main: create child window
+	ipcMain.handle('tb-main', () =>{
+		console.log('sdsd')
+		const cwin = new BrowserWindow()
+		cwin.webContents.setWindowOpenHandler(({url}) => {
+			if(url === 'about:blank'){
+				return {
+					action:'allow',
+					overrideBrowserOptions:{
+						frame: false,
+						fullscreenable: true,
+						webPreferences:{
+							preload:'tbpreload.js'
+						}
+					}
+				}
+			} 
+		return { action:'deny'}
+		})
+	})
 //--- DarkMode
 	// Main: toggle
 	ipcMain.handle('dm-main',	() =>{

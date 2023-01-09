@@ -2,11 +2,7 @@
 // Testing function
 const information = document.getElementById('info')
 information.innerText = `This app is using Chrome (v${versions.chrome()}), Node.js (v${versions.node()}), and Electron (v${versions.electron()})`
-/*const testfunc = async()=>{
-	console.log(await window.versions.test())
-}
-testfunc()
-*/
+
 // FileSystem
 	//Main: File User Interface
 const fsfunc = async (path) => {
@@ -77,6 +73,12 @@ document.getElementById('fs-up').addEventListener('click', async () =>{
 	}else{
 		document.getElementById('fs-info').innerHTML = 'Error in FS Up level'
 	}
+})
+// Toolbar
+document.getElementById('tb-main').addEventListener('click', async () =>{
+	const tbCreateWindow = await window.tb.main()
+	const childWindow = window.open('','modal')
+	childWindow.document.write('<p>This is a window</p>')
 })
 // DarkMode
 	//Main: Toggle
