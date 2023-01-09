@@ -1,7 +1,21 @@
 # Stembase
  File tagging system
  
- 
+---
+	## 2022.01.09		version 0.0.91
+	-- Apply config function setting
+	-- Add create child window function
+	
+	### Added
+	1. Add create child window function
+		-- bugged
+		
+	### Changed
+	1. Control dev-tool by config Debugmode
+		-- finished
+	2. Remove some wasted codes
+		-- finished
+		
 ---
 	## 2022.01.09		version 0.0.9
 	-- Config function implementation

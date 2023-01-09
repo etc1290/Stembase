@@ -1,20 +1,19 @@
 const { app, BrowserWindow, ipcMain, nativeTheme, dialog } = require('electron')
 const path = require('path')
 const fs = require('fs')
-const FileTree = require('./static/js/FileTree.js')
 const {JsonDB,Config} = require('node-json-db');
 
 //--- Import System Variable here
 	// Stemconfig import
-
 const env = (v) =>{
 	const envdata = fs.readFileSync('Stemconfig.json')
 	var envarray = JSON.parse(envdata)
 	return envarray[v]
 }
-
+const staticjs = env('StaticDir') + 'js/'
 
 	// General Declaration
+const FileTree = require(staticjs + 'FileTree.js')
 var fileTree = new FileTree(__dirname)
 console.log(fileTree)
 //test
@@ -30,10 +29,12 @@ const createWindow = async () => {
 			contextIsolation:true
         },
     })
-    win.webContents.openDevTools()
+	if (env('Debugmode')){
+		win.webContents.openDevTools()
+	}
     win.loadFile(env('TemplateDir') + 'index.html')	
 	
-// FileSystem	
+//--- FileSystem	
 	//Main: Show filenames
 	
     ipcMain.handle('fs-main',	(event,v) => {
@@ -71,8 +72,28 @@ const createWindow = async () => {
 		return fsobject
 
 	})
-	
-// DarkMode
+//--- toolbar
+	// Main: create child window
+	ipcMain.handle('tb-main', () =>{
+		console.log('sdsd')
+		const cwin = new BrowserWindow()
+		cwin.webContents.setWindowOpenHandler(({url}) => {
+			if(url === 'about:blank'){
+				return {
+					action:'allow',
+					overrideBrowserOptions:{
+						frame: false,
+						fullscreenable: true,
+						webPreferences:{
+							preload:'tbpreload.js'
+						}
+					}
+				}
+			} 
+		return { action:'deny'}
+		})
+	})
+//--- DarkMode
 	// Main: toggle
 	ipcMain.handle('dm-main',	() =>{
 		if (nativeTheme.shouldUseDarkColors){
@@ -88,7 +109,7 @@ const createWindow = async () => {
 	ipcMain.handle('dm-reset',	() =>{
 		nativeTheme.themeSource = 'system'
 	})
-// Test function 
+//--- Test function 
 	// Main: Experimental Exam
 	var db = new JsonDB(new Config('Stemconfig',true,true,'/'))
 	var ap = await db.getData('/apple')
