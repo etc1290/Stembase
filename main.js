@@ -115,19 +115,19 @@ const createWindow = async () => {
 	var db = new JsonDB(new Config('Stemconfig',true,true,'/'))
 	var ap = await db.getData('/apple')
 	console.log(ap)
+
+	// Generate file tree
+	ipcMain.handle('fileTree',async	() =>{
+		fileTree.build()
+		const data = await fileTree
+		// console.log(data)
+
+		return JSON.stringify(data)
+	})
 }
 
     
 app.whenReady().then(() => {
-	//---Test function---
-	ipcMain.handle('fileTree',async	() =>{
-		fileTree.build()
-		const data = await fileTree
-		console.log(data)
-		return JSON.stringify(data)
-		
-	})
-
     createWindow()
 	// Prevent from multiple windows create
 	app.on('activate', () => {
