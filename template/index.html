@@ -5,6 +5,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'" />
     <meta http-equiv="X-Content-Security-Policy" content="default-src 'self'; script-src 'self'" />
+	<link rel='stylesheet' type='text/css' href='../static/css/styles.css'>
     <title>Hello from Electron renderer!</title>
 </head>
 
@@ -12,7 +13,24 @@
     <h1>Hello from Electron renderer!</h1>
     <p>👋</p>
     <p id="info"></p>
-    <P ID="dir"></P>
+	<div id='fs'>
+		<h1 id='fs-info'></h1>
+		<p id='fs-path'></p>
+		<button id='fs-up'>Up Level</button>
+		<div id='fs-main'>
+		</div>
+		<button id='fs-home'>Home</button>
+	</div>
+	<div id='tb'>
+		<button id='tb-main'>Setting</button>
+	</div>
+	<p>Current color theme:<strong id='dm-text'>System</strong></p>
+	<button id='dm-main'>Toggle</button>
+	<button id='dm-reset'>Reset</button>
+	<button id='fs-openDir'>Open Folder</button>
+	<button type="button" id="btn">Open a File</button>
+
+    
 </body>
 <script src="./index.js"></script>
 

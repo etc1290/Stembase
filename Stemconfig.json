@@ -1,0 +1,9 @@
+{
+    "TemplateDir": "./template/",
+    "StaticDir": "./static/",
+    "StartDir": "./",
+    "Debugmode": true,
+	"Width": 1280,
+	"Height": 960,
+    "apple": 100
+}
