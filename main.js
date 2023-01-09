@@ -3,8 +3,8 @@ const path = require('path')
 const fs = require('fs')
 const {JsonDB,Config} = require('node-json-db');
 
-//--- Import System Variable here
-	// Stemconfig import
+//---Import System Variable here---
+// Stemconfig import
 const env = (v) =>{
 	const envdata = fs.readFileSync('Stemconfig.json')
 	var envarray = JSON.parse(envdata)
@@ -12,14 +12,13 @@ const env = (v) =>{
 }
 const staticjs = env('StaticDir') + 'js/'
 
-	// General Declaration
+// General Declaration (Dev)
 const FileTree = require(staticjs + 'FileTree.js')
 var fileTree = new FileTree(__dirname)
 console.log(fileTree)
-//test
 
-// WindowsCreator
-//--- Window create function
+
+//---Window create function--- 
 const createWindow = async () => {
     const win = new BrowserWindow({
         width: env('Width'),
@@ -34,9 +33,8 @@ const createWindow = async () => {
 	}
     win.loadFile(env('TemplateDir') + 'index.html')	
 	
-//--- FileSystem	
+	//---FileSystem---
 	//Main: Show filenames
-	
     ipcMain.handle('fs-main',	(event,v) => {
 		console.log(v)
 		if(typeof v == 'undefined' || v == 'default'){
@@ -72,7 +70,8 @@ const createWindow = async () => {
 		return fsobject
 
 	})
-//--- toolbar
+
+	//---toolbar---
 	// Main: create child window
 	ipcMain.handle('tb-main', () =>{
 		console.log('sdsd')
@@ -93,7 +92,8 @@ const createWindow = async () => {
 		return { action:'deny'}
 		})
 	})
-//--- DarkMode
+	
+	//---DarkMode---
 	// Main: toggle
 	ipcMain.handle('dm-main',	() =>{
 		if (nativeTheme.shouldUseDarkColors){
@@ -109,15 +109,17 @@ const createWindow = async () => {
 	ipcMain.handle('dm-reset',	() =>{
 		nativeTheme.themeSource = 'system'
 	})
-//--- Test function 
+
+	//---Test function--- 
 	// Main: Experimental Exam
 	var db = new JsonDB(new Config('Stemconfig',true,true,'/'))
 	var ap = await db.getData('/apple')
 	console.log(ap)
 }
+
     
 app.whenReady().then(() => {
-	//Test function
+	//---Test function---
 	ipcMain.handle('fileTree',async	() =>{
 		fileTree.build()
 		const data = await fileTree
@@ -134,6 +136,8 @@ app.whenReady().then(() => {
 		}
 	})
 })
+
+
 // Release all resources of the app
 app.on('window-all-closed', () => {
 	if (process.platform !== 'darwin') {
