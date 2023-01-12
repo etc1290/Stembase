@@ -5,6 +5,7 @@
 ---
 	## 2022.01.12		version 0.0.92
 	-- Arrange codes
+	-- Complete a fully functional and independent child window
 	
 	### Added
 	1. Add WindowToolbar to main.js as setting function
@@ -14,6 +15,7 @@
 		-- finished
 	2. Rename toolbar as setting and move related function to it
 		-- finished
+		
 	### Fixed
 	1. Add create child window function
 		-- finished

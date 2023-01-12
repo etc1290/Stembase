@@ -20,6 +20,22 @@ console.log(fileTree)
 
 // WindowsCreator
 //--- Window create function
+	// Setting Child window
+const WindowSetting = async () =>{
+	const wins = new BrowserWindow ({
+		width: env('Width'),
+		height: env('Height'),
+		webPreference:{
+			preload: 'stpreload.js',
+			contextisolation: true
+		},
+	}) 
+	if (env('Debugmode')){
+		wins.webContents.openDevTools()
+	}
+	wins.loadFile(env('TemplateDir') + 'setting.html')
+}
+	// Main Window
 const WindowMain = async () => {
     const win = new BrowserWindow({
         width: env('Width'),
@@ -75,8 +91,9 @@ const WindowMain = async () => {
 //--- Setting
 	// Main: create child window
 	ipcMain.handle('st-main', () =>{
-		const WindowSetting = new BrowserWindow()
-		WindowToolbar.webContents.setWindowOpenHandler(({url}) => {
+		WindowSetting()
+/*		const WindowSetting = new BrowserWindow()
+		WindowSetting.webContents.setWindowOpenHandler(({url}) => {
 			if(url === 'about:blank'){
 				return {
 					action:'allow',
@@ -90,7 +107,7 @@ const WindowMain = async () => {
 				}
 			} 
 		return { action:'deny'}
-		})
+		})*/
 	})
 //--- DarkMode
 	// Main: toggle
