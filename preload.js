@@ -26,9 +26,9 @@ contextBridge.exposeInMainWorld('dm', {
 	reset:		() => ipcRenderer.invoke('dm-reset')
 })
 
-// toolbar
-contextBridge.exposeInMainWorld('tb', {
-	main:		() => ipcRenderer.invoke('tb-main'),
+// Setting
+contextBridge.exposeInMainWorld('st', {
+	main:		() => ipcRenderer.invoke('st-main'),
 })
 
 

@@ -20,7 +20,7 @@ console.log(fileTree)
 
 // WindowsCreator
 //--- Window create function
-const createWindow = async () => {
+const WindowMain = async () => {
     const win = new BrowserWindow({
         width: env('Width'),
         height: env('Height'),
@@ -72,12 +72,11 @@ const createWindow = async () => {
 		return fsobject
 
 	})
-//--- toolbar
+//--- Setting
 	// Main: create child window
-	ipcMain.handle('tb-main', () =>{
-		console.log('sdsd')
-		const cwin = new BrowserWindow()
-		cwin.webContents.setWindowOpenHandler(({url}) => {
+	ipcMain.handle('st-main', () =>{
+		const WindowSetting = new BrowserWindow()
+		WindowToolbar.webContents.setWindowOpenHandler(({url}) => {
 			if(url === 'about:blank'){
 				return {
 					action:'allow',
@@ -85,7 +84,7 @@ const createWindow = async () => {
 						frame: false,
 						fullscreenable: true,
 						webPreferences:{
-							preload:'tbpreload.js'
+							preload:'stpreload.js'
 						}
 					}
 				}
@@ -126,11 +125,11 @@ app.whenReady().then(() => {
 		
 	})
 
-    createWindow()
+    WindowMain()
 	// Prevent from multiple windows create
 	app.on('activate', () => {
 		if (BrowserWindow.getAllWindows().length === 0) {
-			createWindow()
+			WindowMain()
 		}
 	})
 })

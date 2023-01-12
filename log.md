@@ -1,6 +1,23 @@
 # Stembase
  File tagging system
- 
+
+
+---
+	## 2022.01.12		version 0.0.92
+	-- Arrange codes
+	
+	### Added
+	1. Add WindowToolbar to main.js as setting function
+		-- finished
+	### Changed
+	1. Rename creatWindow in main.js to WindowMain for multiple window implementation
+		-- finished
+	2. Rename toolbar as setting and move related function to it
+		-- finished
+	### Fixed
+	1. Add create child window function
+		-- finished
+		
 ---
 	## 2022.01.09		version 0.0.91
 	-- Apply config function setting

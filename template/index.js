@@ -75,10 +75,10 @@ document.getElementById('fs-up').addEventListener('click', async () =>{
 	}
 })
 // Toolbar
-document.getElementById('tb-main').addEventListener('click', async () =>{
-	const tbCreateWindow = await window.tb.main()
-	const childWindow = window.open('','modal')
-	childWindow.document.write('<p>This is a window</p>')
+document.getElementById('st-main').addEventListener('click', async () =>{
+	const stCreateWindow = await window.st.main()
+	//const childWindow = window.open('','modal')
+	//childWindow.document.write('<p>This is a window</p>')
 })
 // DarkMode
 	//Main: Toggle
