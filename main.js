@@ -3,8 +3,8 @@ const path = require('path')
 const fs = require('fs')
 const {JsonDB,Config} = require('node-json-db');
 
-//--- Import System Variable here
-	// Stemconfig import
+//---Import System Variable here---
+// Stemconfig import
 const env = (v) =>{
 	const envdata = fs.readFileSync('Stemconfig.json')
 	var envarray = JSON.parse(envdata)
@@ -12,11 +12,9 @@ const env = (v) =>{
 }
 const staticjs = env('StaticDir') + 'js/'
 
-	// General Declaration
+// General Declaration (Dev)
 const FileTree = require(staticjs + 'FileTree.js')
-var fileTree = new FileTree(__dirname)
-console.log(fileTree)
-//test
+
 
 // WindowsCreator
 //--- Window create function
@@ -41,8 +39,25 @@ const WindowSetting = async () =>{
 	})
 	return wins
 }
-	// Main Window
-const WindowMain = async () => {
+
+const getFileTree = async (initDir) =>{
+	var fileTree = new FileTree(initDir)
+	fileTree.build()
+	const data = await fileTree
+
+	return JSON.stringify(data)
+}
+
+const writeMata = async (Dir, data) =>{
+	fs.appendFile(`${Dir}/db.json`,await data, function (err) {
+		if (err)
+			throw err;
+		console.log('Saved!');
+	});
+}
+
+//---Window create function--- 
+const createWindow = async () => {
     const win = new BrowserWindow({
         width: env('Width'),
         height: env('Height'),
@@ -56,9 +71,8 @@ const WindowMain = async () => {
 	}
     win.loadFile(env('TemplateDir') + 'index.html')	
 	
-//--- FileSystem	
+	//---FileSystem---
 	//Main: Show filenames
-	
     ipcMain.handle('fs-main',	(event,v) => {
 		console.log(v)
 		if(typeof v == 'undefined' || v == 'default'){
@@ -94,7 +108,18 @@ const WindowMain = async () => {
 		return fsobject
 
 	})
-//--- Setting
+
+
+	ipcMain.handle('fs-createMeta', async () => {
+		const path =dialog.showOpenDialogSync(win, {
+			properties: ['openDirectory']
+		})
+		writeMata(path, getFileTree(path[0]))
+
+		return 0
+	})
+
+	//---toolbar---
 	// Main: create child window
 	ipcMain.handle('st-main', () =>{
 		WindowSetting()
@@ -115,7 +140,8 @@ const WindowMain = async () => {
 		return { action:'deny'}
 		})*/
 	})
-//--- DarkMode
+	
+	//---DarkMode---
 	// Main: toggle
 	ipcMain.handle('dm-main',	() =>{
 		if (nativeTheme.shouldUseDarkColors){
@@ -139,15 +165,22 @@ const WindowMain = async () => {
     
 app.whenReady().then(() => {
 	//Test function
+
+	//---Test function--- 
+
+	// Generate file tree
 	ipcMain.handle('fileTree',async	() =>{
-		fileTree.build()
-		const data = await fileTree
-		console.log(data)
-		return JSON.stringify(data)
-		
+		var dir = __dirname
+	
+		return await getFileTree(__dirname)
 	})
+}
 
     WindowMain()
+
+    
+app.whenReady().then(() => {
+    createWindow()
 	// Prevent from multiple windows create
 	app.on('activate', () => {
 		if (BrowserWindow.getAllWindows().length === 0) {
@@ -155,6 +188,8 @@ app.whenReady().then(() => {
 		}
 	})
 })
+
+
 // Release all resources of the app
 app.on('window-all-closed', () => {
 	if (process.platform !== 'darwin') {
