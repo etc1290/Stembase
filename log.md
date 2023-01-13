@@ -1,6 +1,15 @@
 # Stembase
  File tagging system
 
+
+--- 
+	## 2022.01.13		version 0.0.94
+	-- Text modification
+	
+	### Changed
+	1. Modify annotation
+		-- finished
+		
 ---
 	## 2022.01.13		version 0.0.93
 	-- Testing Git hub function

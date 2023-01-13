@@ -20,7 +20,7 @@ console.log(fileTree)
 
 // WindowsCreator
 //--- Window create function
-	// Setting Child window
+	// Child Window: Setting
 const WindowSetting = async () =>{
 	const wins = new BrowserWindow ({
 		width: env('Width'),
