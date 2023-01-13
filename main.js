@@ -15,6 +15,31 @@ const staticjs = env('StaticDir') + 'js/'
 // General Declaration (Dev)
 const FileTree = require(staticjs + 'FileTree.js')
 
+
+// WindowsCreator
+//--- Window create function
+	// Child Window: Setting
+const WindowSetting = async () =>{
+	
+	const wins = new BrowserWindow ({
+		width: env('Width'),
+		height: env('Height'),
+		
+		webPreference:{
+			preload: path.join(__dirname, 'stpreload4.js'),
+			contextisolation: true
+		},
+	}) 
+	if (env('Debugmode')){
+		wins.webContents.openDevTools()
+	}
+	wins.loadFile(env('TemplateDir') + 'setting.html')
+	ipcMain.handle('st-test',	(event,v) => {
+		console.log(v)
+	})
+	return wins
+}
+
 const getFileTree = async (initDir) =>{
 	var fileTree = new FileTree(initDir)
 	fileTree.build()
@@ -84,6 +109,7 @@ const createWindow = async () => {
 
 	})
 
+
 	ipcMain.handle('fs-createMeta', async () => {
 		const path =dialog.showOpenDialogSync(win, {
 			properties: ['openDirectory']
@@ -95,10 +121,10 @@ const createWindow = async () => {
 
 	//---toolbar---
 	// Main: create child window
-	ipcMain.handle('tb-main', () =>{
-		console.log('sdsd')
-		const cwin = new BrowserWindow()
-		cwin.webContents.setWindowOpenHandler(({url}) => {
+	ipcMain.handle('st-main', () =>{
+		WindowSetting()
+/*		const WindowSetting = new BrowserWindow()
+		WindowSetting.webContents.setWindowOpenHandler(({url}) => {
 			if(url === 'about:blank'){
 				return {
 					action:'allow',
@@ -106,13 +132,13 @@ const createWindow = async () => {
 						frame: false,
 						fullscreenable: true,
 						webPreferences:{
-							preload:'tbpreload.js'
+							preload:'stpreload.js'
 						}
 					}
 				}
 			} 
 		return { action:'deny'}
-		})
+		})*/
 	})
 	
 	//---DarkMode---
@@ -131,6 +157,14 @@ const createWindow = async () => {
 	ipcMain.handle('dm-reset',	() =>{
 		nativeTheme.themeSource = 'system'
 	})
+//--- Test function 
+	// Main: Experimental Exam
+	
+	return win
+}
+    
+app.whenReady().then(() => {
+	//Test function
 
 	//---Test function--- 
 
@@ -142,13 +176,15 @@ const createWindow = async () => {
 	})
 }
 
+    WindowMain()
+
     
 app.whenReady().then(() => {
     createWindow()
 	// Prevent from multiple windows create
 	app.on('activate', () => {
 		if (BrowserWindow.getAllWindows().length === 0) {
-			createWindow()
+			WindowMain()
 		}
 	})
 })
