@@ -14,9 +14,22 @@ const staticjs = env('StaticDir') + 'js/'
 
 // General Declaration (Dev)
 const FileTree = require(staticjs + 'FileTree.js')
-var fileTree = new FileTree(__dirname)
-console.log(fileTree)
 
+const getFileTree = async (initDir) =>{
+	var fileTree = new FileTree(initDir)
+	fileTree.build()
+	const data = await fileTree
+
+	return JSON.stringify(data)
+}
+
+const writeMata = async (Dir, data) =>{
+	fs.appendFile(`${Dir}/db.json`,await data, function (err) {
+		if (err)
+			throw err;
+		console.log('Saved!');
+	});
+}
 
 //---Window create function--- 
 const createWindow = async () => {
@@ -71,6 +84,15 @@ const createWindow = async () => {
 
 	})
 
+	ipcMain.handle('fs-createMeta', async () => {
+		const path =dialog.showOpenDialogSync(win, {
+			properties: ['openDirectory']
+		})
+		writeMata(path, getFileTree(path[0]))
+
+		return 0
+	})
+
 	//---toolbar---
 	// Main: create child window
 	ipcMain.handle('tb-main', () =>{
@@ -111,18 +133,12 @@ const createWindow = async () => {
 	})
 
 	//---Test function--- 
-	// Main: Experimental Exam
-	var db = new JsonDB(new Config('Stemconfig',true,true,'/'))
-	var ap = await db.getData('/apple')
-	console.log(ap)
 
 	// Generate file tree
 	ipcMain.handle('fileTree',async	() =>{
-		fileTree.build()
-		const data = await fileTree
-		// console.log(data)
-
-		return JSON.stringify(data)
+		var dir = __dirname
+	
+		return await getFileTree(__dirname)
 	})
 }
 

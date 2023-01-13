@@ -1,4 +1,3 @@
-
 // Testing function
 const information = document.getElementById('info')
 information.innerText = `This app is using Chrome (v${versions.chrome()}), Node.js (v${versions.node()}), and Electron (v${versions.electron()})`
@@ -54,6 +53,7 @@ const fsclear = (path) =>{
 document.getElementById('fs-openDir').addEventListener('click', async () => {
 	const fsbrowse = await window.fs.getDir()
 	fsfunc(fsbrowse[0])
+
 	
 })
 	// Side: Home 
@@ -97,6 +97,9 @@ btn.addEventListener('click', async () => {
 	const filePath = await window.versions.fileTree()
 	console.log(JSON.parse(filePath)) 
   })
+document.getElementById('fs-createMeta').addEventListener('click', () => {
+	window.fs.createMeta()
+})
 
 //Initailizer
 fsfunc('default')
