@@ -57,7 +57,7 @@ const writeMata = async (Dir, data) =>{
 }
 
 //---Window create function--- 
-const createWindow = async () => {
+const WindowMain = async () => {
     const win = new BrowserWindow({
         width: env('Width'),
         height: env('Height'),
@@ -119,6 +119,13 @@ const createWindow = async () => {
 		return 0
 	})
 
+	ipcMain.handle('fileTree',async	() =>{
+		var dir = __dirname
+	
+		return await getFileTree(__dirname)
+	})
+
+
 	//---toolbar---
 	// Main: create child window
 	ipcMain.handle('st-main', () =>{
@@ -162,25 +169,10 @@ const createWindow = async () => {
 	
 	return win
 }
+
     
 app.whenReady().then(() => {
-	//Test function
-
-	//---Test function--- 
-
-	// Generate file tree
-	ipcMain.handle('fileTree',async	() =>{
-		var dir = __dirname
-	
-		return await getFileTree(__dirname)
-	})
-}
-
     WindowMain()
-
-    
-app.whenReady().then(() => {
-    createWindow()
 	// Prevent from multiple windows create
 	app.on('activate', () => {
 		if (BrowserWindow.getAllWindows().length === 0) {
