@@ -101,7 +101,11 @@ btn.addEventListener('click', async () => {
 //Initailizer
 fsfunc('default')
 
+const testfunc = async ()=>{
+	const apple = await window.st.main()
+}
 
+testfunc()
 
 
 

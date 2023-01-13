@@ -5,7 +5,11 @@
 --- 
 	## 2022.01.13		version 0.0.94
 	-- Text modification
-	
+	-- Add communication channel but bugged
+	### Added
+	1. Set up communication test
+		-- bugged
+		
 	### Changed
 	1. Modify annotation
 		-- finished

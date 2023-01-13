@@ -1,5 +1,4 @@
 const { contextBridge, ipcRenderer } = require('electron')
-
 // Testing function
 contextBridge.exposeInMainWorld('versions', {
     node: 		()=> process.versions.node,
@@ -30,6 +29,5 @@ contextBridge.exposeInMainWorld('dm', {
 contextBridge.exposeInMainWorld('st', {
 	main:		() => ipcRenderer.invoke('st-main'),
 })
-
 
 

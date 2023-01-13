@@ -1,7 +1,7 @@
 var electronFs = require('fs');
 
 module.exports = class FileTree {
-	console.log('test')
+	
     constructor(path, name = null){
         this.path = path;
         this.name = name;

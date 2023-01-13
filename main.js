@@ -22,11 +22,13 @@ console.log(fileTree)
 //--- Window create function
 	// Child Window: Setting
 const WindowSetting = async () =>{
+	
 	const wins = new BrowserWindow ({
 		width: env('Width'),
 		height: env('Height'),
+		
 		webPreference:{
-			preload: 'stpreload.js',
+			preload: path.join(__dirname, 'stpreload4.js'),
 			contextisolation: true
 		},
 	}) 
@@ -34,6 +36,10 @@ const WindowSetting = async () =>{
 		wins.webContents.openDevTools()
 	}
 	wins.loadFile(env('TemplateDir') + 'setting.html')
+	ipcMain.handle('st-test',	(event,v) => {
+		console.log(v)
+	})
+	return wins
 }
 	// Main Window
 const WindowMain = async () => {
@@ -127,9 +133,8 @@ const WindowMain = async () => {
 	})
 //--- Test function 
 	// Main: Experimental Exam
-	var db = new JsonDB(new Config('Stemconfig',true,true,'/'))
-	var ap = await db.getData('/apple')
-	console.log(ap)
+	
+	return win
 }
     
 app.whenReady().then(() => {
