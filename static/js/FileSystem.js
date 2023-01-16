@@ -1,6 +1,7 @@
 const {ipcMain,app,dialog} = require('electron')
 const fs = require('fs')
 const env = require('./env.js')
+	// Main: File query
     ipcMain.handle('fs-main',	(event,v) => {
 		
 		if(typeof v == 'undefined' || v == 'default'){

@@ -4,18 +4,12 @@ const fs = require('fs')
 const {JsonDB,Config} = require('node-json-db')
 const glob = require('glob')
 const env = require('./static/js/env.js')
-//--- Import System Variable here
-
-const staticjs = env('StaticDir') + 'js/'
-
 	// General Declaration
-const FileTree = require(staticjs + 'FileTree.js')
+const FileTree = require(env('StaticDir') + 'js/FileTree.js')
 var fileTree = new FileTree(__dirname)
 console.log(fileTree)
-//test
 
 // WindowsCreator
-//--- Window create function
 	// Child Window: Setting
 const WindowSetting = async () =>{
 	
@@ -75,9 +69,7 @@ const WindowMain = async () => {
 		})*/
 	})
 
-//--- Test function 
-	// Main: Experimental Exam
-	
+//--- Test	
 	return win
 }
 const init = () =>{  
