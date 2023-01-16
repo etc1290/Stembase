@@ -1,10 +1,11 @@
 const { app, BrowserWindow, ipcMain, nativeTheme, dialog } = require('electron')
 const path = require('path')
 const fs = require('fs')
-const {JsonDB,Config} = require('node-json-db');
+const {JsonDB,Config} = require('node-json-db')
+const glob = require('glob')
 
 //--- Import System Variable here
-	// Stemconfig import
+	
 const env = (v) =>{
 	const envdata = fs.readFileSync('Stemconfig.json')
 	var envarray = JSON.parse(envdata)
@@ -60,7 +61,7 @@ const WindowMain = async () => {
 	//Main: Show filenames
 	
     ipcMain.handle('fs-main',	(event,v) => {
-		console.log(v)
+		
 		if(typeof v == 'undefined' || v == 'default'){
 			
 			return fs.readdirSync(env('StartDir'))
@@ -115,46 +116,39 @@ const WindowMain = async () => {
 		return { action:'deny'}
 		})*/
 	})
-//--- DarkMode
-	// Main: toggle
-	ipcMain.handle('dm-main',	() =>{
-		if (nativeTheme.shouldUseDarkColors){
-			nativeTheme.themeSource = 'light'
-			
-		}else{
-			nativeTheme.themeSource = 'dark'
-			
-		}
-		return nativeTheme.shouldUseDarkColors
-	})
-	// Side: Reset to system
-	ipcMain.handle('dm-reset',	() =>{
-		nativeTheme.themeSource = 'system'
-	})
+
 //--- Test function 
 	// Main: Experimental Exam
 	
 	return win
 }
-    
-app.whenReady().then(() => {
-	//Test function
-	ipcMain.handle('fileTree',async	() =>{
-		fileTree.build()
-		const data = await fileTree
-		console.log(data)
-		return JSON.stringify(data)
-		
-	})
+const init = () =>{  
+	const Taskmanager = () =>{
+		const funcScript = glob.sync(env('StaticDir') + '/js/*.js')
+		console.log(funcScript)
+		funcScript.forEach((i) =>{require(i)})
+	}
+	Taskmanager()  
+	app.whenReady().then(() => {
+		//Test function
+		ipcMain.handle('fileTree',async	() =>{
+			fileTree.build()
+			const data = await fileTree
+			console.log(data)
+			return JSON.stringify(data)
+			
+		})
 
-    WindowMain()
-	// Prevent from multiple windows create
-	app.on('activate', () => {
-		if (BrowserWindow.getAllWindows().length === 0) {
-			WindowMain()
-		}
+		WindowMain()
+		// Prevent from multiple windows create
+		app.on('activate', () => {
+			if (BrowserWindow.getAllWindows().length === 0) {
+				WindowMain()
+			}
+		})
 	})
-})
+}
+init()
 // Release all resources of the app
 app.on('window-all-closed', () => {
 	if (process.platform !== 'darwin') {
