@@ -1,7 +1,23 @@
 # Stembase
  File tagging system
 
-
+---
+	## 2022.01.16		version 0.1.0
+	-- Text modification
+	-- Seperate function 
+	
+	### Added
+	1. Seperate function into independent js storing in static/js
+		1-1 FileSystem,env and DarkMode
+		-- finished
+	2. Build a Taskmanager function to load all scripts
+		-- finished
+	3. Build init function to control function loading
+		-- finished
+	### Changed
+	1. Remove some debug console.log
+		-- finished
+		
 --- 
 	## 2022.01.13		version 0.0.94
 	-- Text modification
