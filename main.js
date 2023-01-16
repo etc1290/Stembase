@@ -1,23 +1,15 @@
 const { app, BrowserWindow, ipcMain, nativeTheme, dialog } = require('electron')
 const path = require('path')
 const fs = require('fs')
-const {JsonDB,Config} = require('node-json-db');
-
-//---Import System Variable here---
-// Stemconfig import
-const env = (v) =>{
-	const envdata = fs.readFileSync('Stemconfig.json')
-	var envarray = JSON.parse(envdata)
-	return envarray[v]
-}
-const staticjs = env('StaticDir') + 'js/'
-
-// General Declaration (Dev)
-const FileTree = require(staticjs + 'FileTree.js')
-
+const {JsonDB,Config} = require('node-json-db')
+const glob = require('glob')
+const env = require('./static/js/env.js')
+	// General Declaration
+const FileTree = require(env('StaticDir') + 'js/FileTree.js')
+var fileTree = new FileTree(__dirname)
+console.log(fileTree)
 
 // WindowsCreator
-//--- Window create function
 	// Child Window: Setting
 const WindowSetting = async () =>{
 	
@@ -140,8 +132,7 @@ const createWindow = async () => {
 		return { action:'deny'}
 		})*/
 	})
-	
-	//---DarkMode---
+//--- DarkMode
 	// Main: toggle
 	ipcMain.handle('dm-main',	() =>{
 		if (nativeTheme.shouldUseDarkColors){
@@ -162,34 +153,33 @@ const createWindow = async () => {
 	
 	return win
 }
-    
-app.whenReady().then(() => {
-	//Test function
+const init = () =>{  
+	const Taskmanager = () =>{
+		const funcScript = glob.sync(env('StaticDir') + '/js/*.js')
+		console.log(funcScript)
+		funcScript.forEach((i) =>{require(i)})
+	}
+	Taskmanager()  
+	app.whenReady().then(() => {
+		//Test function
+		ipcMain.handle('fileTree',async	() =>{
+			fileTree.build()
+			const data = await fileTree
+			console.log(data)
+			return JSON.stringify(data)
+			
+		})
 
-	//---Test function--- 
-
-	// Generate file tree
-	ipcMain.handle('fileTree',async	() =>{
-		var dir = __dirname
-	
-		return await getFileTree(__dirname)
+		WindowMain()
+		// Prevent from multiple windows create
+		app.on('activate', () => {
+			if (BrowserWindow.getAllWindows().length === 0) {
+				WindowMain()
+			}
+		})
 	})
 }
-
-    WindowMain()
-
-    
-app.whenReady().then(() => {
-    createWindow()
-	// Prevent from multiple windows create
-	app.on('activate', () => {
-		if (BrowserWindow.getAllWindows().length === 0) {
-			WindowMain()
-		}
-	})
-})
-
-
+init()
 // Release all resources of the app
 app.on('window-all-closed', () => {
 	if (process.platform !== 'darwin') {
