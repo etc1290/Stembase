@@ -11,26 +11,7 @@ console.log(fileTree)
 
 // WindowsCreator
 	// Child Window: Setting
-const WindowSetting = async () =>{
-	
-	const wins = new BrowserWindow ({
-		width: env('Width'),
-		height: env('Height'),
-		
-		webPreference:{
-			preload: path.join(__dirname, 'stpreload4.js'),
-			contextisolation: true
-		},
-	}) 
-	if (env('Debugmode')){
-		wins.webContents.openDevTools()
-	}
-	wins.loadFile(env('TemplateDir') + 'setting.html')
-	ipcMain.handle('st-test',	(event,v) => {
-		console.log(v)
-	})
-	return wins
-}
+
 	// Main Window
 const WindowMain = async () => {
     const win = new BrowserWindow({
@@ -49,8 +30,8 @@ const WindowMain = async () => {
 
 //--- Setting
 	// Main: create child window
-	ipcMain.handle('st-main', () =>{
-		WindowSetting()
+//	ipcMain.handle('st-main', () =>{
+	//	WindowSetting()
 /*		const WindowSetting = new BrowserWindow()
 		WindowSetting.webContents.setWindowOpenHandler(({url}) => {
 			if(url === 'about:blank'){
@@ -67,11 +48,11 @@ const WindowMain = async () => {
 			} 
 		return { action:'deny'}
 		})*/
-	})
+	}
 
 //--- Test	
-	return win
-}
+	
+
 const init = () =>{  
 	const Taskmanager = () =>{
 		const funcScript = glob.sync(env('StaticDir') + '/js/*.js')

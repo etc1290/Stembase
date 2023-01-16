@@ -2,8 +2,19 @@
  File tagging system
 
 ---
+	## 2022.01.16		version 0.1.1
+	-- Separate Child Window create function
+	
+	## Added
+	1. Separate setting child window creation
+		-- finished
+		
+	## Changed
+	1. Rename st and divide it into specific st(child window setting) and general cw(child window creation)
+		-- finished
+---
 	## Setting Branch
-	## 2022.01.16		version 0.1.01 
+	## 2022.01.16		version 0.1.01
 	-- Create a new Branch
 ---
 	## 2022.01.16		version 0.1.0

@@ -25,9 +25,9 @@ contextBridge.exposeInMainWorld('dm', {
 	reset:		() => ipcRenderer.invoke('dm-reset')
 })
 
-// Setting
-contextBridge.exposeInMainWorld('st', {
-	main:		() => ipcRenderer.invoke('st-main'),
+// ChildWindow
+contextBridge.exposeInMainWorld('cw', {
+	setting:		() => ipcRenderer.invoke('cw-setting'),
 })
 
 

@@ -75,7 +75,7 @@ document.getElementById('fs-up').addEventListener('click', async () =>{
 	}
 })
 // Toolbar
-document.getElementById('st-main').addEventListener('click', async () =>{
+document.getElementById('cw-setting').addEventListener('click', async () =>{
 	const stCreateWindow = await window.st.main()
 	//const childWindow = window.open('','modal')
 	//childWindow.document.write('<p>This is a window</p>')
@@ -102,7 +102,7 @@ btn.addEventListener('click', async () => {
 fsfunc('default')
 
 const testfunc = async ()=>{
-	const apple = await window.st.main()
+	const apple = await window.cw.setting()
 }
 
 testfunc()
