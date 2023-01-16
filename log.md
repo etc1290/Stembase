@@ -8,10 +8,11 @@
 	
 	### Added
 	1. Seperate function into independent js storing in static/js
+		1-1 FileSystem,env and DarkMode
 		-- finished
 	2. Build a Taskmanager function to load all scripts
 		-- finished
-	3. Buid init function to control function loading
+	3. Build init function to control function loading
 		-- finished
 	### Changed
 	1. Remove some debug console.log
