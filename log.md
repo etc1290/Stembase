@@ -8,10 +8,12 @@
 	## Added
 	1. Separate setting child window creation
 		-- finished
-		
 	## Changed
 	1. Rename st and divide it into specific st(child window setting) and general cw(child window creation)
 		-- finished
+	## Bugged
+	1. exposeInMainWorld is not defined in stpreload.js
+	
 ---
 	## Setting Branch
 	## 2022.01.16		version 0.1.01

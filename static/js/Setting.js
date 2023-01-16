@@ -1,14 +1,15 @@
 const {ipcMain,BrowserWindow} = require('electron')
 const env = require('./env.js')
+const path= require('path')
 const WindowSetting = async () =>{
 	
 	const wins = new BrowserWindow ({
 		width: env('Width'),
 		height: env('Height'),
 		
-		webPreference:{
-			preload: './stpreload.js',
-			contextisolation: true
+		webPreferences:{
+			preload: path.join(__dirname, 'stpreload.js'),
+			contextIsolation:true
 		},
 	}) 
 	if (env('Debugmode')){

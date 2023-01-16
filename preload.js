@@ -28,6 +28,12 @@ contextBridge.exposeInMainWorld('dm', {
 // ChildWindow
 contextBridge.exposeInMainWorld('cw', {
 	setting:		() => ipcRenderer.invoke('cw-setting'),
+	
 })
+
+contextBridge.exposeInMainWorld('st', {
+	test:		() => ipcRenderer.invoke('st-test'),
+})
+
 
 
