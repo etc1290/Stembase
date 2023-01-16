@@ -1,6 +1,6 @@
 const {ipcMain,BrowserWindow} = require('electron')
 const env = require('./env.js')
-const path= require('path')
+const {resolve,path}= require('path')
 const WindowSetting = async () =>{
 	
 	const wins = new BrowserWindow ({
@@ -8,7 +8,7 @@ const WindowSetting = async () =>{
 		height: env('Height'),
 		
 		webPreferences:{
-			preload: path.join(__dirname, 'stpreload.js'),
+			preload: resolve('stpreload.js'),
 			contextIsolation:true
 		},
 	}) 
@@ -23,7 +23,7 @@ const WindowSetting = async () =>{
 
 ipcMain.handle('st-test',	() =>{
 	console.log('apple')
-}),
+})
 ipcMain.handle('cw-setting', () =>{
 	WindowSetting()
 })

@@ -32,9 +32,6 @@ contextBridge.exposeInMainWorld('cw', {
 	
 })
 
-contextBridge.exposeInMainWorld('st', {
-	test:		() => ipcRenderer.invoke('st-test'),
-})
 
 
 
