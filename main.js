@@ -163,20 +163,6 @@ const createWindow = async () => {
 	return win
 }
     
-app.whenReady().then(() => {
-	//Test function
-
-	//---Test function--- 
-
-	// Generate file tree
-	ipcMain.handle('fileTree',async	() =>{
-		var dir = __dirname
-	
-		return await getFileTree(__dirname)
-	})
-}
-
-    WindowMain()
 
     
 app.whenReady().then(() => {
