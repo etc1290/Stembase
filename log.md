@@ -18,6 +18,7 @@
 	## Setting Branch
 	## 2022.01.16		version 0.1.01
 	-- Create a new Branch
+	1. Make "Setting" branch sync with "main"
 ---
 	## 2022.01.16		version 0.1.0
 	-- Text modification
