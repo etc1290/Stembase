@@ -8,7 +8,7 @@ const WindowSetting = async () =>{
 		height: env('Height'),
 		
 		webPreferences:{
-			preload: path.join(__dirname, 'stpreload.js'),
+			preload: path.join(__dirname,'static', 'stpreload.js'),
 			contextIsolation:true
 		},
 	}) 
