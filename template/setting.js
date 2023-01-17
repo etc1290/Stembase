@@ -16,3 +16,10 @@ document.getElementById('dm-reset').addEventListener('click', async () =>{
 	await window.dm.reset()
 	document.getElementById('dm-text').innerHTML = 'System'
 })	
+
+//WindowSetting
+const init = async () =>{
+	document.getElementById('ws-width').innerHTML = await window.st.read('Width')
+}
+
+init()

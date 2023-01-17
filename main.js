@@ -24,7 +24,14 @@ const WindowMain = async () => {
 		win.webContents.openDevTools()
 	}
     win.loadFile(env('TemplateDir') + 'index.html')	
-	
+	// Communication Test
+	ipcMain.handle('tele-test',(event,v) =>{
+//		console.log('child' + v)
+		win.webContents.send('tele-test552',v)
+	})
+	ipcMain.handle('tele-test2',(event,v) =>{
+		console.log('father' + v)
+		})
 	}
 
 //--- Test	
@@ -46,7 +53,7 @@ const init = () =>{
 			return JSON.stringify(data)
 			
 		})
-
+		
 		WindowMain()
 		// Prevent from multiple windows create
 		app.on('activate', () => {

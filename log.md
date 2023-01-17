@@ -9,7 +9,11 @@
 	## Changed
 	1. Modify deprecated function(st.main) in index.js to new function(cw.setting)
 		-- finished
+	2. Porting DarkMode function to child window Setting
+		-- finished
 	
+	## Bugged
+	1. Setting.js cannot recognize v
 ---
 	## 2022.01.17		version 0.1.11
 	-- Remove annotation

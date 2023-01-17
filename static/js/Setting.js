@@ -18,12 +18,14 @@ const WindowSetting = async () =>{
 	wins.loadFile(env('TemplateDir') + 'setting.html')
 	/*ipcMain.handle('st-test',	(event,v) => {
 		console.log(v) */
+	ipcMain.handle('st-read', (event,v) =>{
+		console.log(v)
+		return env(v)
+	})
 	}
 	
 
-ipcMain.handle('st-test',	() =>{
-	console.log('apple')
-})
+
 ipcMain.handle('cw-setting', () =>{
 	WindowSetting()
 })
