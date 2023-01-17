@@ -2,6 +2,15 @@
  File tagging system
 
 ---
+	## 2022.01.17		version 0.1.2
+	-- Bug fix
+	-- Porting function 
+	
+	## Changed
+	1. Modify deprecated function(st.main) in index.js to new function(cw.setting)
+		-- finished
+	
+---
 	## 2022.01.17		version 0.1.11
 	-- Remove annotation
 	-- File Structure re-arrangement

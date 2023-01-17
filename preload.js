@@ -19,13 +19,13 @@ contextBridge.exposeInMainWorld('fs', {
 })
 
 
-
+/*
 // DarkMode
 contextBridge.exposeInMainWorld('dm', {
 	main:		() => ipcRenderer.invoke('dm-main'),
 	reset:		() => ipcRenderer.invoke('dm-reset')
 })
-
+*/
 // ChildWindow
 contextBridge.exposeInMainWorld('cw', {
 	setting:		() => ipcRenderer.invoke('cw-setting'),

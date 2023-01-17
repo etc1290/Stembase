@@ -76,20 +76,9 @@ document.getElementById('fs-up').addEventListener('click', async () =>{
 })
 // Toolbar
 document.getElementById('cw-setting').addEventListener('click', async () =>{
-	const stCreateWindow = await window.st.main()
+	const stCreateWindow = await window.cw.setting()
 
 })
-// DarkMode
-	//Main: Toggle
-document.getElementById('dm-main').addEventListener('click', async () =>{
-	const isDarkMode = await window.dm.main()
-	document.getElementById('dm-text').innerHTML = isDarkMode ? 'Dark' : 'Light'
-})
-	//Side: Reset to system 
-document.getElementById('dm-reset').addEventListener('click', async () =>{
-	await window.dm.reset()
-	document.getElementById('dm-text').innerHTML = 'System'
-})	
 
 //Test function
 btn.addEventListener('click', async () => {

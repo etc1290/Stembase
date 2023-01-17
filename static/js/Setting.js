@@ -23,7 +23,7 @@ const WindowSetting = async () =>{
 
 ipcMain.handle('st-test',	() =>{
 	console.log('apple')
-}),
+})
 ipcMain.handle('cw-setting', () =>{
 	WindowSetting()
 })
