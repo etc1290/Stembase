@@ -10,8 +10,6 @@ var fileTree = new FileTree(__dirname)
 console.log(fileTree)
 
 // WindowsCreator
-	// Child Window: Setting
-
 	// Main Window
 const WindowMain = async () => {
     const win = new BrowserWindow({
@@ -27,27 +25,6 @@ const WindowMain = async () => {
 	}
     win.loadFile(env('TemplateDir') + 'index.html')	
 	
-
-//--- Setting
-	// Main: create child window
-//	ipcMain.handle('st-main', () =>{
-	//	WindowSetting()
-/*		const WindowSetting = new BrowserWindow()
-		WindowSetting.webContents.setWindowOpenHandler(({url}) => {
-			if(url === 'about:blank'){
-				return {
-					action:'allow',
-					overrideBrowserOptions:{
-						frame: false,
-						fullscreenable: true,
-						webPreferences:{
-							preload:'stpreload.js'
-						}
-					}
-				}
-			} 
-		return { action:'deny'}
-		})*/
 	}
 
 //--- Test	

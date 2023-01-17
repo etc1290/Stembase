@@ -2,6 +2,16 @@
  File tagging system
 
 ---
+	## 2022.01.17		version 0.1.11
+	-- Remove annotation
+	-- File Structure re-arrangement
+	
+	## Changed
+	1. Remove some wasted annotation
+		-- finished
+	2. Move stpreload.js from static to bin for functional isolation
+		-- finished
+---
 	## 2022.01.16		version 0.1.1
 	-- Separate Child Window create function
 	
