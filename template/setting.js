@@ -18,10 +18,13 @@ document.getElementById('dm-reset').addEventListener('click', async () =>{
 })	
 
 //WindowSetting
+	//Main:	Autofill
 const init = async () =>{
-	//const apple = document.querySelector('input[class=option]')
-	//console.log(apple)
-	document.getElementById('Width').value = await window.st.read('Width')
+	var idArray = Array.prototype.map.call(document.querySelectorAll('input[class=option]'),function (element){return element.id})
+	idArray.forEach(async(i) => {
+		document.getElementById(i).value = await window.st.read(i)
+	})
+	
 	
 }
 

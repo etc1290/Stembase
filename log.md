@@ -2,6 +2,14 @@
  File tagging system
 
 ---
+	## 2022.01.18		version 0.1.3
+	-- Function improvement
+	
+	## Changed
+	1. Rebuild Autofill function with more efficient way
+		1-1 Name after a element id in html with corresponded database index and gived classname'option' to activate Autofill
+			-- finished
+---
 	## 2022.01.18		version 0.1.21
 	-- Bug fix
 	-- Rename id
