@@ -2,6 +2,17 @@
  File tagging system
 
 ---
+	## 2022.01.18		version 0.1.21
+	-- Bug fix
+	-- Rename id
+	
+	## Changed
+	1. Rename id in Setting.html for further developing
+		-- finished
+	## Fixed
+	1. Fix Setting.js cannot recognize v
+	
+---
 	## 2022.01.17		version 0.1.2
 	-- Bug fix
 	-- Porting function 

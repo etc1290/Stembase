@@ -19,7 +19,10 @@ document.getElementById('dm-reset').addEventListener('click', async () =>{
 
 //WindowSetting
 const init = async () =>{
-	document.getElementById('ws-width').innerHTML = await window.st.read('Width')
+	//const apple = document.querySelector('input[class=option]')
+	//console.log(apple)
+	document.getElementById('Width').value = await window.st.read('Width')
+	
 }
 
 init()

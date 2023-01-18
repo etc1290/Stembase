@@ -11,7 +11,7 @@ const WindowSetting = async () =>{
 			preload: resolve('stpreload.js'),
 			contextIsolation:true
 		},
-	}) 
+	})                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
 	if (env('Debugmode')){
 		wins.webContents.openDevTools()
 	}
