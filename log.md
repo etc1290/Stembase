@@ -2,13 +2,16 @@
  File tagging system
 
 ---
-	## 2022.01.18		version 0.1.3
+	## 2022.01.18		version 0.1.22
 	-- Function improvement
+	## Added
+	1. Add Write,Record and Reset function in setting.js
+		-- processing
 	
 	## Changed
 	1. Rebuild Autofill function with more efficient way
 		1-1 Name after a element id in html with corresponded database index and gived classname'option' to activate Autofill
-			-- finished
+		-- finished
 ---
 	## 2022.01.18		version 0.1.21
 	-- Bug fix

@@ -3,7 +3,8 @@ const { contextBridge, ipcRenderer } = require('electron')
 
 contextBridge.exposeInMainWorld('st', {
 	test:		() => ipcRenderer.invoke('tele-test','apple'),
-	read:		(v) => ipcRenderer.invoke('st-read',v)
+	write:		(i,v) => ipcRenderer.invoke('st-write',i,v),
+	read:		(v)=> ipcRenderer.invoke('st-read',v)
 })
 
 

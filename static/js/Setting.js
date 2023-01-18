@@ -1,6 +1,7 @@
 const {ipcMain,BrowserWindow} = require('electron')
 const env = require('./env.js')
 const {path,resolve}= require('path')
+const {JsonDB,Config} = require('node-json-db')
 const WindowSetting = async () =>{
 	
 	const wins = new BrowserWindow ({
@@ -18,8 +19,12 @@ const WindowSetting = async () =>{
 	wins.loadFile(env('TemplateDir') + 'setting.html')
 	/*ipcMain.handle('st-test',	(event,v) => {
 		console.log(v) */
+	ipcMain.handle('st-write',(event,i,v) =>{
+		var db = new JsonDB(new Config("StemConfig", true, true, '/'))		
+		db.push('/'+i,v)
+		
+	})
 	ipcMain.handle('st-read', (event,v) =>{
-		console.log(v)
 		return env(v)
 	})
 	}
