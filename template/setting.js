@@ -30,14 +30,25 @@ const stAutoFill = async () =>{
 const stRecord = () =>{
 	document.querySelectorAll('input[class=option').forEach((e) =>{
 		e.addEventListener('input', ()=>{
-			document.getElementById('st-record').value+=','+e.id
+			const optionStr = document.getElementById('st-record').value
+			const optionArr = optionStr.split(',')
+			if (optionArr.indexOf(e.id)==-1){				
+				optionArr.push(e.id)
+			}
+			document.getElementById('st-record').value = ''+optionArr
 		})
 	})
 }
 	//Side: Write 
 const stWrite = async () =>{
 	document.getElementById('st-write').addEventListener('click', async () =>{
-		//await window.st.write('Width',1280)
+		const editedOpt = document.getElementById('st-record').value.split(',')		
+		editedOpt.shift()
+		console.log(editedOpt)
+		editedOpt.forEach(async(i) =>{
+			const v = document.getElementById(i).value
+			await window.st.write(i,v)
+		})
 	})
 }
 	//Side: Reset

@@ -2,8 +2,8 @@
     "TemplateDir": "./template/",
     "StaticDir": "./static/",
     "StartDir": "./",
-    "Debugmode": true,
-    "Width": 1280,
-    "Height": 960,
+    "Debugmode": 1,
+    "Width": 1080,
+    "Height": 720,
     "apple": 100
 }
