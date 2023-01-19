@@ -17,7 +17,7 @@
 	1. Re-arrange codes for clear display in setting.js
 		-- finished
 ---
-	## 2022.01.19		versuin 0.1.4
+	## 2022.01.19		versuin 0.1.4.1
 	-- Remove annotations
 	
 	## Changed
