@@ -21,7 +21,8 @@ contextBridge.exposeInMainWorld('fs', {
 // ChildWindow
 contextBridge.exposeInMainWorld('cw', {
 	setting:		() => ipcRenderer.invoke('cw-setting'),
-	
+	codelab:		() => ipcRenderer.invoke('cw-codelab'),
+	stylelab:		() => ipcRenderer.invoke('cw-stylelab')
 })
 
 

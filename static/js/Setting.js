@@ -18,8 +18,10 @@ const WindowSetting = async () =>{
 		wins.webContents.openDevTools()
 	}
 	wins.loadFile(env('TemplateDir') + 'setting.html')
-	/*ipcMain.handle('st-test',	(event,v) => {
-		console.log(v) */
+	
+	ipcMain.handle('st-test',	(event,v) => {
+		console.log(v) 
+	})
 	ipcMain.handle('st-write',(event,i,v) =>{
 		var db = new JsonDB(new Config("StemConfig", true, true, '/'))	
 		const newv = check(v)
@@ -30,10 +32,11 @@ const WindowSetting = async () =>{
 	ipcMain.handle('st-read', (event,v) =>{
 		return env(v)
 	})
-	}
+}
 	
 
 
 ipcMain.handle('cw-setting', () =>{
 	WindowSetting()
 })
+

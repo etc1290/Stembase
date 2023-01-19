@@ -1,10 +1,4 @@
 
-const testfunc = async ()=>{
-	const apple = await window.st.test('st-test')
-}
-
-testfunc() 
-
 // DarkMode
 	//Main: Toggle
 document.getElementById('dm-main').addEventListener('click', async () =>{
@@ -26,6 +20,7 @@ const stAutoFill = async () =>{
 		document.getElementById(i).value = await window.st.read(i)
 	})	
 }
+	
 	//Side: Record
 const stRecord = () =>{
 	document.querySelectorAll('input[class=option').forEach((e) =>{
@@ -61,11 +56,27 @@ const stReset = async () =>{
 		})		
 	})
 }
+	//Side: Testroom
+const stTest = () =>{
+	document.getElementById('cw-codelab').addEventListener('click', async () =>{
+		const clCreateWindow = await window.cw.codelab()
+	})
+	document.getElementById('cw-stylelab').addEventListener('click', async () =>{
+		const slCreateWindow = await window.cw.stylelab()
+	})
+	
+}
 
+	// Testfunc
+const testfunc = async () =>{
+	const apple = await window.cw.codelab()
+	const bapple = await window.cw.stylelab()
+}
 const init = async ()=>{
 	stAutoFill()
 	stWrite()
 	stReset()
 	stRecord()
+	stTest()
 }
 init()

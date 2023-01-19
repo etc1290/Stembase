@@ -8,11 +8,9 @@ const fsfunc = async (path) => {
 		//Initialize
 	let fspath = document.querySelector('p[id=fs-path]')
 	let updateDiv = document.querySelector('div[id=fs-main]')
-		//Permanent record of current path
 	const nowPath = fspath.innerHTML
 	updateDiv.innerHTML=''
 	fspath.innerHTML=''
-		//Insert file as button
 	const response = await window.fs.main(path)
 	response.forEach(i=>{
 		i = `<button class='fs-data'>` + i + `</button><br>`
@@ -93,7 +91,7 @@ document.getElementById('fs-createMeta').addEventListener('click', () => {
 fsfunc('default')
 
 const testfunc = async ()=>{
-	const apple = await window.cw.setting()
+	const apple = await window.cw.codelab()
 }
 
 testfunc()

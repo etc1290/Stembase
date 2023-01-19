@@ -2,6 +2,31 @@
  File tagging system
 
 ---
+	## 2022.01.19		version 0.1.5
+	-- Function implementation
+	
+	## Added
+	1. Add Code Lab to test codes without affecting any truly important function
+		-- finished
+	2. Add Style Lab to test css/design without affecting overall design
+		-- finished
+	3. Add Code Lab and Style Lab shortcut in Stting page
+		-- finished
+	
+	## Changed
+	1. Re-arrange codes for clear display in setting.js
+		-- finished
+---
+	## 2022.01.19		versuin 0.1.4
+	-- Remove annotations
+	
+	## Changed
+	1. Remove useless annotation in index.js
+		-- finished
+	2. Rearrange the codes in setting.js
+		-- finished
+		
+---
 	## 2022.01.19		version 0.1.4
 	-- Function implementation
 	-- Remove debug codes

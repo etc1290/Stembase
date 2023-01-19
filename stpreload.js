@@ -17,3 +17,9 @@ contextBridge.exposeInMainWorld('dm', {
 	main:		() => ipcRenderer.invoke('dm-main'),
 	reset:		() => ipcRenderer.invoke('dm-reset')
 })
+
+// ChildWindow
+contextBridge.exposeInMainWorld('cw',{
+	codelab:	() => ipcRenderer.invoke('cw-codelab'),
+	stylelab:	() => ipcRenderer.invoke('cw-stylelab')
+})
