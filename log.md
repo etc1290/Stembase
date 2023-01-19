@@ -2,11 +2,26 @@
  File tagging system
 
 ---
+	## 2022.01.19		version 0.1.4
+	-- Function implementation
+	-- Remove debug codes
+	-- Add systematic text
+	
+	## Added
+	1. Finish Reset function in setting.js
+		-- finished
+	2. Add systematic message in setting.html to remind user to restart the app
+		-- finished
+	
+	## Changed
+	1. Remove some debug codes
+		-- finished
+---
 	## 2022.01.19		version 0.1.3
 	-- New function scripts
 	-- Function implementation
 	
-	# Added
+	## Added
 	1. Add a new script called Check.js used for converting all strings to number if possible and return it
 		-- finished
 	2. Finish write,record function in setting.js

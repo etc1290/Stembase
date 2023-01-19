@@ -3,7 +3,7 @@
     "StaticDir": "./static/",
     "StartDir": "./",
     "Debugmode": 1,
-    "Width": 1080,
-    "Height": 720,
+    "Width": 1280,
+    "Height": 960,
     "apple": 100
 }

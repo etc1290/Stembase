@@ -44,16 +44,22 @@ const stWrite = async () =>{
 	document.getElementById('st-write').addEventListener('click', async () =>{
 		const editedOpt = document.getElementById('st-record').value.split(',')		
 		editedOpt.shift()
-		console.log(editedOpt)
 		editedOpt.forEach(async(i) =>{
 			const v = document.getElementById(i).value
 			await window.st.write(i,v)
 		})
+		document.getElementById('st-message').innerHTML = 'To take effect, restart the app is required.'
 	})
 }
 	//Side: Reset
 const stReset = async () =>{
-	console.log('reset test')
+	document.getElementById('st-reset').addEventListener('click', () =>{
+		const editedOpt = document.getElementById('st-record').value.split(',')
+		editedOpt.shift()
+		editedOpt.forEach(async(i) =>{
+			document.getElementById(i).value = await window.st.read(i)
+		})		
+	})
 }
 
 const init = async ()=>{
