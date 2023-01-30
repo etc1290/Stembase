@@ -19,7 +19,7 @@ const fsfunc = async (path) => {
 		//Button function
 	const fsbutton = document.querySelectorAll('button[class=fs-data]')
 	fsbutton.forEach(e=>{
-		e.addEventListener('click',async()=>{
+		e.addEventListener('dblclick',async()=>{
 			fsfunc(fspath.innerHTML + '\\' + e.innerHTML)
 		})
 	})

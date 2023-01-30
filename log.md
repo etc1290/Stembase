@@ -5,11 +5,27 @@
 ---
 	## 2022.01.30		version 0.1.6
 	-- Style design
+	-- Add click and double click trigger
+	
+	## Added
+	1. Add single and double click trigger at fs-data
+		1-1 Single for select function like selection, show details, tagging and so on.
+			-- processing
+		1-2 Double for original function,that is, file browsing
+			-- finished
 	
 	## Changed
 	1. Re-design the style of a button
 		-- finished
 	
+	## Testing
+	1. Set up tagging system and derivative function
+		1-1 Single and Double Click
+			-- finished
+		1-2 Tagging
+		1-3 Details
+		1-4 Selection
+		1-5 Others
 ---
 	## 2022.01.19		version 0.1.5
 	-- Function implementation

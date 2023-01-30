@@ -15,9 +15,11 @@
 	}
 	button{
 		background: rgb(255,250,240);
+		transition: 0.5s;
 	}
 	button:hover{
 		background: rgb(216,255,241);
+		transition:	none;
 	}
 }
 
