@@ -1,0 +1,15 @@
+.cl-btn{
+	text-align:	left;
+	display:	inline-block;
+}
+.cl-text-1{
+	width:		30%;
+	display:	inline-block;
+	padding:	none;
+}
+.cl-text-2{
+	width:		20%;
+	display:	inline-block;
+	text-align:	center;
+	padding:	none;
+}

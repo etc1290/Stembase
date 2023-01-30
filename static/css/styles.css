@@ -1,7 +1,32 @@
 @media (prefers-color-scheme: dark) {
-  body { background:rgb(17,17,17) ; color: rgb(211,211,211); }
+	body { 
+		background:	rgb(17,17,17); 
+		color: 		rgb(211,211,211);
+	}
+	button{
+		background:	rgb(17,17,17);
+	}
 }
 
 @media (prefers-color-scheme: light) {
-  body { background: rgb(255,250,240); color: black; }
+	body { 
+		background: rgb(255,250,240);
+		color: black; 
+	}
+	button{
+		background: rgb(255,250,240);
+	}
+	button:hover{
+		background: rgb(216,255,241);
+	}
+}
+
+button {
+	padding:	0;
+	width:		50%;
+	border:		none;
+}
+
+.fs-data{
+	text-align:left;
 }

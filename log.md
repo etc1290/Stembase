@@ -1,6 +1,15 @@
 # Stembase
  File tagging system
 
+
+---
+	## 2022.01.30		version 0.1.6
+	-- Style design
+	
+	## Changed
+	1. Re-design the style of a button
+		-- finished
+	
 ---
 	## 2022.01.19		version 0.1.5
 	-- Function implementation
