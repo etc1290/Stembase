@@ -1,5 +1,5 @@
 const bytes = (bt, decimals = 2) => {
-    if (!+bt) return '0 B'
+    if (!+bt) return ''
 
     const k = 1024
     const dm = decimals < 0 ? 0 : decimals

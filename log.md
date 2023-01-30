@@ -1,7 +1,18 @@
 # Stembase
  File tagging system
 
-
+---
+	## 2022.01.30		version 0.1.7
+	-- Function implementation
+	
+	## Added
+	1. Add File data mining function in fs-main
+		-- finished
+	
+	## Changed
+	1. Change text in bytes.js for detecting directory
+		-- finished
+		
 ---
 	## 2022.01.30		version 0.1.6
 	-- Style design
