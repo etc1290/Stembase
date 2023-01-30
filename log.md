@@ -6,6 +6,8 @@
 	## 2022.01.30		version 0.1.6
 	-- Style design
 	-- Add click and double click trigger
+	-- Bug fixes
+	-- Tool script importing 
 	
 	## Added
 	1. Add single and double click trigger at fs-data
@@ -13,11 +15,15 @@
 			-- processing
 		1-2 Double for original function,that is, file browsing
 			-- finished
-	
+	2. Build a tool script called bytes.js for 'B,KB,MB,GB...' converting
+		-- finished
+		
 	## Changed
 	1. Re-design the style of a button
 		-- finished
-	
+	2. Fix the bugs of fs-getDir caused by js separate
+		-- finished
+		
 	## Testing
 	1. Set up tagging system and derivative function
 		1-1 Single and Double Click

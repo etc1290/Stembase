@@ -1,17 +1,22 @@
 const {ipcMain,app,dialog} = require('electron')
 const fs = require('fs')
 const env = require('./env.js')
+const bytes = require('./bytes.js')
 	// Main: File query
     ipcMain.handle('fs-main',	(event,v) => {
 		
 		if(typeof v == 'undefined' || v == 'default'){
 			
+			
 			return fs.readdirSync(env('StartDir'))
 		}else if(fs.lstatSync(v).isDirectory()){
-			
+			const {size} = fs.statSync(v)
+			console.log(bytes(size))
 			return fs.readdirSync(v)
 		}else{
 			console.log('this is a file')
+			const {size} = fs.statSync(v)
+			console.log(bytes(size))
 			const pathList = v.split('\\').slice(0,-1).join('\\')
 			
 			return fs.readdirSync(pathList)
@@ -31,7 +36,7 @@ const env = require('./env.js')
 	//Side: File browser
 	ipcMain.handle('fs-getDir', () => {
 		
-		const fsobject =dialog.showOpenDialogSync(win, {
+		const fsobject =dialog.showOpenDialogSync({
 			properties: ['openDirectory']
 		})
 		return fsobject
