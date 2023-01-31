@@ -12,8 +12,6 @@ const fsfunc = async (path) => {
 	updateDiv.innerHTML=''
 	fspath.innerHTML=''
 	const {file,size,birthtime} = await window.fs.main(path)
-	console.log(size)
-	console.log(birthtime)
 	/*
 	file.forEach(i=>{
 		console.log(i)
@@ -23,8 +21,6 @@ const fsfunc = async (path) => {
 	
 	
 	for(var i=0;i<file.length;i++){
-		console.log(size[i])
-		console.log(birthtime[i])
 		var fsbtn = `<button class='fs-data'>` + file[i] + `</button>`
 		var fssize = `<p class='fs-data-size'>`+ size[i] + `</p>`
 		var fsbirthtime = `<p class='fs-data-birthtime'>`+ birthtime[i] +`</p>`
@@ -106,7 +102,7 @@ document.getElementById('fs-createMeta').addEventListener('click', () => {
 fsfunc('default')
 
 const testfunc = async ()=>{
-	const apple = await window.cw.codelab()
+	//const apple = await window.cw.codelab()
 }
 
 testfunc()

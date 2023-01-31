@@ -8,6 +8,7 @@ const bytes = require('./bytes.js')
 		const dataMiner = (v,i) =>{
 			const dynamicList = new Array()
 			if(i=='size'){
+				console.log(v)
 				v.forEach(e =>{
 					const {[i]:k}=fs.statSync(e)
 					dynamicList.push(bytes(k))
@@ -25,20 +26,28 @@ const bytes = require('./bytes.js')
 			const fileList = fs.readdirSync(env('StartDir'))
 			const fileSize = dataMiner(fileList,'size')
 			const fileBirth= dataMiner(fileList,'birthtime')
-			console.log(fileList)
-			console.log(fileSize)
 			return {file:fileList,size:fileSize,birthtime:fileBirth}
 		}else if(fs.lstatSync(v).isDirectory()){
-			
-			const {size} = fs.statSync(v)
-			console.log(bytes(size))
-			return fs.readdirSync(v)
+			const pathList = fs.readdirSync(v)
+			const fileList = new Array
+			pathList.forEach(e=>{
+				fileList.push(v+'\\'+e)
+			})
+			console.log('apple' + fileList)
+			const fileSize = dataMiner(fileList,'size')
+			const fileBirth= dataMiner(fileList,'birthtime')
+			return {file:pathList,size:fileSize,birthtime:fileBirth}
 		}else{
 			console.log('this is a file')
-			const {size} = fs.statSync(v)
-			const pathList = v.split('\\').slice(0,-1).join('\\')
-			
-			return fs.readdirSync(pathList)
+			const path = v.split('\\').slice(0,-1).join('\\')
+			const pathList = fs.readdirSync(path)
+			const fileList = new Array
+			pathList.forEach(e=>{
+				fileList.push(path+'\\'+e)
+			})
+			const fileSize = dataMiner(fileList,'size')
+			const fileBirth= dataMiner(fileList,'birthtime')
+			return {file:pathList,size:fileSize,birthtime:fileBirth}
 		}
 		
 	})

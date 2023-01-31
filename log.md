@@ -11,7 +11,7 @@
 	1. Add independent css for each templates
 		-- finished
 	2. Apply basic Detail function to index.js
-		-- processing
+		-- finished
 	
 	# Changed
 	1. Rename clstyles.css to codelab.css for consistency
