@@ -2,8 +2,15 @@
  File tagging system
 
 ---
+	## 2022.01.31		version 0.1.9
+	-- Function rewrite
+	
+	## Changed
+	1. Rewrite dataminer function into a more dry,efficient and user-friendly function
+		-- finished
+---
 	## 2022.01.31		version 0.1.8
-	-- Style implementation
+	-- tyle implementation
 	-- Function implementation
 	-- Bug Fix
 	

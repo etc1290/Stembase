@@ -5,49 +5,47 @@ const bytes = require('./bytes.js')
 	// Main: File query
     ipcMain.handle('fs-main',	(event,v) => {
 		//Side: File details miner
-		const dataMiner = (v,i) =>{
-			const dynamicList = new Array()
-			if(i=='size'){
-				console.log(v)
-				v.forEach(e =>{
-					const {[i]:k}=fs.statSync(e)
-					dynamicList.push(bytes(k))
-				})
-			}else{
-				v.forEach(e => {
-					const {[i]:k}=fs.statSync(e)			
-					dynamicList.push(k)
-				})
-			}			
-			return dynamicList
+		const dataMiner = (path,property) =>{
+			const output = new Array()
+			const v = new Array
+			const pathList = fs.readdirSync(path)		
+			pathList.forEach(e=>{
+				v.push(path + '\\' + e)
+			})
+			console.log(pathList)
+			property.forEach(i=>{
+				console.log(i)
+				let data = new Array()
+				if (i=='file'){
+					data = pathList
+				}else if(i=='size'){
+					v.forEach(e =>{
+						const {[i]:k}=fs.statSync(e)
+						data.push(bytes(k))
+					})
+				}else{
+					v.forEach(e =>{
+						const {[i]:k}=fs.statSync(e)
+						data.push(k)
+					})
+				}
+				console.log(data)
+				output[i] = data
+			})
+			return output			
 		}
 		// Main function starts here
 		if(typeof v == 'undefined' || v == 'default'){
-			const fileList = fs.readdirSync(env('StartDir'))
-			const fileSize = dataMiner(fileList,'size')
-			const fileBirth= dataMiner(fileList,'birthtime')
-			return {file:fileList,size:fileSize,birthtime:fileBirth}
+			fsdata = (({file,size,birthtime})=>({file,size,birthtime}))(dataMiner(env('StartDir'),['file','size','birthtime']))
+			return fsdata
 		}else if(fs.lstatSync(v).isDirectory()){
-			const pathList = fs.readdirSync(v)
-			const fileList = new Array
-			pathList.forEach(e=>{
-				fileList.push(v+'\\'+e)
-			})
-			console.log('apple' + fileList)
-			const fileSize = dataMiner(fileList,'size')
-			const fileBirth= dataMiner(fileList,'birthtime')
-			return {file:pathList,size:fileSize,birthtime:fileBirth}
+			fsdata = (({file,size,birthtime})=>({file,size,birthtime}))(dataMiner(v,['file','size','birthtime']))
+			return fsdata
 		}else{
-			console.log('this is a file')
+			console.log('this is a file')			
 			const path = v.split('\\').slice(0,-1).join('\\')
-			const pathList = fs.readdirSync(path)
-			const fileList = new Array
-			pathList.forEach(e=>{
-				fileList.push(path+'\\'+e)
-			})
-			const fileSize = dataMiner(fileList,'size')
-			const fileBirth= dataMiner(fileList,'birthtime')
-			return {file:pathList,size:fileSize,birthtime:fileBirth}
+			fsdata = (({file,size,birthtime})=>({file,size,birthtime}))(dataMiner(path,['file','size','birthtime']))
+			return fsdata
 		}
 		
 	})

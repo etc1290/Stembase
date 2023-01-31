@@ -11,7 +11,9 @@ const fsfunc = async (path) => {
 	const nowPath = fspath.innerHTML
 	updateDiv.innerHTML=''
 	fspath.innerHTML=''
+	//const {file,size,birthtime} = await window.fs.main(path)
 	const {file,size,birthtime} = await window.fs.main(path)
+	
 	/*
 	file.forEach(i=>{
 		console.log(i)
