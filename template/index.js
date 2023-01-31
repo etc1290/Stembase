@@ -12,7 +12,7 @@ const fsfunc = async (path) => {
 	updateDiv.innerHTML=''
 	fspath.innerHTML=''
 	//const {file,size,birthtime} = await window.fs.main(path)
-	const {file,size,birthtime} = await window.fs.main(path)
+	const {file,size,mtime} = await window.fs.main(path)
 	
 	/*
 	file.forEach(i=>{
@@ -25,8 +25,8 @@ const fsfunc = async (path) => {
 	for(var i=0;i<file.length;i++){
 		var fsbtn = `<button class='fs-data'>` + file[i] + `</button>`
 		var fssize = `<p class='fs-data-size'>`+ size[i] + `</p>`
-		var fsbirthtime = `<p class='fs-data-birthtime'>`+ birthtime[i] +`</p>`
-		var fsdata = fsbtn + fssize + fsbirthtime + `<br>`
+		var fsmtime = `<p class='fs-data-mtime'>`+ mtime[i] +`</p>`
+		var fsdata = fsbtn + fssize + fsmtime + `<br>`
 		updateDiv.insertAdjacentHTML('beforeend',fsdata)
 	}
 		//Button function

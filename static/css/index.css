@@ -8,7 +8,7 @@
 	padding:		none;
 	margin:			none;
 }
-.fs-data-birthtime{
+.fs-data-mtime{
 	width:			20%;
 	text-align:		center;
 	display:		inline-block;

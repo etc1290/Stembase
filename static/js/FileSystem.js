@@ -2,8 +2,10 @@ const {ipcMain,app,dialog} = require('electron')
 const fs = require('fs')
 const env = require('./env.js')
 const bytes = require('./bytes.js')
+
 	// Main: File query
     ipcMain.handle('fs-main',	(event,v) => {
+		const timestamp = (i) => new Date(i).toISOString().slice(0, 10)
 		//Side: File details miner
 		const dataMiner = (path,property) =>{
 			const output = new Array()
@@ -23,6 +25,11 @@ const bytes = require('./bytes.js')
 						const {[i]:k}=fs.statSync(e)
 						data.push(bytes(k))
 					})
+				}else if(i=='mtime'){
+					v.forEach(e =>{
+						const {[i]:k}=fs.statSync(e)
+						data.push(timestamp(k))
+					})
 				}else{
 					v.forEach(e =>{
 						const {[i]:k}=fs.statSync(e)
@@ -36,15 +43,15 @@ const bytes = require('./bytes.js')
 		}
 		// Main function starts here
 		if(typeof v == 'undefined' || v == 'default'){
-			fsdata = (({file,size,birthtime})=>({file,size,birthtime}))(dataMiner(env('StartDir'),['file','size','birthtime']))
+			fsdata = (({file,size,mtime})=>({file,size,mtime}))(dataMiner(env('StartDir'),['file','size','mtime']))
 			return fsdata
 		}else if(fs.lstatSync(v).isDirectory()){
-			fsdata = (({file,size,birthtime})=>({file,size,birthtime}))(dataMiner(v,['file','size','birthtime']))
+			fsdata = (({file,size,mtime})=>({file,size,mtime}))(dataMiner(v,['file','size','mtime']))
 			return fsdata
 		}else{
 			console.log('this is a file')			
 			const path = v.split('\\').slice(0,-1).join('\\')
-			fsdata = (({file,size,birthtime})=>({file,size,birthtime}))(dataMiner(path,['file','size','birthtime']))
+			fsdata = (({file,size,mtime})=>({file,size,mtime}))(dataMiner(path,['file','size','mtime']))
 			return fsdata
 		}
 		

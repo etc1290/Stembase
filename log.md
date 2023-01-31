@@ -4,13 +4,22 @@
 ---
 	## 2022.01.31		version 0.1.9
 	-- Function rewrite
+	-- Timestamp convert function implementation
 	
+	
+	## Added
+	1. Add a timestamp convert function in fs-main(it's very lightweight,by the way)
+		-- finished
 	## Changed
 	1. Rewrite dataminer function into a more dry,efficient and user-friendly function
 		-- finished
+	2. Mine mtime(modified time) instead of birthtime(created time) to close the actuall use
+		-- finished
+	3. Seprate a independent check for time in dataminer
+		-- finished
 ---
 	## 2022.01.31		version 0.1.8
-	-- tyle implementation
+	-- style implementation
 	-- Function implementation
 	-- Bug Fix
 	
