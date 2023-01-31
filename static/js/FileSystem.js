@@ -18,14 +18,16 @@ const bytes = require('./bytes.js')
 					dynamicList.push(k)
 				})
 			}			
-			return {i:dynamicList}
+			return dynamicList
 		}
 		// Main function starts here
 		if(typeof v == 'undefined' || v == 'default'){
 			const fileList = fs.readdirSync(env('StartDir'))
-			console.log(dataMiner(fileList,'size'))
-			console.log(dataMiner(fileList,'birthtime'))
-			return fileList
+			const fileSize = dataMiner(fileList,'size')
+			const fileBirth= dataMiner(fileList,'birthtime')
+			console.log(fileList)
+			console.log(fileSize)
+			return {file:fileList,size:fileSize,birthtime:fileBirth}
 		}else if(fs.lstatSync(v).isDirectory()){
 			
 			const {size} = fs.statSync(v)

@@ -11,11 +11,26 @@ const fsfunc = async (path) => {
 	const nowPath = fspath.innerHTML
 	updateDiv.innerHTML=''
 	fspath.innerHTML=''
-	const response = await window.fs.main(path)
-	response.forEach(i=>{
+	const {file,size,birthtime} = await window.fs.main(path)
+	console.log(size)
+	console.log(birthtime)
+	/*
+	file.forEach(i=>{
+		console.log(i)
 		i = `<button class='fs-data'>` + i + `</button><br>`
 		updateDiv.insertAdjacentHTML('beforeend',i)
-	})
+	})*/
+	
+	
+	for(var i=0;i<file.length;i++){
+		console.log(size[i])
+		console.log(birthtime[i])
+		var fsbtn = `<button class='fs-data'>` + file[i] + `</button>`
+		var fssize = `<p class='fs-data-size'>`+ size[i] + `</p>`
+		var fsbirthtime = `<p class='fs-data-birthtime'>`+ birthtime[i] +`</p>`
+		var fsdata = fsbtn + fssize + fsbirthtime + `<br>`
+		updateDiv.insertAdjacentHTML('beforeend',fsdata)
+	}
 		//Button function
 	const fsbutton = document.querySelectorAll('button[class=fs-data]')
 	fsbutton.forEach(e=>{

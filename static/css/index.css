@@ -1,0 +1,17 @@
+.fs-data{
+	text-align:		left;
+	display:		inline-block;	
+}
+.fs-data-size{
+	width:			30%;
+	display:		inline-block;
+	padding:		none;
+	margin:			none;
+}
+.fs-data-birthtime{
+	width:			20%;
+	text-align:		center;
+	display:		inline-block;
+	padding:		none;
+	margin:			none;
+}

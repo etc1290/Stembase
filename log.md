@@ -2,6 +2,23 @@
  File tagging system
 
 ---
+	## 2022.01.31		version 0.1.8
+	-- Style implementation
+	-- Function implementation
+	-- Bug Fix
+	
+	## Added
+	1. Add independent css for each templates
+		-- finished
+	2. Apply basic Detail function to index.js
+		-- processing
+	
+	# Changed
+	1. Rename clstyles.css to codelab.css for consistency
+		-- finished
+	2. Fix bug in FileSystem data miner function, which lead overpacking
+		-- finished
+---
 	## 2022.01.30		version 0.1.7
 	-- Function implementation
 	
@@ -12,7 +29,15 @@
 	## Changed
 	1. Change text in bytes.js for detecting directory
 		-- finished
-		
+	## Testing
+	1. Set up tagging system and derivative function
+		1-1 Single and Double Click
+			-- finished
+		1-2 Tagging
+		1-3 Details
+			-- processing
+		1-4 Selection
+		1-5 Others
 ---
 	## 2022.01.30		version 0.1.6
 	-- Style design
