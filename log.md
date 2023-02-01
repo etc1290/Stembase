@@ -15,8 +15,15 @@
 		-- finished
 	3. Add index-ux.js to pack all ux-related function
 		-- finished
+	4. Add div for tagging system
+		-- finished
+	5. Add main-function div to contain FileSystem and Tagging area
+		-- finished
+		
 	## Changed
 	1. Remove some deprecated codes and annotaton
+		-- finished
+	2. Add directory output in bytes.js
 		-- finished
 		
 	## Testing
@@ -27,7 +34,7 @@
 		1-3 Details
 			-- finished
 		1-4 Selection
-			-- processing
+			-- finished
 		1-5 Others
 ---
 	## 2022.02.01		version 0.1.91

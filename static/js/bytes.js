@@ -1,5 +1,5 @@
 const bytes = (bt, decimals = 2) => {
-    if (!+bt) return ''
+    if (!+bt) return 'Directory'
 
     const k = 1024
     const dm = decimals < 0 ? 0 : decimals
