@@ -13,6 +13,8 @@
 		-- finished
 	2. Add ux-info to record selected target
 		-- finished
+	3. Add index-ux.js to pack all ux-related function
+		-- finished
 	## Changed
 	1. Remove some deprecated codes and annotaton
 		-- finished
