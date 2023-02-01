@@ -2,6 +2,10 @@
 const information = document.getElementById('info')
 information.innerText = `This app is using Chrome (v${versions.chrome()}), Node.js (v${versions.node()}), and Electron (v${versions.electron()})`
 
+// User Interactive Design
+const uxselect = async (name) =>{
+	document.getElementById('ux-info').value = name
+}
 // FileSystem
 	//Main: File User Interface
 const fsfunc = async (path) => {
@@ -11,17 +15,8 @@ const fsfunc = async (path) => {
 	const nowPath = fspath.innerHTML
 	updateDiv.innerHTML=''
 	fspath.innerHTML=''
-	//const {file,size,birthtime} = await window.fs.main(path)
 	const {file,size,mtime} = await window.fs.main(path)
-	
-	/*
-	file.forEach(i=>{
-		console.log(i)
-		i = `<button class='fs-data'>` + i + `</button><br>`
-		updateDiv.insertAdjacentHTML('beforeend',i)
-	})*/
-	
-	
+		
 	for(var i=0;i<file.length;i++){
 		var fsbtn = `<button class='fs-data'>` + file[i] + `</button>`
 		var fssize = `<p class='fs-data-size'>`+ size[i] + `</p>`
@@ -34,6 +29,9 @@ const fsfunc = async (path) => {
 	fsbutton.forEach(e=>{
 		e.addEventListener('dblclick',async()=>{
 			fsfunc(fspath.innerHTML + '\\' + e.innerHTML)
+		})
+		e.addEventListener('mousedown',async()=>{
+			uxselect(e.innerHTML)
 		})
 	})
 
