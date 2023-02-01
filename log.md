@@ -7,6 +7,7 @@
 	## 2022.02.01		version 0.2.0
 	-- User Interactive function implementation
 	-- Clear deprecated codes
+	-- Interface re-design
 	
 	## Added
 	1. Add ux div in index.html to achieve complicated selection function for further tagging system
@@ -24,6 +25,8 @@
 	1. Remove some deprecated codes and annotaton
 		-- finished
 	2. Add directory output in bytes.js
+		-- finished
+	3. Interface re-design
 		-- finished
 		
 	## Testing
