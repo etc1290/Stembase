@@ -6,8 +6,6 @@ const time = require('./time.js')
 
 	// Main: File query
     ipcMain.handle('fs-main',	(event,v) => {
-		//Side: Timestamp converter
-		
 		//Side: File details miner
 		const dataMiner = (path,property) =>{
 			const output = new Array()

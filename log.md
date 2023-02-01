@@ -1,6 +1,32 @@
 # Stembase
  File tagging system
 
+
+
+---
+	## 2022.02.01		version 0.2.0
+	-- User Interactive function implementation
+	-- Clear deprecated codes
+	
+	## Added
+	1. Add ux div in index.html to achieve complicated selection function for further tagging system
+		-- finished
+	2. Add ux-info to record selected target
+		-- finished
+	## Changed
+	1. Remove some deprecated codes and annotaton
+		-- finished
+		
+	## Testing
+	1. Set up tagging system and derivative function
+		1-1 Single and Double Click
+			-- finished
+		1-2 Tagging
+		1-3 Details
+			-- finished
+		1-4 Selection
+			-- processing
+		1-5 Others
 ---
 	## 2022.02.01		version 0.1.91
 	-- Separate time function
