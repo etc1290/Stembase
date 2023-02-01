@@ -2,10 +2,12 @@ const {ipcMain,app,dialog} = require('electron')
 const fs = require('fs')
 const env = require('./env.js')
 const bytes = require('./bytes.js')
+const time = require('./time.js')
 
 	// Main: File query
     ipcMain.handle('fs-main',	(event,v) => {
-		const timestamp = (i) => new Date(i).toISOString().slice(0, 10)
+		//Side: Timestamp converter
+		
 		//Side: File details miner
 		const dataMiner = (path,property) =>{
 			const output = new Array()
@@ -28,7 +30,7 @@ const bytes = require('./bytes.js')
 				}else if(i=='mtime'){
 					v.forEach(e =>{
 						const {[i]:k}=fs.statSync(e)
-						data.push(timestamp(k))
+						data.push(time(k))
 					})
 				}else{
 					v.forEach(e =>{

@@ -2,6 +2,15 @@
  File tagging system
 
 ---
+	## 2022.02.01		version 0.1.91
+	-- Separate time function
+	
+	## Changed 
+	1. Separate timeStamp function from a sub-function to a standalone script for precisely developing
+		-- finished
+	2. Rename timeStamp function to time
+		-- finished
+---
 	## 2022.01.31		version 0.1.9
 	-- Function rewrite
 	-- Timestamp convert function implementation
