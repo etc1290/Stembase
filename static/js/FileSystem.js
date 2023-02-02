@@ -14,9 +14,9 @@ const time = require('./time.js')
 			pathList.forEach(e=>{
 				v.push(path + '\\' + e)
 			})
-			console.log(pathList)
+			
 			property.forEach(i=>{
-				console.log(i)
+				
 				let data = new Array()
 				if (i=='file'){
 					data = pathList
@@ -36,7 +36,7 @@ const time = require('./time.js')
 						data.push(k)
 					})
 				}
-				console.log(data)
+				
 				output[i] = data
 			})
 			return output			

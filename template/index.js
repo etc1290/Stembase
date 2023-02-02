@@ -37,7 +37,7 @@ const fsfunc = async (path) => {
 	if(path == 'default'){
 		fspath.innerHTML = pathname
 	}else if (typeof path !== 'undefined'){
-		
+		 
 		//Check file typeof		
 		const fstype = await window.fs.type(fspath.innerHTML + path)
 		if (fstype){			

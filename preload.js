@@ -20,9 +20,14 @@ contextBridge.exposeInMainWorld('fs', {
 
 // ChildWindow
 contextBridge.exposeInMainWorld('cw', {
-	setting:		() => ipcRenderer.invoke('cw-setting'),
-	codelab:		() => ipcRenderer.invoke('cw-codelab'),
-	stylelab:		() => ipcRenderer.invoke('cw-stylelab')
+	setting:	() => ipcRenderer.invoke('cw-setting'),
+	codelab:	() => ipcRenderer.invoke('cw-codelab'),
+	stylelab:	() => ipcRenderer.invoke('cw-stylelab')
+})
+
+// TagSystem
+contextBridge.exposeInMainWorld('tag', {
+	main:		(v) => ipcRenderer.invoke('tag-main',v)	
 })
 
 

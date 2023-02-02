@@ -1,10 +1,10 @@
 //Tagging System
-const tagfunc = (name) =>{
+const tagfunc = async (name) =>{
 	const tagbtn = document.getElementById('tag-btn')
 	tagbtn.innerHTML = ''
 	tagbtn.insertAdjacentHTML('beforeend',`<button id='tag-write'>Tag button</button>`)
-	document.getElementById('tag-write').addEventListener('click', e=>{
-		console.log(name)
+	document.getElementById('tag-write').addEventListener('click', async()=>{
+		const tagwrite = await window.tag.main(name)
 	})
 }
 

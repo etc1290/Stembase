@@ -1,5 +1,4 @@
 const { ipcMain, nativeTheme } = require('electron')
-console.log('ss')
 	// Main: toggle
 ipcMain.handle('dm-main',	() =>{
 	if (nativeTheme.shouldUseDarkColors){

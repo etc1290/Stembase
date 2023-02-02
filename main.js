@@ -7,7 +7,6 @@ const env = require('./static/js/env.js')
 	// General Declaration
 const FileTree = require(env('StaticDir') + 'js/FileTree.js')
 var fileTree = new FileTree(__dirname)
-console.log(fileTree)
 
 // WindowsCreator
 	// Main Window

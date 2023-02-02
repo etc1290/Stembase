@@ -6,11 +6,22 @@
 	## 2022.02.02		version 0.2.1
 	-- Simple selection function implementation
 	-- Tag section layout
+	-- Clear deprecated codes
+	-- Add new environment variable
+	-- Tag function implementation
+	
 	## Added
 	1. Add simple selection function for click-response reaction
 		-- finished
+	2. Assign DBDir to StemConfig for database storage path
+		-- finished
+	3. Add simple Tag function
+		-- finished
+		
 	## Changed
 	1. Design the layout in tag section
+		-- finished
+	2. Remove wasted codes
 		-- finished
 ---
 	## 2022.02.01		version 0.2.0
