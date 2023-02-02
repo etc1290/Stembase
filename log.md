@@ -9,15 +9,17 @@
 	-- Clear deprecated codes
 	-- Add new environment variable
 	-- Tag function implementation
+	-- Add database customized function in Tag function
 	
 	## Added
 	1. Add simple selection function for click-response reaction
 		-- finished
-	2. Assign DBDir to StemConfig for database storage path
+	2. Assign StemdbDir to StemCdb for database storage path
 		-- finished
 	3. Add simple Tag function
 		-- finished
-		
+	4. Add database storage customization function
+		-- finished
 	## Changed
 	1. Design the layout in tag section
 		-- finished

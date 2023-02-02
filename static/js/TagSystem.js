@@ -4,7 +4,7 @@ const {JsonDB,Config} = require('node-json-db')
 const env = require('./env.js')
 
 ipcMain.handle('tag-main',	(event,v) =>{
-	const db = new JsonDB(new Config('Stemdb',true,true,'/'))
+	const db = new JsonDB(new Config(env('StemdbDir'),true,true,'/'))
 	db.push('/'+v,'apple')
 	console.log('apple')
 })

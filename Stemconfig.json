@@ -1,7 +1,7 @@
 {
     "TemplateDir": "./template/",
     "StaticDir": "./static/",
-	"DBDir":"./data/",
+	"StemdbDir":"./data/Stemdb",
     "StartDir": "./",
     "Debugmode": 1,
     "Width": 1280,
