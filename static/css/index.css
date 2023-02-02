@@ -1,16 +1,15 @@
 #main-function{
 	height:			70vh;
-	width:			100vw;
+	width:			100%;
 	display:		flex;
 }
 #fs{
-	width:			70vw;
+	width:			70%;
 	overflow:		auto;
-	display:		inline-block;
 	
 }
 #fs-main{
-	height:90%
+	height:			90%
 }
 .fs-data{
 	text-align:		left;
@@ -30,9 +29,9 @@
 	margin:			none;
 }
 
-#tg{
+#tag{
 	height:			100%;
-	width:			30vw;
-	display:		inline-block;
+	width:			30%;
+	text-align:		center;
 	vertical-align: top;
 }

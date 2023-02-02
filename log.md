@@ -2,7 +2,16 @@
  File tagging system
 
 
-
+---
+	## 2022.02.02		version 0.2.1
+	-- Simple selection function implementation
+	-- Tag section layout
+	## Added
+	1. Add simple selection function for click-response reaction
+		-- finished
+	## Changed
+	1. Design the layout in tag section
+		-- finished
 ---
 	## 2022.02.01		version 0.2.0
 	-- User Interactive function implementation
