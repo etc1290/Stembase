@@ -10,7 +10,8 @@
 	## Added
 	1. Add a block for tag input
 		-- finished
-		
+	2. Fatal bug in push function
+		-- bugged
 ---
 	## 2022.02.02		version 0.2.1
 	-- Simple selection function implementation

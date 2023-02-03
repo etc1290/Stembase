@@ -1,9 +1,24 @@
 {
+    "44774": [
+        "apple5"
+    ],
     ".git": [
         "100",
-        "apple"
+        "apple",
+        "weird"
     ],
     "log.md": [
         "markdown"
+    ],
+    "data": [
+        "444",
+        "apple"
+    ],
+    ".gitignore": [
+        "test"
+    ],
+    ".gitattributes": [
+        "ball",
+        "dd"
     ]
 }

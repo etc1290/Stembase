@@ -27,7 +27,7 @@ contextBridge.exposeInMainWorld('cw', {
 
 // TagSystem
 contextBridge.exposeInMainWorld('tag', {
-	main:		(i,v) => ipcRenderer.invoke('tag-main',i,v)	
+	main:		(i,v,p) => ipcRenderer.invoke('tag-main',i,v,p)	
 })
 
 
