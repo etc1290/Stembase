@@ -19,6 +19,11 @@
     ],
     ".gitattributes": [
         "ball",
-        "dd"
+        "dd",
+        "apple"
+    ],
+    "中文": [
+        "apple",
+        "apple1"
     ]
 }

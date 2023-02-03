@@ -1,7 +1,13 @@
 # Stembase
  File tagging system
 
-
+---
+	## 2022.02.03		version 0.2.2.1
+	-- Fix node-json-db core bug
+	
+	## Fixed
+	1. Fix the core bug in node-json-db push function array support by merge function
+		-- finished
 ---
 	## 2022.02.03		version 0.2.2
 	-- Finish Tag function
