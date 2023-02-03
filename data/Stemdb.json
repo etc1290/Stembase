@@ -1,3 +1,9 @@
 {
-    ".gitattributes": "apple"
+    ".git": [
+        "100",
+        "apple"
+    ],
+    "log.md": [
+        "markdown"
+    ]
 }

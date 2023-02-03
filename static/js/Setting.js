@@ -25,7 +25,6 @@ const WindowSetting = async () =>{
 	ipcMain.handle('st-write',(event,i,v) =>{
 		const db = new JsonDB(new Config("StemConfig", true, true, '/'))	
 		const newv = check(v)
-		console.log(newv)
 		db.push('/'+i,newv)
 		
 	})

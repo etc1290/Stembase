@@ -3,8 +3,9 @@ const fs = require('fs')
 const {JsonDB,Config} = require('node-json-db')
 const env = require('./env.js')
 
-ipcMain.handle('tag-main',	(event,v) =>{
-	const db = new JsonDB(new Config(env('StemdbDir'),true,true,'/'))
-	db.push('/'+v,'apple')
+const Stemdb = env('StemdbDir')
+ipcMain.handle('tag-main',	(event,name,value) =>{
+	const db = new JsonDB(new Config(Stemdb,true,true,'/'))	
+	db.push('/'+name+'[]',value+'')
 	console.log('apple')
 })

@@ -3,6 +3,15 @@
 
 
 ---
+	## 2022.02.03		version 0.2.2
+	-- Finish Tag function
+	-- Code re-arrangement
+	
+	## Added
+	1. Add a block for tag input
+		-- finished
+		
+---
 	## 2022.02.02		version 0.2.1
 	-- Simple selection function implementation
 	-- Tag section layout

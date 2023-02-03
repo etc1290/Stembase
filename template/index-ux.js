@@ -4,7 +4,9 @@ const tagfunc = async (name) =>{
 	tagbtn.innerHTML = ''
 	tagbtn.insertAdjacentHTML('beforeend',`<button id='tag-write'>Tag button</button>`)
 	document.getElementById('tag-write').addEventListener('click', async()=>{
-		const tagwrite = await window.tag.main(name)
+		const taginput = document.getElementById('tag-input').value
+		console.log(taginput)
+		const tagwrite = await window.tag.main(name,taginput)
 	})
 }
 
@@ -13,6 +15,7 @@ const tagfunc = async (name) =>{
 const uxselect = async (name) =>{
 	document.getElementById('ux-info').value = name
 	document.getElementById('ux-selected').innerHTML = name
+	
 	tagfunc(name)
 }
 
