@@ -8,5 +8,6 @@ ipcMain.handle('tag-main',	(event,name,value,path) =>{
 	const db 	= new JsonDB(new Config(Stemdb,true,true,'/'))	
 	const meta	= new JsonDB(new Config(path + '\\Stemmeta',true,true,'/'))
 	meta.push('/'+name,[value],false)
-	db.push('/'+name,[value],false)
+	db.push('/'+ path + '\\' +name,[value],false)
+	db.push('/tag\\' + value,[name],false )
 })

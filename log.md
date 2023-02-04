@@ -2,6 +2,13 @@
  File tagging system
 
 ---
+	## 2022.02.04		version 0.2.3
+	-- Rewrite tag function
+	
+	## Added
+	1. Separate tag records and file records for searching function
+		-- finished
+---
 	## 2022.02.03		version 0.2.2.1
 	-- Fix node-json-db core bug
 	
