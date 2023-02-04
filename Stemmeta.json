@@ -8,10 +8,12 @@
     ".git": [
         "apple",
         "bapple",
-        "werk",
-        "werk",
-        "47",
-        "47",
-        "47"
+        "orange"
+    ],
+    ".gitignore": [
+        "apple"
+    ],
+    "log.md": [
+        "markdown"
     ]
 }

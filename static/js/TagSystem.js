@@ -15,26 +15,26 @@ const tagsearch = (name,path,isMeta = true) =>{
 	}
 }
 // Main: Add tags
-ipcMain.handle('tag-main',	(event,name,value,path) =>{
-	const meta	= new JsonDB(new Config(path + '\\Stemmeta',true,true,'/'))
-	meta.push('/'+name,[value],false)
-	db.push('/'+ path + '\\' +name,[value],false)
-	db.push('/tag\\' + value,[name],false )
+ipcMain.handle('tag-main',	async(event,name,value,path) =>{
+	let isExist = false
+	let tags = ''
+	try{
+		tags = await tagsearch(name,path)
+		isExist = tags.includes(value)
+	}catch(e){
+		isExist = false
+	}
+	if (!isExist){
+		const meta	= new JsonDB(new Config(path + '\\Stemmeta',true,true,'/'))
+		meta.push('/'+name,[value],false)
+		db.push('/'+ path + '\\' +name,[value],false)
+		db.push('/tag\\' + value,[name],false )
+	}
+	console.log(tags)
 })
 // Side: Display tags
 ipcMain.handle('tag-info', async (event,name,path) =>{
-	/*
-	const meta	= new JsonDB(new Config(path + '\\Stemmeta',true,true,'/'))
-	let tags = ''	
-	const fakePromise = (name) =>{
-		return tags = meta.getData('/' + name)
-	}
-	try{
-		await fakePromise(name)
-	}catch(e){
-		tags = 'None'
-	}
-	*/
+
 	let tags = ''
 	try{
 		tags = await tagsearch(name,path)
