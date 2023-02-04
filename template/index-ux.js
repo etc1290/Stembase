@@ -11,12 +11,23 @@ const tagmain = async (name) =>{
 		tagdisplay(name)
 	})
 }
+	// Side: Tag button function
+const tagbtnInit = () =>{
+	const tagbtn = document.querySelectorAll('button[class=tag-label]')
+	tagbtn.forEach(e =>{
+		e.addEventListener('dblclick', () =>{
+			console.log(e.innerHTML)
+		})
+		e.addEventListener('mousedown', () =>{
+			document.getElementById('tag-selected').value = e.innerHTML
+		})
+	})
+}
 	// Side: Tag display
 const tagdisplay = async (name) =>{
 	const updateDiv = document.getElementById('tag-display')
 	const tagpath	= document.getElementById('fs-path').innerHTML
 	const taginfo 	= await window.tag.info(name,tagpath)
-	console.log(taginfo)
 	updateDiv.innerHTML  = ''
 	if(taginfo == 'None'){
 		updateDiv.insertAdjacentHTML('beforeend','No tags found')
@@ -25,6 +36,7 @@ const tagdisplay = async (name) =>{
 			const taglabel = `<button class='tag-label'>` + e + `</button><br>` 
 			updateDiv.insertAdjacentHTML('beforeend',taglabel)
 		})
+		tagbtnInit()
 	}
 }
 	// Init

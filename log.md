@@ -8,6 +8,7 @@
 	-- Add refresh trigger when click add tag button
 	-- Separate Search and Display tags function
 	-- Add duplicate tags check function
+	-- Add Tag selected funcion
 	## Added
 	1. Separate tag records and file records for searching function
 		-- finished
@@ -18,6 +19,8 @@
 	4. Add basic search tags function 
 		-- finished
 	5. Add Duplicate checker function in tag-main to prevent same tags added
+		-- finished
+	6. Add Tag selected function for further function
 		-- finished
 ---
 	## 2022.02.03		version 0.2.2.1

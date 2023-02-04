@@ -23,11 +23,11 @@ const fsfunc = async (path) => {
 	}
 		//Button function
 	const fsbutton = document.querySelectorAll('button[class=fs-data]')
-	fsbutton.forEach(e=>{
-		e.addEventListener('dblclick',async()=>{
+	fsbutton.forEach(e =>{
+		e.addEventListener('dblclick',async() =>{
 			fsfunc(fspath.innerHTML + '\\' + e.innerHTML)
 		})
-		e.addEventListener('mousedown',async()=>{
+		e.addEventListener('mousedown',async() =>{
 			uxselect(e.innerHTML)
 		})
 	})

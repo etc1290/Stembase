@@ -24,13 +24,13 @@ ipcMain.handle('tag-main',	async(event,name,value,path) =>{
 	}catch(e){
 		isExist = false
 	}
-	if (!isExist){
+	if (!isExist && value !==''){
 		const meta	= new JsonDB(new Config(path + '\\Stemmeta',true,true,'/'))
 		meta.push('/'+name,[value],false)
 		db.push('/'+ path + '\\' +name,[value],false)
 		db.push('/tag\\' + value,[name],false )
 	}
-	console.log(tags)
+	
 })
 // Side: Display tags
 ipcMain.handle('tag-info', async (event,name,path) =>{
@@ -41,6 +41,6 @@ ipcMain.handle('tag-info', async (event,name,path) =>{
 	}catch(e){
 		tags = 'None'
 	}
-	console.log(tags)
+	
 	return tags
 })
