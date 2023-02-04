@@ -8,6 +8,7 @@ const tagmain = async (name) =>{
 		const taginput 	= document.getElementById('tag-input').value
 		const tagpath	= document.getElementById('fs-path').innerHTML
 		const tagwrite 	= await window.tag.main(name,taginput,tagpath)
+		tagdisplay(name)
 	})
 }
 	// Side: Tag display

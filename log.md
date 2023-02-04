@@ -5,11 +5,14 @@
 	## 2022.02.04		version 0.2.3
 	-- Rewrite tag function
 	-- Display tags function implementation
+	-- Add refresh trigger when click add tag button
 	
 	## Added
 	1. Separate tag records and file records for searching function
 		-- finished
 	2. Add display tags function
+		-- finished
+	3. Add refresh function in tag-write function
 		-- finished
 ---
 	## 2022.02.03		version 0.2.2.1
