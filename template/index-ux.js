@@ -1,5 +1,6 @@
 //Tagging System
-const tagfunc = async (name) =>{
+	// Main: Tag add
+const tagmain = async (name) =>{
 	const tagbtn = document.getElementById('tag-btn')
 	tagbtn.innerHTML = ''
 	tagbtn.insertAdjacentHTML('beforeend',`<button id='tag-write'>Tag button</button>`)
@@ -8,6 +9,27 @@ const tagfunc = async (name) =>{
 		const tagpath	= document.getElementById('fs-path').innerHTML
 		const tagwrite 	= await window.tag.main(name,taginput,tagpath)
 	})
+}
+	// Side: Tag display
+const tagdisplay = async (name) =>{
+	const updateDiv = document.getElementById('tag-display')
+	const tagpath	= document.getElementById('fs-path').innerHTML
+	const taginfo 	= await window.tag.info(name,tagpath)
+	console.log(taginfo)
+	updateDiv.innerHTML  = ''
+	if(taginfo == 'None'){
+		updateDiv.insertAdjacentHTML('beforeend','No tags found')
+	}else{ 
+		taginfo.forEach(e =>{
+			const taglabel = `<button class='tag-label'>` + e + `</button><br>` 
+			updateDiv.insertAdjacentHTML('beforeend',taglabel)
+		})
+	}
+}
+	// Init
+const tagfunc = async (name) =>{
+	tagmain(name)
+	tagdisplay(name)
 }
 
 

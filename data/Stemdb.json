@@ -7,5 +7,19 @@
     ],
     "tag\\84": [
         "中文"
+    ],
+    "C:\\Users\\329058\\Desktop\\others\\KnowledgeManager\\Stembase\\.gitattributes": [
+        "apple"
+    ],
+    "tag\\apple": [
+        ".gitattributes",
+        ".git"
+    ],
+    "C:\\Users\\329058\\Desktop\\others\\KnowledgeManager\\Stembase\\.git": [
+        "apple",
+        "bapple"
+    ],
+    "tag\\bapple": [
+        ".git"
     ]
 }
