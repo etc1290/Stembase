@@ -7,6 +7,7 @@
 	-- Add tag remove function
 	-- Refresh page after remove tag
 	-- Clear selected tag after remove tag
+	-- Remove function support main db 
 	
 	## Added
 	1. Add tag remove function by select tag and press Delete Tag
@@ -14,6 +15,8 @@
 	2. Refresh tag display after use remove tag function
 		-- finished
 	3. Clear selected tag after remove tag prevent inherited operation
+		-- finished
+	4. Remove function support Stemdb and tag remove
 		-- finished
 	## Changed
 	1. Remove undefined folder. It was created by bug
