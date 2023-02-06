@@ -1,6 +1,31 @@
 # Stembase
  File tagging system
 
+--- 
+	## 2022.02.06		version 0.2.4
+	-- Remove deprecated file
+	-- Add tag remove function
+	
+	## Added
+	1. Add tag remove function by select tag and press Delete Tag
+		-- finished
+	## Changed
+	1. Remove undefined folder. It was created by bug
+		-- finished
+	
+	## Testing
+	1. Set up tagging system and derivative function
+		1-1 Single and Double Click
+			-- finished
+		1-2 Tagging
+			-- finished
+		1-3 Details
+			-- finished
+		1-4 Selection
+			-- finished
+		1-5 Deleting
+		1-6 Searching
+		
 ---
 	## 2022.02.04		version 0.2.3
 	-- Rewrite tag function

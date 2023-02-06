@@ -44,3 +44,11 @@ ipcMain.handle('tag-info', async (event,name,path) =>{
 	
 	return tags
 })
+// Side: Remove tags
+ipcMain.handle('tag-remove', async(event,name,value,path) =>{
+	console.log(name)
+	console.log(value)
+	console.log(path)
+	const meta	= new JsonDB(new Config(path + '\\Stemmeta',true,true,'/'))
+	meta.delete('/'+name+'[' +value +']')
+})

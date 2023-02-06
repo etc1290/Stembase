@@ -20,8 +20,28 @@ const tagbtnInit = () =>{
 		})
 		e.addEventListener('mousedown', () =>{
 			document.getElementById('tag-selected').value = e.innerHTML
+			const tagList = Array.from(document.querySelectorAll('button[class=tag-label]'))
+			const tagInnerList = tagList.map(function(e){return e.innerHTML})
+			const tagindex = tagInnerList.indexOf(e.innerHTML)
+			document.getElementById('tag-selected-id').value = tagindex
 		})
 	})
+}
+	//Side: Tag delete
+const tagdelete = async () =>{
+	const tagDeletedbtn = document.getElementById('tag-delete')
+	
+	tagDeletedbtn.addEventListener('click', async(e) =>{
+		const file = document.getElementById('ux-selected').innerHTML
+		const tag = document.getElementById('tag-selected-id').value
+		const tagpath = document.getElementById('fs-path').innerHTML
+		console.log(tag)
+		console.log(file)
+		console.log(tagpath)
+		const tagremove = await window.tag.remove(file,tag,tagpath)
+	})
+	
+	
 }
 	// Side: Tag display
 const tagdisplay = async (name) =>{
@@ -37,14 +57,19 @@ const tagdisplay = async (name) =>{
 			updateDiv.insertAdjacentHTML('beforeend',taglabel)
 		})
 		tagbtnInit()
+		
 	}
 }
 	// Init
+const tagInit = () =>{
+	tagdelete()
+}
+tagInit()
+	// Refresh
 const tagfunc = async (name) =>{
 	tagmain(name)
-	tagdisplay(name)
+	tagdisplay(name)	
 }
-
 
 // User Interactive Design
 const uxselect = async (name) =>{

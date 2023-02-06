@@ -1,19 +1,14 @@
 {
-    "中文": [
-        "84"
-    ],
     ".gitattributes": [
         "apple"
-    ],
-    ".git": [
-        "apple",
-        "bapple",
-        "orange"
     ],
     ".gitignore": [
         "apple"
     ],
     "log.md": [
         "markdown"
+    ],
+    ".git": [
+        "apple"
     ]
 }

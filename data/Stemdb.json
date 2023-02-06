@@ -14,12 +14,66 @@
     "tag\\apple": [
         ".gitattributes",
         ".git",
-        ".gitignore"
+        ".gitignore",
+        ".git",
+        ".git"
     ],
     "C:\\Users\\329058\\Desktop\\others\\KnowledgeManager\\Stembase\\.git": [
         "apple",
         "bapple",
-        "orange"
+        "orange",
+        "apple",
+        "apples",
+        "banana",
+        "s",
+        "aaa",
+        "apple",
+        "apple2",
+        "apple2",
+        "apple3",
+        "4",
+        "2",
+        "3",
+        "4",
+        "5",
+        "4",
+        "1",
+        "2",
+        "3",
+        "2",
+        "1",
+        "3",
+        "4",
+        "5",
+        "2",
+        "3",
+        "4",
+        "1",
+        "2",
+        "1",
+        "2",
+        "4",
+        "1",
+        "2",
+        "4",
+        "1",
+        "2",
+        "3",
+        "1",
+        "2",
+        "4",
+        "1",
+        "2",
+        "4",
+        "1",
+        "2",
+        "3",
+        "1",
+        "2",
+        "1",
+        "2",
+        "3",
+        "4"
     ],
     "tag\\bapple": [
         ".git"
@@ -44,5 +98,77 @@
     ],
     "tag\\markdown": [
         "log.md"
+    ],
+    "tag\\apples": [
+        ".git"
+    ],
+    "tag\\banana": [
+        ".git"
+    ],
+    "tag\\s": [
+        ".git"
+    ],
+    "tag\\aaa": [
+        ".git"
+    ],
+    "tag\\apple2": [
+        ".git",
+        ".git"
+    ],
+    "tag\\apple3": [
+        ".git"
+    ],
+    "tag\\4": [
+        ".git",
+        ".git",
+        ".git",
+        ".git",
+        ".git",
+        ".git",
+        ".git",
+        ".git",
+        ".git",
+        ".git"
+    ],
+    "tag\\2": [
+        ".git",
+        ".git",
+        ".git",
+        ".git",
+        ".git",
+        ".git",
+        ".git",
+        ".git",
+        ".git",
+        ".git",
+        ".git",
+        ".git",
+        ".git"
+    ],
+    "tag\\3": [
+        ".git",
+        ".git",
+        ".git",
+        ".git",
+        ".git",
+        ".git",
+        ".git"
+    ],
+    "tag\\5": [
+        ".git",
+        ".git"
+    ],
+    "tag\\1": [
+        ".git",
+        ".git",
+        ".git",
+        ".git",
+        ".git",
+        ".git",
+        ".git",
+        ".git",
+        ".git",
+        ".git",
+        ".git"
     ]
 }
