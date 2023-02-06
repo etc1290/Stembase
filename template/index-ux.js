@@ -27,22 +27,7 @@ const tagbtnInit = () =>{
 		})
 	})
 }
-	//Side: Tag delete
-const tagdelete = async () =>{
-	const tagDeletedbtn = document.getElementById('tag-delete')
-	
-	tagDeletedbtn.addEventListener('click', async(e) =>{
-		const file = document.getElementById('ux-selected').innerHTML
-		const tag = document.getElementById('tag-selected-id').value
-		const tagpath = document.getElementById('fs-path').innerHTML
-		console.log(tag)
-		console.log(file)
-		console.log(tagpath)
-		const tagremove = await window.tag.remove(file,tag,tagpath)
-	})
-	
-	
-}
+
 	// Side: Tag display
 const tagdisplay = async (name) =>{
 	const updateDiv = document.getElementById('tag-display')
@@ -56,9 +41,21 @@ const tagdisplay = async (name) =>{
 			const taglabel = `<button class='tag-label'>` + e + `</button><br>` 
 			updateDiv.insertAdjacentHTML('beforeend',taglabel)
 		})
-		tagbtnInit()
-		
+		tagbtnInit()		
 	}
+}
+	//Side: Tag delete
+const tagdelete = async () =>{
+	const tagDeletedbtn = document.getElementById('tag-delete')
+	
+	tagDeletedbtn.addEventListener('click', async(e) =>{
+		const file = document.getElementById('ux-selected').innerHTML
+		const tag = document.getElementById('tag-selected-id').value
+		const tagpath = document.getElementById('fs-path').innerHTML
+		const tagremove = await window.tag.remove(file,tag,tagpath)
+		document.getElementById('tag-selected-id').value =''
+		tagdisplay(file)
+	})
 }
 	// Init
 const tagInit = () =>{

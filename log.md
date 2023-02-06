@@ -5,9 +5,15 @@
 	## 2022.02.06		version 0.2.4
 	-- Remove deprecated file
 	-- Add tag remove function
+	-- Refresh page after remove tag
+	-- Clear selected tag after remove tag
 	
 	## Added
 	1. Add tag remove function by select tag and press Delete Tag
+		-- finished
+	2. Refresh tag display after use remove tag function
+		-- finished
+	3. Clear selected tag after remove tag prevent inherited operation
 		-- finished
 	## Changed
 	1. Remove undefined folder. It was created by bug
