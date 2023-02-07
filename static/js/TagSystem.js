@@ -45,14 +45,14 @@ ipcMain.handle('tag-info', async (event,name,path) =>{
 	return tags
 })
 // Side: Remove tags
-ipcMain.handle('tag-remove', async(event,name,value,id,path) =>{
-	let tagOfTag = await db.getData('/tag\\' + value)
-	const tagid = tagOfTag.indexOf(name)
+ipcMain.handle('tag-remove', async(event,file,tag,id,path) =>{
+	let tagOfTag = await db.getData('/tag\\' + tag)
+	const tagid = tagOfTag.indexOf(file)
 	tagOfTag.splice(tagid,1)
-	let tagOfFile = await tagsearch(name,path,false)
+	let tagOfFile = await tagsearch(file,path,false)
 	tagOfFile.splice(id,1)
-	db.push('/' + path + '\\' + name,tagOfFile,true)
-	db.push('/tag\\' + value, tagOfTag,true)
+	db.push('/' + path + '\\' + file,tagOfFile,true)
+	db.push('/tag\\' + tag, tagOfTag,true)
 	const meta	= new JsonDB(new Config(path + '\\Stemmeta',true,true,'/'))
-	meta.delete('/'+name+'[' + id +']')
+	meta.delete('/'+file+'[' + id +']')
 })

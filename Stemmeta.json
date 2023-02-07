@@ -1,3 +1,9 @@
 {
-
+    ".git": [
+        "apple"
+    ],
+    ".gitignore": [
+        "dd",
+        "apple"
+    ]
 }

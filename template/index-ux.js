@@ -51,7 +51,7 @@ const tagdelete = async () =>{
 	
 	tagDeletedbtn.addEventListener('click', async(e) =>{
 		const file = document.getElementById('ux-selected').innerHTML
-		const tag = document.getElementById('tag-selected-id').value
+		const tag = document.getElementById('tag-selected').value
 		if (tag!==''){
 			const id = document.getElementById('tag-selected-id').value
 			const tagpath = document.getElementById('fs-path').innerHTML
@@ -65,9 +65,17 @@ const tagdelete = async () =>{
 		
 	})
 }
+	//Side: Auto selected
+const tagfocus = ()=>{
+	const inputBlock = document.getElementById('tag-input')
+	inputBlock.addEventListener('click', (e)=>{
+		inputBlock.select()
+	})
+}
 	// Init
 const tagInit = () =>{
 	tagdelete()
+	tagfocus()
 }
 tagInit()
 	// Refresh

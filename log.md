@@ -4,12 +4,25 @@
 ---
 	## 2022.02.07		version 0.2.4.1
 	-- Add tag remove protection
-	
+	-- Fix tag id is took as tag on parsing
+	-- Add auto highlight function
+	-- Rename variable name 
 	## Added
 	1. Add protection to tag remove function to prevent accidently trigger
 		1-1 Add warning if no tag is selected
+			-- finished
 		1-2 Remove warning when tag is selected
+			-- finished
+	2. When click tag input block highlight the content
+		-- finished
+
+	# Changed
+	1. Rename variable names in tag remove function for better readable
+		-- finished
 		
+	# Fixed
+	1. Fix the bug in index-ux.js result from typo
+		-- finished
 --- 
 	## 2022.02.06		version 0.2.4
 	-- Remove deprecated file
