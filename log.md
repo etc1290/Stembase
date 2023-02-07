@@ -22,6 +22,8 @@
 			-- finished
 		2-2 Re-arrange div and create 'buttonbar' div to contains buttons
 			-- finished
+		2-3 Add placeholder in debug input field
+			-- finished
 		
 ---
 	## 2022.02.07		version 0.2.4.1

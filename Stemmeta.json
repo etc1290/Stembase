@@ -1,5 +1,14 @@
 {
     ".git": [
+        "apple",
+        "banana",
+        "grapes"
+    ],
+    ".gitignore": [
+        "apple",
+        "coke"
+    ],
+    ".gitattributes": [
         "apple"
     ]
 }
