@@ -4,10 +4,23 @@
 ---
 	## 2022.02.07		version 0.2.5
 	-- Add focus color on file and tag
+	-- Add border on blocks
+	-- Change the formoat of db data
+	-- Style design change
 	
-	## Added
+	# Added
 	1. Add selected color on file and tag to notify selecton
-	
+		-- finished
+	2. Add border on each blocks
+		-- finished
+		
+	# Changed
+	1. Change add tags function's behavior when save tags
+		-- finished
+	2. Style design change
+		2-1 Add borderline in each function section
+			-- finished
+		
 ---
 	## 2022.02.07		version 0.2.4.1
 	-- Add tag remove protection
@@ -15,7 +28,7 @@
 	-- Add auto highlight function
 	-- Rename variable name 
 	-- Adjust style design
-	## Added
+	# Added
 	1. Add protection to tag remove function to prevent accidently trigger
 		1-1 Add warning if no tag is selected
 			-- finished

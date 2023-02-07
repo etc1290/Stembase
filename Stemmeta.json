@@ -1,12 +1,5 @@
 {
     ".git": [
-        "apple",
-        "banana",
-        "grape",
-        "papaya"
-    ],
-    ".gitignore": [
-        "dd",
         "apple"
     ]
 }

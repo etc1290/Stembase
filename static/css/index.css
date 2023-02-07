@@ -6,7 +6,9 @@
 #fs{
 	width:			70%;
 	overflow:		auto;
-	
+	border-top:		5px solid rgb(255,238,214);
+	border-right:	5px solid rgb(255,238,214);
+
 }
 #fs-main{
 	height:			90%
@@ -19,12 +21,12 @@
 	transition:		0.5s;
 	padding:		15px;
 }
-/*Columbia Blue*/
+/* Columbia Blue */
 .fs-data:hover{
 	background:		rgb(211,229,238);
 	transition:		none;
 }
-/*Dark Columbia Blue*/
+/* Dark Columbia Blue */
 .fs-data:focus{
 	background:		rgb(167,203,221);
 	transition:		none;
@@ -49,18 +51,24 @@
 	text-align:		center;
 	vertical-align: top;
 }
-/*Floral White*/
+/* Floral White */
 .tag-label{
 	background:		rgb(255,250,240);
 	transition:		0.5s;
 }
-/*Mimi Pink*/
+/* Mimi Pink */
 .tag-label:hover{
 	background:		rgb(244,205,233);
 	transition:		none;
 }
-/* Plim */
+/* Plum */
 .tag-label:focus{
 	background:		rgb(233,150,211);
 	transition:		none;
+}
+#tag-searchbar{
+	border-top:		5px solid rgb(255,238,214);
+}
+#tag-window{
+	border-top:		5px solid rgb(255,238,214);
 }

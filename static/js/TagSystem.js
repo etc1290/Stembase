@@ -28,7 +28,7 @@ ipcMain.handle('tag-main',	async(event,name,value,path) =>{
 		const meta	= new JsonDB(new Config(path + '\\Stemmeta',true,true,'/'))
 		meta.push('/'+name,[value],false)
 		db.push('/'+ path + '\\' +name,[value],false)
-		db.push('/tag\\' + value,[name],false )
+		db.push('/tag\\' + value,[path + '\\' + name],false )
 	}
 	
 })
@@ -52,7 +52,7 @@ ipcMain.handle('tag-remove', async(event,file,tag,id,path) =>{
 	let tagOfFile = await tagsearch(file,path,false)
 	tagOfFile.splice(id,1)
 	db.push('/' + path + '\\' + file,tagOfFile,true)
-	db.push('/tag\\' + tag, tagOfTag,true)
+	db.push('/tag\\' + tag,tagOfTag,true)
 	const meta	= new JsonDB(new Config(path + '\\Stemmeta',true,true,'/'))
 	meta.delete('/'+file+'[' + id +']')
 })
