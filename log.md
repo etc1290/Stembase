@@ -20,6 +20,8 @@
 	2. Style design change
 		2-1 Add borderline in each function section
 			-- finished
+		2-2 Re-arrange div and create 'buttonbar' div to contains buttons
+			-- finished
 		
 ---
 	## 2022.02.07		version 0.2.4.1
