@@ -1,6 +1,9 @@
 {
     "C:\\Users\\329058\\Desktop\\others\\KnowledgeManager\\Stembase\\.git": [
-        "apple"
+        "apple",
+        "banana",
+        "grape",
+        "papaya"
     ],
     "tag\\445": [],
     "tag\\apple": [
@@ -13,5 +16,14 @@
     "C:\\Users\\329058\\Desktop\\others\\KnowledgeManager\\Stembase\\.gitignore": [
         "dd",
         "apple"
+    ],
+    "tag\\banana": [
+        ".git"
+    ],
+    "tag\\grape": [
+        ".git"
+    ],
+    "tag\\papaya": [
+        ".git"
     ]
 }

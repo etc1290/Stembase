@@ -2,6 +2,13 @@
  File tagging system
 
 ---
+	## 2022.02.07		version 0.2.5
+	-- Add focus color on file and tag
+	
+	## Added
+	1. Add selected color on file and tag to notify selecton
+	
+---
 	## 2022.02.07		version 0.2.4.1
 	-- Add tag remove protection
 	-- Fix tag id is took as tag on parsing
