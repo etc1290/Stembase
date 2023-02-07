@@ -1,14 +1,13 @@
 {
-    ".git": [
+    ".git": [],
+    ".gitattributes": [
         "apple",
-        "banana",
-        "grapes"
+        "orange"
     ],
     ".gitignore": [
-        "apple",
-        "coke"
-    ],
-    ".gitattributes": [
         "apple"
+    ],
+    "clpreload.js": [
+        "duck"
     ]
 }

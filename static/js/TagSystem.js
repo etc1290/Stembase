@@ -6,12 +6,12 @@ const env = require('./env.js')
 const Stemdb= env('StemdbDir')
 const db 	= new JsonDB(new Config(Stemdb,true,true,'/'))	
 // Side: Search tags
-const tagsearch = (name,path,isMeta = true) =>{
+const tagsearch = (name='',path='',isMeta = true) =>{
 	if(isMeta){
 		const meta	= new JsonDB(new Config(path + '\\Stemmeta',true,true,'/'))
 		return meta.getData('/' + name)
 	}else{
-		return db.getData('/' + path +'\\'+ name)
+		return db.getData('/file/' + path +'\\'+ name)
 	}
 }
 // Main: Add tags
@@ -27,8 +27,8 @@ ipcMain.handle('tag-main',	async(event,name,value,path) =>{
 	if (!isExist && value !==''){
 		const meta	= new JsonDB(new Config(path + '\\Stemmeta',true,true,'/'))
 		meta.push('/'+name,[value],false)
-		db.push('/'+ path + '\\' +name,[value],false)
-		db.push('/tag\\' + value,[path + '\\' + name],false )
+		db.push('/file/'+ path + '\\' +name,[value],false)
+		db.push('/tag/' + value,[path + '\\' + name],false )
 	}
 	
 })
@@ -46,13 +46,23 @@ ipcMain.handle('tag-info', async (event,name,path) =>{
 })
 // Side: Remove tags
 ipcMain.handle('tag-remove', async(event,file,tag,id,path) =>{
-	let tagOfTag = await db.getData('/tag\\' + tag)
+	let tagOfTag = await db.getData('/tag/' + tag)
 	const tagid = tagOfTag.indexOf(file)
 	tagOfTag.splice(tagid,1)
 	let tagOfFile = await tagsearch(file,path,false)
 	tagOfFile.splice(id,1)
-	db.push('/' + path + '\\' + file,tagOfFile,true)
-	db.push('/tag\\' + tag,tagOfTag,true)
+	db.push('/file/' + path + '\\' + file,tagOfFile,true)
+	db.push('/tag/' + tag,tagOfTag,true)
 	const meta	= new JsonDB(new Config(path + '\\Stemmeta',true,true,'/'))
 	meta.delete('/'+file+'[' + id +']')
+})
+//Side: Query tags
+ipcMain.handle('tag-query', async(event,input) =>{
+	/*
+	const dbdata = fs.readFileSync(Stemdb)
+	const dbarray = JSON.parse(dbdata)
+	console.log('input: ' + input)
+	console.log('queryset: ' + dbarray)
+	return queryset
+	*/
 })

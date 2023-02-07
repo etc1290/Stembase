@@ -7,6 +7,7 @@
 	-- Add border on blocks
 	-- Change the formoat of db data
 	-- Style design change
+	-- Rewrite tag add, display, search and remove function
 	
 	# Added
 	1. Add selected color on file and tag to notify selecton
@@ -24,6 +25,8 @@
 			-- finished
 		2-3 Add placeholder in debug input field
 			-- finished
+	3. Rewrite tag add,  display, search and remove function for tag and file isolation
+		-- finished
 		
 ---
 	## 2022.02.07		version 0.2.4.1

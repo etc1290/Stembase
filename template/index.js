@@ -91,10 +91,11 @@ btn.addEventListener('click', async () => {
 	const filePath = await window.versions.fileTree()
 	console.log(JSON.parse(filePath)) 
   })
+ /*
 document.getElementById('fs-createMeta').addEventListener('click', () => {
 	window.fs.createMeta()
 })
-
+*/
 //Initailizer
 fsfunc('default')
 

@@ -29,7 +29,8 @@ contextBridge.exposeInMainWorld('cw', {
 contextBridge.exposeInMainWorld('tag', {
 	main:		(i,v,p) => ipcRenderer.invoke('tag-main',i,v,p),
 	info:		(v,p) => ipcRenderer.invoke('tag-info',v,p),
-	remove:		(i,v,id,p) => ipcRenderer.invoke('tag-remove',i,v,id,p)
+	remove:		(i,v,id,p) => ipcRenderer.invoke('tag-remove',i,v,id,p),
+	query:		(v) => ipcRenderer.invoke('tag-query',v)
 })
 
 

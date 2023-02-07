@@ -1,28 +1,27 @@
 {
-    "C:\\Users\\329058\\Desktop\\others\\KnowledgeManager\\Stembase\\.git": [
-        "apple",
-        "banana",
-        "grapes"
-    ],
-    "tag\\apple": [
-        "C:\\Users\\329058\\Desktop\\others\\KnowledgeManager\\Stembase\\.git",
-        "C:\\Users\\329058\\Desktop\\others\\KnowledgeManager\\Stembase\\.gitignore",
-        "C:\\Users\\329058\\Desktop\\others\\KnowledgeManager\\Stembase\\.gitattributes"
-    ],
-    "tag\\banana": [
-        "C:\\Users\\329058\\Desktop\\others\\KnowledgeManager\\Stembase\\.git"
-    ],
-    "tag\\grapes": [
-        "C:\\Users\\329058\\Desktop\\others\\KnowledgeManager\\Stembase\\.git"
-    ],
-    "C:\\Users\\329058\\Desktop\\others\\KnowledgeManager\\Stembase\\.gitignore": [
-        "apple",
-        "coke"
-    ],
-    "C:\\Users\\329058\\Desktop\\others\\KnowledgeManager\\Stembase\\.gitattributes": [
-        "apple"
-    ],
-    "tag\\coke": [
-        "C:\\Users\\329058\\Desktop\\others\\KnowledgeManager\\Stembase\\.gitignore"
-    ]
+    "file": {
+        "C:\\Users\\329058\\Desktop\\others\\KnowledgeManager\\Stembase\\.git": [],
+        "C:\\Users\\329058\\Desktop\\others\\KnowledgeManager\\Stembase\\.gitattributes": [
+            "apple",
+            "orange"
+        ],
+        "C:\\Users\\329058\\Desktop\\others\\KnowledgeManager\\Stembase\\.gitignore": [
+            "apple"
+        ],
+        "C:\\Users\\329058\\Desktop\\others\\KnowledgeManager\\Stembase\\clpreload.js": [
+            "duck"
+        ]
+    },
+    "tag": {
+        "apple": [
+            "C:\\Users\\329058\\Desktop\\others\\KnowledgeManager\\Stembase\\.git",
+            "C:\\Users\\329058\\Desktop\\others\\KnowledgeManager\\Stembase\\.gitattributes"
+        ],
+        "orange": [
+            "C:\\Users\\329058\\Desktop\\others\\KnowledgeManager\\Stembase\\.gitattributes"
+        ],
+        "duck": [
+            "C:\\Users\\329058\\Desktop\\others\\KnowledgeManager\\Stembase\\clpreload.js"
+        ]
+    }
 }

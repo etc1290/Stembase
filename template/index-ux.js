@@ -72,10 +72,24 @@ const tagfocus = ()=>{
 		inputBlock.select()
 	})
 }
+	//Side: Tag query
+const tagsearch = ()=>{
+	const tagbtn = document.getElementById('tag-searchbtn')
+	const updateDiv = document.getElementById('tag-search-output')
+	const taginput = document.getElementById('tag-search')
+	tagbtn.addEventListener('click', async()=>{
+		const input = taginput.value
+		console.log(input)
+		const tagquery = await window.tag.query(input)
+		console.log(tagquery)
+	})
+	
+}
 	// Init
 const tagInit = () =>{
 	tagdelete()
 	tagfocus()
+	tagsearch()
 }
 tagInit()
 	// Refresh
