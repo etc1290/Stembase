@@ -19,10 +19,6 @@
 		background: rgb(255,250,240);
 		transition: 0.5s;
 	}
-	button:hover{
-		background: rgb(216,255,241);
-		transition:	none;
-	}
 }
 
 button {
@@ -30,4 +26,15 @@ button {
 	width:		50%;
 	border:		none;
 }
-
+button{
+	background:		rgb(255,250,240);
+	transition:		0.5s;
+}
+/*Pale Purple*/
+button:hover{
+	background:		rgb(231,221,248);
+	transition:		none;
+}
+p{
+	margin:			0px;
+}

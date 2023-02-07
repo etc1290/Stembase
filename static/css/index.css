@@ -11,9 +11,18 @@
 #fs-main{
 	height:			90%
 }
+
 .fs-data{
 	text-align:		left;
 	display:		inline-block;	
+	background:		rgb(255,250,240);
+	transition:		0.5s;
+	padding:		15px;
+}
+/*Columbia Blue*/
+.fs-data:hover{
+	background:		rgb(211,229,238);
+	transition:		none;
 }
 .fs-data-size{
 	width:			30%;
@@ -34,4 +43,14 @@
 	width:			30%;
 	text-align:		center;
 	vertical-align: top;
+}
+/*Floral White*/
+.tag-label{
+	background:		rgb(255,250,240);
+	transition:		0.5s;
+}
+/*Mimi Pink*/
+.tag-label:hover{
+	background:		rgb(244,205,233);
+	transition:		none;
 }

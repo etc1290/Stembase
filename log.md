@@ -7,6 +7,7 @@
 	-- Fix tag id is took as tag on parsing
 	-- Add auto highlight function
 	-- Rename variable name 
+	-- Adjust style design
 	## Added
 	1. Add protection to tag remove function to prevent accidently trigger
 		1-1 Add warning if no tag is selected
@@ -19,6 +20,11 @@
 	# Changed
 	1. Rename variable names in tag remove function for better readable
 		-- finished
+	2. Design change
+		2-1 Add color to button and tag
+			-- finished
+		2-2 Fill up space by padding instead of margin for hover
+			-- finished
 		
 	# Fixed
 	1. Fix the bug in index-ux.js result from typo
