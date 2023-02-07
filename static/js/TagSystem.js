@@ -14,10 +14,6 @@ const tagsearch = (name,path,isMeta = true) =>{
 		return db.getData('/' + path +'\\'+ name)
 	}
 }
-// Side: Search files
-const tagfsearch = (tag) =>{
-	return db.getData('/tag\\' + tag)
-}
 // Main: Add tags
 ipcMain.handle('tag-main',	async(event,name,value,path) =>{
 	let isExist = false
@@ -50,13 +46,13 @@ ipcMain.handle('tag-info', async (event,name,path) =>{
 })
 // Side: Remove tags
 ipcMain.handle('tag-remove', async(event,name,value,id,path) =>{
-	let tagfilelist = await db.getData('/tag\\' + value)
-	const fileid = tagfilelist.indexOf(name)
-	tagfilelist.splice(fileid,1)
-	let filetaglist = await tagsearch(name,path,false)
-	filetaglist.splice(id,1)
-	db.push('/' + path + '\\' + name,filetaglist,true)
-	db.push('/tag\\' + value, tagfilelist,true)
+	let tagOfTag = await db.getData('/tag\\' + value)
+	const tagid = tagOfTag.indexOf(name)
+	tagOfTag.splice(tagid,1)
+	let tagOfFile = await tagsearch(name,path,false)
+	tagOfFile.splice(id,1)
+	db.push('/' + path + '\\' + name,tagOfFile,true)
+	db.push('/tag\\' + value, tagOfTag,true)
 	const meta	= new JsonDB(new Config(path + '\\Stemmeta',true,true,'/'))
 	meta.delete('/'+name+'[' + id +']')
 })

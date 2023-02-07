@@ -1,6 +1,15 @@
 # Stembase
  File tagging system
 
+---
+	## 2022.02.07		version 0.2.4.1
+	-- Add tag remove protection
+	
+	## Added
+	1. Add protection to tag remove function to prevent accidently trigger
+		1-1 Add warning if no tag is selected
+		1-2 Remove warning when tag is selected
+		
 --- 
 	## 2022.02.06		version 0.2.4
 	-- Remove deprecated file

@@ -24,6 +24,7 @@ const tagbtnInit = () =>{
 			const tagInnerList = tagList.map(function(e){return e.innerHTML})
 			const tagindex = tagInnerList.indexOf(e.innerHTML)
 			document.getElementById('tag-selected-id').value = tagindex
+			document.getElementById('tag-info').innerHTML =''
 		})
 	})
 }
@@ -50,12 +51,18 @@ const tagdelete = async () =>{
 	
 	tagDeletedbtn.addEventListener('click', async(e) =>{
 		const file = document.getElementById('ux-selected').innerHTML
-		const tag = document.getElementById('tag-selected').value
-		const id = document.getElementById('tag-selected-id').value
-		const tagpath = document.getElementById('fs-path').innerHTML
-		const tagremove = await window.tag.remove(file,tag,id,tagpath)
-		document.getElementById('tag-selected-id').value =''
-		tagdisplay(file)
+		const tag = document.getElementById('tag-selected-id').value
+		if (tag!==''){
+			const id = document.getElementById('tag-selected-id').value
+			const tagpath = document.getElementById('fs-path').innerHTML
+			const tagremove = await window.tag.remove(file,tag,id,tagpath)
+			document.getElementById('tag-selected-id').value =''
+			tagdisplay(file)
+		}else{
+			const taginfo = document.getElementById('tag-info')
+			taginfo.innerHTML = 'Tag is not selected'
+		}
+		
 	})
 }
 	// Init
