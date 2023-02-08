@@ -68,24 +68,10 @@ ipcMain.handle('tag-getdb', async(event) =>{
 	Object.keys(dbfile).forEach(e =>{
 		fileset.push(e)
 	})
-	console.log(tagset)
-	console.log(fileset)
 	return {tagset:tagset,fileset:fileset}	
 })
 //Side: Query tags
 ipcMain.handle('tag-query', async(event,input) =>{
-	const dbtag = await db.getData('/tag')
-	const dbfile = await db.getData('/file')
-	const tagset = []
-	const fileset =[]
-	Object.keys(dbtag).forEach(e =>{
-		tagset.push(e)
-	})
-	Object.keys(dbfile).forEach(e =>{
-		fileset.push(e)
-	})
-	console.log(tagset)
-	console.log(fileset)
-	//console.log(dbfile)
-	return {tagset:tagset,fileset:fileset}
+	const queryset = await db.getData('/tag/' + input)
+	return queryset
 })

@@ -89,8 +89,6 @@ const tagmatch = async()=>{
 	tagsearchbar.addEventListener('input', ()=>{
 		const file = JSON.parse(filelist.value)
 		const tag = JSON.parse(taglist.value)
-		console.log(file)
-		console.log(tag)
 		updateDiv.innerHTML =''
 		for(var i=0,n=Math.min(5,tag.length,file.length);i<n;i++){
 			const tagoutput = `<button id='tag-match-result'>` + tag[i] + `</button><br>`
@@ -106,6 +104,13 @@ const tagsearch = ()=>{
 	const taginput = document.getElementById('tag-search')
 	tagbtn.addEventListener('click', async()=>{
 		const input = taginput.value
+		const output = await window.tag.query(input)
+		console.log(output)
+		updateDiv.innerHTML = ''
+		for(var i=0,n=output.length;i<n;i++){
+			const tagoutput = `<button id='tag-search-result'>` + output[i] + `</button><br>`
+			updateDiv.insertAdjacentHTML('beforeend',tagoutput)
+		}
 	})
 }
 	// Init
