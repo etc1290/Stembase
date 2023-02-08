@@ -18,7 +18,7 @@
 	text-align:		left;
 	display:		inline-block;	
 	background:		rgb(255,250,240);
-	transition:		0.5s;
+	transition:		0.1s;
 	padding:		15px;
 }
 /* Columbia Blue */
@@ -54,7 +54,7 @@
 /* Floral White */
 .tag-label{
 	background:		rgb(255,250,240);
-	transition:		0.5s;
+	transition:		0.1s;
 }
 /* Mimi Pink */
 .tag-label:hover{
@@ -74,4 +74,8 @@
 }
 #buttonbar{
 	border-top:		5px solid rgb(255,238,214);
+}
+/* Anti Flash White*/
+#tag-match-result:hover{
+	background:		rgb(231,238,238);
 }

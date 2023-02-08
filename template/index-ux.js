@@ -72,24 +72,48 @@ const tagfocus = ()=>{
 		inputBlock.select()
 	})
 }
-	//Side: Tag query
+	//Side: Tag get datalist
+const taggetdb = async()=>{
+	const {tagset,fileset} = await window.tag.getdb()
+	return {tagset,fileset}	
+}
+	//Side: Tag match
+const tagmatch = async()=>{
+	const {tagset:tag,fileset:file} = await taggetdb()
+	const tagsearchbar = document.getElementById('tag-search')
+	const updateDiv = document.getElementById('tag-match-div')
+	const taglist = document.getElementById('tag-matchlist-tag')
+	const filelist = document.getElementById('tag-matchlist-file')
+	taglist.value = JSON.stringify(tag) 
+	filelist.value = JSON.stringify(file)
+	tagsearchbar.addEventListener('input', ()=>{
+		const file = JSON.parse(filelist.value)
+		const tag = JSON.parse(taglist.value)
+		console.log(file)
+		console.log(tag)
+		updateDiv.innerHTML =''
+		for(var i=0,n=Math.min(5,tag.length,file.length);i<n;i++){
+			const tagoutput = `<button id='tag-match-result'>` + tag[i] + `</button><br>`
+			updateDiv.insertAdjacentHTML('beforeend',tagoutput)
+		}
+	})
+	
+}
+	//Side: Tag search 
 const tagsearch = ()=>{
 	const tagbtn = document.getElementById('tag-searchbtn')
 	const updateDiv = document.getElementById('tag-search-output')
 	const taginput = document.getElementById('tag-search')
 	tagbtn.addEventListener('click', async()=>{
 		const input = taginput.value
-		console.log(input)
-		const tagquery = await window.tag.query(input)
-		console.log(tagquery)
 	})
-	
 }
 	// Init
 const tagInit = () =>{
 	tagdelete()
 	tagfocus()
 	tagsearch()
+	tagmatch()
 }
 tagInit()
 	// Refresh
@@ -101,8 +125,7 @@ const tagfunc = async (name) =>{
 // User Interactive Design
 const uxselect = async (name) =>{
 	document.getElementById('ux-info').value = name
-	document.getElementById('ux-selected').innerHTML = name
-	
+	document.getElementById('ux-selected').innerHTML = name	
 	tagfunc(name)
 }
 

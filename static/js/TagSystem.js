@@ -6,7 +6,7 @@ const env = require('./env.js')
 const Stemdb= env('StemdbDir')
 const db 	= new JsonDB(new Config(Stemdb,true,true,'/'))	
 // Side: Search tags
-const tagsearch = (name='',path='',isMeta = true) =>{
+const tagsearch = (name='',path='',isMeta = true,) =>{
 	if(isMeta){
 		const meta	= new JsonDB(new Config(path + '\\Stemmeta',true,true,'/'))
 		return meta.getData('/' + name)
@@ -56,13 +56,36 @@ ipcMain.handle('tag-remove', async(event,file,tag,id,path) =>{
 	const meta	= new JsonDB(new Config(path + '\\Stemmeta',true,true,'/'))
 	meta.delete('/'+file+'[' + id +']')
 })
+//Side: Get all db
+ipcMain.handle('tag-getdb', async(event) =>{
+	const dbtag = await db.getData('/tag')
+	const dbfile = await db.getData('/file')
+	const tagset = []
+	const fileset =[]
+	Object.keys(dbtag).forEach(e =>{
+		tagset.push(e)
+	})
+	Object.keys(dbfile).forEach(e =>{
+		fileset.push(e)
+	})
+	console.log(tagset)
+	console.log(fileset)
+	return {tagset:tagset,fileset:fileset}	
+})
 //Side: Query tags
 ipcMain.handle('tag-query', async(event,input) =>{
-	/*
-	const dbdata = fs.readFileSync(Stemdb)
-	const dbarray = JSON.parse(dbdata)
-	console.log('input: ' + input)
-	console.log('queryset: ' + dbarray)
-	return queryset
-	*/
+	const dbtag = await db.getData('/tag')
+	const dbfile = await db.getData('/file')
+	const tagset = []
+	const fileset =[]
+	Object.keys(dbtag).forEach(e =>{
+		tagset.push(e)
+	})
+	Object.keys(dbfile).forEach(e =>{
+		fileset.push(e)
+	})
+	console.log(tagset)
+	console.log(fileset)
+	//console.log(dbfile)
+	return {tagset:tagset,fileset:fileset}
 })

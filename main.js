@@ -39,7 +39,6 @@ const WindowMain = async () => {
 const init = () =>{  
 	const Taskmanager = () =>{
 		const funcScript = glob.sync(env('StaticDir') + '/js/*.js')
-		console.log(funcScript)
 		funcScript.forEach((i) =>{require(i)})
 	}
 	Taskmanager()  
