@@ -72,6 +72,11 @@ ipcMain.handle('tag-getdb', async(event) =>{
 })
 //Side: Query tags
 ipcMain.handle('tag-query', async(event,input) =>{
-	const queryset = await db.getData('/tag/' + input)
+	let queryset = ''
+	try{
+		queryset = await db.getData('/tag/' + input)
+	}catch(e){
+		queryset = ['No matched result']
+	}
 	return queryset
 })

@@ -10,7 +10,9 @@
 	1. Searching function deploying
 		1-1 Add demo-tag match display function
 			-- finished
-		1-2 Add demo search display function
+		1-2 Add demo-search display function
+			-- finished
+		1-3 Add demo-check matched result in search display function
 			-- finished
 	
 	2. Building tag and file search function which contains two parts:
