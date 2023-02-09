@@ -78,5 +78,8 @@ ipcMain.handle('tag-query', async(event,input) =>{
 	}catch(e){
 		queryset = ['No matched result']
 	}
+	if(!queryset.length){
+		queryset = ['No attachment']
+	}
 	return queryset
 })

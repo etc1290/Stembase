@@ -2,6 +2,19 @@
  File tagging system
 
 ---
+	## 2022.02.09		version 0.2.5.2
+	-- Style design change
+	-- Add gimmick in query function
+	# Added
+	1. Add protection in query function to handle data exist but no attachment
+		-- finished
+	2. When input value is null show some tags
+		-- finished
+	# Changed
+	1. Style design change
+		1-1 Add search result as Alice blue
+			-- finished
+---
 	## 2022.02.08		version 0.2.5.1
 	-- Style design change
 	-- Code cleaning
@@ -19,7 +32,7 @@
 		1-1 by input value return file info or tag info
 		1-2 Display similar results
 		-- processing
-	## Changed
+	# Changed
 	1. Style design change
 		1-1 Shorten the hover transition time from 0.5s to 0.1s for etc1290 ask's sake
 			-- finished

@@ -104,12 +104,18 @@ const tagsearch = ()=>{
 	const taginput = document.getElementById('tag-search')
 	tagbtn.addEventListener('click', async()=>{
 		const input = taginput.value
-		const output = await window.tag.query(input)
-		console.log(output)
+		const rawArray = await window.tag.query(input)
+		let result=''
+		if(input){
+			result = rawArray
+		}else{
+			result = Object.keys(rawArray)
+		}
 		updateDiv.innerHTML = ''
-		for(var i=0,n=output.length;i<n;i++){
-			const tagoutput = `<button id='tag-search-result'>` + output[i] + `</button><br>`
-			updateDiv.insertAdjacentHTML('beforeend',tagoutput)
+		for(var i=0,n=result.length;i<n;i++){
+			const tagoutput = `<div id='tag-search-result'><p>` + result[i] + `</p>`
+			const tagdetail = `<em> this is a italics words test</em></div>`
+			updateDiv.insertAdjacentHTML('beforeend',tagoutput + tagdetail)
 		}
 	})
 }
