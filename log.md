@@ -5,10 +5,13 @@
 	## 2022.02.09		version 0.2.5.2
 	-- Style design change
 	-- Add gimmick in query function
+	-- Complete a basic query function
 	# Added
 	1. Add protection in query function to handle data exist but no attachment
 		-- finished
 	2. When input value is null show some tags
+		-- finished
+	3. Query function is achieved by need more data to check the performance
 		-- finished
 	# Changed
 	1. Style design change
