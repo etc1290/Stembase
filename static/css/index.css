@@ -75,12 +75,16 @@
 #buttonbar{
 	border-top:		5px solid rgb(255,238,214);
 }
+#tag-match-div{
+	height:			0vh;
+	overflow:		auto;
+}
 /* Anti Flash White*/
 #tag-match-result:hover{
 	background:		rgb(231,238,238);
 }
 #tag-search-output{
-	height:20vh;
+
 }
 /* Alice Blue */
 #tag-search-result:hover{

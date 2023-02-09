@@ -86,14 +86,28 @@ const tagmatch = async()=>{
 	const filelist = document.getElementById('tag-matchlist-file')
 	taglist.value = JSON.stringify(tag) 
 	filelist.value = JSON.stringify(file)
+		// Initialize match area
+	document.addEventListener('click', (e)=>{
+		const isInBoundary = [tagsearchbar,updateDiv].some(i => e.composedPath().includes(i))
+		console.log(isInBoundary)
+		if(!isInBoundary){
+			updateDiv.style.height = 0
+		}
+	})
+		// Expand match area
+	tagsearchbar.addEventListener('click', ()=>{
+		updateDiv.style.height = '20vh'
+	})
+		// Main match function
 	tagsearchbar.addEventListener('input', ()=>{
 		const file = JSON.parse(filelist.value)
 		const tag = JSON.parse(taglist.value)
 		const input = tagsearchbar.value.toLowerCase()
-		console.log(input)
+		
 		const tagmatch = tag.filter(v =>v.includes(input))
 		const filematch = file.filter(v =>v.includes(input))
 		const matchResult = tagmatch.concat(filematch)
+		console.log(matchResult)
 		updateDiv.innerHTML =''
 		for(var i=0,n=Math.min(5,matchResult.length);i<n;i++){
 			const tagoutput = `<button id='tag-match-result'>` + matchResult[i] + `</button><br>`

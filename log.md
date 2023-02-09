@@ -2,7 +2,7 @@
  File tagging system
 
 ---
-	## 2022.02.09		version 0.2.5.2
+	## 2022.02.09		version 0.2.6
 	-- Style design change
 	-- Add gimmick in query function
 	-- Complete a basic query function
@@ -16,6 +16,8 @@
 	# Changed
 	1. Style design change
 		1-1 Add search result as Alice blue
+			-- finished
+		1-2 Folder and expand match area by click inside and out
 			-- finished
 ---
 	## 2022.02.08		version 0.2.5.1
