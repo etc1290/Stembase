@@ -89,7 +89,6 @@ const tagmatch = async()=>{
 		// Initialize match area
 	document.addEventListener('click', (e)=>{
 		const isInBoundary = [tagsearchbar,updateDiv].some(i => e.composedPath().includes(i))
-		console.log(isInBoundary)
 		if(!isInBoundary){
 			updateDiv.style.height = 0
 		}
@@ -102,8 +101,9 @@ const tagmatch = async()=>{
 	tagsearchbar.addEventListener('input', ()=>{
 		const file = JSON.parse(filelist.value)
 		const tag = JSON.parse(taglist.value)
-		const input = tagsearchbar.value.toLowerCase()
+		console.log(file)
 		
+		const input = tagsearchbar.value.toLowerCase()	
 		const tagmatch = tag.filter(v =>v.includes(input))
 		const filematch = file.filter(v =>v.includes(input))
 		const matchResult = tagmatch.concat(filematch)

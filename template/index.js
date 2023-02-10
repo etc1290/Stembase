@@ -71,7 +71,6 @@ document.getElementById('fs-home').addEventListener('click', async () =>{
 document.getElementById('fs-up').addEventListener('click', async () =>{
 	const nowPath = document.querySelector('p[id=fs-path]')
 	const newPath = nowPath.innerHTML.split('\\').slice(0,-1).join('\\')
-	console.log(newPath)
 	if(newPath == 'C:'){
 		fsfunc('C:\\')
 	}else if (newPath){

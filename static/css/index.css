@@ -78,6 +78,7 @@
 #tag-match-div{
 	height:			0vh;
 	overflow:		auto;
+	transition:		0.5s;
 }
 /* Anti Flash White*/
 #tag-match-result:hover{

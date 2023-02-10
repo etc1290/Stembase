@@ -1,27 +1,3 @@
 {
-    "file": {
-        "C:\\Users\\329058\\Desktop\\others\\KnowledgeManager\\Stembase\\.git": [
-            "sss",
-            "7747"
-        ],
-        "C:\\Users\\329058\\Desktop\\others\\KnowledgeManager\\Stembase\\.gitattributes": [],
-        "C:\\Users\\329058\\Desktop\\others\\KnowledgeManager\\Stembase\\clpreload.js": [
-            "sss"
-        ],
-        "C:\\Users\\329058\\Desktop\\others\\KnowledgeManager\\Stembase\\.gitignore": [
-            "sss"
-        ]
-    },
-    "tag": {
-        "7747": [
-            "C:\\Users\\329058\\Desktop\\others\\KnowledgeManager\\Stembase\\.git"
-        ],
-        "aaa": [],
-        "sss": [
-            "C:\\Users\\329058\\Desktop\\others\\KnowledgeManager\\Stembase\\.git",
-            "C:\\Users\\329058\\Desktop\\others\\KnowledgeManager\\Stembase\\.gitattributes",
-            "C:\\Users\\329058\\Desktop\\others\\KnowledgeManager\\Stembase\\clpreload.js"
-        ],
-        "ddaad": []
-    }
+
 }

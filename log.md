@@ -2,6 +2,18 @@
  File tagging system
 
 ---
+	## 2022.02.10		version 0.2.6.1
+	-- Style design change
+	-- Add exception handle
+	
+	# Added
+	1. Add exception handler in get all db when there are no data
+		-- finished
+	# Changed
+	1. Style design change
+		1-1 Add transition in match area for smooth change
+			-- finished
+---
 	## 2022.02.09		version 0.2.6
 	-- Style design change
 	-- Add gimmick in query function

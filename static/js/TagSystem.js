@@ -28,7 +28,9 @@ ipcMain.handle('tag-main',	async(event,name,value,path) =>{
 		const meta	= new JsonDB(new Config(path + '\\Stemmeta',true,true,'/'))
 		meta.push('/'+name,[value],false)
 		db.push('/file/'+ path + '\\' +name,[value],false)
-		db.push('/tag/' + value,[path + '\\' + name],false )
+		db.push('/tag/' + value,[path + '\\' + name],false)
+		db.push('/name/',[name,path],true)
+		
 	}
 	
 })
@@ -58,8 +60,12 @@ ipcMain.handle('tag-remove', async(event,file,tag,id,path) =>{
 })
 //Side: Get all db
 ipcMain.handle('tag-getdb', async(event) =>{
-	const dbtag = await db.getData('/tag')
-	const dbfile = await db.getData('/file')
+	try{	
+		const dbtag = await db.getData('/tag')
+		const dbfile = await db.getData('/file')
+	}catch(e){
+		return {tagset:[],fileset:[]}
+	}
 	const tagset = []
 	const fileset =[]
 	Object.keys(dbtag).forEach(e =>{
@@ -68,7 +74,7 @@ ipcMain.handle('tag-getdb', async(event) =>{
 	Object.keys(dbfile).forEach(e =>{
 		fileset.push(e)
 	})
-	return {tagset:tagset,fileset:fileset}	
+		return {tagset:tagset,fileset:fileset}	
 })
 //Side: Query tags
 ipcMain.handle('tag-query', async(event,input) =>{
