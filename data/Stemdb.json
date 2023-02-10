@@ -1,26 +1,30 @@
 {
-    "name": [
-        ".git",
-        "C:\\Users\\329058\\Desktop\\others\\KnowledgeManager\\Stembase",
-        ".gitattributes",
-        "C:\\Users\\329058\\Desktop\\others\\KnowledgeManager\\Stembase"
-    ],
+    "name": {
+        "name": [
+            ".git",
+            "clpreload.js"
+        ],
+        "path": [
+            "C:\\Users\\329058\\Desktop\\others\\KnowledgeManager\\Stembase",
+            "C:\\Users\\329058\\Desktop\\others\\KnowledgeManager\\Stembase"
+        ]
+    },
     "file": {
         "C:\\Users\\329058\\Desktop\\others\\KnowledgeManager\\Stembase\\.git": [
-            "a",
-            "s"
+            "apple",
+            "grave"
         ],
-        "C:\\Users\\329058\\Desktop\\others\\KnowledgeManager\\Stembase\\.gitattributes": [
-            "s"
+        "C:\\Users\\329058\\Desktop\\others\\KnowledgeManager\\Stembase\\clpreload.js": [
+            "grave"
         ]
     },
     "tag": {
-        "a": [
+        "apple": [
             "C:\\Users\\329058\\Desktop\\others\\KnowledgeManager\\Stembase\\.git"
         ],
-        "s": [
+        "grave": [
             "C:\\Users\\329058\\Desktop\\others\\KnowledgeManager\\Stembase\\.git",
-            "C:\\Users\\329058\\Desktop\\others\\KnowledgeManager\\Stembase\\.gitattributes"
+            "C:\\Users\\329058\\Desktop\\others\\KnowledgeManager\\Stembase\\clpreload.js"
         ]
     }
 }

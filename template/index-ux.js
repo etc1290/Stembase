@@ -74,18 +74,22 @@ const tagfocus = ()=>{
 }
 	//Side: Tag get datalist
 const taggetdb = async()=>{
-	const {tagset,fileset} = await window.tag.getdb()
-	return {tagset,fileset}	
+	const {tagset,nameset,pathset} = await window.tag.getdb()
+	return {tagset,nameset,pathset}	
 }
 	//Side: Tag match
 const tagmatch = async()=>{
-	const {tagset:tag,fileset:file} = await taggetdb()
+	//const {tagset:tag,fileset:file} = await taggetdb()
+	const {tagset:tag,nameset:name,pathset:path} = await taggetdb()
 	const tagsearchbar = document.getElementById('tag-search')
 	const updateDiv = document.getElementById('tag-match-div')
 	const taglist = document.getElementById('tag-matchlist-tag')
-	const filelist = document.getElementById('tag-matchlist-file')
+	const namelist = document.getElementById('tag-matchlist-name')
+	const pathlist = document.getElementById('tag-matchlist-path')
 	taglist.value = JSON.stringify(tag) 
-	filelist.value = JSON.stringify(file)
+	namelist.value= JSON.stringify(name)
+	pathlist.value= JSON.stringify(path)
+	//filelist.value = JSON.stringify(file)
 		// Initialize match area
 	document.addEventListener('click', (e)=>{
 		const isInBoundary = [tagsearchbar,updateDiv].some(i => e.composedPath().includes(i))
@@ -99,14 +103,15 @@ const tagmatch = async()=>{
 	})
 		// Main match function
 	tagsearchbar.addEventListener('input', ()=>{
-		const file = JSON.parse(filelist.value)
 		const tag = JSON.parse(taglist.value)
-		console.log(file)
+		const path = JSON.parse(pathlist.value)
+		const name = JSON.parse(namelist.value)
+		
 		
 		const input = tagsearchbar.value.toLowerCase()	
 		const tagmatch = tag.filter(v =>v.includes(input))
-		const filematch = file.filter(v =>v.includes(input))
-		const matchResult = tagmatch.concat(filematch)
+		const namematch = name.filter(v =>v.includes(input))
+		const matchResult = tagmatch.concat(namematch)
 		console.log(matchResult)
 		updateDiv.innerHTML =''
 		for(var i=0,n=Math.min(5,matchResult.length);i<n;i++){

@@ -1,9 +1,9 @@
 {
     ".git": [
-        "a",
-        "s"
+        "apple",
+        "grave"
     ],
-    ".gitattributes": [
-        "s"
+    "clpreload.js": [
+        "grave"
     ]
 }

@@ -37,13 +37,12 @@ ipcMain.handle('tag-main',	async(event,name,value,path) =>{
 		const meta	= new JsonDB(new Config(path + '\\Stemmeta',true,true,'/'))		
 		if(!isNameExist){
 			console.log('s')
-			db.push('/name/',[name,path],false)	
+			db.push('/name/name',[name],false)
+			db.push('/name/path',[path],false)
 		}
 		meta.push('/'+name,[value],false)
 		db.push('/file/'+ path + '\\' +name,[value],false)
-		db.push('/tag/' + value,[path + '\\' + name],false)
-		
-		
+		db.push('/tag/' + value,[path + '\\' + name],false)	
 	}
 	
 })
@@ -73,21 +72,29 @@ ipcMain.handle('tag-remove', async(event,file,tag,id,path) =>{
 })
 //Side: Get all db
 ipcMain.handle('tag-getdb', async(event) =>{
+	let tagset = []
+	let nameset =[]
+	let pathset =[]
+	let dbtag	=''
 	try{	
-		const dbtag = await db.getData('/tag')
-		const dbfile = await db.getData('/file')
+		dbtag = await db.getData('/tag')
+		//const dbfile = await db.getData('/file')
+		nameset = await db.getData('/name/name')
+		pathset = await db.getData('/name/path')
 	}catch(e){
-		return {tagset:[],fileset:[]}
+		//return {tagset:[],fileset:[],nameset:[]}
+		return{tagset:[],nameset:[],pathset:[]}
 	}
-	const tagset = []
-	const fileset =[]
+	//const fileset =[]
 	Object.keys(dbtag).forEach(e =>{
 		tagset.push(e)
 	})
+	/*
 	Object.keys(dbfile).forEach(e =>{
 		fileset.push(e)
-	})
-		return {tagset:tagset,fileset:fileset}	
+	})	
+		return {tagset:tagset,fileset:fileset,nameset:nameset}	 */
+		return {tagset:tagset,nameset:nameset,pathset:pathset}
 })
 //Side: Query tags
 ipcMain.handle('tag-query', async(event,input) =>{
