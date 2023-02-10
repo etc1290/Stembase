@@ -6,7 +6,7 @@ const env = require('./env.js')
 const Stemdb= env('StemdbDir')
 const db 	= new JsonDB(new Config(Stemdb,true,true,'/'))	
 // Side: Search tags
-const tagsearch = (name='',path='',isMeta = true,) =>{
+const tagsearch = (name='',path='',isMeta = true) =>{
 	if(isMeta){
 		const meta	= new JsonDB(new Config(path + '\\Stemmeta',true,true,'/'))
 		return meta.getData('/' + name)
@@ -17,19 +17,32 @@ const tagsearch = (name='',path='',isMeta = true,) =>{
 // Main: Add tags
 ipcMain.handle('tag-main',	async(event,name,value,path) =>{
 	let isExist = false
+	let isNameExist = false
 	let tags = ''
 	try{
 		tags = await tagsearch(name,path)
-		isExist = tags.includes(value)
+		isExist = tags.includes(value)				
 	}catch(e){
 		isExist = false
 	}
+	try{
+		tags = await tagsearch(name,path,false)
+			if(tags){
+				isNameExist = true
+			}
+	}catch(e){
+		isNameExist = false
+	}
 	if (!isExist && value !==''){
-		const meta	= new JsonDB(new Config(path + '\\Stemmeta',true,true,'/'))
+		const meta	= new JsonDB(new Config(path + '\\Stemmeta',true,true,'/'))		
+		if(!isNameExist){
+			console.log('s')
+			db.push('/name/',[name,path],false)	
+		}
 		meta.push('/'+name,[value],false)
 		db.push('/file/'+ path + '\\' +name,[value],false)
 		db.push('/tag/' + value,[path + '\\' + name],false)
-		db.push('/name/',[name,path],true)
+		
 		
 	}
 	

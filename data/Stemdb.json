@@ -1,3 +1,26 @@
 {
-
+    "name": [
+        ".git",
+        "C:\\Users\\329058\\Desktop\\others\\KnowledgeManager\\Stembase",
+        ".gitattributes",
+        "C:\\Users\\329058\\Desktop\\others\\KnowledgeManager\\Stembase"
+    ],
+    "file": {
+        "C:\\Users\\329058\\Desktop\\others\\KnowledgeManager\\Stembase\\.git": [
+            "a",
+            "s"
+        ],
+        "C:\\Users\\329058\\Desktop\\others\\KnowledgeManager\\Stembase\\.gitattributes": [
+            "s"
+        ]
+    },
+    "tag": {
+        "a": [
+            "C:\\Users\\329058\\Desktop\\others\\KnowledgeManager\\Stembase\\.git"
+        ],
+        "s": [
+            "C:\\Users\\329058\\Desktop\\others\\KnowledgeManager\\Stembase\\.git",
+            "C:\\Users\\329058\\Desktop\\others\\KnowledgeManager\\Stembase\\.gitattributes"
+        ]
+    }
 }

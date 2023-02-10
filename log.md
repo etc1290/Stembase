@@ -2,6 +2,13 @@
  File tagging system
 
 ---
+	## 2022.02.10		version 0.2.6.2
+	-- Add up the layer of database
+	
+	# Added
+	1. Add name layer in database for quick search
+		-- finished
+---
 	## 2022.02.10		version 0.2.6.1
 	-- Style design change
 	-- Add exception handle
