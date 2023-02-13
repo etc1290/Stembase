@@ -114,9 +114,15 @@ const tagmatch = async()=>{
 		const displayNum = Math.min(5,matchResult.length)
 		for(var i=0;i<displayNum;i++){
 			matchBlocks.push(`<button class='tag-match-block'>` + matchResult[i] +`</button><br>`)
-			console.log(i)
+			
 		}
 		updateDiv.innerHTML = matchBlocks.join('')
+		const matchBlockbtn = document.querySelectorAll('button[class=tag-match-block]')
+		matchBlockbtn.forEach(e =>{
+			e.addEventListener('click',()=>{
+				tagsearchbar.value = e.innerHTML
+			})
+		})
 		
 	})
 	

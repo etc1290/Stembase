@@ -2,14 +2,22 @@
  File tagging system
 
 ---
-	## 2022.02.13		version 0.2.6.3
+	## 2022.02.13		version 0.2.7
 	-- Bug fix
 	-- Rewrite function
+	-- Add new enviroment variable
+	-- Function implementation
+
+	# Added
+	1. Add new environment variable 'MatchDisplayNum' to operate the display number in match
+		-- finished
+	2. When press match result auto input that result into the searchbar
+		-- finished
 	
 	# Changed
 	1. Rewrite match function for faster display
 		-- finished
-	
+		
 	# Fixed
 	1. Fix bug in Setting.js results from resolve require method
 		-- finished
