@@ -2,11 +2,15 @@
     "name": {
         "name": [
             ".git",
-            "clpreload.js"
+            "clpreload.js",
+            ".gitignore",
+            ".git"
         ],
         "path": [
             "C:\\Users\\329058\\Desktop\\others\\KnowledgeManager\\Stembase",
-            "C:\\Users\\329058\\Desktop\\others\\KnowledgeManager\\Stembase"
+            "C:\\Users\\329058\\Desktop\\others\\KnowledgeManager\\Stembase",
+            "C:\\Users\\329058\\Desktop\\others\\KnowledgeManager\\Stembase",
+            "C:\\Users\\329058\\Desktop\\others\\KnowledgeManager\\Stembase\\中文"
         ]
     },
     "file": {
@@ -16,15 +20,25 @@
         ],
         "C:\\Users\\329058\\Desktop\\others\\KnowledgeManager\\Stembase\\clpreload.js": [
             "grave"
+        ],
+        "C:\\Users\\329058\\Desktop\\others\\KnowledgeManager\\Stembase\\.gitignore": [
+            "apple"
+        ],
+        "C:\\Users\\329058\\Desktop\\others\\KnowledgeManager\\Stembase\\中文\\.git": [
+            "test"
         ]
     },
     "tag": {
         "apple": [
-            "C:\\Users\\329058\\Desktop\\others\\KnowledgeManager\\Stembase\\.git"
+            "C:\\Users\\329058\\Desktop\\others\\KnowledgeManager\\Stembase\\.git",
+            "C:\\Users\\329058\\Desktop\\others\\KnowledgeManager\\Stembase\\.gitignore"
         ],
         "grave": [
             "C:\\Users\\329058\\Desktop\\others\\KnowledgeManager\\Stembase\\.git",
             "C:\\Users\\329058\\Desktop\\others\\KnowledgeManager\\Stembase\\clpreload.js"
+        ],
+        "test": [
+            "C:\\Users\\329058\\Desktop\\others\\KnowledgeManager\\Stembase\\中文\\.git"
         ]
     }
 }

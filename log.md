@@ -13,6 +13,8 @@
 		-- finished
 	2. When press match result auto input that result into the searchbar
 		-- finished
+	3. Implement search function for tags or file name searching
+		-- finished
 	
 	# Changed
 	1. Rewrite match function for faster display

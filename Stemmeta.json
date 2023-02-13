@@ -5,5 +5,8 @@
     ],
     "clpreload.js": [
         "grave"
+    ],
+    ".gitignore": [
+        "apple"
     ]
 }

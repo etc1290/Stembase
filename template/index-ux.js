@@ -132,21 +132,33 @@ const tagsearch = ()=>{
 	const tagbtn = document.getElementById('tag-searchbtn')
 	const updateDiv = document.getElementById('tag-search-output')
 	const taginput = document.getElementById('tag-search')
+	const taglist = document.getElementById('tag-matchlist-tag')
+	const namelist = document.getElementById('tag-matchlist-name')
+	const pathlist = document.getElementById('tag-matchlist-path')
+	
 	tagbtn.addEventListener('click', async()=>{
+		const tag = JSON.parse(taglist.value)
+		const path = JSON.parse(pathlist.value)
+		const name = JSON.parse(namelist.value)
 		const input = taginput.value
-		const rawArray = await window.tag.query(input)
-		let result=''
-		if(input){
-			result = rawArray
-		}else{
-			result = Object.keys(rawArray)
+		const tagmatch = tag.filter(v => v.includes(input))
+		const namematch = name.reduce((val, i, idx) => val = i == input ? [...val, idx] : val, [])
+		console.log(tagmatch)
+		console.log(namematch)
+		const searchTagInfo = `<em class ='taglabel-info'>Tag</em></div><br>`
+		const searchBlocks = []
+		for(var i=0;i<tagmatch.length;i++){
+			const searchLabel = `<div class = 'tag-search-block'><button class='taglabel'>` + tagmatch[i] + `</button>`
+			searchBlocks.push(searchLabel + searchTagInfo)
 		}
-		updateDiv.innerHTML = ''
-		for(var i=0,n=result.length;i<n;i++){
-			const tagoutput = `<div id='tag-search-result'><p>` + result[i] + `</p>`
-			const tagdetail = `<em> this is a italics words test</em></div>`
-			updateDiv.insertAdjacentHTML('beforeend',tagoutput + tagdetail)
+		for(var i=0;i<namematch.length;i++){
+			const searchLabel = `<div class = 'tag-search-block'><button class = 'filelabel'>` + name[namematch[i]] + `</button>`
+			const searchInfo = `<em class = 'filelabel-info'>` + path[namematch[i]] + `</em></div><br>`
+			searchBlocks.push(searchLabel + searchInfo)
 		}
+		console.log(searchBlocks)
+		updateDiv.innerHTML = searchBlocks.join('')
+
 	})
 }
 	// Init
