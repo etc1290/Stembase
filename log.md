@@ -4,6 +4,11 @@
 ---
 	## 2022.02.13		version 0.2.6.3
 	-- Bug fix
+	-- Rewrite function
+	
+	# Changed
+	1. Rewrite match function for faster display
+		-- finished
 	
 	# Fixed
 	1. Fix bug in Setting.js results from resolve require method

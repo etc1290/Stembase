@@ -106,18 +106,18 @@ const tagmatch = async()=>{
 		const tag = JSON.parse(taglist.value)
 		const path = JSON.parse(pathlist.value)
 		const name = JSON.parse(namelist.value)
-		
-		
 		const input = tagsearchbar.value.toLowerCase()	
 		const tagmatch = tag.filter(v =>v.includes(input))
 		const namematch = name.filter(v =>v.includes(input))
 		const matchResult = tagmatch.concat(namematch)
-		console.log(matchResult)
-		updateDiv.innerHTML =''
-		for(var i=0,n=Math.min(5,matchResult.length);i<n;i++){
-			const tagoutput = `<button id='tag-match-result'>` + matchResult[i] + `</button><br>`
-			updateDiv.insertAdjacentHTML('beforeend',tagoutput)
+		const matchBlocks = []
+		const displayNum = Math.min(5,matchResult.length)
+		for(var i=0;i<displayNum;i++){
+			matchBlocks.push(`<button class='tag-match-block'>` + matchResult[i] +`</button><br>`)
+			console.log(i)
 		}
+		updateDiv.innerHTML = matchBlocks.join('')
+		
 	})
 	
 }
