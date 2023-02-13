@@ -2,6 +2,13 @@
  File tagging system
 
 ---
+	## 2022.02.13		version 0.2.6.3
+	-- Bug fix
+	
+	# Fixed
+	1. Fix bug in Setting.js results from resolve require method
+		-- finished
+---
 	## 2022.02.10		version 0.2.6.2
 	-- Add up the layer of database
 	

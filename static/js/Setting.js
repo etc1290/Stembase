@@ -1,7 +1,7 @@
 const {ipcMain,BrowserWindow} = require('electron')
 const env = require('./env.js')
 const check = require('./check.js')
-const resolve = require('path')
+const path = require('path')
 const {JsonDB,Config} = require('node-json-db')
 const WindowSetting = async () =>{
 	
@@ -10,7 +10,7 @@ const WindowSetting = async () =>{
 		height: env('Height'),
 		
 		webPreferences:{
-			preload: resolve('stpreload.js'),
+			preload: path.resolve('stpreload.js'),
 			contextIsolation:true
 		},
 	})                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
