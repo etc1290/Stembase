@@ -135,16 +135,16 @@ const tagsearch = ()=>{
 	const taglist = document.getElementById('tag-matchlist-tag')
 	const namelist = document.getElementById('tag-matchlist-name')
 	const pathlist = document.getElementById('tag-matchlist-path')
+	//Main: Search function
 	
 	tagbtn.addEventListener('click', async()=>{
+		const evt = new Event('click')
 		const tag = JSON.parse(taglist.value)
 		const path = JSON.parse(pathlist.value)
 		const name = JSON.parse(namelist.value)
 		const input = taginput.value
 		const tagmatch = tag.filter(v => v.includes(input))
 		const namematch = name.reduce((val, i, idx) => val = i == input ? [...val, idx] : val, [])
-		console.log(tagmatch)
-		console.log(namematch)
 		const searchTagInfo = `<em class ='taglabel-info'>Tag</em></div><br>`
 		const searchBlocks = []
 		for(var i=0;i<tagmatch.length;i++){
@@ -156,8 +156,33 @@ const tagsearch = ()=>{
 			const searchInfo = `<em class = 'filelabel-info'>` + path[namematch[i]] + `</em></div><br>`
 			searchBlocks.push(searchLabel + searchInfo)
 		}
-		console.log(searchBlocks)
+		// Display search result
 		updateDiv.innerHTML = searchBlocks.join('')
+		const searchBlockbtn = document.querySelectorAll('div[class=tag-search-block]')
+		const searchTagbtn = document.querySelectorAll('button[class=taglabel]')
+		const searchFilebtn= document.querySelectorAll('button[class=filelabel]')
+		//Side: Function of search results
+			//Connection of main and info
+		searchBlockbtn.forEach(e=>{
+			e.children[1].addEventListener('click',()=>{
+				e.children[0].dispatchEvent(evt)
+			})	
+		})
+			//Main search result function 
+		searchTagbtn.forEach(e=>{
+			e.addEventListener('click',()=>{
+				taginput.value = e.innerHTML
+				tagbtn.dispatchEvent(evt)
+			})		
+		})
+		searchFilebtn.forEach(e=>{
+			e.addEventListener('click',()=>{
+				console.log(e.nextSibling.innerHTML + e.innerHTML)	
+			})
+		})
+		
+		
+		
 
 	})
 }

@@ -1,6 +1,14 @@
 # Stembase
  File tagging system
 
+
+---
+	## 2022.02.14		version 0.2.8
+	-- Function implementation
+	
+	# Added
+	1. Add demo-query function to search result button
+		-- finished
 ---
 	## 2022.02.13		version 0.2.7
 	-- Bug fix
