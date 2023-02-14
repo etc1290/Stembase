@@ -3,7 +3,7 @@
 
 
 ---
-	## 2022.02.14		version 0.2.8
+	## 2022.02.14		version 0.2.7.1
 	-- Function implementation
 	
 	# Added

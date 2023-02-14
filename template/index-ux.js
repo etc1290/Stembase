@@ -127,6 +127,31 @@ const tagmatch = async()=>{
 	})
 	
 }
+const tagcreator = (pathset,fileset)=>{
+	const updateDiv = document.getElementById('tag-search-output')
+	const searchBlocks = []
+	for(var i=0;i<fileset.length;i++){
+		const searchLabel = `<div class = 'tag-search-block'><button class = 'filelabel'>` + fileset[i] + `</button>`
+		const searchInfo = `<em class = 'filelabel-info'>` + pathset[i] + `</em></div><br>`
+		searchBlocks.push(searchLabel + searchInfo)
+	}
+	updateDiv.innerHTML = searchBlocks.join('')
+} 
+const taglabel = (queryset,isTag = true)=>{
+	let pathset = []
+	let fileset = []
+	console.log(queryset)
+	if(isTag){
+		for(var i=0;i<queryset.length;i++){
+			
+			fileset.push(queryset[i].split('\\').pop()) 
+			pathset.push(queryset[i].slice(0,-fileset[i].length))
+		}
+		tagcreator(pathset,fileset)
+	}else{
+		
+	}
+}
 	//Side: Tag search 
 const tagsearch = ()=>{
 	const tagbtn = document.getElementById('tag-searchbtn')
@@ -135,8 +160,9 @@ const tagsearch = ()=>{
 	const taglist = document.getElementById('tag-matchlist-tag')
 	const namelist = document.getElementById('tag-matchlist-name')
 	const pathlist = document.getElementById('tag-matchlist-path')
-	//Main: Search function
 	
+	
+	//Main: Search function
 	tagbtn.addEventListener('click', async()=>{
 		const evt = new Event('click')
 		const tag = JSON.parse(taglist.value)
@@ -168,11 +194,11 @@ const tagsearch = ()=>{
 				e.children[0].dispatchEvent(evt)
 			})	
 		})
-			//Main search result function 
+			//Tag label function
 		searchTagbtn.forEach(e=>{
-			e.addEventListener('click',()=>{
-				taginput.value = e.innerHTML
-				tagbtn.dispatchEvent(evt)
+			e.addEventListener('click',async()=>{
+				const queryset = await window.tag.query(e.innerHTML)
+				taglabel(queryset)			
 			})		
 		})
 		searchFilebtn.forEach(e=>{

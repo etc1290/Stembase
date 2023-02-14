@@ -96,8 +96,8 @@ ipcMain.handle('tag-getdb', async(event) =>{
 		return {tagset:tagset,fileset:fileset,nameset:nameset}	 */
 		return {tagset:tagset,nameset:nameset,pathset:pathset}
 })
-//Side: Query tags
-ipcMain.handle('tag-query', async(event,input) =>{
+//Side: Query
+ipcMain.handle('tag-query', async(event,input,isTag = true) =>{
 	let queryset = ''
 	try{
 		queryset = await db.getData('/tag/' + input)
