@@ -109,11 +109,6 @@ const tagmatch = async()=>{
 	const taglist = document.getElementById('tag-matchlist-tag')
 	const namelist = document.getElementById('tag-matchlist-name')
 	const pathlist = document.getElementById('tag-matchlist-path')
-	/*
-	taglist.value = JSON.stringify(tag) 
-	namelist.value= JSON.stringify(name)
-	pathlist.value= JSON.stringify(path)
-	*/
 	//filelist.value = JSON.stringify(file)
 		// Initialize match area
 	document.addEventListener('click', (e)=>{
@@ -156,8 +151,12 @@ const tagmatch = async()=>{
 	})
 	
 }
+	// Label function
 const tagLabelfunc = ()=>{
 	const searchFilebtn= document.querySelectorAll('button[class=filelabel]')
+	const tooltipArea = document.querySelectorAll('em[class=tooltip]')
+	const pathArea = document.querySelectorAll('em[class=filelabel-info]')
+	
 	searchFilebtn.forEach(e=>{
 		e.addEventListener('click',()=>{	
 			uxselect(e.innerHTML)
@@ -168,14 +167,33 @@ const tagLabelfunc = ()=>{
 			}		
 		})
 	})
+	for(let i=0;i<tooltipArea.length;i++){
+		tooltipArea[i].addEventListener('mouseover',()=>{			
+			tooltipArea[i].style.display = 'block'
+		})
+		tooltipArea[i].addEventListener('mouseleave',()=>{
+			tooltipArea[i].style.display = 'none'
+		})
+		pathArea[i].addEventListener('mouseover',()=>{
+			tooltipArea[i].style.display = 'block'
+		})
+		pathArea[i].addEventListener('mouseleave',()=>{
+			tooltipArea[i].style.display = 'none'
+		})
+		tooltipArea[i].style.width = tooltipArea[i].innerHTML.length *7.5 + 'px'
+		
+	}
 }
+	// Label contents 
 const tagFileCreator = (pathset,fileset)=>{
 	const updateDiv = document.getElementById('tag-search-output')
 	const searchBlocks = []
+	const infoset = 'apple'
 	for(var i=0;i<fileset.length;i++){
 		const searchLabel = `<div class = 'tag-search-block'><button class = 'filelabel'>` + fileset[i] + `</button>`
-		const searchInfo = `<em class = 'filelabel-info'>` + pathset[i] + `</em></div><br>`
-		searchBlocks.push(searchLabel + searchInfo)
+		const searchTooltip = `<em class = 'tooltip'>` + pathset[i] + fileset[i] + `</em></div>`
+		const searchInfo = `<em class = 'filelabel-info'>` + infoset + `</em></div><br>`
+		searchBlocks.push(searchLabel + searchTooltip + searchInfo)
 	}
 	updateDiv.innerHTML = searchBlocks.join('')
 	tagLabelfunc()

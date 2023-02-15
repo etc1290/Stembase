@@ -1,7 +1,12 @@
 # Stembase
  File tagging system
 
-
+	## 2022.02.16		version 0.2.9
+	-- Function implementation
+	
+	# Added
+	1. Show partly path info until hover it in search label
+		-- finished
 ---
 	## 2022.02.15		version 0.2.8
 	-- Function implementation

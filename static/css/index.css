@@ -91,3 +91,14 @@
 #tag-search-result:hover{
 	background:		rgb(223,239,247);
 }
+
+.tooltip{
+	display:		none;
+	position:		absolute;
+	z-index:		1;
+	background:		teal;
+	color:			white;	
+	font-size:		12px;
+	height:			2vh;
+	right:			30px;
+}
