@@ -5,11 +5,13 @@
 ---
 	## 2022.02.15		version 0.2.8
 	-- Function implementation
-	
+	-- Function shares
 	# Added
 	1. Tag label now is fully functional
 		-- finished
 	2. Tag file label add select function
+		-- finished
+	3. When click searchbar auto select the field
 		-- finished
 ---
 	## 2022.02.14		version 0.2.7.1

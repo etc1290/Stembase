@@ -79,11 +79,14 @@ const tagdelete = async () =>{
 }
 	//Side: Auto selected
 const tagfocus = ()=>{
-	const inputBlock = document.getElementById('tag-input')
-	inputBlock.addEventListener('click', (e)=>{
-		inputBlock.select()
+	const inputBlock = document.querySelectorAll('input[class=input-field]')
+	inputBlock.forEach(e=>{
+		e.addEventListener('click',()=>{
+			e.select()
+		})	
 	})
 }
+
 	//Side: Tag get datalist
 const taggetdb = async()=>{
 	const {tagset,nameset,pathset} = await window.tag.getdb()
