@@ -45,6 +45,18 @@ const tagdisplay = async (name) =>{
 		tagbtnInit()		
 	}
 }
+	// Side: Refresh
+const tagfunc = async (name) =>{
+	tagmain(name)
+	tagdisplay(name)	
+}
+
+	// Init: User Interactive Design
+const uxselect = async (name) =>{
+	document.getElementById('ux-info').value = name
+	document.getElementById('ux-selected').innerHTML = name	
+	tagfunc(name)
+}
 	//Side: Tag delete
 const tagdelete = async () =>{
 	const tagDeletedbtn = document.getElementById('tag-delete')
@@ -127,7 +139,16 @@ const tagmatch = async()=>{
 	})
 	
 }
-const tagcreator = (pathset,fileset)=>{
+const tagLabelfunc = ()=>{
+	const searchFilebtn= document.querySelectorAll('button[class=filelabel]')
+	searchFilebtn.forEach(e=>{
+		e.addEventListener('click',()=>{
+			//console.log(e.nextSibling.innerHTML + e.innerHTML)	
+			uxselect(e.innerHTML)
+		})
+	})
+}
+const tagFileCreator = (pathset,fileset)=>{
 	const updateDiv = document.getElementById('tag-search-output')
 	const searchBlocks = []
 	for(var i=0;i<fileset.length;i++){
@@ -136,6 +157,7 @@ const tagcreator = (pathset,fileset)=>{
 		searchBlocks.push(searchLabel + searchInfo)
 	}
 	updateDiv.innerHTML = searchBlocks.join('')
+	tagLabelfunc()
 } 
 const taglabel = (queryset,isTag = true)=>{
 	let pathset = []
@@ -147,7 +169,7 @@ const taglabel = (queryset,isTag = true)=>{
 			fileset.push(queryset[i].split('\\').pop()) 
 			pathset.push(queryset[i].slice(0,-fileset[i].length))
 		}
-		tagcreator(pathset,fileset)
+		tagFileCreator(pathset,fileset)
 	}else{
 		
 	}
@@ -177,16 +199,19 @@ const tagsearch = ()=>{
 			const searchLabel = `<div class = 'tag-search-block'><button class='taglabel'>` + tagmatch[i] + `</button>`
 			searchBlocks.push(searchLabel + searchTagInfo)
 		}
+		
 		for(var i=0;i<namematch.length;i++){
 			const searchLabel = `<div class = 'tag-search-block'><button class = 'filelabel'>` + name[namematch[i]] + `</button>`
 			const searchInfo = `<em class = 'filelabel-info'>` + path[namematch[i]] + `</em></div><br>`
 			searchBlocks.push(searchLabel + searchInfo)
 		}
+		
+		
 		// Display search result
 		updateDiv.innerHTML = searchBlocks.join('')
 		const searchBlockbtn = document.querySelectorAll('div[class=tag-search-block]')
 		const searchTagbtn = document.querySelectorAll('button[class=taglabel]')
-		const searchFilebtn= document.querySelectorAll('button[class=filelabel]')
+		
 		//Side: Function of search results
 			//Connection of main and info
 		searchBlockbtn.forEach(e=>{
@@ -194,22 +219,15 @@ const tagsearch = ()=>{
 				e.children[0].dispatchEvent(evt)
 			})	
 		})
-			//Tag label function
+			//Tag label function	
 		searchTagbtn.forEach(e=>{
 			e.addEventListener('click',async()=>{
 				const queryset = await window.tag.query(e.innerHTML)
 				taglabel(queryset)			
 			})		
 		})
-		searchFilebtn.forEach(e=>{
-			e.addEventListener('click',()=>{
-				console.log(e.nextSibling.innerHTML + e.innerHTML)	
-			})
-		})
+		tagLabelfunc()
 		
-		
-		
-
 	})
 }
 	// Init
@@ -220,16 +238,5 @@ const tagInit = () =>{
 	tagmatch()
 }
 tagInit()
-	// Refresh
-const tagfunc = async (name) =>{
-	tagmain(name)
-	tagdisplay(name)	
-}
 
-// User Interactive Design
-const uxselect = async (name) =>{
-	document.getElementById('ux-info').value = name
-	document.getElementById('ux-selected').innerHTML = name	
-	tagfunc(name)
-}
 

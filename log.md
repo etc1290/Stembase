@@ -3,6 +3,15 @@
 
 
 ---
+	## 2022.02.15		version 0.2.8
+	-- Function implementation
+	
+	# Added
+	1. Tag label now is fully functional
+		-- finished
+	2. Tag file label add select function
+		-- finished
+---
 	## 2022.02.14		version 0.2.7.1
 	-- Function implementation
 	
