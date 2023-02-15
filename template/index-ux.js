@@ -98,6 +98,7 @@ const tagmatch = async()=>{
 	const {tagset:tag,nameset:name,pathset:path} = await taggetdb()
 	const tagsearchbar = document.getElementById('tag-search')
 	const updateDiv = document.getElementById('tag-match-div')
+	const tagbtn = document.getElementById('tag-searchbtn')
 	const taglist = document.getElementById('tag-matchlist-tag')
 	const namelist = document.getElementById('tag-matchlist-name')
 	const pathlist = document.getElementById('tag-matchlist-path')
@@ -118,6 +119,7 @@ const tagmatch = async()=>{
 	})
 		// Main match function
 	tagsearchbar.addEventListener('input', ()=>{
+		const evt = new Event('click')
 		const tag = JSON.parse(taglist.value)
 		const path = JSON.parse(pathlist.value)
 		const name = JSON.parse(namelist.value)
@@ -137,6 +139,9 @@ const tagmatch = async()=>{
 			e.addEventListener('click',()=>{
 				tagsearchbar.value = e.innerHTML
 			})
+			e.addEventListener('dblclick',()=>{
+				tagbtn.dispatchEvent(evt)
+			})
 		})
 		
 	})
@@ -145,8 +150,7 @@ const tagmatch = async()=>{
 const tagLabelfunc = ()=>{
 	const searchFilebtn= document.querySelectorAll('button[class=filelabel]')
 	searchFilebtn.forEach(e=>{
-		e.addEventListener('click',()=>{
-			//console.log(e.nextSibling.innerHTML + e.innerHTML)	
+		e.addEventListener('click',()=>{	
 			uxselect(e.innerHTML)
 		})
 	})
