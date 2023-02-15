@@ -152,6 +152,7 @@ const tagLabelfunc = ()=>{
 	searchFilebtn.forEach(e=>{
 		e.addEventListener('click',()=>{	
 			uxselect(e.innerHTML)
+			fsfunc(e.nextSibling.innerHTML.slice(0,-1))
 		})
 	})
 }

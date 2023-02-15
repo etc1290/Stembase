@@ -15,6 +15,8 @@
 		-- finished
 	4. Add double click function in match label
 		-- finished
+	5. When click match label redirect to selected position
+		-- finished
 ---
 	## 2022.02.14		version 0.2.7.1
 	-- Function implementation
