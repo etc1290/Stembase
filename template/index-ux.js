@@ -170,7 +170,6 @@ const tagFileCreator = (pathset,fileset)=>{
 const taglabel = (queryset,isTag = true)=>{
 	let pathset = []
 	let fileset = []
-	console.log(queryset)
 	if(isTag){
 		for(var i=0;i<queryset.length;i++){
 			

@@ -6,6 +6,7 @@
 	## 2022.02.15		version 0.2.8
 	-- Function implementation
 	-- Function expansion
+	-- Clear debug codes
 	# Added
 	1. Tag label now is fully functional
 		-- finished
@@ -16,6 +17,9 @@
 	4. Add double click function in match label
 		-- finished
 	5. When click match label redirect to selected position
+		-- finished
+	# Changed
+	1. Set debug input field as hidden 
 		-- finished
 ---
 	## 2022.02.14		version 0.2.7.1
