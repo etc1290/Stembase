@@ -8,5 +8,11 @@
     ],
     ".gitignore": [
         "apple"
+    ],
+    "data": [
+        "apple"
+    ],
+    "preload.js": [
+        "test"
     ]
 }

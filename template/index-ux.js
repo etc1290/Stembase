@@ -1,4 +1,15 @@
 //Tagging System
+	//Side: Tag get datalist
+const taggetdb = async()=>{
+	const taglist = document.getElementById('tag-matchlist-tag')
+	const namelist = document.getElementById('tag-matchlist-name')
+	const pathlist = document.getElementById('tag-matchlist-path')
+	const {tagset,nameset,pathset} = await window.tag.getdb()
+	taglist.value = JSON.stringify(tagset) 
+	namelist.value= JSON.stringify(nameset)
+	pathlist.value= JSON.stringify(pathset)
+	return {tagset,nameset,pathset}	
+}
 	// Main: Tag add
 const tagmain = async (name) =>{
 	const tagbtn = document.getElementById('tag-btn')
@@ -9,6 +20,7 @@ const tagmain = async (name) =>{
 		const tagpath	= document.getElementById('fs-path').innerHTML
 		const tagwrite 	= await window.tag.main(name,taginput,tagpath)
 		tagdisplay(name)
+		await taggetdb()
 	})
 }
 	// Side: Tag button function
@@ -74,7 +86,6 @@ const tagdelete = async () =>{
 			const taginfo = document.getElementById('tag-info')
 			taginfo.innerHTML = 'Tag is not selected'
 		}
-		
 	})
 }
 	//Side: Auto selected
@@ -87,11 +98,7 @@ const tagfocus = ()=>{
 	})
 }
 
-	//Side: Tag get datalist
-const taggetdb = async()=>{
-	const {tagset,nameset,pathset} = await window.tag.getdb()
-	return {tagset,nameset,pathset}	
-}
+
 	//Side: Tag match
 const tagmatch = async()=>{
 	//const {tagset:tag,fileset:file} = await taggetdb()
@@ -102,9 +109,11 @@ const tagmatch = async()=>{
 	const taglist = document.getElementById('tag-matchlist-tag')
 	const namelist = document.getElementById('tag-matchlist-name')
 	const pathlist = document.getElementById('tag-matchlist-path')
+	/*
 	taglist.value = JSON.stringify(tag) 
 	namelist.value= JSON.stringify(name)
 	pathlist.value= JSON.stringify(path)
+	*/
 	//filelist.value = JSON.stringify(file)
 		// Initialize match area
 	document.addEventListener('click', (e)=>{
@@ -152,7 +161,11 @@ const tagLabelfunc = ()=>{
 	searchFilebtn.forEach(e=>{
 		e.addEventListener('click',()=>{	
 			uxselect(e.innerHTML)
-			fsfunc(e.nextSibling.innerHTML.slice(0,-1))
+			try{
+				fsfunc(e.nextSibling.innerHTML.slice(0,-1))
+			}catch{
+				fsfunc(e.nextSibling.innerHTML)
+			}		
 		})
 	})
 }

@@ -4,13 +4,17 @@
             ".git",
             "clpreload.js",
             ".gitignore",
-            ".git"
+            ".git",
+            "data",
+            "preload.js"
         ],
         "path": [
             "C:\\Users\\329058\\Desktop\\others\\KnowledgeManager\\Stembase",
             "C:\\Users\\329058\\Desktop\\others\\KnowledgeManager\\Stembase",
             "C:\\Users\\329058\\Desktop\\others\\KnowledgeManager\\Stembase",
-            "C:\\Users\\329058\\Desktop\\others\\KnowledgeManager\\Stembase\\中文"
+            "C:\\Users\\329058\\Desktop\\others\\KnowledgeManager\\Stembase\\中文",
+            "C:\\Users\\329058\\Desktop\\others\\KnowledgeManager\\Stembase",
+            "C:\\Users\\329058\\Desktop\\others\\KnowledgeManager\\Stembase"
         ]
     },
     "file": {
@@ -26,19 +30,27 @@
         ],
         "C:\\Users\\329058\\Desktop\\others\\KnowledgeManager\\Stembase\\中文\\.git": [
             "test"
+        ],
+        "C:\\Users\\329058\\Desktop\\others\\KnowledgeManager\\Stembase\\data": [
+            "apple"
+        ],
+        "C:\\Users\\329058\\Desktop\\others\\KnowledgeManager\\Stembase\\preload.js": [
+            "test"
         ]
     },
     "tag": {
         "apple": [
             "C:\\Users\\329058\\Desktop\\others\\KnowledgeManager\\Stembase\\.git",
-            "C:\\Users\\329058\\Desktop\\others\\KnowledgeManager\\Stembase\\.gitignore"
+            "C:\\Users\\329058\\Desktop\\others\\KnowledgeManager\\Stembase\\.gitignore",
+            "C:\\Users\\329058\\Desktop\\others\\KnowledgeManager\\Stembase\\data"
         ],
         "grave": [
             "C:\\Users\\329058\\Desktop\\others\\KnowledgeManager\\Stembase\\.git",
             "C:\\Users\\329058\\Desktop\\others\\KnowledgeManager\\Stembase\\clpreload.js"
         ],
         "test": [
-            "C:\\Users\\329058\\Desktop\\others\\KnowledgeManager\\Stembase\\中文\\.git"
+            "C:\\Users\\329058\\Desktop\\others\\KnowledgeManager\\Stembase\\中文\\.git",
+            "C:\\Users\\329058\\Desktop\\others\\KnowledgeManager\\Stembase\\data"
         ]
     }
 }

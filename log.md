@@ -7,6 +7,7 @@
 	-- Function implementation
 	-- Function expansion
 	-- Clear debug codes
+	-- Code re-arrangement
 	# Added
 	1. Tag label now is fully functional
 		-- finished
@@ -18,8 +19,12 @@
 		-- finished
 	5. When click match label redirect to selected position
 		-- finished
+	6. Refresh matchlist when tag added
+		-- finished
 	# Changed
 	1. Set debug input field as hidden 
+		-- finished
+	2. Re-arrange the position of functions for calling
 		-- finished
 ---
 	## 2022.02.14		version 0.2.7.1
