@@ -3,11 +3,19 @@
 
 	## 2022.02.16		version 0.2.9
 	-- Function implementation
+	-- Bug fix
+	-- Style design change
 	
 	# Added
 	1. Show partly path info until hover it in search label
 		-- finished
 	2. Ellipsis in path info when it's too longer
+		-- finished
+	# Changed
+	1. Set fixed height as fs-path to erase the instability
+		-- finished
+	# Fixed
+	1. Fix tag label browse function
 		-- finished
 ---
 	## 2022.02.15		version 0.2.8

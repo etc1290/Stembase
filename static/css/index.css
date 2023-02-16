@@ -13,7 +13,9 @@
 #fs-main{
 	height:			90%
 }
-
+#fs-path{
+	height:			5vh;
+}
 .fs-data{
 	text-align:		left;
 	display:		inline-block;	
