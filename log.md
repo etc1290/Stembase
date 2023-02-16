@@ -14,6 +14,8 @@
 	# Changed
 	1. Set fixed height as fs-path to erase the instability
 		-- finished
+	2. Re-arrange the css to fit the ranking
+		-- finished
 	# Fixed
 	1. Fix tag label browse function
 		-- finished
