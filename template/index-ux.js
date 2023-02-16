@@ -187,12 +187,33 @@ const tagLabelfunc = ()=>{
 	// Label contents 
 const tagFileCreator = (pathset,fileset)=>{
 	const updateDiv = document.getElementById('tag-search-output')
+	const searchbar = document.getElementById('tag-searchbar')
 	const searchBlocks = []
-	const infoset = 'apple'
+	let pathdata = ''
 	for(var i=0;i<fileset.length;i++){
+		
+		const maxLength = 30
+		const infoset = []
+		infoset[i] = pathset[i].split('\\')
+		const pathhead = infoset[i][0]
+		const textLength = pathhead.length 
+		const trimLength = maxLength - textLength - 5
+		if(pathset[i].length>30){
+			infoset[i].splice(0,1)
+			infoset[i].splice(infoset[i].length-1,1)
+			const pathinfo = infoset[i].join('\\')
+			const infohead = Math.ceil(trimLength/2)
+			const infotail = Math.floor(trimLength/2)
+			const pathhand = pathinfo.substring(0,infohead)
+			const pathleg = pathinfo.substring(pathinfo.length - infotail)
+			pathdata = pathhead + '\\' + pathhand + '...' + pathleg + '\\'
+		}else{
+			pathdata = pathset[i]
+		}
+		
 		const searchLabel = `<div class = 'tag-search-block'><button class = 'filelabel'>` + fileset[i] + `</button>`
 		const searchTooltip = `<em class = 'tooltip'>` + pathset[i] + fileset[i] + `</em></div>`
-		const searchInfo = `<em class = 'filelabel-info'>` + infoset + `</em></div><br>`
+		const searchInfo = `<em class = 'filelabel-info'>` + pathdata + `</em></div><br>`
 		searchBlocks.push(searchLabel + searchTooltip + searchInfo)
 	}
 	updateDiv.innerHTML = searchBlocks.join('')

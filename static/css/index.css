@@ -102,3 +102,9 @@
 	height:			2vh;
 	right:			30px;
 }
+
+.filelabel-info{
+	overflow:		hidden;
+	white-space:	nowrap;
+	
+}

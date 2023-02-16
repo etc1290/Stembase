@@ -6,7 +6,11 @@
             ".gitignore",
             ".git",
             "data",
-            "preload.js"
+            "preload.js",
+            "3D Objects",
+            "7樓-後棟施工圖.pdf",
+            "sasasasasasasasasasasasasasasasasasasasa",
+            "5"
         ],
         "path": [
             "C:\\Users\\329058\\Desktop\\others\\KnowledgeManager\\Stembase",
@@ -14,7 +18,11 @@
             "C:\\Users\\329058\\Desktop\\others\\KnowledgeManager\\Stembase",
             "C:\\Users\\329058\\Desktop\\others\\KnowledgeManager\\Stembase\\中文",
             "C:\\Users\\329058\\Desktop\\others\\KnowledgeManager\\Stembase",
-            "C:\\Users\\329058\\Desktop\\others\\KnowledgeManager\\Stembase"
+            "C:\\Users\\329058\\Desktop\\others\\KnowledgeManager\\Stembase",
+            "C:\\Users\\329058",
+            "C:\\Users\\329058\\Desktop",
+            "C:\\Users\\329058\\Desktop",
+            "C:\\Users\\329058\\Desktop\\sasasasasasasasasasasasasasasasasasasasa"
         ]
     },
     "file": {
@@ -36,6 +44,18 @@
         ],
         "C:\\Users\\329058\\Desktop\\others\\KnowledgeManager\\Stembase\\preload.js": [
             "test"
+        ],
+        "C:\\Users\\329058\\3D Objects": [
+            "test"
+        ],
+        "C:\\Users\\329058\\Desktop\\7樓-後棟施工圖.pdf": [
+            "test"
+        ],
+        "C:\\Users\\329058\\Desktop\\sasasasasasasasasasasasasasasasasasasasa": [
+            "test"
+        ],
+        "C:\\Users\\329058\\Desktop\\sasasasasasasasasasasasasasasasasasasasa\\5": [
+            "test"
         ]
     },
     "tag": {
@@ -50,7 +70,11 @@
         ],
         "test": [
             "C:\\Users\\329058\\Desktop\\others\\KnowledgeManager\\Stembase\\中文\\.git",
-            "C:\\Users\\329058\\Desktop\\others\\KnowledgeManager\\Stembase\\data"
+            "C:\\Users\\329058\\Desktop\\others\\KnowledgeManager\\Stembase\\data",
+            "C:\\Users\\329058\\3D Objects",
+            "C:\\Users\\329058\\Desktop\\7樓-後棟施工圖.pdf",
+            "C:\\Users\\329058\\Desktop\\sasasasasasasasasasasasasasasasasasasasa",
+            "C:\\Users\\329058\\Desktop\\sasasasasasasasasasasasasasasasasasasasa\\5"
         ]
     }
 }

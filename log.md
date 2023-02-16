@@ -7,6 +7,8 @@
 	# Added
 	1. Show partly path info until hover it in search label
 		-- finished
+	2. Ellipsis in path info when it's too longer
+		-- finished
 ---
 	## 2022.02.15		version 0.2.8
 	-- Function implementation
