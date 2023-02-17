@@ -1,6 +1,16 @@
 # Stembase
  File tagging system
 
+	## 2022.02.17		version 0.3.0
+	-- Rewrite function
+	-- Protection mechanism
+	
+	# Added
+	1. Add protection to prevent protected file like system files rendered
+		-- finished
+	# Changed
+	1. Rewrite file system file display function to a more proficient way
+		-- finished
 	## 2022.02.17		version 0.2.9.1
 	-- Protection mechanism
 	

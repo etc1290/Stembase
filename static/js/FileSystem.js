@@ -27,7 +27,7 @@ const time = require('./time.js')
 							const {[i]:k}=fs.statSync(e)
 							data.push(bytes(k))
 						}catch(e){
-							data.push('Access Denied')
+							data.push(false)
 						}
 					})
 					
@@ -38,7 +38,7 @@ const time = require('./time.js')
 							const {[i]:k}=fs.statSync(e)
 							data.push(time(k))
 						}catch(e){
-							data.push('Access Denied')
+							data.push(false)
 						}
 					})			
 				}else{
@@ -48,14 +48,19 @@ const time = require('./time.js')
 							const {[i]:k}=fs.statSync(e)
 							data.push(k)
 						}catch(e){
-							data.push('Access Denied')
+							data.push(false)
 						}	
 					})
 					
 				}
+				if(data){
+					output[i] = data
+				} 
 				
-				output[i] = data
 			})
+			console.log(output)
+			const outputset = output.filter(n=>n)
+			console.log(outputset)
 			return output			
 		}
 		// Main function starts here
@@ -89,7 +94,6 @@ const time = require('./time.js')
 		const fsobject =dialog.showOpenDialogSync({
 			properties: ['openDirectory']
 		})
-		console.log(fsobject)
 		return fsobject
 
 	})

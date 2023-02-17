@@ -1,26 +1,32 @@
 // Testing function
 const information = document.getElementById('info')
 information.innerText = `This app is using Chrome (v${versions.chrome()}), Node.js (v${versions.node()}), and Electron (v${versions.electron()})`
-
+let pathset = []
 
 // FileSystem
 	//Main: File User Interface
 const fsfunc = async (path) => {
 		//Initialize
-	let fspath = document.querySelector('p[id=fs-path]')
-	let updateDiv = document.querySelector('div[id=fs-main]')
+	const fspath = document.querySelector('[id=fs-path]')
+	const updateDiv = document.querySelector('div[id=fs-main]')
 	const nowPath = fspath.innerHTML
-	updateDiv.innerHTML=''
+	//updateDiv.innerHTML=''
 	fspath.innerHTML=''
 	const {file,size,mtime} = await window.fs.main(path)
-		
+	const fsdataset = []	
 	for(var i=0;i<file.length;i++){
-		var fsbtn = `<button class='fs-data'>` + file[i] + `</button>`
-		var fssize = `<p class='fs-data-size'>`+ size[i] + `</p>`
-		var fsmtime = `<p class='fs-data-mtime'>`+ mtime[i] +`</p>`
-		var fsdata = fsbtn + fssize + fsmtime + `<br>`
-		updateDiv.insertAdjacentHTML('beforeend',fsdata)
+		console.log(file[i])
+		if(size[i]){
+			const fsbtn = `<button class='fs-data'>` + file[i] + `</button>`
+			const fssize = `<p class='fs-data-size'>`+ size[i] + `</p>`
+			const fsmtime = `<p class='fs-data-mtime'>`+ mtime[i] +`</p>`
+			const fsdata = fsbtn + fssize + fsmtime + `<br>`
+			fsdataset[i] = fsdata
+		}
+		
 	}
+	updateDiv.innerHTML = fsdataset.join('')
+	
 		//Button function
 	const fsbutton = document.querySelectorAll('button[class=fs-data]')
 	fsbutton.forEach(e =>{
@@ -33,6 +39,7 @@ const fsfunc = async (path) => {
 	})
 
 		//Show pathname
+		
 	const pathname = await window.fs.path(path)
 	if(path == 'default'){
 		fspath.innerHTML = pathname
@@ -50,6 +57,8 @@ const fsfunc = async (path) => {
 	}else{
 		console.log('Exception in show pathname')
 	}
+	
+	
 }
 	// Side: Clear path text
 const fsclear = (path) =>{
@@ -90,11 +99,7 @@ btn.addEventListener('click', async () => {
 	const filePath = await window.versions.fileTree()
 	console.log(JSON.parse(filePath)) 
   })
- /*
-document.getElementById('fs-createMeta').addEventListener('click', () => {
-	window.fs.createMeta()
-})
-*/
+
 //Initailizer
 fsfunc('default')
 
