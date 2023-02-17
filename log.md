@@ -1,6 +1,13 @@
 # Stembase
  File tagging system
 
+	## 2022.02.17		version 0.2.9.1
+	-- Protection mechanism
+	
+	# Added
+	1. Add protection in dataMiner when access system folders or crypted files
+		-- finished
+		
 	## 2022.02.16		version 0.2.9
 	-- Function implementation
 	-- Bug fix

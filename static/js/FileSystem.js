@@ -7,6 +7,7 @@ const time = require('./time.js')
 	// Main: File query
     ipcMain.handle('fs-main',	(event,v) => {
 		//Side: File details miner
+		console.log(v)
 		const dataMiner = (path,property) =>{
 			const output = new Array()
 			const v = new Array
@@ -22,19 +23,35 @@ const time = require('./time.js')
 					data = pathList
 				}else if(i=='size'){
 					v.forEach(e =>{
-						const {[i]:k}=fs.statSync(e)
-						data.push(bytes(k))
+						try{
+							const {[i]:k}=fs.statSync(e)
+							data.push(bytes(k))
+						}catch(e){
+							data.push('Access Denied')
+						}
 					})
+					
 				}else if(i=='mtime'){
+					
 					v.forEach(e =>{
-						const {[i]:k}=fs.statSync(e)
-						data.push(time(k))
-					})
+						try{
+							const {[i]:k}=fs.statSync(e)
+							data.push(time(k))
+						}catch(e){
+							data.push('Access Denied')
+						}
+					})			
 				}else{
+					
 					v.forEach(e =>{
-						const {[i]:k}=fs.statSync(e)
-						data.push(k)
+						try{
+							const {[i]:k}=fs.statSync(e)
+							data.push(k)
+						}catch(e){
+							data.push('Access Denied')
+						}	
 					})
+					
 				}
 				
 				output[i] = data
@@ -72,6 +89,7 @@ const time = require('./time.js')
 		const fsobject =dialog.showOpenDialogSync({
 			properties: ['openDirectory']
 		})
+		console.log(fsobject)
 		return fsobject
 
 	})

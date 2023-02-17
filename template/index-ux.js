@@ -160,15 +160,6 @@ const tagLabelfunc = ()=>{
 	searchFilebtn.forEach(e=>{
 		e.addEventListener('click',()=>{	
 			uxselect(e.innerHTML)
-			/*
-			try{
-				console.log(e.nextSibling.innerHTML.slice(0,-1))
-				fsfunc(e.nextSibling.innerHTML.slice(0,-1))
-			}catch{
-				console.log(e.nextSibling.innerHTML)
-				fsfunc(e.nextSibling.innerHTML)
-			}		
-			*/
 			const path = e.nextSibling.innerHTML.split('\\')
 			path.pop()
 			
