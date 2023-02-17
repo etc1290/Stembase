@@ -10,16 +10,14 @@ const fsfunc = async (path) => {
 	const fspath = document.querySelector('[id=fs-path]')
 	const updateDiv = document.querySelector('div[id=fs-main]')
 	const nowPath = fspath.innerHTML
-	//updateDiv.innerHTML=''
 	fspath.innerHTML=''
 	const {file,size,mtime} = await window.fs.main(path)
 	const fsdataset = []	
 	for(var i=0;i<file.length;i++){
-		console.log(file[i])
 		if(size[i]){
-			const fsbtn = `<button class='fs-data'>` + file[i] + `</button>`
+			const fsbtn = `<div class='fs-data-label'><button class='fs-data'>` + file[i] + `</button>`
 			const fssize = `<p class='fs-data-size'>`+ size[i] + `</p>`
-			const fsmtime = `<p class='fs-data-mtime'>`+ mtime[i] +`</p>`
+			const fsmtime = `<p class='fs-data-mtime'>`+ mtime[i] +`</p></div>`
 			const fsdata = fsbtn + fssize + fsmtime + `<br>`
 			fsdataset[i] = fsdata
 		}
@@ -28,13 +26,21 @@ const fsfunc = async (path) => {
 	updateDiv.innerHTML = fsdataset.join('')
 	
 		//Button function
-	const fsbutton = document.querySelectorAll('button[class=fs-data]')
-	fsbutton.forEach(e =>{
+	const fslabelset = document.querySelectorAll('div[class=fs-data-label]')
+	const evt = new Event('reset')
+	fslabelset.forEach(e =>{
 		e.addEventListener('dblclick',async() =>{
-			fsfunc(fspath.innerHTML + '\\' + e.innerHTML)
+			fsfunc(fspath.innerHTML + '\\' + e.firstChild.innerHTML)
 		})
 		e.addEventListener('mousedown',async() =>{
-			uxselect(e.innerHTML)
+			uxselect(e.firstChild.innerHTML)
+			e.style.background = 'rgb(167,203,221)'
+		})
+		e.addEventListener('mouseover',()=>{
+			e.firstChild.style.background = 'rgb(211,229,238)'
+		})
+		e.addEventListener('mouseleave',()=>{
+			e.firstChild.style.background = 'rgb(255,250,240)'
 		})
 	})
 

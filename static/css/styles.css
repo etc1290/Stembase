@@ -17,7 +17,7 @@
 	}
 	button{
 		background: rgb(255,250,240);
-		transition: 0.1s;
+		
 	}
 }
 
@@ -28,7 +28,7 @@ button {
 }
 button{
 	background:		rgb(255,250,240);
-	transition:		0.1s;
+	
 }
 /*Pale Purple*/
 button:hover{

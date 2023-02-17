@@ -23,34 +23,35 @@
 #fs-main{
 	height:			90%
 }
+
 .fs-data{
 	text-align:		left;
 	display:		inline-block;	
-	background:		rgb(255,250,240);
-	transition:		0.1s;
 	padding:		15px;
 }
-/* Columbia Blue */
 .fs-data:hover{
 	background:		rgb(211,229,238);
 	transition:		none;
 }
+/* Columbia Blue */
+.fs-data-label:hover{
+	background:		rgb(211,229,238);
+	transition:		none;
+}
 /* Dark Columbia Blue */
-.fs-data:focus{
+.fs-data-label:focus{
 	background:		rgb(167,203,221);
 	transition:		none;
 }
 .fs-data-size{
 	width:			30%;
 	display:		inline-block;
-	padding:		none;
 	margin:			none;
 }
 .fs-data-mtime{
 	width:			20%;
 	text-align:		center;
 	display:		inline-block;
-	padding:		none;
 	margin:			none;
 }
 
