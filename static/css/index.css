@@ -30,7 +30,7 @@
 	padding:		15px;
 }
 .fs-data:hover{
-	background:		rgb(211,229,238);
+	background:		transparent;
 	transition:		none;
 }
 /* Columbia Blue */
@@ -48,6 +48,7 @@
 	display:		inline-block;
 	margin:			none;
 }
+
 .fs-data-mtime{
 	width:			20%;
 	text-align:		center;

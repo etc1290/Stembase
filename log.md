@@ -1,6 +1,14 @@
 # Stembase
  File tagging system
 
+	## 2022.02.18		version 0.3.0.1
+	-- Rewrite function
+	
+	# Changed
+	1. Use css replace js function of highlight
+		-- finished
+	2. Rewrite focus function by js 
+		-- finished
 	## 2022.02.17		version 0.3.0
 	-- Rewrite function
 	-- Protection mechanism
@@ -10,6 +18,8 @@
 		-- finished
 	# Changed
 	1. Rewrite file system file display function to a more proficient way
+		-- finished
+	2. Rewrite data-label click and hover function
 		-- finished
 	## 2022.02.17		version 0.2.9.1
 	-- Protection mechanism

@@ -11,11 +11,12 @@ const fsfunc = async (path) => {
 	const updateDiv = document.querySelector('div[id=fs-main]')
 	const nowPath = fspath.innerHTML
 	fspath.innerHTML=''
+	let focusStorage = 'fs-info'
 	const {file,size,mtime} = await window.fs.main(path)
 	const fsdataset = []	
 	for(var i=0;i<file.length;i++){
 		if(size[i]){
-			const fsbtn = `<div class='fs-data-label'><button class='fs-data'>` + file[i] + `</button>`
+			const fsbtn = `<div class='fs-data-label' id='datalabel` + i +`'><button class='fs-data'>` + file[i] + `</button>`
 			const fssize = `<p class='fs-data-size'>`+ size[i] + `</p>`
 			const fsmtime = `<p class='fs-data-mtime'>`+ mtime[i] +`</p></div>`
 			const fsdata = fsbtn + fssize + fsmtime + `<br>`
@@ -27,23 +28,20 @@ const fsfunc = async (path) => {
 	
 		//Button function
 	const fslabelset = document.querySelectorAll('div[class=fs-data-label]')
-	const evt = new Event('reset')
 	fslabelset.forEach(e =>{
 		e.addEventListener('dblclick',async() =>{
 			fsfunc(fspath.innerHTML + '\\' + e.firstChild.innerHTML)
 		})
-		e.addEventListener('mousedown',async() =>{
+		e.addEventListener('click',async(evt) =>{
 			uxselect(e.firstChild.innerHTML)
-			e.style.background = 'rgb(167,203,221)'
-		})
-		e.addEventListener('mouseover',()=>{
-			e.firstChild.style.background = 'rgb(211,229,238)'
-		})
-		e.addEventListener('mouseleave',()=>{
-			e.firstChild.style.background = 'rgb(255,250,240)'
+			e.style.background = 'rgb(167,203,221)'		
+			const focusTarget = evt.currentTarget.id		
+			if (focusStorage !== focusTarget){
+				document.getElementById(focusStorage+'').style.background = ''
+				focusStorage = focusTarget
+			}
 		})
 	})
-
 		//Show pathname
 		
 	const pathname = await window.fs.path(path)

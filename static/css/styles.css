@@ -16,7 +16,7 @@
 		height:		100vh;
 	}
 	button{
-		background: rgb(255,250,240);
+		background: transparent;
 		
 	}
 }
@@ -25,10 +25,6 @@ button {
 	padding:	0;
 	width:		50%;
 	border:		none;
-}
-button{
-	background:		rgb(255,250,240);
-	
 }
 /*Pale Purple*/
 button:hover{

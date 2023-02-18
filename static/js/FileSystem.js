@@ -58,9 +58,9 @@ const time = require('./time.js')
 				} 
 				
 			})
-			console.log(output)
+			
 			const outputset = output.filter(n=>n)
-			console.log(outputset)
+			
 			return output			
 		}
 		// Main function starts here
