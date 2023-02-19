@@ -13,11 +13,12 @@
   },
   "dependencies": {
     "glob": "^8.1.0",
-    "node-json-db": "^2.1.3"
+    "node-json-db": "^2.1.3",
+    "sqlite3": "^5.1.4"
   },
   "build": {
     "win": {
-        "requestedExecutionLevel": "highestAvailable"
+      "requestedExecutionLevel": "highestAvailable"
     }
   }
 }

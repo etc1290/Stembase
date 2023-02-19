@@ -10,7 +10,8 @@
             "3D Objects",
             "7樓-後棟施工圖.pdf",
             "sasasasasasasasasasasasasasasasasasasasa",
-            "5"
+            "5",
+            "data"
         ],
         "path": [
             "C:\\Users\\329058\\Desktop\\others\\KnowledgeManager\\Stembase",
@@ -22,7 +23,8 @@
             "C:\\Users\\329058",
             "C:\\Users\\329058\\Desktop",
             "C:\\Users\\329058\\Desktop",
-            "C:\\Users\\329058\\Desktop\\sasasasasasasasasasasasasasasasasasasasa"
+            "C:\\Users\\329058\\Desktop\\sasasasasasasasasasasasasasasasasasasasa",
+            "C:\\Users\\etc1290\\Documents\\GitHub\\Stembase"
         ]
     },
     "file": {
@@ -56,6 +58,9 @@
         ],
         "C:\\Users\\329058\\Desktop\\sasasasasasasasasasasasasasasasasasasasa\\5": [
             "test"
+        ],
+        "C:\\Users\\etc1290\\Documents\\GitHub\\Stembase\\data": [
+            "sd"
         ]
     },
     "tag": {
@@ -75,6 +80,7 @@
             "C:\\Users\\329058\\Desktop\\7樓-後棟施工圖.pdf",
             "C:\\Users\\329058\\Desktop\\sasasasasasasasasasasasasasasasasasasasa",
             "C:\\Users\\329058\\Desktop\\sasasasasasasasasasasasasasasasasasasasa\\5"
-        ]
+        ],
+        "sd": []
     }
 }
