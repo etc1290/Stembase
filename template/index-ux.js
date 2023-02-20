@@ -101,7 +101,7 @@ const tagfocus = ()=>{
 
 	//Side: Tag match
 const tagmatch = async()=>{
-	//const {tagset:tag,fileset:file} = await taggetdb()
+	
 	const {tagset:tag,nameset:name,pathset:path} = await taggetdb()
 	const tagsearchbar = document.getElementById('tag-search')
 	const updateDiv = document.getElementById('tag-match-div')
@@ -109,7 +109,7 @@ const tagmatch = async()=>{
 	const taglist = document.getElementById('tag-matchlist-tag')
 	const namelist = document.getElementById('tag-matchlist-name')
 	const pathlist = document.getElementById('tag-matchlist-path')
-	//filelist.value = JSON.stringify(file)
+	
 		// Initialize match area
 	document.addEventListener('click', (e)=>{
 		const isInBoundary = [tagsearchbar,updateDiv].some(i => e.composedPath().includes(i))

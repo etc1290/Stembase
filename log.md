@@ -1,7 +1,19 @@
 # Stembase
  File tagging system
-
-	## 2022.02.18		version 0.3.0.1
+ 
+ 
+---
+	## 2023.02.20		version 0.3.1
+	-- Replace database
+	-- Fix typo
+	# Added
+	1. Replace old node-json-db with Sqlite
+		-- finished
+	# Fixed
+	1. Massive date typo in log.md
+		-- finished
+--
+	## 2023.02.18		version 0.3.0.1
 	-- Rewrite function
 	
 	# Changed
@@ -9,7 +21,8 @@
 		-- finished
 	2. Rewrite focus function by js 
 		-- finished
-	## 2022.02.17		version 0.3.0
+---
+	## 2023.02.17		version 0.3.0
 	-- Rewrite function
 	-- Protection mechanism
 	
@@ -21,14 +34,15 @@
 		-- finished
 	2. Rewrite data-label click and hover function
 		-- finished
-	## 2022.02.17		version 0.2.9.1
+---	
+	## 2023.02.17		version 0.2.9.1
 	-- Protection mechanism
 	
 	# Added
 	1. Add protection in dataMiner when access system folders or crypted files
 		-- finished
-		
-	## 2022.02.16		version 0.2.9
+---		
+	## 2023.02.16		version 0.2.9
 	-- Function implementation
 	-- Bug fix
 	-- Style design change
@@ -47,7 +61,7 @@
 	1. Fix tag label browse function
 		-- finished
 ---
-	## 2022.02.15		version 0.2.8
+	## 2023.02.15		version 0.2.8
 	-- Function implementation
 	-- Function expansion
 	-- Clear debug codes
@@ -71,14 +85,14 @@
 	2. Re-arrange the position of functions for calling
 		-- finished
 ---
-	## 2022.02.14		version 0.2.7.1
+	## 2023.02.14		version 0.2.7.1
 	-- Function implementation
 	
 	# Added
 	1. Add demo-query function to search result button
 		-- finished
 ---
-	## 2022.02.13		version 0.2.7
+	## 2023.02.13		version 0.2.7
 	-- Bug fix
 	-- Rewrite function
 	-- Add new enviroment variable
@@ -100,14 +114,14 @@
 	1. Fix bug in Setting.js results from resolve require method
 		-- finished
 ---
-	## 2022.02.10		version 0.2.6.2
+	## 2023.02.10		version 0.2.6.2
 	-- Add up the layer of database
 	
 	# Added
 	1. Add name layer in database for quick search
 		-- finished
 ---
-	## 2022.02.10		version 0.2.6.1
+	## 2023.02.10		version 0.2.6.1
 	-- Style design change
 	-- Add exception handle
 	
@@ -119,7 +133,7 @@
 		1-1 Add transition in match area for smooth change
 			-- finished
 ---
-	## 2022.02.09		version 0.2.6
+	## 2023.02.09		version 0.2.6
 	-- Style design change
 	-- Add gimmick in query function
 	-- Complete a basic query function
@@ -137,7 +151,7 @@
 		1-2 Folder and expand match area by click inside and out
 			-- finished
 ---
-	## 2022.02.08		version 0.2.5.1
+	## 2023.02.08		version 0.2.5.1
 	-- Style design change
 	-- Code cleaning
 	-- Building search function
@@ -164,7 +178,7 @@
 		-- finished
 		
 ---
-	## 2022.02.07		version 0.2.5
+	## 2023.02.07		version 0.2.5
 	-- Add focus color on file and tag
 	-- Add border on blocks
 	-- Change the formoat of db data
@@ -191,7 +205,7 @@
 		-- finished
 		
 ---
-	## 2022.02.07		version 0.2.4.1
+	## 2023.02.07		version 0.2.4.1
 	-- Add tag remove protection
 	-- Fix tag id is took as tag on parsing
 	-- Add auto highlight function
@@ -219,7 +233,7 @@
 	1. Fix the bug in index-ux.js result from typo
 		-- finished
 --- 
-	## 2022.02.06		version 0.2.4
+	## 2023.02.06		version 0.2.4
 	-- Remove deprecated file
 	-- Add tag remove function
 	-- Refresh page after remove tag
@@ -253,7 +267,7 @@
 		1-6 Searching
 		
 ---
-	## 2022.02.04		version 0.2.3
+	## 2023.02.04		version 0.2.3
 	-- Rewrite tag function
 	-- Display tags function implementation
 	-- Add refresh trigger when click add tag button
@@ -274,14 +288,14 @@
 	6. Add Tag selected function for further function
 		-- finished
 ---
-	## 2022.02.03		version 0.2.2.1
+	## 2023.02.03		version 0.2.2.1
 	-- Fix node-json-db core bug
 	
 	## Fixed
 	1. Fix the core bug in node-json-db push function array support by merge function
 		-- finished
 ---
-	## 2022.02.03		version 0.2.2
+	## 2023.02.03		version 0.2.2
 	-- Finish Tag function
 	-- Code re-arrangement
 	
@@ -291,7 +305,7 @@
 	2. Fatal bug in push function
 		-- bugged
 ---
-	## 2022.02.02		version 0.2.1
+	## 2023.02.02		version 0.2.1
 	-- Simple selection function implementation
 	-- Tag section layout
 	-- Clear deprecated codes
@@ -314,7 +328,7 @@
 	2. Remove wasted codes
 		-- finished
 ---
-	## 2022.02.01		version 0.2.0
+	## 2023.02.01		version 0.2.0
 	-- User Interactive function implementation
 	-- Clear deprecated codes
 	-- Interface re-design
@@ -350,7 +364,7 @@
 			-- finished
 		1-5 Others
 ---
-	## 2022.02.01		version 0.1.91
+	## 2023.02.01		version 0.1.91
 	-- Separate time function
 	
 	## Changed 
@@ -359,7 +373,7 @@
 	2. Rename timeStamp function to time
 		-- finished
 ---
-	## 2022.01.31		version 0.1.9
+	## 2023.01.31		version 0.1.9
 	-- Function rewrite
 	-- Timestamp convert function implementation
 	
@@ -375,7 +389,7 @@
 	3. Seprate a independent check for time in dataminer
 		-- finished
 ---
-	## 2022.01.31		version 0.1.8
+	## 2023.01.31		version 0.1.8
 	-- style implementation
 	-- Function implementation
 	-- Bug Fix
@@ -392,7 +406,7 @@
 	2. Fix bug in FileSystem data miner function, which lead overpacking
 		-- finished
 ---
-	## 2022.01.30		version 0.1.7
+	## 2023.01.30		version 0.1.7
 	-- Function implementation
 	
 	## Added
@@ -412,7 +426,7 @@
 		1-4 Selection
 		1-5 Others
 ---
-	## 2022.01.30		version 0.1.6
+	## 2023.01.30		version 0.1.6
 	-- Style design
 	-- Add click and double click trigger
 	-- Bug fixes
@@ -442,7 +456,7 @@
 		1-4 Selection
 		1-5 Others
 ---
-	## 2022.01.19		version 0.1.5
+	## 2023.01.19		version 0.1.5
 	-- Function implementation
 	
 	## Added
@@ -457,7 +471,7 @@
 	1. Re-arrange codes for clear display in setting.js
 		-- finished
 ---
-	## 2022.01.19		versuin 0.1.4.1
+	## 2023.01.19		versuin 0.1.4.1
 	-- Remove annotations
 	
 	## Changed
@@ -467,7 +481,7 @@
 		-- finished
 		
 ---
-	## 2022.01.19		version 0.1.4
+	## 2023.01.19		version 0.1.4
 	-- Function implementation
 	-- Remove debug codes
 	-- Add systematic text
@@ -482,7 +496,7 @@
 	1. Remove some debug codes
 		-- finished
 ---
-	## 2022.01.19		version 0.1.3
+	## 2023.01.19		version 0.1.3
 	-- New function scripts
 	-- Function implementation
 	
@@ -492,7 +506,7 @@
 	2. Finish write,record function in setting.js
 		-- finished
 ---
-	## 2022.01.18		version 0.1.22
+	## 2023.01.18		version 0.1.22
 	-- Function improvement
 	## Added
 	1. Add Write,Record and Reset function in setting.js
@@ -503,7 +517,7 @@
 		1-1 Name after a element id in html with corresponded database index and gived classname'option' to activate Autofill
 		-- finished
 ---
-	## 2022.01.18		version 0.1.21
+	## 2023.01.18		version 0.1.21
 	-- Bug fix
 	-- Rename id
 	
@@ -514,7 +528,7 @@
 	1. Fix Setting.js cannot recognize v
 	
 ---
-	## 2022.01.17		version 0.1.2
+	## 2023.01.17		version 0.1.2
 	-- Bug fix
 	-- Porting function 
 	
@@ -527,7 +541,7 @@
 	## Bugged
 	1. Setting.js cannot recognize v
 ---
-	## 2022.01.17		version 0.1.11
+	## 2023.01.17		version 0.1.11
 	-- Remove annotation
 	-- File Structure re-arrangement
 	
@@ -537,7 +551,7 @@
 	2. Move stpreload.js from static to bin for functional isolation
 		-- finished
 ---
-	## 2022.01.16		version 0.1.1
+	## 2023.01.16		version 0.1.1
 	-- Separate Child Window create function
 	
 	## Added
@@ -556,7 +570,7 @@
 	-- Create a new Branch
 	1. Make "Setting" branch sync with "main"
 ---
-	## 2022.01.16		version 0.1.0
+	## 2023.01.16		version 0.1.0
 	-- Text modification
 	-- Seperate function 
 	
@@ -573,7 +587,7 @@
 		-- finished
 		
 --- 
-	## 2022.01.13		version 0.0.94
+	## 2023.01.13		version 0.0.94
 	-- Text modification
 	-- Add communication channel but bugged
 	### Added
@@ -585,10 +599,10 @@
 		-- finished
 		
 ---
-	## 2022.01.13		version 0.0.93
+	## 2023.01.13		version 0.0.93
 	-- Testing Git hub function
 ---
-	## 2022.01.12		version 0.0.92
+	## 2023.01.12		version 0.0.92
 	-- Arrange codes
 	-- Complete a fully functional and independent child window
 	
@@ -606,7 +620,7 @@
 		-- finished
 		
 ---
-	## 2022.01.09		version 0.0.91
+	## 2023.01.09		version 0.0.91
 	-- Apply config function setting
 	-- Add create child window function
 	
@@ -621,7 +635,7 @@
 		-- finished
 		
 ---
-	## 2022.01.09		version 0.0.9
+	## 2023.01.09		version 0.0.9
 	-- Config function implementation
 	
 	### Added 
@@ -639,7 +653,7 @@
 	4. Change the way that get data from JSON file.
 		-- finished
 ---
-	## 2022.01.06		version 0.0.81
+	## 2023.01.06		version 0.0.81
 	- Database implementation
 	- FileTree Function 
 	
@@ -659,7 +673,7 @@
 		-- processing
 		
 ---
-	## 2022.01.05		version 0.0.8
+	## 2023.01.05		version 0.0.8
 	- Code re-arrangement
 	- Bug fix
 	- Function implementation
@@ -680,7 +694,7 @@
 		
 
 ---
-	## 2022.01.04		version 0.0.7
+	## 2023.01.04		version 0.0.7
 	- Coding re-arrangement
 	- Function implementation
 	
@@ -706,7 +720,7 @@
 	2. Display path when press button
 		-- bugged		
 ---
-	## 2022.01.04		version 0.0.6
+	## 2023.01.04		version 0.0.6
 	- Minor bug fix
 	- Function implementation: Browse down level, File or directory check
 	
@@ -730,7 +744,7 @@
 	2. Display path when press button
 		-- bugged
 ---
-	## 2022.01.03		version 0.0.53
+	## 2023.01.03		version 0.0.53
 	- Text Change
 	
 	### Added

@@ -1,27 +1,45 @@
 const { app, BrowserWindow, ipcMain, nativeTheme, dialog } = require('electron')
 const path = require('path')
 const fs = require('fs')
-const {JsonDB,Config} = require('node-json-db')
+//const {JsonDB,Config} = require('node-json-db')
 const glob = require('glob')
 const env = require('./static/js/env.js')
-const sqlite3 = require('sqlite3')
+const sqlite3 = require('sqlite3').verbose()
 	// General Declaration
 const FileTree = require(env('StaticDir') + 'js/FileTree.js')
 var fileTree = new FileTree(__dirname)
+const db = new sqlite3.Database('data/Stemdb.db')
 
-//SQLite Test
-var db = new sqlite3.Database('1.db',function() {
+// Create a new db
+db.run('create table Main(name text,tag varchar(15))',()=>{})
+db.close()
+/*
+db.run('INSERT INTO Main VALUES(?, ?)', [a, b])
+db.all('select Main.name as name,Main.tag as tag from Main order by name',[],(err,row)=>{
+	if(err){
+		throw err
+	}
+	row.forEach((row)=>{
+		console.log(row.name)
+		console.log(row.tag)
+	})
+})
+db.close()
+*/
+/*
+var db = new sqlite3.Database('data/Stemdb.db',function() {
   db.run("create table test(name varchar(15))",function(){
     db.run("insert into test values('hello,world')",function(){
       db.all("select * from test",function(err,res){
         if(!err)
-          console.log(JSON.stringify(res));
+          console.log(JSON.stringify(res))
         else
-          console.log(err);
-      });
+          console.log(err)
+      })
     })
-  });
-});
+  })
+})*/
+
 
 // WindowsCreator
 	// Main Window
