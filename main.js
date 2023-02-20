@@ -4,14 +4,39 @@ const fs = require('fs')
 //const {JsonDB,Config} = require('node-json-db')
 const glob = require('glob')
 const env = require('./static/js/env.js')
+const Stemdb= env('StemdbDir')
 const sqlite3 = require('sqlite3').verbose()
+const db = new sqlite3.Database(Stemdb + '.db')
+
 	// General Declaration
 const FileTree = require(env('StaticDir') + 'js/FileTree.js')
 var fileTree = new FileTree(__dirname)
-const db = new sqlite3.Database('data/Stemdb.db')
+
 
 // Create a new db
-db.run('create table Main(name text,tag varchar(15))',()=>{})
+db.get('PRAGMA foreign_keys = ON')
+db.run(`create table "File" (
+	"id"	integer not null unique,
+	"name"	text not null unique,
+	primary key("id" autoincrement)
+)`,()=>{})
+db.run(`create table "Tag" (
+	"id"	integer not null unique,
+	"tag"	text not null unique,
+	primary key("id" autoincrement)
+	foreign key('tag') references File(name) on delete cascade on update cascade
+)`,()=>{})
+db.run(`create table "Ref" (
+	"id"	integer not null unique,
+	"name-ref"	text, 
+	"tag-ref"	text,
+	primary key("id" autoincrement)
+	foreign key('name-ref') references File(name) on delete cascade on update cascade,
+	foreign key('tag-ref') references Tag(tag) on delete cascade on update cascade
+)`,()=>{})
+//db.run('update Main set tag = ? where name = ?',[77,'apple'],(e)=>{console.log(e)})
+//db.run('insert or ignore into Main (name,tag) values (?,?)',['apple',77])
+
 db.close()
 /*
 db.run('INSERT INTO Main VALUES(?, ?)', [a, b])

@@ -9,6 +9,7 @@
 	# Added
 	1. Replace old node-json-db with Sqlite
 		-- finished
+	2. Build a new database can handle many to many 
 	# Fixed
 	1. Massive date typo in log.md
 		-- finished
