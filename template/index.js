@@ -98,7 +98,13 @@ document.getElementById('cw-setting').addEventListener('click', async () =>{
 
 })
 
-//Test function
+// SQLite Test
+document.getElementById('tag-getdata').addEventListener('click', async () =>{
+	const data = await window.tag.getdata()
+	console.log(data)
+})
+
+//File Tree Test
 btn.addEventListener('click', async () => {
 	const filePath = await window.versions.fileTree()
 	console.log(JSON.parse(filePath)) 

@@ -4,24 +4,11 @@ const fs = require('fs')
 const {JsonDB,Config} = require('node-json-db')
 const glob = require('glob')
 const env = require('./static/js/env.js')
-const sqlite3 = require('sqlite3')
+
 	// General Declaration
 const FileTree = require(env('StaticDir') + 'js/FileTree.js')
 var fileTree = new FileTree(__dirname)
 
-//SQLite Test
-var db = new sqlite3.Database('1.db',function() {
-  db.run("create table test(name varchar(15))",function(){
-    db.run("insert into test values('hello,world')",function(){
-      db.all("select * from test",function(err,res){
-        if(!err)
-          console.log(JSON.stringify(res));
-        else
-          console.log(err);
-      });
-    })
-  });
-});
 
 // WindowsCreator
 	// Main Window
@@ -62,14 +49,6 @@ const init = () =>{
 	}
 	Taskmanager()  
 	app.whenReady().then(() => {
-		//Test function
-		/*ipcMain.handle('fileTree',async	() =>{
-			fileTree.build()
-			const data = await fileTree
-			console.log(data)
-			return JSON.stringify(data)
-		})*/
-		
 		WindowMain()
 		// Prevent from multiple windows create
 		app.on('activate', () => {
