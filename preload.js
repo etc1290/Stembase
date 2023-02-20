@@ -31,7 +31,9 @@ contextBridge.exposeInMainWorld('tag', {
 	info:		(v,p) => ipcRenderer.invoke('tag-info',v,p),
 	remove:		(i,v,id,p) => ipcRenderer.invoke('tag-remove',i,v,id,p),
 	query:		(v,b) => ipcRenderer.invoke('tag-query',v,b),
-	getdb:		() => ipcRenderer.invoke('tag-getdb')
+	getdb:		() => ipcRenderer.invoke('tag-getdb'),
+	//SQLite Test
+	getdata:	() => ipcRenderer.invoke('tag-getdata')
 })
 
 

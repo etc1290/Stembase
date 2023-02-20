@@ -12,5 +12,5 @@ ipcMain.handle('dm-main',	() =>{
 })
 	// Side: Reset to system
 ipcMain.handle('dm-reset',	() =>{
-	nativeTheme.themeSource = 'system'
+	nativeTheme.themeSource = 'light'
 })

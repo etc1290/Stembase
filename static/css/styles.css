@@ -1,4 +1,4 @@
-@media (prefers-color-scheme: dark) {
+/* @media (prefers-color-scheme: dark) {
 	body { 
 		background:	rgb(17,17,17); 
 		color: 		rgb(211,211,211);
@@ -7,7 +7,7 @@
 	button{
 		background:	rgb(17,17,17);
 	}
-}
+} */
 
 @media (prefers-color-scheme: light) {
 	body { 

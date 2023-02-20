@@ -40,7 +40,7 @@ const WindowMain = async () => {
     win.loadFile(env('TemplateDir') + 'index.html')	
 	// Communication Test
 	ipcMain.handle('tele-test',(event,v) =>{
-//		console.log('child' + v)
+		// console.log('child' + v)
 		win.webContents.send('tele-test552',v)
 	})
 	ipcMain.handle('tele-test2',(event,v) =>{
@@ -63,13 +63,12 @@ const init = () =>{
 	Taskmanager()  
 	app.whenReady().then(() => {
 		//Test function
-		ipcMain.handle('fileTree',async	() =>{
+		/*ipcMain.handle('fileTree',async	() =>{
 			fileTree.build()
 			const data = await fileTree
 			console.log(data)
 			return JSON.stringify(data)
-			
-		})
+		})*/
 		
 		WindowMain()
 		// Prevent from multiple windows create
