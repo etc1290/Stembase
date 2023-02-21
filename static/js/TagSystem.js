@@ -32,7 +32,7 @@ ipcMain.handle('tag-main', (event,name,tag,path) =>{
 		} )
 	sqldb.run(`insert or ignore into File(name) values(?)`,[filename],()=>{
 		sqldb.run(`insert or ignore into Tag(tag) values(?)`,[tag],()=>{
-			let cmd = `insert or ignore into Ref(nameref,tagref) values(?,?)`
+			const cmd = `insert or ignore into Ref(nameref,tagref) values(?,?)`
 			sqldb.run(cmd,[filename,tag],()=>{})
 		})
 	})
@@ -41,14 +41,13 @@ ipcMain.handle('tag-main', (event,name,tag,path) =>{
 
 ipcMain.handle('tag-info', async(event,name,path) =>{
 	const sqlmeta = metaParser(path)
-	let cmd =`select tag from Meta where name = ?`
+	const cmd =`select tag from Meta where name = ?`
 	const output = await new Promise((resolve)=>{
 		sqlmeta.all(cmd,[name],(err,res)=>{
 			if(err || res.length==0){
 				resolve('None')
 			}else{
-				const data = res.map(i=>Object.values(i))[0]
-				console.log(res)
+				const data = res.map(i=>Object.values(i)[0])
 				resolve(data)
 			}
 		})
@@ -59,15 +58,18 @@ ipcMain.handle('tag-info', async(event,name,path) =>{
 })
 // Side: Remove tags
 ipcMain.handle('tag-remove', async(event,file,tag,id,path) =>{
-	let tagOfTag = await db.getData('/tag/' + tag)
-	const tagid = tagOfTag.indexOf(file)
-	tagOfTag.splice(tagid,1)
-	let tagOfFile = await tagsearch(file,path,false)
-	tagOfFile.splice(id,1)
-	db.push('/file/' + path + '\\' + file,tagOfFile,true)
-	db.push('/tag/' + tag,tagOfTag,true)
-	const meta	= new JsonDB(new Config(path + '\\Stemmeta',true,true,'/'))
-	meta.delete('/'+file+'[' + id +']')
+	const sqlmeta = metaParser(path)
+	const filename = path + '\\' + file
+	const cmda = `delete from Meta where name = ? and tag = ?`
+	sqlmeta.run(cmda,[file,tag],(err)=>{
+		if(err){
+			console.log(err)
+		}
+	})
+	const cmdb = `delete from Ref where nameref = ? and tagref = ?`
+	sqldb.run(cmdb,[filename,tag],(err)=>{
+		console.log(err)
+	})
 })
 //Side: Get all db
 ipcMain.handle('tag-getdb', async(event) =>{

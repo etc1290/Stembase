@@ -10,6 +10,8 @@
 		-- finished
 	2. Rewrite tag display function
 		-- finished
+	3. Rewrite tag delete function
+		-- finished
 		
 		
 ---
