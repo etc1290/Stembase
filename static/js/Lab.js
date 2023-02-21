@@ -69,9 +69,9 @@ var db = new sqlite3.Database('1.db',function() {
 	})
   })
 
-ipcMain.handle('tag-getdata', async () => {
+ipcMain.handle('tag-getdata', async (event, sql) => {
 	return new Promise((resolve, reject) => {
-		db.all("select * from test", (err, rows) => {
+		db.all(sql, (err, rows) => {
 		  if (err) {
 			reject(err);
 		  } else {

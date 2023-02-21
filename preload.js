@@ -33,7 +33,7 @@ contextBridge.exposeInMainWorld('tag', {
 	query:		(v,b) => ipcRenderer.invoke('tag-query',v,b),
 	getdb:		() => ipcRenderer.invoke('tag-getdb'),
 	//SQLite Test
-	getdata:	(v) => ipcRenderer.invoke('tag-getdata',v)
+	getdata:	(v,sql) => ipcRenderer.invoke('tag-getdata',v,sql)
 })
 
 

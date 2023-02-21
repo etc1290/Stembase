@@ -100,8 +100,13 @@ document.getElementById('cw-setting').addEventListener('click', async () =>{
 
 // SQLite Test
 document.getElementById('tag-getdata').addEventListener('click', async () =>{
-	const data = await window.tag.getdata()
-	console.log(data)
+	await window.tag.getdata("select * from test").then(rows => {
+		// Do something with the retrieved rows
+		console.log(rows);
+	  })
+	  .catch(err => {
+		console.error(err);
+	  });
 })
 
 //File Tree Test
