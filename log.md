@@ -1,9 +1,17 @@
 # Stembase
  File tagging system
  
- 
 ---
-	## 2023.02.20		version 0.3.1
+	## 2023.02.21		version 0.3.1
+	-- Revist old function by new method
+	
+	# Changed
+	1. Rewrite tag added function with sqlite
+		-- finshed
+		
+		
+---
+	## 2023.02.20		version 0.3.0.2
 	-- Replace database
 	-- Fix typo
 	# Added

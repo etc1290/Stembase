@@ -5,6 +5,7 @@ const env = require('./env.js')
 const sqlite3 = require('sqlite3').verbose()
 const Stemdb= env('StemdbDir')
 const sqldb = new sqlite3.Database(Stemdb + '.db')
+
 const db 	= new JsonDB(new Config(Stemdb,true,true,'/'))	
 // Side: Search tags
 const tagsearch = (name='',path='',isMeta = true) =>{
@@ -16,7 +17,7 @@ const tagsearch = (name='',path='',isMeta = true) =>{
 	}
 }
 // Main: Add tags
-
+/*
 ipcMain.handle('tag-main',	async(event,name,value,path) =>{
 	let isExist = false
 	let isNameExist = false
@@ -46,11 +47,25 @@ ipcMain.handle('tag-main',	async(event,name,value,path) =>{
 		db.push('/tag/' + value,[path + '\\' + name],false)	
 	}
 	
-})
-/*
-ipcMain.handle('tag-main', (event,name,tag,path) =>{
-	db.run(`update Main set tag = ? where name = ?`,[])
 })*/
+
+ipcMain.handle('tag-main', (event,name,tag,path) =>{
+	const filename = path + '\\' + name
+	const sqlmeta = new sqlite3.Database(path + '\\Stemmeta.db')
+	sqlmeta.run(`create table 'Meta'(
+		"id" 	integer not null unique,
+		"name" 	text not null,
+		"tag"	text not null,
+		primary key("id" autoincrement),
+		unique(name,tag))`,()=>{
+			sqlmeta.run(`insert or ignore into Meta(name,tag) values(?,?)`,[name,tag],()=>{})
+		} )
+	sqldb.run(`insert or ignore into File(name) values(?)`,[filename],()=>{
+		sqldb.run(`insert or ignore into Tag(tag) values(?)`,[tag],()=>{
+			sqldb.run(`insert or ignore into Ref(nameref,tagref) values(?,?)`,[filename,tag],()=>{})
+		})
+	})
+})
 // Side: Display tags
 ipcMain.handle('tag-info', async (event,name,path) =>{
 

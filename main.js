@@ -24,20 +24,32 @@ db.run(`create table "Tag" (
 	"id"	integer not null unique,
 	"tag"	text not null unique,
 	primary key("id" autoincrement)
-	foreign key('tag') references File(name) on delete cascade on update cascade
 )`,()=>{})
 db.run(`create table "Ref" (
-	"id"	integer not null unique,
-	"name-ref"	text, 
-	"tag-ref"	text,
+	"id"		integer not null unique,
+	"nameref"	text, 
+	"tagref"	text,
 	primary key("id" autoincrement)
-	foreign key('name-ref') references File(name) on delete cascade on update cascade,
-	foreign key('tag-ref') references Tag(tag) on delete cascade on update cascade
+	foreign key('nameref') references File(name) on delete cascade on update cascade,
+	foreign key('tagref') references Tag(tag) on delete cascade on update cascade,
+	unique(nameref,tagref)
 )`,()=>{})
-//db.run('update Main set tag = ? where name = ?',[77,'apple'],(e)=>{console.log(e)})
-//db.run('insert or ignore into Main (name,tag) values (?,?)',['apple',77])
+/*
+const a = 'banana'
+const b = 'yellow'
+db.run(`insert or ignore into File (name) values (?)`,[a],()=>{
+	db.run(`insert or ignore into Tag (tag) values (?)`,[b],()=>{
+		db.run(`insert or ignore into Ref (nameref,tagref) values (?,?)`,[a,b],()=>{
+			db.close()
+		})
+	})
+})
+*/
 
-db.close()
+
+//db.run(`update File set name = ? `,['apple'],(e)=>{console.log(e)})
+//db.run(`update Tag set tag = ? `,['round'],(e)=>{console.log(e)})
+//db.run(`update Ref set tagref = ? where nameref = ?`,['round','apple'],(e)=>{console.log(e)})
 /*
 db.run('INSERT INTO Main VALUES(?, ?)', [a, b])
 db.all('select Main.name as name,Main.tag as tag from Main order by name',[],(err,row)=>{
