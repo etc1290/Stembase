@@ -7,7 +7,9 @@
 	
 	# Changed
 	1. Rewrite tag added function with sqlite
-		-- finshed
+		-- finished
+	2. Rewrite tag display function
+		-- finished
 		
 		
 ---

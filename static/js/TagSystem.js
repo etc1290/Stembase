@@ -7,6 +7,7 @@ const Stemdb= env('StemdbDir')
 const sqldb = new sqlite3.Database(Stemdb + '.db')
 
 const db 	= new JsonDB(new Config(Stemdb,true,true,'/'))	
+const metaParser = (path)=>{return new sqlite3.Database(path + '\\Stemmeta.db')}
 // Side: Search tags
 const tagsearch = (name='',path='',isMeta = true) =>{
 	if(isMeta){
@@ -17,41 +18,10 @@ const tagsearch = (name='',path='',isMeta = true) =>{
 	}
 }
 // Main: Add tags
-/*
-ipcMain.handle('tag-main',	async(event,name,value,path) =>{
-	let isExist = false
-	let isNameExist = false
-	let tags = ''
-	try{
-		tags = await tagsearch(name,path)
-		isExist = tags.includes(value)				
-	}catch(e){
-		isExist = false
-	}
-	try{
-		tags = await tagsearch(name,path,false)
-			if(tags){
-				isNameExist = true
-			}
-	}catch(e){
-		isNameExist = false
-	}
-	if (!isExist && value !==''){
-		const meta	= new JsonDB(new Config(path + '\\Stemmeta',true,true,'/'))		
-		if(!isNameExist){
-			db.push('/name/name',[name],false)
-			db.push('/name/path',[path],false)		
-		}
-		meta.push('/'+name,[value],false)
-		db.push('/file/'+ path + '\\' +name,[value],false)
-		db.push('/tag/' + value,[path + '\\' + name],false)	
-	}
-	
-})*/
 
 ipcMain.handle('tag-main', (event,name,tag,path) =>{
 	const filename = path + '\\' + name
-	const sqlmeta = new sqlite3.Database(path + '\\Stemmeta.db')
+	const sqlmeta = metaParser(path)
 	sqlmeta.run(`create table 'Meta'(
 		"id" 	integer not null unique,
 		"name" 	text not null,
@@ -62,21 +32,30 @@ ipcMain.handle('tag-main', (event,name,tag,path) =>{
 		} )
 	sqldb.run(`insert or ignore into File(name) values(?)`,[filename],()=>{
 		sqldb.run(`insert or ignore into Tag(tag) values(?)`,[tag],()=>{
-			sqldb.run(`insert or ignore into Ref(nameref,tagref) values(?,?)`,[filename,tag],()=>{})
+			let cmd = `insert or ignore into Ref(nameref,tagref) values(?,?)`
+			sqldb.run(cmd,[filename,tag],()=>{})
 		})
 	})
 })
 // Side: Display tags
-ipcMain.handle('tag-info', async (event,name,path) =>{
 
-	let tags = ''
-	try{
-		tags = await tagsearch(name,path)
-	}catch(e){
-		tags = 'None'
-	}
-	
-	return tags
+ipcMain.handle('tag-info', async(event,name,path) =>{
+	const sqlmeta = metaParser(path)
+	let cmd =`select tag from Meta where name = ?`
+	const output = await new Promise((resolve)=>{
+		sqlmeta.all(cmd,[name],(err,res)=>{
+			if(err || res.length==0){
+				resolve('None')
+			}else{
+				const data = res.map(i=>Object.values(i))[0]
+				console.log(res)
+				resolve(data)
+			}
+		})
+	})
+	console.log(output)
+	return output
+
 })
 // Side: Remove tags
 ipcMain.handle('tag-remove', async(event,file,tag,id,path) =>{

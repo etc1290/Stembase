@@ -47,6 +47,7 @@ const tagdisplay = async (name) =>{
 	const tagpath	= document.getElementById('fs-path').innerHTML
 	const taginfo 	= await window.tag.info(name,tagpath)
 	updateDiv.innerHTML  = ''
+	console.log(taginfo)
 	if(taginfo == 'None'){
 		updateDiv.insertAdjacentHTML('beforeend','No tags found')
 	}else{ 
