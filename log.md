@@ -2,6 +2,12 @@
  File tagging system
  
 ---
+	## 2023.02.23		version 0.3.1.1
+	-- Fix Asynchronous works 
+	# Fixed
+	1. Wrap tag add function and tag delete in a big promise to ensure executed
+		-- finished
+---
 	## 2023.02.21		version 0.3.1
 	-- Revist old function by new method
 	
@@ -12,7 +18,6 @@
 		-- finished
 	3. Rewrite tag delete function
 		-- finished
-		
 		
 ---
 	## 2023.02.20		version 0.3.0.2

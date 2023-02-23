@@ -22,27 +22,46 @@ const tagsearch = (name='',path='',isMeta = true) =>{
 ipcMain.handle('tag-main', (event,name,tag,path) =>{
 	const filename = path + '\\' + name
 	const sqlmeta = metaParser(path)
+	let output = ''
+	/*
 	sqlmeta.run(`create table 'Meta'(
 		"id" 	integer not null unique,
 		"name" 	text not null,
 		"tag"	text not null,
 		primary key("id" autoincrement),
 		unique(name,tag))`,()=>{
-			sqlmeta.run(`insert or ignore into Meta(name,tag) values(?,?)`,[name,tag],()=>{})
+			const cmd = `insert or ignore into Meta(name,tag) values(?,?)`
+			sqlmeta.all(cmd,[name,tag],()=>{})
 		} )
+		*/
 	sqldb.run(`insert or ignore into File(name) values(?)`,[filename],()=>{
 		sqldb.run(`insert or ignore into Tag(tag) values(?)`,[tag],()=>{
 			const cmd = `insert or ignore into Ref(nameref,tagref) values(?,?)`
 			sqldb.run(cmd,[filename,tag],()=>{})
 		})
 	})
+	output = new Promise((resolve)=>{
+		sqlmeta.run(`create table 'Meta'(
+			"id" 	integer not null unique,
+			"name" 	text not null,
+			"tag"	text not null,
+			primary key("id" autoincrement),
+			unique(name,tag))`,()=>{
+				const cmd = `insert or ignore into Meta(name,tag) values(?,?)`
+				sqlmeta.all(cmd,[name,tag],()=>{
+					resolve(true)
+				})
+		} )
+	})
+	return output
+	
 })
 // Side: Display tags
 
 ipcMain.handle('tag-info', async(event,name,path) =>{
 	const sqlmeta = metaParser(path)
 	const cmd =`select tag from Meta where name = ?`
-	const output = await new Promise((resolve)=>{
+	const output = new Promise((resolve)=>{
 		sqlmeta.all(cmd,[name],(err,res)=>{
 			if(err || res.length==0){
 				resolve('None')
@@ -52,24 +71,28 @@ ipcMain.handle('tag-info', async(event,name,path) =>{
 			}
 		})
 	})
-	console.log(output)
 	return output
 
 })
 // Side: Remove tags
-ipcMain.handle('tag-remove', async(event,file,tag,id,path) =>{
+ipcMain.handle('tag-remove', async(event,file,tag,path) =>{
 	const sqlmeta = metaParser(path)
 	const filename = path + '\\' + file
-	const cmda = `delete from Meta where name = ? and tag = ?`
-	sqlmeta.run(cmda,[file,tag],(err)=>{
-		if(err){
-			console.log(err)
-		}
+	const output = new Promise((resolve)=>{
+		const cmd = `delete from Meta where name = ? and tag = ?`
+			sqlmeta.run(cmd,[file,tag],(err)=>{
+				if(err){
+				console.log(err)
+				}
+				resolve(true)
+			})
 	})
-	const cmdb = `delete from Ref where nameref = ? and tagref = ?`
-	sqldb.run(cmdb,[filename,tag],(err)=>{
-		console.log(err)
+	
+	const cmd = `delete from Ref where nameref = ? and tagref = ?`
+	sqldb.run(cmd,[filename,tag],(err)=>{
+		
 	})
+	return output
 })
 //Side: Get all db
 ipcMain.handle('tag-getdb', async(event) =>{

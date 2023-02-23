@@ -11,16 +11,16 @@ const taggetdb = async()=>{
 	return {tagset,nameset,pathset}	
 }
 	// Main: Tag add
-const tagmain = async (name) =>{
+const tagmain = (name) =>{
 	const tagbtn = document.getElementById('tag-btn')
 	tagbtn.innerHTML = ''
 	tagbtn.insertAdjacentHTML('beforeend',`<button id='tag-write'>Tag button</button>`)
 	document.getElementById('tag-write').addEventListener('click', async()=>{
 		const taginput 	= document.getElementById('tag-input').value
 		const tagpath	= document.getElementById('fs-path').innerHTML
-		const tagwrite 	= await window.tag.main(name,taginput,tagpath)
+		const tagwrite = await window.tag.main(name,taginput,tagpath)
 		tagdisplay(name)
-		await taggetdb()
+		taggetdb()
 	})
 }
 	// Side: Tag button function
@@ -43,11 +43,12 @@ const tagbtnInit = () =>{
 
 	// Side: Tag display
 const tagdisplay = async (name) =>{
+	console.log(name)
 	const updateDiv = document.getElementById('tag-display')
 	const tagpath	= document.getElementById('fs-path').innerHTML
 	const taginfo 	= await window.tag.info(name,tagpath)
-	updateDiv.innerHTML  = ''
 	console.log(taginfo)
+	updateDiv.innerHTML  = ''
 	if(taginfo == 'None'){
 		updateDiv.insertAdjacentHTML('beforeend','No tags found')
 	}else{ 
@@ -78,15 +79,15 @@ const tagdelete = async () =>{
 		const file = document.getElementById('ux-selected').innerHTML
 		const tag = document.getElementById('tag-selected').value
 		if (tag!==''){
-			const id = document.getElementById('tag-selected-id').value
 			const tagpath = document.getElementById('fs-path').innerHTML
-			const tagremove = await window.tag.remove(file,tag,id,tagpath)
+			const tagremove = await window.tag.remove(file,tag,tagpath)
 			document.getElementById('tag-selected-id').value =''
 			tagdisplay(file)
 		}else{
 			const taginfo = document.getElementById('tag-info')
 			taginfo.innerHTML = 'Tag is not selected'
 		}
+		
 	})
 }
 	//Side: Auto selected
