@@ -1,4 +1,5 @@
 //Tagging System
+
 	//Side: Tag get datalist
 const taggetdb = async()=>{
 	const taglist = document.getElementById('tag-matchlist-tag')
@@ -104,14 +105,15 @@ const tagfocus = ()=>{
 	//Side: Tag match
 const tagmatch = async()=>{
 	
-	const {tagset:tag,nameset:name,pathset:path} = await taggetdb()
+	//const {tagset:tag,nameset:name,pathset:path} = await taggetdb()
 	const tagsearchbar = document.getElementById('tag-search')
 	const updateDiv = document.getElementById('tag-match-div')
 	const tagbtn = document.getElementById('tag-searchbtn')
+	/*
 	const taglist = document.getElementById('tag-matchlist-tag')
 	const namelist = document.getElementById('tag-matchlist-name')
 	const pathlist = document.getElementById('tag-matchlist-path')
-	
+	*/
 		// Initialize match area
 	document.addEventListener('click', (e)=>{
 		const isInBoundary = [tagsearchbar,updateDiv].some(i => e.composedPath().includes(i))
@@ -124,6 +126,17 @@ const tagmatch = async()=>{
 		updateDiv.style.height = '20vh'
 	})
 		// Main match function
+	tagsearchbar.addEventListener('input',async()=>{
+		const evt = new Event('click')
+		const input = tagsearchbar.value
+		const matchBlock = []
+		const tagset = await tag.match(input)
+		for(var i=0;i<tagset.length;i++){
+			matchBlock[i] = `<button class='tag-match-block tag-match-block-tag'>` + tagset[i] + `</button><br>`
+		}
+		updateDiv.innerHTML = matchBlock.join('')
+	})
+	/*
 	tagsearchbar.addEventListener('input', ()=>{
 		const evt = new Event('click')
 		const tag = JSON.parse(taglist.value)
@@ -150,7 +163,7 @@ const tagmatch = async()=>{
 			})
 		})
 		
-	})
+	})*/
 	
 }
 	// Label function

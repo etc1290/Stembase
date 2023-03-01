@@ -1,6 +1,14 @@
 # Stembase
  File tagging system
  
+ 
+---
+	## 2022.03.01		version 0.3.2
+	-- Clear wasted codes 
+	-- Rewrite function
+	# Changed
+	1. Remove tag-getdb and eplace to new tag match function
+		-- processing
 ---
 	## 2023.02.23		version 0.3.1.1
 	-- Fix Asynchronous works 

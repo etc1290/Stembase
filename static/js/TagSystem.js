@@ -23,17 +23,6 @@ ipcMain.handle('tag-main', (event,name,tag,path) =>{
 	const filename = path + '\\' + name
 	const sqlmeta = metaParser(path)
 	let output = ''
-	/*
-	sqlmeta.run(`create table 'Meta'(
-		"id" 	integer not null unique,
-		"name" 	text not null,
-		"tag"	text not null,
-		primary key("id" autoincrement),
-		unique(name,tag))`,()=>{
-			const cmd = `insert or ignore into Meta(name,tag) values(?,?)`
-			sqlmeta.all(cmd,[name,tag],()=>{})
-		} )
-		*/
 	sqldb.run(`insert or ignore into File(name) values(?)`,[filename],()=>{
 		sqldb.run(`insert or ignore into Tag(tag) values(?)`,[tag],()=>{
 			const cmd = `insert or ignore into Ref(nameref,tagref) values(?,?)`
@@ -89,11 +78,29 @@ ipcMain.handle('tag-remove', async(event,file,tag,path) =>{
 	})
 	
 	const cmd = `delete from Ref where nameref = ? and tagref = ?`
-	sqldb.run(cmd,[filename,tag],(err)=>{
-		
+	sqldb.run(cmd,[filename,tag],(err)=>{})
+	return output
+})
+//Side:	match
+ipcMain.handle('tag-match',async(event,v)=>{
+	
+	const input = '%' + v + '%'
+	console.log(input)
+	const cmd = `select tagref from Ref where tagref like ? collate nocase`
+	const output = new Promise((resolve)=>{
+		sqldb.all(cmd,[input],(err,res)=>{
+			if(err){
+				resolve(err)
+			}else{
+				const data = res.map(i=>Object.values(i)[0])
+				resolve(data)
+				console.log(data)
+			}
+		})
 	})
 	return output
 })
+/*
 //Side: Get all db
 ipcMain.handle('tag-getdb', async(event) =>{
 	let tagset = []
@@ -117,9 +124,9 @@ ipcMain.handle('tag-getdb', async(event) =>{
 	Object.keys(dbfile).forEach(e =>{
 		fileset.push(e)
 	})	
-		return {tagset:tagset,fileset:fileset,nameset:nameset}	 */
+		return {tagset:tagset,fileset:fileset,nameset:nameset}	 
 		return {tagset:tagset,nameset:nameset,pathset:pathset}
-})
+})*/
 //Side: Query
 ipcMain.handle('tag-query', async(event,input,isTag = true) =>{
 	let queryset = ''

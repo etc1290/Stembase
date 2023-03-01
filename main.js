@@ -34,48 +34,6 @@ db.run(`create table "Ref" (
 	foreign key('tagref') references Tag(tag) on delete cascade on update cascade,
 	unique(nameref,tagref)
 )`,()=>{})
-/*
-const a = 'banana'
-const b = 'yellow'
-db.run(`insert or ignore into File (name) values (?)`,[a],()=>{
-	db.run(`insert or ignore into Tag (tag) values (?)`,[b],()=>{
-		db.run(`insert or ignore into Ref (nameref,tagref) values (?,?)`,[a,b],()=>{
-			db.close()
-		})
-	})
-})
-*/
-
-
-//db.run(`update File set name = ? `,['apple'],(e)=>{console.log(e)})
-//db.run(`update Tag set tag = ? `,['round'],(e)=>{console.log(e)})
-//db.run(`update Ref set tagref = ? where nameref = ?`,['round','apple'],(e)=>{console.log(e)})
-/*
-db.run('INSERT INTO Main VALUES(?, ?)', [a, b])
-db.all('select Main.name as name,Main.tag as tag from Main order by name',[],(err,row)=>{
-	if(err){
-		throw err
-	}
-	row.forEach((row)=>{
-		console.log(row.name)
-		console.log(row.tag)
-	})
-})
-db.close()
-*/
-/*
-var db = new sqlite3.Database('data/Stemdb.db',function() {
-  db.run("create table test(name varchar(15))",function(){
-    db.run("insert into test values('hello,world')",function(){
-      db.all("select * from test",function(err,res){
-        if(!err)
-          console.log(JSON.stringify(res))
-        else
-          console.log(err)
-      })
-    })
-  })
-})*/
 
 
 // WindowsCreator
