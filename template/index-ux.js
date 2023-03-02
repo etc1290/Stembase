@@ -135,6 +135,16 @@ const tagmatch = async()=>{
 			matchBlock[i] = `<button class='tag-match-block tag-match-block-tag'>` + tagset[i] + `</button><br>`
 		}
 		updateDiv.innerHTML = matchBlock.join('')
+		const matchBlockbtn = document.querySelectorAll('button.tag-match-block')
+		console.log(matchBlockbtn)
+		matchBlockbtn.forEach(e=>{
+			e.addEventListener('click',()=>{
+				tagsearchbar.value = e.innerHTML
+			})
+			e.addEventListener('dblclick',()=>{
+				tagbtn.dispatchEvent(evt)
+			})
+		})
 	})
 	/*
 	tagsearchbar.addEventListener('input', ()=>{

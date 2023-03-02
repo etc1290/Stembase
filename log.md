@@ -3,11 +3,18 @@
  
  
 ---
+	## 2022.03.02		version 0.3.2.1
+	-- Rewrite function
+	
+	# Changed
+	1. Assign function to match results
+		-- finished
+---
 	## 2022.03.01		version 0.3.2
 	-- Clear wasted codes 
 	-- Rewrite function
 	# Changed
-	1. Remove tag-getdb and eplace to new tag match function
+	1. Remove tag-getdb and replace to new tag match function
 		-- processing
 ---
 	## 2023.02.23		version 0.3.1.1
