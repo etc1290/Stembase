@@ -13,6 +13,8 @@
 		-- finished
 	3. Rewrite the display of ellipsis in query results
 		-- finished
+	4. Display tooltip when hovering
+		-- finished
 ---
 	## 2022.03.02		version 0.3.2.1
 	-- Rewrite function

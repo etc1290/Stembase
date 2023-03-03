@@ -146,7 +146,7 @@ const tagmatch = async()=>{
 const tagLabelfunc = ()=>{
 	const searchFilebtn= document.querySelectorAll('button.filelabel')
 	const tooltipArea = document.querySelectorAll('em.tooltip')
-	const pathArea = document.querySelectorAll('em.filelabel-info')
+	const pathArea = document.querySelectorAll('div.tag-search-block')
 	console.log(searchFilebtn)
 	console.log(pathArea)
 	console.log(tooltipArea)
@@ -241,14 +241,10 @@ const tagsearch = ()=>{
 		const tagset = await tag.query(input)
 		
 		const nameset = await tag.query(input,false)
-		console.log('tag')
-		console.log(tagset)
-		console.log('name')
-		console.log(nameset)
 		
 		const searchBlock = []
 		const searchTagLabel = `<div class = 'tag-search-block'><button class='taglabel'>`
-		const searchTagInfo = `</button><em class ='taglabel-info'>Tag</em></div><br>`
+		const searchTagInfo = `</button><em class ='taglabel-info tooltip'>Tag</em></div><br>`
 		for(var i=0;i<tagset.length;i++){
 			searchBlock[i] = searchTagLabel + tagset[i] + searchTagInfo
 		}
