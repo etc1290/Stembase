@@ -2,6 +2,7 @@
 
 	//Side: Tag get datalist
 const taggetdb = async()=>{
+	/*
 	const taglist = document.getElementById('tag-matchlist-tag')
 	const namelist = document.getElementById('tag-matchlist-name')
 	const pathlist = document.getElementById('tag-matchlist-path')
@@ -9,7 +10,7 @@ const taggetdb = async()=>{
 	taglist.value = JSON.stringify(tagset) 
 	namelist.value= JSON.stringify(nameset)
 	pathlist.value= JSON.stringify(pathset)
-	return {tagset,nameset,pathset}	
+	return {tagset,nameset,pathset}	*/
 }
 	// Main: Tag add
 const tagmain = (name) =>{
@@ -21,7 +22,7 @@ const tagmain = (name) =>{
 		const tagpath	= document.getElementById('fs-path').innerHTML
 		const tagwrite = await window.tag.main(name,taginput,tagpath)
 		tagdisplay(name)
-		taggetdb()
+		//taggetdb()
 	})
 }
 	// Side: Tag button function
@@ -109,11 +110,6 @@ const tagmatch = async()=>{
 	const tagsearchbar = document.getElementById('tag-search')
 	const updateDiv = document.getElementById('tag-match-div')
 	const tagbtn = document.getElementById('tag-searchbtn')
-	/*
-	const taglist = document.getElementById('tag-matchlist-tag')
-	const namelist = document.getElementById('tag-matchlist-name')
-	const pathlist = document.getElementById('tag-matchlist-path')
-	*/
 		// Initialize match area
 	document.addEventListener('click', (e)=>{
 		const isInBoundary = [tagsearchbar,updateDiv].some(i => e.composedPath().includes(i))
@@ -146,34 +142,6 @@ const tagmatch = async()=>{
 			})
 		})
 	})
-	/*
-	tagsearchbar.addEventListener('input', ()=>{
-		const evt = new Event('click')
-		const tag = JSON.parse(taglist.value)
-		const path = JSON.parse(pathlist.value)
-		const name = JSON.parse(namelist.value)
-		const input = tagsearchbar.value.toLowerCase()	
-		const tagmatch = tag.filter(v =>v.includes(input))
-		const namematch = name.filter(v =>v.includes(input))
-		const matchResult = tagmatch.concat(namematch)
-		const matchBlocks = []
-		const displayNum = Math.min(5,matchResult.length)
-		for(var i=0;i<displayNum;i++){
-			matchBlocks.push(`<button class='tag-match-block'>` + matchResult[i] +`</button><br>`)
-			
-		}
-		updateDiv.innerHTML = matchBlocks.join('')
-		const matchBlockbtn = document.querySelectorAll('button[class=tag-match-block]')
-		matchBlockbtn.forEach(e =>{
-			e.addEventListener('click',()=>{
-				tagsearchbar.value = e.innerHTML
-			})
-			e.addEventListener('dblclick',()=>{
-				tagbtn.dispatchEvent(evt)
-			})
-		})
-		
-	})*/
 	
 }
 	// Label function
@@ -262,17 +230,42 @@ const tagsearch = ()=>{
 	const tagbtn = document.getElementById('tag-searchbtn')
 	const updateDiv = document.getElementById('tag-search-output')
 	const taginput = document.getElementById('tag-search')
+	/*
 	const taglist = document.getElementById('tag-matchlist-tag')
 	const namelist = document.getElementById('tag-matchlist-name')
 	const pathlist = document.getElementById('tag-matchlist-path')
+	*/
 	
 	
 	//Main: Search function
 	tagbtn.addEventListener('click', async()=>{
 		const evt = new Event('click')
+		const input = taginput.value
+		const tagset = await tag.query(input)
+		console.log(tagset)
+		const nameset = await tag.query(input,false)
+		console.log(nameset)
+		
+		const searchBlock = []
+		const searchTagLabel = `<div class = 'tag-search-block'><button class='taglabel'>`
+		const searchTagInfo = `</button><em class ='taglabel-info'>Tag</em></div><br>`
+		for(var i=0;i<tagset.length;i++){
+			searchBlock[i] = searchTagLabel + tagset[i] + searchTagInfo
+		}
+		for(var i=0;i<nameset.length;i++){
+			const name = nameset[i]
+			const path = name.substring(0,name.lastIndexOf('\\') + 1)
+			const file = name.substring(name.lastIndexOf('\\') + 1,name.length)
+			const searchNameLabel = `<div class = 'tag-search-block'><button class = 'filelabel'>` + file + `</button>`
+			const searchNameInfo = `<em class = 'filelabel-info'>` + path + `</em></div><br>`
+			searchBlock[i+tagset.length] = searchNameLabel + searchNameInfo
+		}
+		
+		/*
 		const tag = JSON.parse(taglist.value)
 		const path = JSON.parse(pathlist.value)
 		const name = JSON.parse(namelist.value)
+		
 		const input = taginput.value
 		const tagmatch = tag.filter(v => v.includes(input))
 		const namematch = name.reduce((val, i, idx) => val = i == input ? [...val, idx] : val, [])
@@ -288,10 +281,10 @@ const tagsearch = ()=>{
 			const searchInfo = `<em class = 'filelabel-info'>` + path[namematch[i]] + `</em></div><br>`
 			searchBlocks.push(searchLabel + searchInfo)
 		}
-		
+		*/
 		
 		// Display search result
-		updateDiv.innerHTML = searchBlocks.join('')
+		updateDiv.innerHTML = searchBlock.join('')
 		const searchBlockbtn = document.querySelectorAll('div[class=tag-search-block]')
 		const searchTagbtn = document.querySelectorAll('button[class=taglabel]')
 		

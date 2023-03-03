@@ -18,6 +18,7 @@ db.get('PRAGMA foreign_keys = ON')
 db.run(`create table "File" (
 	"id"	integer not null unique,
 	"name"	text not null unique,
+	"file"	text not null,
 	primary key("id" autoincrement)
 )`,()=>{})
 db.run(`create table "Tag" (

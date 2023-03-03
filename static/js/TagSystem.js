@@ -23,7 +23,7 @@ ipcMain.handle('tag-main', (event,name,tag,path) =>{
 	const filename = path + '\\' + name
 	const sqlmeta = metaParser(path)
 	let output = ''
-	sqldb.run(`insert or ignore into File(name) values(?)`,[filename],()=>{
+	sqldb.run(`insert or ignore into File(name,file) values(?,?)`,[filename,name],()=>{
 		sqldb.run(`insert or ignore into Tag(tag) values(?)`,[tag],()=>{
 			const cmd = `insert or ignore into Ref(nameref,tagref) values(?,?)`
 			sqldb.run(cmd,[filename,tag],()=>{})
@@ -81,13 +81,36 @@ ipcMain.handle('tag-remove', async(event,file,tag,path) =>{
 	sqldb.run(cmd,[filename,tag],(err)=>{})
 	return output
 })
-//Side:	match
+//Side:	partial match
 ipcMain.handle('tag-match',async(event,v)=>{
 	
 	const input = '%' + v + '%'
-	console.log(input)
-	const cmd = `select tagref from Ref where tagref like ? collate nocase`
+	const cmda = `select tag from Tag where tag like ? collate nocase union all `
+	const cmdb = `select name from File where file like ? collate nocase`
+	const cmd = cmda + cmdb
 	const output = new Promise((resolve)=>{
+		sqldb.all(cmd,[input,input],(err,res)=>{
+			if(err){
+				console.log(err)
+				resolve(err)
+			}else{
+				console.log(res)
+				const rawdata = res.map(i=>Object.values(i)[0])
+				const data = [...new Set(rawdata)]
+				resolve(data)
+			}
+		})
+	})
+	return output
+})
+//Side: Query
+ipcMain.handle('tag-query', (event,input,isTag=true)=>{
+	const output = new Promise((resolve)=>{
+		let cmd = `select nameref from Ref where tagref = ?`
+		if(!isTag){
+			cmd = `select nameref from Ref where nameref like ?`
+			input = '%' + input
+		}
 		sqldb.all(cmd,[input],(err,res)=>{
 			if(err){
 				resolve(err)
@@ -101,33 +124,6 @@ ipcMain.handle('tag-match',async(event,v)=>{
 	return output
 })
 /*
-//Side: Get all db
-ipcMain.handle('tag-getdb', async(event) =>{
-	let tagset = []
-	let nameset =[]
-	let pathset =[]
-	let dbtag	=''
-	try{	
-		dbtag = await db.getData('/tag')
-		//const dbfile = await db.getData('/file')
-		nameset = await db.getData('/name/name')
-		pathset = await db.getData('/name/path')
-	}catch(e){
-		//return {tagset:[],fileset:[],nameset:[]}
-		return{tagset:[],nameset:[],pathset:[]}
-	}
-	//const fileset =[]
-	Object.keys(dbtag).forEach(e =>{
-		tagset.push(e)
-	})
-	/*
-	Object.keys(dbfile).forEach(e =>{
-		fileset.push(e)
-	})	
-		return {tagset:tagset,fileset:fileset,nameset:nameset}	 
-		return {tagset:tagset,nameset:nameset,pathset:pathset}
-})*/
-//Side: Query
 ipcMain.handle('tag-query', async(event,input,isTag = true) =>{
 	let queryset = ''
 	try{
@@ -139,4 +135,4 @@ ipcMain.handle('tag-query', async(event,input,isTag = true) =>{
 		queryset = ['No attachment']
 	}
 	return queryset
-})
+})*/

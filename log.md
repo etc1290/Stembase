@@ -3,6 +3,14 @@
  
  
 ---
+	## 2022.03.03		version 0.3.3
+	-- Rewrite function
+	# Changed
+	1. Add name squery in partial match
+		-- finished
+	2. Add new column file in File table for matching
+		-- finished
+---
 	## 2022.03.02		version 0.3.2.1
 	-- Rewrite function
 	
