@@ -146,10 +146,7 @@ const tagmatch = async()=>{
 const tagLabelfunc = ()=>{
 	const searchFilebtn= document.querySelectorAll('button.filelabel')
 	const tooltipArea = document.querySelectorAll('em.tooltip')
-	const pathArea = document.querySelectorAll('div.tag-search-block')
-	console.log(searchFilebtn)
-	console.log(pathArea)
-	console.log(tooltipArea)
+	const blockArea = document.querySelectorAll('div.tag-search-block')
 	searchFilebtn.forEach(e=>{
 		e.addEventListener('click',()=>{	
 			uxselect(e.innerHTML)
@@ -160,19 +157,11 @@ const tagLabelfunc = ()=>{
 		})
 	})
 	for(let i=0;i<tooltipArea.length;i++){
-		tooltipArea[i].addEventListener('mouseover',()=>{			
+		blockArea[i].addEventListener('mouseover',()=>{
 			tooltipArea[i].style.display = 'block'
 			console.log('in')
 		})
-		tooltipArea[i].addEventListener('mouseleave',()=>{
-			tooltipArea[i].style.display = 'none'
-			console.log('out')
-		})
-		pathArea[i].addEventListener('mouseover',()=>{
-			tooltipArea[i].style.display = 'block'
-			console.log('in')
-		})
-		pathArea[i].addEventListener('mouseleave',()=>{
+		blockArea[i].addEventListener('mouseleave',()=>{
 			tooltipArea[i].style.display = 'none'
 			console.log('out')
 		})
