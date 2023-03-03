@@ -5,10 +5,13 @@
 ---
 	## 2022.03.03		version 0.3.3
 	-- Rewrite function
+	-- Clear wasted codes
 	# Changed
 	1. Add name squery in partial match
 		-- finished
 	2. Add new column file in File table for matching
+		-- finished
+	3. Rewrite the display of ellipsis in query results
 		-- finished
 ---
 	## 2022.03.02		version 0.3.2.1

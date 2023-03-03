@@ -117,22 +117,9 @@ ipcMain.handle('tag-query', (event,input,isTag=true)=>{
 			}else{
 				const data = res.map(i=>Object.values(i)[0])
 				resolve(data)
-				console.log(data)
+				
 			}
 		})
 	})
 	return output
 })
-/*
-ipcMain.handle('tag-query', async(event,input,isTag = true) =>{
-	let queryset = ''
-	try{
-		queryset = await db.getData('/tag/' + input)
-	}catch(e){
-		queryset = ['No matched result']
-	}
-	if(!queryset.length){
-		queryset = ['No attachment']
-	}
-	return queryset
-})*/

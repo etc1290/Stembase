@@ -106,7 +106,6 @@ const tagfocus = ()=>{
 	//Side: Tag match
 const tagmatch = async()=>{
 	
-	//const {tagset:tag,nameset:name,pathset:path} = await taggetdb()
 	const tagsearchbar = document.getElementById('tag-search')
 	const updateDiv = document.getElementById('tag-match-div')
 	const tagbtn = document.getElementById('tag-searchbtn')
@@ -132,7 +131,6 @@ const tagmatch = async()=>{
 		}
 		updateDiv.innerHTML = matchBlock.join('')
 		const matchBlockbtn = document.querySelectorAll('button.tag-match-block')
-		console.log(matchBlockbtn)
 		matchBlockbtn.forEach(e=>{
 			e.addEventListener('click',()=>{
 				tagsearchbar.value = e.innerHTML
@@ -146,10 +144,12 @@ const tagmatch = async()=>{
 }
 	// Label function
 const tagLabelfunc = ()=>{
-	const searchFilebtn= document.querySelectorAll('button[class=filelabel]')
-	const tooltipArea = document.querySelectorAll('em[class=tooltip]')
-	const pathArea = document.querySelectorAll('em[class=filelabel-info]')
-	
+	const searchFilebtn= document.querySelectorAll('button.filelabel')
+	const tooltipArea = document.querySelectorAll('em.tooltip')
+	const pathArea = document.querySelectorAll('em.filelabel-info')
+	console.log(searchFilebtn)
+	console.log(pathArea)
+	console.log(tooltipArea)
 	searchFilebtn.forEach(e=>{
 		e.addEventListener('click',()=>{	
 			uxselect(e.innerHTML)
@@ -162,15 +162,19 @@ const tagLabelfunc = ()=>{
 	for(let i=0;i<tooltipArea.length;i++){
 		tooltipArea[i].addEventListener('mouseover',()=>{			
 			tooltipArea[i].style.display = 'block'
+			console.log('in')
 		})
 		tooltipArea[i].addEventListener('mouseleave',()=>{
 			tooltipArea[i].style.display = 'none'
+			console.log('out')
 		})
 		pathArea[i].addEventListener('mouseover',()=>{
 			tooltipArea[i].style.display = 'block'
+			console.log('in')
 		})
 		pathArea[i].addEventListener('mouseleave',()=>{
 			tooltipArea[i].style.display = 'none'
+			console.log('out')
 		})
 		tooltipArea[i].style.width = tooltipArea[i].innerHTML.length *7.5 + 'px'
 		
@@ -230,20 +234,16 @@ const tagsearch = ()=>{
 	const tagbtn = document.getElementById('tag-searchbtn')
 	const updateDiv = document.getElementById('tag-search-output')
 	const taginput = document.getElementById('tag-search')
-	/*
-	const taglist = document.getElementById('tag-matchlist-tag')
-	const namelist = document.getElementById('tag-matchlist-name')
-	const pathlist = document.getElementById('tag-matchlist-path')
-	*/
-	
-	
 	//Main: Search function
 	tagbtn.addEventListener('click', async()=>{
 		const evt = new Event('click')
 		const input = taginput.value
 		const tagset = await tag.query(input)
-		console.log(tagset)
+		
 		const nameset = await tag.query(input,false)
+		console.log('tag')
+		console.log(tagset)
+		console.log('name')
 		console.log(nameset)
 		
 		const searchBlock = []
@@ -255,38 +255,23 @@ const tagsearch = ()=>{
 		for(var i=0;i<nameset.length;i++){
 			const name = nameset[i]
 			const path = name.substring(0,name.lastIndexOf('\\') + 1)
+			let pathcut = ''
+			if(path.length > 20){
+				pathcut = path.substring(0,17) + `...`
+			}else{
+				pathcut = path
+			}
 			const file = name.substring(name.lastIndexOf('\\') + 1,name.length)
-			const searchNameLabel = `<div class = 'tag-search-block'><button class = 'filelabel'>` + file + `</button>`
-			const searchNameInfo = `<em class = 'filelabel-info'>` + path + `</em></div><br>`
-			searchBlock[i+tagset.length] = searchNameLabel + searchNameInfo
+			const searchNameLabel = `<div class = 'tag-search-block'><button class = 'filelabel'>` + file + `</button><br>`
+			const searchNameInfo = `<em class = 'filelabel-info'>` + pathcut + `</em>`
+			const searchNameTooltip=`<em class = 'tooltip'>` + path + `</em></div>`
+			searchBlock[i+tagset.length] = searchNameLabel + searchNameInfo + searchNameTooltip
 		}
-		
-		/*
-		const tag = JSON.parse(taglist.value)
-		const path = JSON.parse(pathlist.value)
-		const name = JSON.parse(namelist.value)
-		
-		const input = taginput.value
-		const tagmatch = tag.filter(v => v.includes(input))
-		const namematch = name.reduce((val, i, idx) => val = i == input ? [...val, idx] : val, [])
-		const searchTagInfo = `<em class ='taglabel-info'>Tag</em></div><br>`
-		const searchBlocks = []
-		for(var i=0;i<tagmatch.length;i++){
-			const searchLabel = `<div class = 'tag-search-block'><button class='taglabel'>` + tagmatch[i] + `</button>`
-			searchBlocks.push(searchLabel + searchTagInfo)
-		}
-		
-		for(var i=0;i<namematch.length;i++){
-			const searchLabel = `<div class = 'tag-search-block'><button class = 'filelabel'>` + name[namematch[i]] + `</button>`
-			const searchInfo = `<em class = 'filelabel-info'>` + path[namematch[i]] + `</em></div><br>`
-			searchBlocks.push(searchLabel + searchInfo)
-		}
-		*/
 		
 		// Display search result
 		updateDiv.innerHTML = searchBlock.join('')
-		const searchBlockbtn = document.querySelectorAll('div[class=tag-search-block]')
-		const searchTagbtn = document.querySelectorAll('button[class=taglabel]')
+		const searchBlockbtn = document.querySelectorAll('div.tag-search-block')
+		const searchTagbtn = document.querySelectorAll('button.taglabel')
 		
 		//Side: Function of search results
 			//Connection of main and info
