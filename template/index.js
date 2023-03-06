@@ -7,6 +7,7 @@ let pathset = []
 	//Main: File User Interface
 const fsfunc = async (path) => {
 		//Initialize
+		console.log(path)
 	const fspath = document.querySelector('[id=fs-path]')
 	const updateDiv = document.querySelector('div[id=fs-main]')
 	const nowPath = fspath.innerHTML

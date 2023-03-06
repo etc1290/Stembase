@@ -146,26 +146,29 @@ const tagmatch = async()=>{
 const tagLabelfunc = ()=>{
 	const searchFilebtn= document.querySelectorAll('button.filelabel')
 	const tooltipArea = document.querySelectorAll('em.tooltip')
-	const blockArea = document.querySelectorAll('div.tag-search-block')
+	const displayArea = document.querySelectorAll('button.filelabel,em.filelabel-info,button.taglabel,em.taglabel-info')
+	console.log(displayArea)
 	searchFilebtn.forEach(e=>{
 		e.addEventListener('click',()=>{	
 			uxselect(e.innerHTML)
 			const path = e.nextSibling.innerHTML.split('\\')
 			path.pop()
-			
+			console.log(e.nextSibling.innerHTML)
 			fsfunc(path.join('\\'))
 		})
 	})
-	for(let i=0;i<tooltipArea.length;i++){
-		blockArea[i].addEventListener('mouseover',()=>{
-			tooltipArea[i].style.display = 'block'
-			console.log('in')
+	for(let i=0;i<displayArea.length;i++){
+		const v = Math.floor(i/2)
+		console.log(v)
+		displayArea[i].addEventListener('mouseover',()=>{
+			tooltipArea[v].style.display = 'block'
+			
 		})
-		blockArea[i].addEventListener('mouseleave',()=>{
-			tooltipArea[i].style.display = 'none'
-			console.log('out')
+		displayArea[i].addEventListener('mouseleave',()=>{
+			tooltipArea[v].style.display = 'none'
+			
 		})
-		tooltipArea[i].style.width = tooltipArea[i].innerHTML.length *7.5 + 'px'
+		tooltipArea[v].style.width = tooltipArea[v].innerHTML.length *7.5 + 'px'
 		
 	}
 }
@@ -218,6 +221,29 @@ const taglabel = (queryset,isTag = true)=>{
 		
 	}
 }
+	//Side: Truncate the display path
+const Truncation = (path)=>{
+	const maxLen = 20
+	const bricks = path.split('\\')
+	const drive = bricks[0]
+	const pathLen = bricks.length
+	const filename = bricks[pathLen-1]
+	const currLen = drive.length + filename.length
+	const extraLen = maxLen - currLen - 5
+	if(extraLen > 0){
+		bricks.splice(0,1)
+		bricks.splice(pathLen - 1,1)
+		const newpath = bricks.join('\\')
+		const vorLen = Math.ceil(extraLen / 2)
+		const hinterLen = Math.floor(extraLen/2)
+		const vorpath = newpath.substring(0,vorLen)
+		const hinterpath = newpath.substring(pathLen - hinterLen)
+		output = drive + '\\' + vorpath + '...' + hinterpath + '\\' + filename
+		return output
+	}else{
+		return path
+	}
+}
 	//Side: Tag search 
 const tagsearch = ()=>{
 	const tagbtn = document.getElementById('tag-searchbtn')
@@ -235,6 +261,7 @@ const tagsearch = ()=>{
 		const searchTagLabel = `<div class = 'tag-search-block'><button class='taglabel'>`
 		const searchTagInfo = `</button><em class ='taglabel-info tooltip'>Tag</em></div><br>`
 		for(var i=0;i<tagset.length;i++){
+			const newpath = Truncation(tagset[i])
 			searchBlock[i] = searchTagLabel + tagset[i] + searchTagInfo
 		}
 		for(var i=0;i<nameset.length;i++){

@@ -106,7 +106,7 @@ ipcMain.handle('tag-match',async(event,v)=>{
 //Side: Query
 ipcMain.handle('tag-query', (event,input,isTag=true)=>{
 	const output = new Promise((resolve)=>{
-		let cmd = `select nameref from Ref where tagref = ?`
+		let cmd = `select tagref from Ref where tagref = ?`
 		if(!isTag){
 			cmd = `select nameref from Ref where nameref like ?`
 			input = '%' + input

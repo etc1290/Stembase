@@ -2,6 +2,17 @@
  File tagging system
  
  
+
+---
+	## 2022.03.06		version 0.3.3.1
+	-- Bug Fix
+	-- Clear wasted codes
+	# Changed
+	1. Rewrite tooltip display function to more accurate version
+		-- finished
+	# Fixed
+	1. Return path instead of tag when querying a tag
+		-- finished
 ---
 	## 2022.03.03		version 0.3.3
 	-- Rewrite function
