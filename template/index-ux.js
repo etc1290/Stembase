@@ -45,7 +45,7 @@ const tagbtnInit = () =>{
 
 	// Side: Tag display
 const tagdisplay = async (name) =>{
-	console.log(name)
+
 	const updateDiv = document.getElementById('tag-display')
 	const tagpath	= document.getElementById('fs-path').innerHTML
 	const taginfo 	= await window.tag.info(name,tagpath)
@@ -147,22 +147,22 @@ const tagLabelfunc = ()=>{
 	const searchFilebtn= document.querySelectorAll('button.filelabel')
 	const tooltipArea = document.querySelectorAll('em.tooltip')
 	const displayArea = document.querySelectorAll('button.filelabel,em.filelabel-info,button.taglabel,em.taglabel-info')
-	console.log(displayArea)
-	searchFilebtn.forEach(e=>{
-		e.addEventListener('click',()=>{	
-			uxselect(e.innerHTML)
-			const path = e.nextSibling.innerHTML.split('\\')
-			path.pop()
-			console.log(e.nextSibling.innerHTML)
+	
+	for(let i=0;i<searchFilebtn.length;i++){
+		searchFilebtn[i].addEventListener('click',()=>{
+			const tooltip = tooltipArea[i]
+			console.log(tooltip)
+			const path = tooltip.innerHTML.split('\\')
+			const filename = path.pop()
+			uxselect(filename)			
 			fsfunc(path.join('\\'))
 		})
-	})
-	for(let i=0;i<displayArea.length;i++){
+	}
+	for(var i=0;i<displayArea.length;i++){
 		const v = Math.floor(i/2)
-		console.log(v)
+		
 		displayArea[i].addEventListener('mouseover',()=>{
 			tooltipArea[v].style.display = 'block'
-			
 		})
 		displayArea[i].addEventListener('mouseleave',()=>{
 			tooltipArea[v].style.display = 'none'
@@ -295,6 +295,8 @@ const tagsearch = ()=>{
 			//Tag label function	
 		searchTagbtn.forEach(e=>{
 			e.addEventListener('click',async()=>{
+				//const queryset = await window.tag.query(e.innerHTML)
+				console.log(e.innerHTML)
 				const queryset = await window.tag.query(e.innerHTML)
 				taglabel(queryset)			
 			})		

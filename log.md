@@ -4,12 +4,15 @@
  
 
 ---
-	## 2022.03.06		version 0.3.3.1
+	## 2022.03.06		version 0.3.4
 	-- Bug Fix
 	-- Clear wasted codes
 	# Changed
 	1. Rewrite tooltip display function to more accurate version
 		-- finished
+	2. Rewrite tag label function
+		-- finished
+		
 	# Fixed
 	1. Return path instead of tag when querying a tag
 		-- finished
