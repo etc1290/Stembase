@@ -2,7 +2,20 @@
  File tagging system
  
  
-
+---
+	## 2022.03.07		version 0.3.5
+	-- Rewrite function
+	-- Clear wasted codes
+	-- Bug fix
+	
+	# Changed
+	1. Rewrite selection function
+		-- processing
+	
+	# Fixed
+	1. Fix search label wrongly parsing path
+		-- finished
+		
 ---
 	## 2022.03.06		version 0.3.4
 	-- Bug Fix

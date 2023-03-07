@@ -69,6 +69,7 @@ const tagfunc = async (name) =>{
 
 	// Init: User Interactive Design
 const uxselect = async (name) =>{
+	
 	document.getElementById('ux-info').value = name
 	document.getElementById('ux-selected').innerHTML = name	
 	tagfunc(name)
@@ -144,20 +145,27 @@ const tagmatch = async()=>{
 }
 	// Label function
 const tagLabelfunc = ()=>{
-	const searchFilebtn= document.querySelectorAll('button.filelabel')
+	const fileLabelbtn= document.querySelectorAll('button.filelabel')
+	const tagLabelbtn = document.querySelectorAll('button.taglabel')
 	const tooltipArea = document.querySelectorAll('em.tooltip')
 	const displayArea = document.querySelectorAll('button.filelabel,em.filelabel-info,button.taglabel,em.taglabel-info')
-	
-	for(let i=0;i<searchFilebtn.length;i++){
-		searchFilebtn[i].addEventListener('click',()=>{
-			const tooltip = tooltipArea[i]
-			console.log(tooltip)
-			const path = tooltip.innerHTML.split('\\')
-			const filename = path.pop()
+	const tagLen = tagLabelbtn.length
+	for(let i=0;i<tagLen;i++){
+		tagLabelbtn[i].addEventListener('click',()=>{
+			console.log(i)
+		})
+	}
+	for(let i=0;i<fileLabelbtn.length;i++){
+		fileLabelbtn[i].addEventListener('click',()=>{
+			const tooltip = tooltipArea[i + tagLen]
+			const path = tooltip.innerHTML.split('\\')	
+			path.pop()
+			const filename = fileLabelbtn[i].innerHTML
 			uxselect(filename)			
 			fsfunc(path.join('\\'))
 		})
 	}
+	
 	for(var i=0;i<displayArea.length;i++){
 		const v = Math.floor(i/2)
 		
@@ -172,7 +180,7 @@ const tagLabelfunc = ()=>{
 		
 	}
 }
-	// Label contents 
+/*	// Label contents 
 const tagFileCreator = (pathset,fileset)=>{
 	const updateDiv = document.getElementById('tag-search-output')
 	const searchbar = document.getElementById('tag-searchbar')
@@ -206,7 +214,8 @@ const tagFileCreator = (pathset,fileset)=>{
 	}
 	updateDiv.innerHTML = searchBlocks.join('')
 	tagLabelfunc()
-} 
+} */
+/*
 const taglabel = (queryset,isTag = true)=>{
 	let pathset = []
 	let fileset = []
@@ -220,7 +229,7 @@ const taglabel = (queryset,isTag = true)=>{
 	}else{
 		
 	}
-}
+}*/
 	//Side: Truncate the display path
 const Truncation = (path)=>{
 	const maxLen = 20
@@ -292,7 +301,7 @@ const tagsearch = ()=>{
 				e.children[0].dispatchEvent(evt)
 			})	
 		})
-			//Tag label function	
+		/*	//Tag label function	
 		searchTagbtn.forEach(e=>{
 			e.addEventListener('click',async()=>{
 				//const queryset = await window.tag.query(e.innerHTML)
@@ -300,7 +309,7 @@ const tagsearch = ()=>{
 				const queryset = await window.tag.query(e.innerHTML)
 				taglabel(queryset)			
 			})		
-		})
+		})*/
 		tagLabelfunc()
 		
 	})
