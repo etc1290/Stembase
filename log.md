@@ -10,7 +10,7 @@
 	
 	# Changed
 	1. Rewrite selection function
-		-- processing
+		-- finished
 	
 	# Fixed
 	1. Fix search label wrongly parsing path

@@ -1,8 +1,8 @@
 //Tagging System
-
+/*
 	//Side: Tag get datalist
 const taggetdb = async()=>{
-	/*
+	
 	const taglist = document.getElementById('tag-matchlist-tag')
 	const namelist = document.getElementById('tag-matchlist-name')
 	const pathlist = document.getElementById('tag-matchlist-path')
@@ -10,8 +10,8 @@ const taggetdb = async()=>{
 	taglist.value = JSON.stringify(tagset) 
 	namelist.value= JSON.stringify(nameset)
 	pathlist.value= JSON.stringify(pathset)
-	return {tagset,nameset,pathset}	*/
-}
+	return {tagset,nameset,pathset}	
+}*/
 	// Main: Tag add
 const tagmain = (name) =>{
 	const tagbtn = document.getElementById('tag-btn')
@@ -48,6 +48,7 @@ const tagdisplay = async (name) =>{
 
 	const updateDiv = document.getElementById('tag-display')
 	const tagpath	= document.getElementById('fs-path').innerHTML
+	console.log(tagpath)
 	const taginfo 	= await window.tag.info(name,tagpath)
 	console.log(taginfo)
 	updateDiv.innerHTML  = ''
@@ -156,13 +157,17 @@ const tagLabelfunc = ()=>{
 		})
 	}
 	for(let i=0;i<fileLabelbtn.length;i++){
-		fileLabelbtn[i].addEventListener('click',()=>{
+		fileLabelbtn[i].addEventListener('click',async()=>{
 			const tooltip = tooltipArea[i + tagLen]
 			const path = tooltip.innerHTML.split('\\')	
 			path.pop()
 			const filename = fileLabelbtn[i].innerHTML
-			uxselect(filename)			
-			fsfunc(path.join('\\'))
+			//document.getElementById('fs-path').innerHTML = path
+			
+			const signal = await fsfunc(path.join('\\'))
+			if(signal){
+				uxselect(filename)
+			}
 		})
 	}
 	

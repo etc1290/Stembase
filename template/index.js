@@ -5,7 +5,7 @@ let pathset = []
 
 // FileSystem
 	//Main: File User Interface
-const fsfunc = async (path) => {
+const fsfunc = async (path,callback) => {
 		//Initialize
 		console.log(path)
 	const fspath = document.querySelector('[id=fs-path]')
@@ -62,8 +62,7 @@ const fsfunc = async (path) => {
 	}else{
 		console.log('Exception in show pathname')
 	}
-	
-	
+	return new Promise((resolve)=>{resolve(true)})
 }
 	// Side: Clear path text
 const fsclear = (path) =>{

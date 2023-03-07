@@ -48,6 +48,8 @@ ipcMain.handle('tag-main', (event,name,tag,path) =>{
 // Side: Display tags
 
 ipcMain.handle('tag-info', async(event,name,path) =>{
+	console.log(path)
+	console.log(name)
 	const sqlmeta = metaParser(path)
 	const cmd =`select tag from Meta where name = ?`
 	const output = new Promise((resolve)=>{
@@ -94,7 +96,7 @@ ipcMain.handle('tag-match',async(event,v)=>{
 				console.log(err)
 				resolve(err)
 			}else{
-				console.log(res)
+				//console.log(res)
 				const rawdata = res.map(i=>Object.values(i)[0])
 				const data = [...new Set(rawdata)]
 				resolve(data)
