@@ -48,14 +48,12 @@ ipcMain.handle('tag-main', (event,name,tag,path) =>{
 // Side: Display tags
 
 ipcMain.handle('tag-info', async(event,name,path) =>{
-	console.log(path)
-	console.log(name)
 	const sqlmeta = metaParser(path)
 	const cmd =`select tag from Meta where name = ?`
 	const output = new Promise((resolve)=>{
 		sqlmeta.all(cmd,[name],(err,res)=>{
 			if(err || res.length==0){
-				resolve('None')
+				resolve(false)
 			}else{
 				const data = res.map(i=>Object.values(i)[0])
 				resolve(data)
@@ -96,7 +94,7 @@ ipcMain.handle('tag-match',async(event,v)=>{
 				console.log(err)
 				resolve(err)
 			}else{
-				//console.log(res)
+				
 				const rawdata = res.map(i=>Object.values(i)[0])
 				const data = [...new Set(rawdata)]
 				resolve(data)
@@ -106,11 +104,11 @@ ipcMain.handle('tag-match',async(event,v)=>{
 	return output
 })
 //Side: Query
-ipcMain.handle('tag-query', (event,input,isTag=true)=>{
+ipcMain.handle('tag-query', (event,input,target,position,isTag=true)=>{
 	const output = new Promise((resolve)=>{
-		let cmd = `select tagref from Ref where tagref = ?`
+		let cmd = `select ` + target + ` from Ref where ` + position +` = ?`
 		if(!isTag){
-			cmd = `select nameref from Ref where nameref like ?`
+			cmd = `select ` + target + ` from Ref where ` + position +` like ?`
 			input = '%' + input
 		}
 		sqldb.all(cmd,[input],(err,res)=>{
