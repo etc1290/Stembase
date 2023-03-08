@@ -8,25 +8,13 @@ const tagmain = (name) =>{
 	document.getElementById('tag-write').addEventListener('click', async()=>{
 		const taginput 	= document.getElementById('tag-input').value
 		const tagpath	= document.getElementById('fs-path').innerHTML
-		const tagwrite = await window.tag.main(name,taginput,tagpath)
-		tagdisplay(name)
-	})
-}
-	// Side: Tag button function
-const tagbtnInit = () =>{
-	const tagbtn = document.querySelectorAll('button[class=tag-label]')
-	tagbtn.forEach(e =>{
-		e.addEventListener('dblclick', () =>{
-			console.log(e.innerHTML)
-		})
-		e.addEventListener('mousedown', () =>{
-			document.getElementById('tag-selected').value = e.innerHTML
-			const tagList = Array.from(document.querySelectorAll('button[class=tag-label]'))
-			const tagInnerList = tagList.map(function(e){return e.innerHTML})
-			const tagindex = tagInnerList.indexOf(e.innerHTML)
-			document.getElementById('tag-selected-id').value = tagindex
-			document.getElementById('tag-info').innerHTML =''
-		})
+		if (taginput == ''){
+			const inputError = await window.tag.error('taginput')
+		}else{
+			const tagwrite = await window.tag.main(name,taginput,tagpath)
+			tagdisplay(name)
+		}
+		
 	})
 }
 
@@ -182,7 +170,7 @@ const Truncation = (path)=>{
 		return path
 	}
 }
-	//Side:	Label function giver
+	//Side:	Label Renderer
 const tagfuncarr = []
 		//Search 
 tagfuncarr['tag-search-output'] = () =>{
@@ -209,7 +197,22 @@ tagfuncarr['tag-match-div'] = () =>{
 	})
 }		//Tag
 tagfuncarr['tag-display'] = ()=>{
-	tagbtnInit()
+	const tagbtn = document.querySelectorAll('button[class=tag-label]')
+	tagbtn.forEach(e =>{
+		e.addEventListener('dblclick', () =>{
+			console.log(e.innerHTML)
+		})
+		e.addEventListener('mousedown', () =>{
+			document.getElementById('tag-selected').value = e.innerHTML
+			/*
+			const tagList = Array.from(document.querySelectorAll('button[class=tag-label]'))
+			const tagInnerList = tagList.map(function(e){return e.innerHTML})
+			const tagindex = tagInnerList.indexOf(e.innerHTML)
+			document.getElementById('tag-selected-id').value = tagindex
+			*/
+			document.getElementById('tag-info').innerHTML =''
+		})
+	})
 }
 	// Write on screen 
 const tagupdate = (areaName,queryset)=>{

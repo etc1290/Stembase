@@ -1,4 +1,4 @@
-const {ipcMain} = require('electron')
+const {ipcMain,dialog} = require('electron')
 const fs = require('fs')
 const {JsonDB,Config} = require('node-json-db')
 const env = require('./env.js')
@@ -103,6 +103,7 @@ ipcMain.handle('tag-match',async(event,v)=>{
 	})
 	return output
 })
+
 //Side: Query
 ipcMain.handle('tag-query', (event,input,target,position,isTag=true)=>{
 	const output = new Promise((resolve)=>{
@@ -122,4 +123,10 @@ ipcMain.handle('tag-query', (event,input,target,position,isTag=true)=>{
 		})
 	})
 	return output
+})
+//Side: Exception Handler
+ipcMain.handle('tag-error', (event,error)=>{
+	const warn = []
+	warn['taginput'] = 'Tag cannot be null!!'
+	dialog.showErrorBox('ERROR',warn[error])
 })

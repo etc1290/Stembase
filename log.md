@@ -5,7 +5,11 @@
 	## 2022.03.08		version 0.3.6
 	-- Rewrite function
 	-- Clear wasted codes
-	## Changed
+	-- Fix Bug
+	# Fixed
+	1. Add popup warning window when not input tag but press tag button
+		-- finished
+	# Changed
 	1. Rewrite tag query function to present a more flexible function
 		-- finished
 	2. Rewrite all screen rendering function and wrap into one
