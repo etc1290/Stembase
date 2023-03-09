@@ -14,9 +14,6 @@
     <h1>Hello from Electron renderer!</h1>
     <p>👋</p>
     <p id="info"></p>
-	<div id='ux'>
-		<input type='hidden' id='ux-info'>
-	</div>
 	<p id='fs-path'></p>
 		<div id='main-function'>
 			<div id='fs'>
@@ -38,11 +35,11 @@
 				<div id='tag-window'>
 					<p id='ux-selected'>File is not selected</p>
 					<input id='tag-input' class='input-field'>
-					<div id='tag-btn'></div>
+					<div id='tag-btn'>
+						<button id='tag-write'>Add Tag</button>
+					</div>
 					<div id='tag-display'></div>
 					<div id='tag-placeholder'>
-						<input id='tag-selected' type='hidden' placeholder='tag(debug)'>
-						<input id='tag-selected-id' type='hidden' placeholder ='tag array id(debug)'>
 						<button id ='tag-delete'>Delete Tag</button>
 						<p id='tag-info'></p>
 					</div>

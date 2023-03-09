@@ -2,15 +2,14 @@
 
 	// Main: Tag add
 const tagmain = (name) =>{
-	const tagbtn = document.getElementById('tag-btn')
-	tagbtn.innerHTML = ''
-	tagbtn.insertAdjacentHTML('beforeend',`<button id='tag-write'>Tag button</button>`)
 	document.getElementById('tag-write').addEventListener('click', async()=>{
 		const taginput 	= document.getElementById('tag-input').value
 		const tagpath	= document.getElementById('fs-path').innerHTML
+		const name 		= document.getElementById('ux-selected').innerHTML
 		if (taginput == ''){
 			const inputError = await window.tag.error('taginput')
 		}else{
+			
 			const tagwrite = await window.tag.main(name,taginput,tagpath)
 			tagdisplay(name)
 		}
@@ -31,18 +30,11 @@ const tagdisplay = async (name) =>{
 	}
 	tagupdate('tag-display',queryset)
 }
-	// Side: Refresh
-const tagfunc = async (name) =>{
-	tagmain(name)
-	tagdisplay(name)	
-}
 
 	// Init: User Interactive Design
 const uxselect = async (name) =>{
-	
-	document.getElementById('ux-info').value = name
 	document.getElementById('ux-selected').innerHTML = name	
-	tagfunc(name)
+	tagdisplay(name)
 }
 	//Side: Tag delete
 const tagdelete = async () =>{
@@ -204,12 +196,6 @@ tagfuncarr['tag-display'] = ()=>{
 		})
 		e.addEventListener('mousedown', () =>{
 			document.getElementById('tag-selected').value = e.innerHTML
-			/*
-			const tagList = Array.from(document.querySelectorAll('button[class=tag-label]'))
-			const tagInnerList = tagList.map(function(e){return e.innerHTML})
-			const tagindex = tagInnerList.indexOf(e.innerHTML)
-			document.getElementById('tag-selected-id').value = tagindex
-			*/
 			document.getElementById('tag-info').innerHTML =''
 		})
 	})
@@ -261,6 +247,7 @@ const tagsearch = ()=>{
 }
 	// Init
 const tagInit = () =>{
+	tagmain()
 	tagdelete()
 	tagfocus()
 	tagsearch()

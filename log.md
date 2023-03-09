@@ -1,6 +1,16 @@
 # Stembase
  File tagging system
  
+ 
+---
+	## 2022.03.09		version 0.3.7
+	-- Clear wasted codes
+	-- Rewrite function
+	# Changed
+	1. Rewrite tagmain frome clicked trigger to one action for all
+		-- finished
+	2. Merge tagfunc and tagdisplay
+		-- finished
 ---
 	## 2022.03.08		version 0.3.6
 	-- Rewrite function
