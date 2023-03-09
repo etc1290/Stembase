@@ -13,6 +13,8 @@
 		-- finished
 	3. Rewrite tag selected mechanism and prepare for further tag editing fuction
 		-- finished
+	4. Modularize file label processing in tagsearch makes accessed from outside is available
+		-- finished
 ---
 	## 2022.03.08		version 0.3.6
 	-- Rewrite function

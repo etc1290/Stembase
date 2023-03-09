@@ -101,7 +101,7 @@ const tagLabelfunc = ()=>{
 		tagLabelbtn[i].addEventListener('click',async()=>{
 			const tag = tagLabelbtn[i].innerHTML
 			const queryset = await window.tag.query(tag,'nameref','tagref')
-			console.log(queryset)
+			//tagupdate('tag-search-output',queryset)
 		})
 	}
 	// File Label
@@ -157,17 +157,7 @@ const Truncation = (path)=>{
 }
 	//Side:	Label Renderer
 const tagfuncarr = []
-		//Search 
-tagfuncarr['tag-search-output'] = () =>{
-	const searchBlockbtn = document.querySelectorAll('div.tag-search-block')
-	const searchTagbtn = document.querySelectorAll('button.taglabel')
-	searchBlockbtn.forEach(e=>{
-		e.children[1].addEventListener('click',()=>{
-			e.children[0].dispatchEvent(new Event('click'))
-		})	
-	})
-	tagLabelfunc()
-}		//Match 
+//Match 
 tagfuncarr['tag-match-div'] = () =>{
 	const matchBlockbtn = document.querySelectorAll('button.tag-match-block')
 	const tagsearchbar = document.getElementById('tag-search')
@@ -180,12 +170,24 @@ tagfuncarr['tag-match-div'] = () =>{
 			tagbtn.dispatchEvent(new Event('click'))
 		})
 	})
-}		//Tag
+}
+		//Search 
+tagfuncarr['tag-search-output'] = () =>{
+	const searchBlockbtn = document.querySelectorAll('div.tag-search-block')
+	const searchTagbtn = document.querySelectorAll('button.taglabel')
+	searchBlockbtn.forEach(e=>{
+		e.children[1].addEventListener('click',()=>{
+			e.children[0].dispatchEvent(new Event('click'))
+		})	
+	})
+	tagLabelfunc()
+}				
+		//Tag
 tagfuncarr['tag-display'] = ()=>{
 	const tagbtn = document.querySelectorAll('button[class=tag-label]')
 	tagbtn.forEach(e =>{
 		e.addEventListener('dblclick', () =>{
-			console.log(e.innerHTML)
+			console.log(e.innerHTML)// The port of Tag interface
 		})
 		e.addEventListener('mousedown', () =>{
 			document.getElementById('tag-selected').innerHTML = e.innerHTML
@@ -208,7 +210,7 @@ const tagsearch = ()=>{
 		const evt = new Event('click')
 		const input = taginput.value
 		const tagset = await tag.query(input,'tagref','tagref')
-		const nameset = await tag.query(input,'nameref','nameref',false)
+		const fileset = await tag.query(input,'nameref','nameref',false)
 		
 		const searchBlock = []
 		const searchTagLabel = `<div class = 'tag-search-block'><button class='taglabel'>`
@@ -216,25 +218,29 @@ const tagsearch = ()=>{
 		for(var i=0;i<tagset.length;i++){
 			searchBlock[i] = searchTagLabel + tagset[i] + searchTagInfo
 		}
-		for(var i=0;i<nameset.length;i++){
-			const name = nameset[i]
-			const path = name.substring(0,name.lastIndexOf('\\') + 1)
-			let pathcut = ''
-			if(path.length > 20){
-				pathcut = path.substring(0,17) + `...`
-			}else{
-				pathcut = path
+		
+		const fileProcessor = (nameset,searchBlock=[]) =>{
+			for(var i=0;i<nameset.length;i++){
+				const name = nameset[i]
+				const path = name.substring(0,name.lastIndexOf('\\') + 1)
+				let pathcut = ''
+				if(path.length > 20){
+					pathcut = path.substring(0,17) + `...`
+				}else{
+					pathcut = path
+				}
+				const file = name.substring(name.lastIndexOf('\\') + 1,name.length)
+				const searchNameLabel = `<div class = 'tag-search-block'><button class = 'filelabel'>` + file + `</button><br>`
+				const searchNameInfo = `<em class = 'filelabel-info'>` + pathcut + `</em>`
+				const searchNameTooltip=`<em class = 'tooltip'>` + path + `</em></div>`
+				searchBlock[i+tagset.length] = searchNameLabel + searchNameInfo + searchNameTooltip
 			}
-			const file = name.substring(name.lastIndexOf('\\') + 1,name.length)
-			const searchNameLabel = `<div class = 'tag-search-block'><button class = 'filelabel'>` + file + `</button><br>`
-			const searchNameInfo = `<em class = 'filelabel-info'>` + pathcut + `</em>`
-			const searchNameTooltip=`<em class = 'tooltip'>` + path + `</em></div>`
-			searchBlock[i+tagset.length] = searchNameLabel + searchNameInfo + searchNameTooltip
 		}
-			
+		fileProcessor(fileset,searchBlock)
 		tagupdate('tag-search-output',searchBlock)
-		
-		
+		return {
+			file : fileProcessor
+		}
 	})
 }
 	// Init
