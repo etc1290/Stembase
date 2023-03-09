@@ -6,6 +6,7 @@
 	## 2022.03.09		version 0.3.7
 	-- Clear wasted codes
 	-- Rewrite function
+	-- Deprecate node-json-db
 	# Added
 	1. Add the follow-up function to tag system
 		-- finished
@@ -17,6 +18,8 @@
 	3. Rewrite tag selected mechanism and prepare for further tag editing fuction
 		-- finished
 	4. Modularize file label processing in tagsearch makes accessed from outside is available
+		-- finished
+	5. Deprecate node-json-db
 		-- finished
 	
 ---

@@ -4,29 +4,19 @@ const {JsonDB,Config} = require('node-json-db')
 const env = require('./env.js')
 const sqlite3 = require('sqlite3').verbose()
 const Stemdb= env('StemdbDir')
-const sqldb = new sqlite3.Database(Stemdb + '.db')
+const db = new sqlite3.Database(Stemdb + '.db')
 
-const db 	= new JsonDB(new Config(Stemdb,true,true,'/'))	
 const metaParser = (path)=>{return new sqlite3.Database(path + '\\Stemmeta.db')}
-// Side: Search tags
-const tagsearch = (name='',path='',isMeta = true) =>{
-	if(isMeta){
-		const meta	= new JsonDB(new Config(path + '\\Stemmeta',true,true,'/'))
-		return meta.getData('/' + name)
-	}else{
-		return db.getData('/file/' + path +'\\'+ name)
-	}
-}
 // Main: Add tags
 
 ipcMain.handle('tag-main', (event,name,tag,path) =>{
 	const filename = path + '\\' + name
 	const sqlmeta = metaParser(path)
 	let output = ''
-	sqldb.run(`insert or ignore into File(name,file) values(?,?)`,[filename,name],()=>{
-		sqldb.run(`insert or ignore into Tag(tag) values(?)`,[tag],()=>{
+	db.run(`insert or ignore into File(name,file) values(?,?)`,[filename,name],()=>{
+		db.run(`insert or ignore into Tag(tag) values(?)`,[tag],()=>{
 			const cmd = `insert or ignore into Ref(nameref,tagref) values(?,?)`
-			sqldb.run(cmd,[filename,tag],()=>{})
+			db.run(cmd,[filename,tag],()=>{})
 		})
 	})
 	output = new Promise((resolve)=>{
@@ -78,7 +68,7 @@ ipcMain.handle('tag-remove', async(event,file,tag,path) =>{
 	})
 	
 	const cmd = `delete from Ref where nameref = ? and tagref = ?`
-	sqldb.run(cmd,[filename,tag],(err)=>{})
+	db.run(cmd,[filename,tag],(err)=>{})
 	return output
 })
 //Side:	partial match
@@ -89,7 +79,7 @@ ipcMain.handle('tag-match',async(event,v)=>{
 	const cmdb = `select name from File where file like ? collate nocase`
 	const cmd = cmda + cmdb
 	const output = new Promise((resolve)=>{
-		sqldb.all(cmd,[input,input],(err,res)=>{
+		db.all(cmd,[input,input],(err,res)=>{
 			if(err){
 				console.log(err)
 				resolve(err)
@@ -112,7 +102,7 @@ ipcMain.handle('tag-query', (event,input,target,position,isTag=true)=>{
 			cmd = `select ` + target + ` from Ref where ` + position +` like ?`
 			input = '%' + input
 		}
-		sqldb.all(cmd,[input],(err,res)=>{
+		db.all(cmd,[input],(err,res)=>{
 			if(err){
 				resolve(err)
 			}else{
