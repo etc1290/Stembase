@@ -6,6 +6,9 @@
 	## 2022.03.09		version 0.3.7
 	-- Clear wasted codes
 	-- Rewrite function
+	# Added
+	1. Add the follow-up function to tag system
+		-- finished
 	# Changed
 	1. Rewrite tagmain frome clicked trigger to one action for all
 		-- finished
@@ -15,6 +18,7 @@
 		-- finished
 	4. Modularize file label processing in tagsearch makes accessed from outside is available
 		-- finished
+	
 ---
 	## 2022.03.08		version 0.3.6
 	-- Rewrite function
