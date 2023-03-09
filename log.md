@@ -11,6 +11,8 @@
 		-- finished
 	2. Merge tagfunc and tagdisplay
 		-- finished
+	3. Rewrite tag selected mechanism and prepare for further tag editing fuction
+		-- finished
 ---
 	## 2022.03.08		version 0.3.6
 	-- Rewrite function

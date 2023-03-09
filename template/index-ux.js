@@ -42,17 +42,10 @@ const tagdelete = async () =>{
 	
 	tagDeletedbtn.addEventListener('click', async(e) =>{
 		const file = document.getElementById('ux-selected').innerHTML
-		const tag = document.getElementById('tag-selected').value
-		if (tag!==''){
-			const tagpath = document.getElementById('fs-path').innerHTML
-			const tagremove = await window.tag.remove(file,tag,tagpath)
-			document.getElementById('tag-selected-id').value =''
-			tagdisplay(file)
-		}else{
-			const taginfo = document.getElementById('tag-info')
-			taginfo.innerHTML = 'Tag is not selected'
-		}
-		
+		const tag = document.getElementById('tag-selected').innerHTML
+		const tagpath = document.getElementById('fs-path').innerHTML
+		const tagremove = await window.tag.remove(file,tag,tagpath)
+		tagdisplay(file)		
 	})
 }
 	//Side: Auto selected
@@ -195,8 +188,7 @@ tagfuncarr['tag-display'] = ()=>{
 			console.log(e.innerHTML)
 		})
 		e.addEventListener('mousedown', () =>{
-			document.getElementById('tag-selected').value = e.innerHTML
-			document.getElementById('tag-info').innerHTML =''
+			document.getElementById('tag-selected').innerHTML = e.innerHTML
 		})
 	})
 }

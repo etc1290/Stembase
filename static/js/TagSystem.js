@@ -128,5 +128,6 @@ ipcMain.handle('tag-query', (event,input,target,position,isTag=true)=>{
 ipcMain.handle('tag-error', (event,error)=>{
 	const warn = []
 	warn['taginput'] = 'Tag cannot be null!!'
+	warn['tagdelete']= 'Tag is not selected!'
 	dialog.showErrorBox('ERROR',warn[error])
 })
