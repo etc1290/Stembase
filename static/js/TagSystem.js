@@ -6,7 +6,7 @@ const sqlite3 = require('sqlite3').verbose()
 const Stemdb= env('StemdbDir')
 const db = new sqlite3.Database(Stemdb + '.db')
 
-const metaParser = (path)=>{return new sqlite3.Database(path + '\\Stemmeta.db')}
+const metaParser = (path)=>{return new sqlite3.Database(path + '\\Stemmeta.db',()=>{})}
 // Main: Add tags
 
 ipcMain.handle('tag-main', (event,name,tag,path) =>{

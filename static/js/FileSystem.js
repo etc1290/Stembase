@@ -69,8 +69,7 @@ const time = require('./time.js')
 		}else if(fs.lstatSync(v).isDirectory()){
 			fsdata = (({file,size,mtime})=>({file,size,mtime}))(dataMiner(v,['file','size','mtime']))
 			return fsdata
-		}else{
-			console.log('this is a file')			
+		}else{			
 			const path = v.split('\\').slice(0,-1).join('\\')
 			fsdata = (({file,size,mtime})=>({file,size,mtime}))(dataMiner(path,['file','size','mtime']))
 			return fsdata
@@ -96,4 +95,5 @@ const time = require('./time.js')
 		return fsobject
 
 	})
+	//Side: Exception Handler
 	

@@ -15,7 +15,7 @@ contextBridge.exposeInMainWorld('fs', {
 	type:		(v)=> ipcRenderer.invoke('fs-type',v),
 	path:		(v)=> ipcRenderer.invoke('fs-path',v),
     getDir:     ()=> ipcRenderer.invoke('fs-getDir'),
-    createMeta: ()=> ipcRenderer.invoke('fs-createMeta'),
+    createMeta: ()=> ipcRenderer.invoke('fs-createMeta')
 })
 
 // ChildWindow

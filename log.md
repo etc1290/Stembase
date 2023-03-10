@@ -1,7 +1,16 @@
 # Stembase
  File tagging system
  
- 
+
+---
+	## 2022.03.10		version 0.3.7.1
+	-- Rewrite function
+	-- Bug fix
+	# Changed
+	1. Slightly modified some codes
+		-- finished
+	2. Fix the bug if interact file in a directory without meta
+		-- finished
 ---
 	## 2022.03.09		version 0.3.7
 	-- Clear wasted codes

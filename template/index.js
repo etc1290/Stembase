@@ -4,14 +4,38 @@ information.innerText = `This app is using Chrome (v${versions.chrome()}), Node.
 let pathset = []
 
 // FileSystem
+const fsgetPath = ()=>{
+	const path = document.getElementById('fs-path').innerHTML
+	const output = path.replace('<p>','').replace('</p>','')
+	return output
+}
+const fssetPath = (v)=>{
+	console.log(v)
+	const updateDiv = document.getElementById('fs-path')
+	let pathset = v.split('\\')
+	for(var i=0;i=pathset.length;i++){
+		pathset[i] = `<p id='fs-path-part-` + i + `'class='fs-path-part'>` + pathset[i] + `</p>`
+	}
+	const path = pathArr.join('')
+	updateDiv.innerHTML = path
+	const partset = document.querySelectorAll('.fs-path-part')
+	for(var i=0;i=partset.length;i++){
+		partset[i].addEventListener('click',()=>{
+			console.log(partset[i].id)
+		})
+	}
+}
 	//Main: File User Interface
-const fsfunc = async (path,callback) => {
+const fsfunc = async (path) => {
 		//Initialize
-	const fspath = document.querySelector('[id=fs-path]')
-	const updateDiv = document.querySelector('div[id=fs-main]')
-	const nowPath = fspath.innerHTML
-	fspath.innerHTML=''
-	let focusStorage = 'fs-info'
+	const fspath = document.getElementById('fs-path')
+	const updateDiv = document.getElementById('fs-main')
+	//const nowPath = fspath.innerHTML
+	const nowPath = fsgetPath()
+	//fspath.innerHTML=''
+	//console.log(path)
+	//fssetPath(path)
+	
 	const {file,size,mtime} = await window.fs.main(path)
 	const fsdataset = []	
 	for(var i=0;i<file.length;i++){
@@ -27,11 +51,13 @@ const fsfunc = async (path,callback) => {
 	updateDiv.innerHTML = fsdataset.join('')
 	
 		//Button function
+	let focusStorage = 'fs-info'
 	const fslabelset = document.querySelectorAll('div[class=fs-data-label]')
 	fslabelset.forEach(e =>{
 		e.addEventListener('dblclick',async() =>{
-			fsfunc(fspath.innerHTML + '\\' + e.firstChild.innerHTML)
+			fsfunc(fsgetPath() + '\\' + e.firstChild.innerHTML)
 		})
+			//Select file
 		e.addEventListener('click',async(evt) =>{
 			uxselect(e.firstChild.innerHTML)
 			e.style.background = 'rgb(167,203,221)'		
@@ -50,12 +76,9 @@ const fsfunc = async (path,callback) => {
 	}else if (typeof path !== 'undefined'){
 		 
 		//Check file typeof		
-		const fstype = await window.fs.type(fspath.innerHTML + path)
-		if (fstype){			
-			fspath.innerHTML += path
-		}else{
-			console.log('this is a file')
-			fspath.innerHTML = nowPath
+		const fstype = await window.fs.type(path)
+		if (fstype){						
+			fspath.innerHTML = path
 		}
 		
 	}else{
@@ -65,7 +88,7 @@ const fsfunc = async (path,callback) => {
 }
 	// Side: Clear path text
 const fsclear = (path) =>{
-	document.querySelector('p[id=fs-path]').innerHTML=''
+	document.getElementById('fs-path').innerHTML=''
 }
 	// Side: Directory browser
 document.getElementById('fs-openDir').addEventListener('click', async () => {
@@ -81,7 +104,7 @@ document.getElementById('fs-home').addEventListener('click', async () =>{
 
 	// Side: Uplevel
 document.getElementById('fs-up').addEventListener('click', async () =>{
-	const nowPath = document.querySelector('p[id=fs-path]')
+	const nowPath = document.getElementById('fs-path')
 	const newPath = nowPath.innerHTML.split('\\').slice(0,-1).join('\\')
 	if(newPath == 'C:'){
 		fsfunc('C:\\')
@@ -106,11 +129,7 @@ btn.addEventListener('click', async () => {
 //Initailizer
 fsfunc('default')
 
-const testfunc = async ()=>{
-	//const apple = await window.cw.codelab()
-}
 
-testfunc()
 
 
 
