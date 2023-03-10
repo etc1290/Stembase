@@ -13,7 +13,7 @@ contextBridge.exposeInMainWorld('versions', {
 contextBridge.exposeInMainWorld('fs', {
     main: 		(v)=> ipcRenderer.invoke('fs-main',v),
 	type:		(v)=> ipcRenderer.invoke('fs-type',v),
-	path:		(v)=> ipcRenderer.invoke('fs-path',v),
+	path:		()=> ipcRenderer.invoke('fs-path'),
     getDir:     ()=> ipcRenderer.invoke('fs-getDir'),
     createMeta: ()=> ipcRenderer.invoke('fs-createMeta')
 })

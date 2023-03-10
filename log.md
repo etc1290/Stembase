@@ -11,6 +11,9 @@
 		-- finished
 	2. Fix the bug if interact file in a directory without meta
 		-- finished
+	3. Rewrite home path display
+		-- finished
+		
 ---
 	## 2022.03.09		version 0.3.7
 	-- Clear wasted codes

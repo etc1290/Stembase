@@ -26,7 +26,7 @@ const fssetPath = (v)=>{
 	}
 }
 	//Main: File User Interface
-const fsfunc = async (path) => {
+const fsfunc = async (path=false) => {
 		//Initialize
 	const fspath = document.getElementById('fs-path')
 	const updateDiv = document.getElementById('fs-main')
@@ -52,7 +52,7 @@ const fsfunc = async (path) => {
 	
 		//Button function
 	let focusStorage = 'fs-info'
-	const fslabelset = document.querySelectorAll('div[class=fs-data-label]')
+	const fslabelset = document.querySelectorAll('div.fs-data-label')
 	fslabelset.forEach(e =>{
 		e.addEventListener('dblclick',async() =>{
 			fsfunc(fsgetPath() + '\\' + e.firstChild.innerHTML)
@@ -70,8 +70,9 @@ const fsfunc = async (path) => {
 	})
 		//Show pathname
 		
-	const pathname = await window.fs.path(path)
-	if(path == 'default'){
+	
+	if(!path){
+		const pathname = await window.fs.path(path)
 		fspath.innerHTML = pathname
 	}else if (typeof path !== 'undefined'){
 		 
@@ -99,7 +100,7 @@ document.getElementById('fs-openDir').addEventListener('click', async () => {
 })
 	// Side: Home 
 document.getElementById('fs-home').addEventListener('click', async () =>{
-	fsfunc('default')
+	fsfunc()
 })
 
 	// Side: Uplevel
@@ -127,7 +128,7 @@ btn.addEventListener('click', async () => {
   })
 
 //Initailizer
-fsfunc('default')
+fsfunc()
 
 
 

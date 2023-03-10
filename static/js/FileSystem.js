@@ -63,7 +63,7 @@ const time = require('./time.js')
 			return output			
 		}
 		// Main function starts here
-		if(typeof v == 'undefined' || v == 'default'){
+		if(typeof v == 'undefined' || !v){
 			fsdata = (({file,size,mtime})=>({file,size,mtime}))(dataMiner(env('StartDir'),['file','size','mtime']))
 			return fsdata
 		}else if(fs.lstatSync(v).isDirectory()){
@@ -77,10 +77,8 @@ const time = require('./time.js')
 		
 	})
 	//Side: Store file path
-	ipcMain.handle('fs-path',	(event,v) =>{
-		if(v == 'default'){
-			return app.getAppPath()
-		}
+	ipcMain.handle('fs-path',	(event) =>{
+		return app.getAppPath()
 	})
 	//Side: File type checker
 	ipcMain.handle('fs-type', (event,v) =>{
