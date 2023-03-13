@@ -1,6 +1,7 @@
 
 #fs-path{
 	height:			5vh;
+	display:		flex;
 }
 #main-function{
 	height:			70vh;

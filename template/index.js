@@ -5,21 +5,30 @@ let pathset = []
 
 // FileSystem
 const fsgetPath = ()=>{
+	console.time('first')
+	
 	const path = document.getElementById('fs-path').innerHTML
-	const output = path.replace('<p>','').replace('</p>','')
+	console.time('regex method')
+	const b = path.replace(/(\<.*?\>)/gi,'\\')
+	
+	const c = b.replaceAll('\\\\\\','\\')
+	const output = c.slice(0,-1).slice(1,b.length-1)
+	console.log(output)
+	//const output = path.replace('<p>','').replace('</p>','')
 	return output
 }
+
 const fssetPath = (v)=>{
 	console.log(v)
 	const updateDiv = document.getElementById('fs-path')
 	let pathset = v.split('\\')
-	for(var i=0;i=pathset.length;i++){
-		pathset[i] = `<p id='fs-path-part-` + i + `'class='fs-path-part'>` + pathset[i] + `</p>`
+	for(var i=0;i<pathset.length;i++){
+		pathset[i] = `<p id='fs-path-part-` + i + `'class='fs-path-part'>` + pathset[i] + `\\</p>`
 	}
-	const path = pathArr.join('')
+	const path = pathset.join('')
 	updateDiv.innerHTML = path
 	const partset = document.querySelectorAll('.fs-path-part')
-	for(var i=0;i=partset.length;i++){
+	for(var i=0;i<partset.length;i++){
 		partset[i].addEventListener('click',()=>{
 			console.log(partset[i].id)
 		})
@@ -35,7 +44,7 @@ const fsfunc = async (path=false) => {
 	//fspath.innerHTML=''
 	//console.log(path)
 	//fssetPath(path)
-	
+	console.log('aaa' + path)
 	const {file,size,mtime} = await window.fs.main(path)
 	const fsdataset = []	
 	for(var i=0;i<file.length;i++){
@@ -55,7 +64,7 @@ const fsfunc = async (path=false) => {
 	const fslabelset = document.querySelectorAll('div.fs-data-label')
 	fslabelset.forEach(e =>{
 		e.addEventListener('dblclick',async() =>{
-			fsfunc(fsgetPath() + '\\' + e.firstChild.innerHTML)
+			fsfunc(fsgetPath()  + e.firstChild.innerHTML)
 		})
 			//Select file
 		e.addEventListener('click',async(evt) =>{
@@ -73,13 +82,16 @@ const fsfunc = async (path=false) => {
 	
 	if(!path){
 		const pathname = await window.fs.path(path)
-		fspath.innerHTML = pathname
+		//fspath.innerHTML = pathname
+		console.log('aaa')
+		fssetPath(pathname)
 	}else if (typeof path !== 'undefined'){
 		 
 		//Check file typeof		
 		const fstype = await window.fs.type(path)
 		if (fstype){						
-			fspath.innerHTML = path
+			//fspath.innerHTML = path
+			fssetPath(path)
 		}
 		
 	}else{
@@ -105,12 +117,15 @@ document.getElementById('fs-home').addEventListener('click', async () =>{
 
 	// Side: Uplevel
 document.getElementById('fs-up').addEventListener('click', async () =>{
-	const nowPath = document.getElementById('fs-path')
-	const newPath = nowPath.innerHTML.split('\\').slice(0,-1).join('\\')
-	if(newPath == 'C:'){
+	/*const nowPath = document.getElementById('fs-path')
+	const newPath = nowPath.innerHTML.split('\\').slice(0,-1).join('\\')*/
+	const currPath = fsgetPath()
+	console.log(currPath)
+	const path = currPath.split('\\').slice(0,-2).join('\\')
+	if(path == 'C:'){
 		fsfunc('C:\\')
-	}else if (newPath){
-		fsfunc(newPath)
+	}else if (path){
+		fsfunc(path)
 	}else{
 		document.getElementById('fs-info').innerHTML = 'Error in FS Up level'
 	}

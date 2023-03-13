@@ -1,7 +1,12 @@
 # Stembase
  File tagging system
  
-
+---
+	## 2022.03.13		version 0.3.8
+	-- Rewrite function
+	# Changed
+	1. Rewrite uplevel, getpath and file label button function
+		-- finished
 ---
 	## 2022.03.10		version 0.3.7.1
 	-- Rewrite function
