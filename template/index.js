@@ -4,17 +4,11 @@ information.innerText = `This app is using Chrome (v${versions.chrome()}), Node.
 let pathset = []
 
 // FileSystem
-const fsgetPath = ()=>{
-	console.time('first')
-	
+const fsgetPath = ()=>{	
 	const path = document.getElementById('fs-path').innerHTML
-	console.time('regex method')
-	const b = path.replace(/(\<.*?\>)/gi,'\\')
-	
-	const c = b.replaceAll('\\\\\\','\\')
-	const output = c.slice(0,-1).slice(1,b.length-1)
-	console.log(output)
-	//const output = path.replace('<p>','').replace('</p>','')
+	const rawPath = path.replace(/(\<.*?\>)/gi,'\\')	
+	const newPath = rawPath.replaceAll('\\\\\\','\\')
+	const output = newPath.slice(0,-1).slice(1,b.length-1)
 	return output
 }
 
