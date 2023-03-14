@@ -2,6 +2,16 @@
  File tagging system
  
 ---
+	## 2022.03.14		version 0.3.9
+	-- Path structure function
+	-- Clear wasted codes
+	-- Style design
+	# Added
+	1. Add browsing function through file path
+		-- finished
+	2. Give color to check hover and pressed and return to default when leaving
+		-- finished
+---
 	## 2022.03.13		version 0.3.8
 	-- Rewrite function
 	# Changed

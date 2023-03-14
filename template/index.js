@@ -8,12 +8,11 @@ const fsgetPath = ()=>{
 	const path = document.getElementById('fs-path').innerHTML
 	const rawPath = path.replace(/(\<.*?\>)/gi,'\\')	
 	const newPath = rawPath.replaceAll('\\\\\\','\\')
-	const output = newPath.slice(0,-1).slice(1,b.length-1)
+	const output = newPath.slice(0,-1).slice(1,newPath.length-1)
 	return output
 }
 
 const fssetPath = (v)=>{
-	console.log(v)
 	const updateDiv = document.getElementById('fs-path')
 	let pathset = v.split('\\')
 	for(var i=0;i<pathset.length;i++){
@@ -22,9 +21,27 @@ const fssetPath = (v)=>{
 	const path = pathset.join('')
 	updateDiv.innerHTML = path
 	const partset = document.querySelectorAll('.fs-path-part')
-	for(var i=0;i<partset.length;i++){
-		partset[i].addEventListener('click',()=>{
-			console.log(partset[i].id)
+	const pathlog = []
+	const pathlogout = []
+	// Side: Path function
+	for(let i=0;i<partset.length;i++){
+		const part = partset[i]
+		const target = document.getElementById(part.id)
+		pathlog[i] = part.innerHTML
+		pathlogout[i] = pathlog.join('')
+		part.addEventListener('mouseover',()=>{
+			target.style.background = 'rgb(255,232,189)'
+		})
+		part.addEventListener('mouseleave',()=>{
+			target.style.background = 'rgb(255,250,240)'
+		})
+		part.addEventListener('mousedown',()=>{			
+			target.style.background = 'rgb(255,221,158)'
+			
+		})
+		part.addEventListener('mouseup',()=>{
+			target.style.background = 'rgb(255,250,240)'
+			fsfunc(pathlogout[i])
 		})
 	}
 }
@@ -33,12 +50,7 @@ const fsfunc = async (path=false) => {
 		//Initialize
 	const fspath = document.getElementById('fs-path')
 	const updateDiv = document.getElementById('fs-main')
-	//const nowPath = fspath.innerHTML
 	const nowPath = fsgetPath()
-	//fspath.innerHTML=''
-	//console.log(path)
-	//fssetPath(path)
-	console.log('aaa' + path)
 	const {file,size,mtime} = await window.fs.main(path)
 	const fsdataset = []	
 	for(var i=0;i<file.length;i++){
@@ -76,8 +88,6 @@ const fsfunc = async (path=false) => {
 	
 	if(!path){
 		const pathname = await window.fs.path(path)
-		//fspath.innerHTML = pathname
-		console.log('aaa')
 		fssetPath(pathname)
 	}else if (typeof path !== 'undefined'){
 		 
@@ -111,8 +121,6 @@ document.getElementById('fs-home').addEventListener('click', async () =>{
 
 	// Side: Uplevel
 document.getElementById('fs-up').addEventListener('click', async () =>{
-	/*const nowPath = document.getElementById('fs-path')
-	const newPath = nowPath.innerHTML.split('\\').slice(0,-1).join('\\')*/
 	const currPath = fsgetPath()
 	console.log(currPath)
 	const path = currPath.split('\\').slice(0,-2).join('\\')
