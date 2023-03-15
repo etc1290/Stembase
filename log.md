@@ -2,6 +2,16 @@
  File tagging system
  
 ---
+	## 2022.03.15		version 0.3.9.1
+	-- Bug Fix
+	-- Rewrite function
+	# Changed
+	1. Rewrite drive checking process
+		-- finished
+	# Fixed
+	1. Fix FATAL ERROR: Error::ThrowAsJavaScriptException napi_throw
+		-- finished
+---
 	## 2022.03.14		version 0.3.9
 	-- Path structure function
 	-- Clear wasted codes

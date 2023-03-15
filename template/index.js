@@ -46,7 +46,7 @@ const fssetPath = (v)=>{
 	}
 }
 	//Main: File User Interface
-const fsfunc = async (path=false) => {
+const fsfunc = async (path=false,isDrive=false) => {
 		//Initialize
 	const fspath = document.getElementById('fs-path')
 	const updateDiv = document.getElementById('fs-main')
@@ -95,7 +95,7 @@ const fsfunc = async (path=false) => {
 		const fstype = await window.fs.type(path)
 		if (fstype){						
 			//fspath.innerHTML = path
-			fssetPath(path)
+			fssetPath(path,isDrive)
 		}
 		
 	}else{
@@ -122,10 +122,12 @@ document.getElementById('fs-home').addEventListener('click', async () =>{
 	// Side: Uplevel
 document.getElementById('fs-up').addEventListener('click', async () =>{
 	const currPath = fsgetPath()
-	console.log(currPath)
 	const path = currPath.split('\\').slice(0,-2).join('\\')
-	if(path == 'C:'){
-		fsfunc('C:\\')
+	const reg = /(?=^.{0,2}$)[A-Z]:/
+	const isDrive = reg.test(path)
+	if(isDrive){
+		console.log('first stage')
+		fsfunc(path+'\\')
 	}else if (path){
 		fsfunc(path)
 	}else{
