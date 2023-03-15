@@ -4,7 +4,7 @@
 const tagmain = (name) =>{
 	document.getElementById('tag-write').addEventListener('click', async()=>{
 		const taginput 	= document.getElementById('tag-input').value
-		const tagpath	= document.getElementById('fs-path').innerHTML
+		const tagpath = fsgetPath()
 		const name 		= document.getElementById('ux-selected').innerHTML
 		if (taginput == ''){
 			const inputError = await window.tag.error('taginput')
@@ -19,7 +19,7 @@ const tagmain = (name) =>{
 
 	// Side: Tag display
 const tagdisplay = async (name) =>{
-	const tagpath	= document.getElementById('fs-path').innerHTML
+	const tagpath = fsgetPath()
 	const taginfo 	= await window.tag.info(name,tagpath)
 	const queryset = []
 	for (var i=0;i<taginfo.length;i++){
@@ -43,7 +43,7 @@ const tagdelete = async () =>{
 	tagDeletedbtn.addEventListener('click', async(e) =>{
 		const file = document.getElementById('ux-selected').innerHTML
 		const tag = document.getElementById('tag-selected').innerHTML
-		const tagpath = document.getElementById('fs-path').innerHTML
+		const tagpath = fsgetPath()
 		const tagremove = await window.tag.remove(file,tag,tagpath)
 		tagdisplay(file)		
 	})

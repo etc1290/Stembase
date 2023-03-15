@@ -12,7 +12,7 @@ const db = new sqlite3.Database(Stemdb + '.db')
 const FileTree = require(env('StaticDir') + 'js/FileTree.js')
 var fileTree = new FileTree(__dirname)
 
-app.allowRendererProcessReuse = false
+//app.allowRendererProcessReuse = false
 // Create a new db
 db.get('PRAGMA foreign_keys = ON')
 db.run(`create table "File" (

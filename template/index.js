@@ -74,6 +74,7 @@ const fsfunc = async (path=false,isDrive=false) => {
 		})
 			//Select file
 		e.addEventListener('click',async(evt) =>{
+		
 			uxselect(e.firstChild.innerHTML)
 			e.style.background = 'rgb(167,203,221)'		
 			const focusTarget = evt.currentTarget.id		

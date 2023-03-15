@@ -2,6 +2,12 @@
  File tagging system
  
 ---
+	## 2022.03.15		version 0.3.9.2
+	-- Bug fix
+	# Fixed
+	1. Fix tag display,add and delete function defect due to new fspath mechanism
+		-- finished
+---
 	## 2022.03.15		version 0.3.9.1
 	-- Bug Fix
 	-- Rewrite function
