@@ -15,6 +15,8 @@ const fsgetPath = ()=>{
 const fssetPath = (v)=>{
 	const updateDiv = document.getElementById('fs-path')
 	let pathset = v.split('\\')
+	pathset.filter(n => n)
+	console.log('fssetpath:' + pathset)
 	for(var i=0;i<pathset.length;i++){
 		pathset[i] = `<p id='fs-path-part-` + i + `'class='fs-path-part'>` + pathset[i] + `\\</p>`
 	}
@@ -46,12 +48,17 @@ const fssetPath = (v)=>{
 	}
 }
 	//Main: File User Interface
-const fsfunc = async (path=false,isDrive=false) => {
+const fsfunc = async (v=false,isDrive=false) => {
 		//Initialize
 	const fspath = document.getElementById('fs-path')
 	const updateDiv = document.getElementById('fs-main')
 	const nowPath = fsgetPath()
-	const {file,size,mtime} = await window.fs.main(path)
+	const path = v
+	console.log('fsfunc:' + path)
+	if(isDrive){
+		v = v + '\\'
+	}
+	const {file,size,mtime} = await window.fs.main(v)
 	const fsdataset = []	
 	for(var i=0;i<file.length;i++){
 		if(size[i]){
@@ -95,8 +102,7 @@ const fsfunc = async (path=false,isDrive=false) => {
 		//Check file typeof		
 		const fstype = await window.fs.type(path)
 		if (fstype){						
-			//fspath.innerHTML = path
-			fssetPath(path,isDrive)
+			fssetPath(path)
 		}
 		
 	}else{
@@ -123,12 +129,16 @@ document.getElementById('fs-home').addEventListener('click', async () =>{
 	// Side: Uplevel
 document.getElementById('fs-up').addEventListener('click', async () =>{
 	const currPath = fsgetPath()
-	const path = currPath.split('\\').slice(0,-2).join('\\')
+	let path = currPath.split('\\').slice(0,-2).join('\\')
+	if(!path){
+		path = currPath.replace(/.$/,'')
+	}
 	const reg = /(?=^.{0,2}$)[A-Z]:/
 	const isDrive = reg.test(path)
+	console.log(path)
 	if(isDrive){
-		console.log('first stage')
-		fsfunc(path+'\\')
+		console.log('below')
+		fsfunc(path,isDrive)
 	}else if (path){
 		fsfunc(path)
 	}else{
@@ -142,11 +152,15 @@ document.getElementById('cw-setting').addEventListener('click', async () =>{
 })
 
 //Test function
+/*
 btn.addEventListener('click', async () => {
 	const filePath = await window.versions.fileTree()
 	console.log(JSON.parse(filePath)) 
   })
-
+*/
+document.getElementById('btn').addEventListener('click',()=>{
+	console.log('ding!')
+})
 //Initailizer
 fsfunc()
 

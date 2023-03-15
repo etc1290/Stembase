@@ -7,6 +7,8 @@
 	# Fixed
 	1. Fix tag display,add and delete function defect due to new fspath mechanism
 		-- finished
+	2. Fix when uplevel to drive would get double slash
+		-- finished
 ---
 	## 2022.03.15		version 0.3.9.1
 	-- Bug Fix
