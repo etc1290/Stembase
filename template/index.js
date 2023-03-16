@@ -44,19 +44,6 @@ const fssetPath = (v)=>{
 			target.style.background = 'rgb(255,250,240)'
 			fsfunc(pathlogout[i])
 		})
-		
-		/*
-		if(i=0){
-			part.addEventListener('mouseup',()=>{
-				target.style.background = 'rgb(255,250,240)'
-				fsfunc(pathlogout[i] + '\\')
-			})
-		}else{
-			part.addEventListener('mouseup',()=>{
-				target.style.background = 'rgb(255,250,240)'
-				fsfunc(pathlogout[i])
-			})
-		}	*/
 	}
 }
 	//Main: File User Interface
@@ -104,8 +91,6 @@ const fsfunc = async (v=false,isDrive=false) => {
 		})
 	})
 		//Show pathname
-		
-	
 	if(!path){
 		const pathname = await window.fs.path(path)
 		fssetPath(pathname)
@@ -121,10 +106,6 @@ const fsfunc = async (v=false,isDrive=false) => {
 		console.log('Exception in show pathname')
 	}
 	return new Promise((resolve)=>{resolve(true)})
-}
-	// Side: Clear path text
-const fsclear = (path) =>{
-	document.getElementById('fs-path').innerHTML=''
 }
 	// Side: Directory browser
 document.getElementById('fs-openDir').addEventListener('click', async () => {
@@ -155,6 +136,7 @@ document.getElementById('fs-up').addEventListener('click', async () =>{
 		document.getElementById('fs-info').innerHTML = 'Error in FS Up level'
 	}
 })
+
 // Toolbar
 document.getElementById('cw-setting').addEventListener('click', async () =>{
 	const stCreateWindow = await window.cw.setting()
@@ -173,6 +155,7 @@ document.getElementById('btn').addEventListener('click',()=>{
 })
 //Initailizer
 fsfunc()
+fsedit()
 
 
 

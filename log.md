@@ -5,6 +5,7 @@
 ---
 	## 2022.03.16		version 0.3.9.3
 	-- Bug fix
+	-- Clear wasted codes
 	# Fixed
 	1. Fix path browsing function double slash bug
 		-- finished
