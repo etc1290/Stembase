@@ -1,7 +1,22 @@
 # Stembase
  File tagging system
  
- 
+
+---
+	## 2022.03.16		version 0.4.0
+	-- Style change
+	-- Structure change
+	-- Implement function
+	# Added
+	1. Add fs-floor for further structured-type file system implementation
+		-- finished
+	2. Implement fsfloor structure
+		-- finished
+	# Changed
+	1. Set toolbar sticky to top
+		-- finished
+	2. Set horizontal display and nowrap 
+		-- finished
 ---
 	## 2022.03.16		version 0.3.9.3
 	-- Bug fix

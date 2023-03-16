@@ -46,14 +46,14 @@ const fssetPath = (v)=>{
 		})
 	}
 }
+
 	//Main: File User Interface
-const fsfunc = async (v=false,isDrive=false) => {
+const fsfunc = async (v=false,isDrive=false,floorNum='fs-floor-0') => {
 		//Initialize
 	const fspath = document.getElementById('fs-path')
-	const updateDiv = document.getElementById('fs-floor-0')
+	const updateDiv = document.getElementById(floorNum)
 	const nowPath = fsgetPath()
 	const path = v
-	console.log('fsfunc:' + path)
 	if(isDrive){
 		v = v + '\\'
 	}
@@ -66,17 +66,26 @@ const fsfunc = async (v=false,isDrive=false) => {
 			const fsmtime = `<p class='fs-data-mtime'>`+ mtime[i] +`</p></div>`
 			const fsdata = fsbtn + fssize + fsmtime + `<br>`
 			fsdataset[i] = fsdata
-		}
-		
+		}	
 	}
+	console.log(floorNum)
 	updateDiv.innerHTML = fsdataset.join('')
 	
 		//Button function
 	let focusStorage = 'fs-info'
-	const fslabelset = document.querySelectorAll('div.fs-data-label')
+	const maxFloor = 2
+	const fslabelset = document.querySelectorAll('#' + floorNum +' .fs-data-label')
 	fslabelset.forEach(e =>{
 		e.addEventListener('dblclick',async() =>{
-			fsfunc(fsgetPath()  + e.firstChild.innerHTML)
+			const nextFloor = +e.parentNode.id.match(/.$/,'') + 1
+			if(nextFloor > maxFloor - 1){
+				const info = document.getElementById('info')
+				info.id = 'BOOM'
+				console.log(info)
+			}else{
+				const nextFloorNum = 'fs-floor-' + nextFloor
+				fsfunc(fsgetPath() + e.firstChild.innerHTML,undefined,nextFloorNum)
+			}			
 		})
 			//Select file
 		e.addEventListener('click',async(evt) =>{
