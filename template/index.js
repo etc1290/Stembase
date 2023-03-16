@@ -50,7 +50,7 @@ const fssetPath = (v)=>{
 const fsfunc = async (v=false,isDrive=false) => {
 		//Initialize
 	const fspath = document.getElementById('fs-path')
-	const updateDiv = document.getElementById('fs-main')
+	const updateDiv = document.getElementById('fs-floor-0')
 	const nowPath = fsgetPath()
 	const path = v
 	console.log('fsfunc:' + path)
@@ -155,7 +155,7 @@ document.getElementById('btn').addEventListener('click',()=>{
 })
 //Initailizer
 fsfunc()
-fsedit()
+
 
 
 

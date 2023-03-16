@@ -10,7 +10,7 @@
 }
 #fs{
 	width:			70%;
-	overflow:		auto;
+
 	border-top:		5px solid rgb(255,238,214);
 	border-right:	5px solid rgb(255,238,214);
 
@@ -18,13 +18,26 @@
 #fs-info{
 	margin:			0;
 }
+#fs-toolbar{
+	position:		sticky;
+	border-bottom:	5px solid rgb(255,238,214);
+	top:			0;
+	left:			0;
+}
 #fs-up{
 	height:			3vh;
 }
 #fs-main{
-	height:			90%
+	height:			90%;
+	overflow:		scroll;
+	
 }
-
+.fs-floor{
+	width: 			65vw;
+	display:		inline-block;
+	border-right:	5px solid rgb(255,238,214);
+	
+}
 .fs-data{
 	text-align:		left;
 	display:		inline-block;	
