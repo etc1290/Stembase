@@ -14,9 +14,8 @@ const fsgetPath = ()=>{
 
 const fssetPath = (v)=>{
 	const updateDiv = document.getElementById('fs-path')
-	let pathset = v.split('\\')
-	pathset.filter(n => n)
-	console.log('fssetpath:' + pathset)
+	let rawset = v.split('\\')
+	const pathset = rawset.filter(n => n)
 	for(var i=0;i<pathset.length;i++){
 		pathset[i] = `<p id='fs-path-part-` + i + `'class='fs-path-part'>` + pathset[i] + `\\</p>`
 	}
@@ -45,6 +44,19 @@ const fssetPath = (v)=>{
 			target.style.background = 'rgb(255,250,240)'
 			fsfunc(pathlogout[i])
 		})
+		
+		/*
+		if(i=0){
+			part.addEventListener('mouseup',()=>{
+				target.style.background = 'rgb(255,250,240)'
+				fsfunc(pathlogout[i] + '\\')
+			})
+		}else{
+			part.addEventListener('mouseup',()=>{
+				target.style.background = 'rgb(255,250,240)'
+				fsfunc(pathlogout[i])
+			})
+		}	*/
 	}
 }
 	//Main: File User Interface
@@ -135,9 +147,7 @@ document.getElementById('fs-up').addEventListener('click', async () =>{
 	}
 	const reg = /(?=^.{0,2}$)[A-Z]:/
 	const isDrive = reg.test(path)
-	console.log(path)
 	if(isDrive){
-		console.log('below')
 		fsfunc(path,isDrive)
 	}else if (path){
 		fsfunc(path)

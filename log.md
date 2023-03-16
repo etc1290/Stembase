@@ -1,6 +1,13 @@
 # Stembase
  File tagging system
  
+ 
+---
+	## 2022.03.16		version 0.3.9.3
+	-- Bug fix
+	# Fixed
+	1. Fix path browsing function double slash bug
+		-- finished
 ---
 	## 2022.03.15		version 0.3.9.2
 	-- Bug fix
