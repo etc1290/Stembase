@@ -49,8 +49,10 @@ const fssetPath = (v)=>{
 	fsfuncPath()
 }
 	//Main: File User Interface
-const fsfunc = async (v=false,isDrive=false,floorNum='fs-floor-0') => {
+let floorNum = 'fs-floor-0'
+const fsfunc = async (v=false,isDrive=false) => {
 		//Initialize
+	console.log(floorNum)
 	const fspath = document.getElementById('fs-path')
 	const updateDiv = document.getElementById(floorNum)
 	const nowPath = fsgetPath()
@@ -70,23 +72,33 @@ const fsfunc = async (v=false,isDrive=false,floorNum='fs-floor-0') => {
 		}	
 	}
 	updateDiv.innerHTML = fsdataset.join('')
-	
+	updateDiv.style.width = '532px'
+	updateDiv.style.borderLeft = '5px solid rgb(255,238,214'
+	document.getElementById(floorNum).scrollIntoView()
+		//Area function
+	const floorset = document.querySelectorAll('.fs-floor')
+	for(let i=0;i<floorset.length;i++){
+		floorset[i].addEventListener('mouseenter',()=>{
+			floorNum = floorset[i].id
+			const floorid = +floorNum.match(/.$/,'')
+			
+		})
+	}
 		//Button function
 	let focusStorage = 'fs-info'
 	const maxFloor = 5
 	const fslabelset = document.querySelectorAll('#' + floorNum +' .fs-data-label')
 	fslabelset.forEach(e =>{
 		e.addEventListener('dblclick',async() =>{
-			const nextFloor = +e.parentNode.id.match(/.$/,'') + 1
+			const nextFloor = +floorNum.match(/.$/,'')+1
 			if(nextFloor > maxFloor - 1){
 				const info = document.getElementById('info')
 				info.id = 'BOOM'
 				console.log(info)
 			}else{
-				const nextFloorNum = 'fs-floor-' + nextFloor
-				document.getElementById(nextFloorNum).scrollIntoView()
-				fsfunc(fsgetPath() + e.firstChild.innerHTML,undefined,nextFloorNum)
-			}			
+				floorNum = 'fs-floor-' + nextFloor
+				fsfunc(fsgetPath() + e.firstChild.innerHTML)
+			}
 		})
 			//Select file
 		e.addEventListener('click',async(evt) =>{
@@ -138,6 +150,11 @@ document.getElementById('fs-up').addEventListener('click', async () =>{
 		path = currPath.replace(/.$/,'')
 	}
 	const reg = /(?=^.{0,2}$)[A-Z]:/
+	let lastFloor = +floorNum.match(/.$/,'')-1
+	if(lastFloor<0){
+		lastFloor = 0
+	}
+	floorNum = 'fs-floor-' + lastFloor
 	const isDrive = reg.test(path)
 	if(isDrive){
 		fsfunc(path,isDrive)

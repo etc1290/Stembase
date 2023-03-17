@@ -11,6 +11,8 @@
 	# Changed
 	1. Fix the width of fs-label to fit window size changes
 		-- finished
+	2. Resize width with append fsfloor
+		-- finished
 		
 ---
 	## 2022.03.16		version 0.4.0
