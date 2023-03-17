@@ -11,16 +11,7 @@ const fsgetPath = ()=>{
 	const output = newPath.slice(0,-1).slice(1,newPath.length-1)
 	return output
 }
-
-const fssetPath = (v)=>{
-	const updateDiv = document.getElementById('fs-path')
-	let rawset = v.split('\\')
-	const pathset = rawset.filter(n => n)
-	for(var i=0;i<pathset.length;i++){
-		pathset[i] = `<p id='fs-path-part-` + i + `'class='fs-path-part'>` + pathset[i] + `\\</p>`
-	}
-	const path = pathset.join('')
-	updateDiv.innerHTML = path
+const fsfuncPath = (v)=>{
 	const partset = document.querySelectorAll('.fs-path-part')
 	const pathlog = []
 	const pathlogout = []
@@ -34,19 +25,29 @@ const fssetPath = (v)=>{
 			target.style.background = 'rgb(255,232,189)'
 		})
 		part.addEventListener('mouseleave',()=>{
-			target.style.background = 'rgb(255,250,240)'
+			target.style.background = 'transparent'
 		})
 		part.addEventListener('mousedown',()=>{			
 			target.style.background = 'rgb(255,221,158)'
 			
 		})
 		part.addEventListener('mouseup',()=>{
-			target.style.background = 'rgb(255,250,240)'
+			target.style.background = 'transparent'
 			fsfunc(pathlogout[i])
 		})
 	}
 }
-
+const fssetPath = (v)=>{
+	const updateDiv = document.getElementById('fs-path')
+	let rawset = v.split('\\')
+	const pathset = rawset.filter(n => n)
+	for(var i=0;i<pathset.length;i++){
+		pathset[i] = `<p id='fs-path-part-` + i + `'class='fs-path-part'>` + pathset[i] + `\\</p>`
+	}
+	const path = pathset.join('')
+	updateDiv.innerHTML = path
+	fsfuncPath()
+}
 	//Main: File User Interface
 const fsfunc = async (v=false,isDrive=false,floorNum='fs-floor-0') => {
 		//Initialize
@@ -68,12 +69,11 @@ const fsfunc = async (v=false,isDrive=false,floorNum='fs-floor-0') => {
 			fsdataset[i] = fsdata
 		}	
 	}
-	console.log(floorNum)
 	updateDiv.innerHTML = fsdataset.join('')
 	
 		//Button function
 	let focusStorage = 'fs-info'
-	const maxFloor = 2
+	const maxFloor = 5
 	const fslabelset = document.querySelectorAll('#' + floorNum +' .fs-data-label')
 	fslabelset.forEach(e =>{
 		e.addEventListener('dblclick',async() =>{
@@ -84,6 +84,7 @@ const fsfunc = async (v=false,isDrive=false,floorNum='fs-floor-0') => {
 				console.log(info)
 			}else{
 				const nextFloorNum = 'fs-floor-' + nextFloor
+				document.getElementById(nextFloorNum).scrollIntoView()
 				fsfunc(fsgetPath() + e.firstChild.innerHTML,undefined,nextFloorNum)
 			}			
 		})
@@ -99,6 +100,7 @@ const fsfunc = async (v=false,isDrive=false,floorNum='fs-floor-0') => {
 			}
 		})
 	})
+	
 		//Show pathname
 	if(!path){
 		const pathname = await window.fs.path(path)

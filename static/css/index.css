@@ -98,6 +98,9 @@
 	background:		rgb(233,150,211);
 	transition:		none;
 }
+#tag-display{
+	border-bottom:	5px solid rgb(255,238,214);
+}
 #tag-searchbar{
 	border-top:		5px solid rgb(255,238,214);
 }
