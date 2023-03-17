@@ -8,6 +8,9 @@
 	# Added
 	1. Add jump to new section function
 		-- finished
+	# Changed
+	1. Fix the width of fs-label to fit window size changes
+		-- finished
 		
 ---
 	## 2022.03.16		version 0.4.0
