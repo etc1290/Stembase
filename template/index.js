@@ -25,14 +25,14 @@ const fsfuncPath = (v)=>{
 			target.style.background = 'rgb(255,232,189)'
 		})
 		part.addEventListener('mouseleave',()=>{
-			target.style.background = 'transparent'
+			target.style.background = ''
 		})
 		part.addEventListener('mousedown',()=>{			
 			target.style.background = 'rgb(255,221,158)'
 			
 		})
 		part.addEventListener('mouseup',()=>{
-			target.style.background = 'transparent'
+			target.style.background = ''
 			fsfunc(pathlogout[i])
 		})
 	}
@@ -50,13 +50,44 @@ const fssetPath = (v)=>{
 }
 	//Main: File User Interface
 let floorNum = 'fs-floor-0'
+const fsfloorfunc = ()=>{
+	
+		//Floor Sign
+	const floorCurrNum = document.getElementById('fs-path').lastChild
+	const floorSign = ()=>{
+		//document.getElementById('fs-path-part-' + floorNumber).style.background = 'aliceblue'
+		floorCurrNum.style.background = 'aliceblue'
+		
+	}
+	const floorSignout = ()=>{
+		//document.getElementById('fs-path-part-' + floorNumber).style.background = ''
+		floorCurrNum.style.background = ''
+	}
+		//Floor building
+	const floorCurr = document.getElementById(floorNum)
+	floorCurr.addEventListener('mouseenter',floorSign)
+	floorCurr.addEventListener('mouseleave',floorSignout)
+	
+	document.getElementById(floorNum).scrollIntoView()
+		//Floor function
+	const floorset = document.querySelectorAll('.fs-floor')
+	for(let i=0;i<floorset.length;i++){
+		floorset[i].addEventListener('mouseenter',()=>{
+			floorNum = floorset[i].id
+			const floorid = +floorNum.match(/.$/,'')
+			
+		})
+	}
+}
 const fsfunc = async (v=false,isDrive=false) => {
-		//Initialize
-	console.log(floorNum)
+		//Declaration - constant
 	const fspath = document.getElementById('fs-path')
 	const updateDiv = document.getElementById(floorNum)
 	const nowPath = fsgetPath()
 	const path = v
+	
+		//Initialize
+	console.log(floorNum)
 	if(isDrive){
 		v = v + '\\'
 	}
@@ -71,19 +102,9 @@ const fsfunc = async (v=false,isDrive=false) => {
 			fsdataset[i] = fsdata
 		}	
 	}
-	updateDiv.innerHTML = fsdataset.join('')
+	updateDiv.innerHTML = fsdataset.join('')		
 	updateDiv.style.width = '532px'
-	updateDiv.style.borderLeft = '5px solid rgb(255,238,214'
-	document.getElementById(floorNum).scrollIntoView()
-		//Area function
-	const floorset = document.querySelectorAll('.fs-floor')
-	for(let i=0;i<floorset.length;i++){
-		floorset[i].addEventListener('mouseenter',()=>{
-			floorNum = floorset[i].id
-			const floorid = +floorNum.match(/.$/,'')
-			
-		})
-	}
+	updateDiv.style.borderLeft = '5px solid rgb(255,238,214)'
 		//Button function
 	let focusStorage = 'fs-info'
 	const maxFloor = 5
@@ -128,6 +149,7 @@ const fsfunc = async (v=false,isDrive=false) => {
 	}else{
 		console.log('Exception in show pathname')
 	}
+	fsfloorfunc()
 	return new Promise((resolve)=>{resolve(true)})
 }
 	// Side: Directory browser
