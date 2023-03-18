@@ -3,8 +3,8 @@
  
 	## 2022.03.17		version 0.4.2
 	# Added
-	1. Add Delete all data for uninstalling
-		--Testing
+	1. Add Delete all data function for uninstalling
+		-- Testing
 	# Changed
 	1. Fix Dark mode issiue
 		-- finished
