@@ -8,9 +8,6 @@ const Stemdb= env('StemdbDir')
 const sqlite3 = require('sqlite3').verbose()
 const db = new sqlite3.Database(Stemdb + '.db')
 
-	// General Declaration
-const FileTree = require(env('StaticDir') + 'js/FileTree.js')
-var fileTree = new FileTree(__dirname)
 
 app.allowRendererProcessReuse = false
 // Create a new db
@@ -76,15 +73,6 @@ const init = () =>{
 	}
 	Taskmanager()  
 	app.whenReady().then(() => {
-		//Test function
-		ipcMain.handle('fileTree',async	() =>{
-			fileTree.build()
-			const data = await fileTree
-			console.log(data)
-			return JSON.stringify(data)
-			
-		})
-		
 		WindowMain()
 		// Prevent from multiple windows create
 		app.on('activate', () => {
