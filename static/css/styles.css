@@ -5,7 +5,8 @@
 		height:		100vh;
 	}
 	button{
-		background:	rgb(17,17,17);
+		color :	rgb(211,211,211);
+		background: transparent;
 	}
 }
 

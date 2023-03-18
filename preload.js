@@ -32,7 +32,8 @@ contextBridge.exposeInMainWorld('tag', {
 	remove:		(i,v,id,p)	=> ipcRenderer.invoke('tag-remove',i,v,id,p),
 	query:		(v,t,p,b) 	=> ipcRenderer.invoke('tag-query',v,t,p,b),
 	match:		(v)			=> ipcRenderer.invoke('tag-match',v),
-	error:		(v)			=> ipcRenderer.invoke('tag-error',v)
+	error:		(v)			=> ipcRenderer.invoke('tag-error',v),
+	delDB:		() 			=> ipcRenderer.invoke('ts-delDB')
 	//getdb:		() => ipcRenderer.invoke('tag-getdb')
 })
 

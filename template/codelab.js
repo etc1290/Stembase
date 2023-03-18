@@ -1,3 +1,5 @@
+
+
 const clclick = () =>{
 
 	document.querySelectorAll('button[class=cl-btn]').forEach( e => {
@@ -17,6 +19,12 @@ const cldbclick = () =>{
 		})
 	})
 }
+
+
+document.getElementById('ts-delete-btn').addEventListener('click', async ()=>{
+	console.log('deleting!')
+	await window.tag.delDB()
+})
 
 const Init = () =>{
 	
