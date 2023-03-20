@@ -51,26 +51,27 @@ const fssetPath = (v)=>{
 	//Main: File User Interface
 let floorNum = 'fs-floor-0'
 const fsfloorfunc = ()=>{
-	
+	const floorset = document.querySelectorAll('.fs-floor')
 		//Floor Sign
 	const floorCurrNum = document.getElementById('fs-path').lastChild
 	const floorSign = ()=>{
-		//document.getElementById('fs-path-part-' + floorNumber).style.background = 'aliceblue'
 		floorCurrNum.style.background = 'aliceblue'
 		
 	}
 	const floorSignout = ()=>{
-		//document.getElementById('fs-path-part-' + floorNumber).style.background = ''
 		floorCurrNum.style.background = ''
 	}
 		//Floor building
 	const floorCurr = document.getElementById(floorNum)
 	floorCurr.addEventListener('mouseenter',floorSign)
 	floorCurr.addEventListener('mouseleave',floorSignout)
-	
+	for(var i = +floorNum.match(/.$/,'')+1;i<floorset.length;i++){
+		floorset[i].innerHTML = ''
+		floorset[i].style.width = '0px'
+	}
 	document.getElementById(floorNum).scrollIntoView()
 		//Floor function
-	const floorset = document.querySelectorAll('.fs-floor')
+	
 	for(let i=0;i<floorset.length;i++){
 		floorset[i].addEventListener('mouseenter',()=>{
 			floorNum = floorset[i].id
@@ -111,14 +112,19 @@ const fsfunc = async (v=false,isDrive=false) => {
 	const fslabelset = document.querySelectorAll('#' + floorNum +' .fs-data-label')
 	fslabelset.forEach(e =>{
 		e.addEventListener('dblclick',async() =>{
+			const floortype = await window.fs.type(fsgetPath()+e.firstChild.innerHTML)
 			const nextFloor = +floorNum.match(/.$/,'')+1
-			if(nextFloor > maxFloor - 1){
-				const info = document.getElementById('info')
-				info.id = 'BOOM'
-				console.log(info)
+			if(floortype){
+				if(nextFloor > maxFloor - 1){
+					const info = document.getElementById('info')
+					info.id = 'BOOM'
+					console.log(info)
+				}else{
+					floorNum = 'fs-floor-' + nextFloor
+					fsfunc(fsgetPath() + e.firstChild.innerHTML)
+				}
 			}else{
-				floorNum = 'fs-floor-' + nextFloor
-				fsfunc(fsgetPath() + e.firstChild.innerHTML)
+				console.log(floortype)
 			}
 		})
 			//Select file

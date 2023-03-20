@@ -1,7 +1,17 @@
 # Stembase
  File tagging system
- 
-	## 2022.03.17		version 0.4.2
+
+---
+	## 2022.03.20		version 0.4.3
+	-- Remove wasted codes
+	-- Resize fsfloor when browse
+	
+	# Added
+	1. Clear and fold not using floor
+		-- finished
+--- 
+	## 2022.03.17		version 0.4.2	
+	
 	# Added
 	1. Add Delete all data function for uninstalling
 		-- Testing
