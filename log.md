@@ -2,7 +2,17 @@
  File tagging system
 
 ---
-	## 2022.03.20		version 0.4.3
+	## 2023.03.21		version 0.4.4
+	-- Function implementation
+	-- Re-arrange code structure
+	-- Build a onReady function for file system
+	# Added
+	1. Add floor sign function 
+		-- finished
+	2. Add fsInit to wrap initializer and clarify the timepoint of rendering
+		-- finished
+---
+	## 2023.03.20		version 0.4.3
 	-- Remove wasted codes
 	-- Resize fsfloor when browse
 	
@@ -10,7 +20,7 @@
 	1. Clear and fold not using floor
 		-- finished
 --- 
-	## 2022.03.17		version 0.4.2	
+	## 2023.03.17		version 0.4.2	
 	
 	# Added
 	1. Add Delete all data function for uninstalling
@@ -19,7 +29,7 @@
 	1. Fix Dark mode issiue
 		-- finished
 ---
-	## 2022.03.17		version 0.4.1
+	## 2023.03.17		version 0.4.1
 	-- Style change
 	-- Jump to section function
 	# Added
@@ -35,7 +45,7 @@
 	
 		
 ---
-	## 2022.03.16		version 0.4.0
+	## 2023.03.16		version 0.4.0
 	-- Style change
 	-- Structure change
 	-- Implement function
@@ -50,7 +60,7 @@
 	2. Set horizontal display and nowrap 
 		-- finished
 ---
-	## 2022.03.16		version 0.3.9.3
+	## 2023.03.16		version 0.3.9.3
 	-- Bug fix
 	-- Clear wasted codes
 	# Fixed
@@ -65,7 +75,7 @@
 	2. Fix when uplevel to drive would get double slash
 		-- finished
 ---
-	## 2022.03.15		version 0.3.9.1
+	## 2023.03.15		version 0.3.9.1
 	-- Bug Fix
 	-- Rewrite function
 	# Changed
@@ -75,7 +85,7 @@
 	1. Fix FATAL ERROR: Error::ThrowAsJavaScriptException napi_throw
 		-- finished
 ---
-	## 2022.03.14		version 0.3.9
+	## 2023.03.14		version 0.3.9
 	-- Path structure function
 	-- Clear wasted codes
 	-- Style design
@@ -85,13 +95,13 @@
 	2. Give color to check hover and pressed and return to default when leaving
 		-- finished
 ---
-	## 2022.03.13		version 0.3.8
+	## 2023.03.13		version 0.3.8
 	-- Rewrite function
 	# Changed
 	1. Rewrite uplevel, getpath and file label button function
 		-- finished
 ---
-	## 2022.03.10		version 0.3.7.1
+	## 2023.03.10		version 0.3.7.1
 	-- Rewrite function
 	-- Bug fix
 	# Changed
@@ -103,7 +113,7 @@
 		-- finished
 		
 ---
-	## 2022.03.09		version 0.3.7
+	## 2023.03.09		version 0.3.7
 	-- Clear wasted codes
 	-- Rewrite function
 	-- Deprecate node-json-db
@@ -123,7 +133,7 @@
 		-- finished
 	
 ---
-	## 2022.03.08		version 0.3.6
+	## 2023.03.08		version 0.3.6
 	-- Rewrite function
 	-- Clear wasted codes
 	-- Fix Bug
@@ -136,7 +146,7 @@
 	2. Rewrite all screen rendering function and wrap into one
 		-- finished
 ---
-	## 2022.03.07		version 0.3.5
+	## 2023.03.07		version 0.3.5
 	-- Rewrite function
 	-- Clear wasted codes
 	-- Bug fix
@@ -150,7 +160,7 @@
 		-- finished
 		
 ---
-	## 2022.03.06		version 0.3.4
+	## 2023.03.06		version 0.3.4
 	-- Bug Fix
 	-- Clear wasted codes
 	# Changed
@@ -163,7 +173,7 @@
 	1. Return path instead of tag when querying a tag
 		-- finished
 ---
-	## 2022.03.03		version 0.3.3
+	## 2023.03.03		version 0.3.3
 	-- Rewrite function
 	-- Clear wasted codes
 	# Changed
@@ -176,7 +186,7 @@
 	4. Display tooltip when hovering
 		-- finished
 ---
-	## 2022.03.02		version 0.3.2.1
+	## 2023.03.02		version 0.3.2.1
 	-- Rewrite function
 	
 	# Changed

@@ -50,21 +50,27 @@ const fssetPath = (v)=>{
 }
 	//Main: File User Interface
 let floorNum = 'fs-floor-0'
+let floorCheckIn = 0
+const fsfloorInit = ()=>{
+	// Floor sign display
+	const floorset = document.querySelectorAll('.fs-floor')	
+	for(let i=0;i<floorset.length;i++){
+		floorset[i].addEventListener('mouseenter',(event)=>{
+			const floorNumset = document.querySelectorAll('.fs-path-part')
+			const floorCount = document.getElementById('fs-path').childElementCount
+			const floorCurrNum = floorCount - floorCheckIn - 1 + i
+			floorNumset[floorCurrNum].style.background = 'aliceblue'		
+		})
+		floorset[i].addEventListener('mouseleave',(event)=>{
+			const floorNumset = document.querySelectorAll('.fs-path-part')
+			const floorCount = document.getElementById('fs-path').childElementCount
+			const floorCurrNum = floorCount - floorCheckIn - 1 + i
+			floorNumset[floorCurrNum].style.background = ''
+		})
+	}
+}
 const fsfloorfunc = ()=>{
 	const floorset = document.querySelectorAll('.fs-floor')
-		//Floor Sign
-	const floorCurrNum = document.getElementById('fs-path').lastChild
-	const floorSign = ()=>{
-		floorCurrNum.style.background = 'aliceblue'
-		
-	}
-	const floorSignout = ()=>{
-		floorCurrNum.style.background = ''
-	}
-		//Floor building
-	const floorCurr = document.getElementById(floorNum)
-	floorCurr.addEventListener('mouseenter',floorSign)
-	floorCurr.addEventListener('mouseleave',floorSignout)
 	for(var i = +floorNum.match(/.$/,'')+1;i<floorset.length;i++){
 		floorset[i].innerHTML = ''
 		floorset[i].style.width = '0px'
@@ -105,6 +111,7 @@ const fsfunc = async (v=false,isDrive=false) => {
 	}
 	updateDiv.innerHTML = fsdataset.join('')		
 	updateDiv.style.width = '532px'
+	floorCheckIn = +floorNum.match(/.$/,'')
 	updateDiv.style.borderLeft = '5px solid rgb(255,238,214)'
 		//Button function
 	let focusStorage = 'fs-info'
@@ -210,7 +217,15 @@ document.getElementById('btn').addEventListener('click',()=>{
 	console.log('ding!')
 })
 //Initailizer
-fsfunc()
+const fsInit = async()=>{
+	const isReady = await fsfunc()
+	if(isReady){
+		fsfloorInit()		
+	}
+
+}
+fsInit()
+
 
 
 
