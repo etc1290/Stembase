@@ -7,3 +7,7 @@ const db = new sqlite3.Database(Stemdb + '.db')
 ipcMain.handle('ts-delDB', () => {
     console.log('Deleting!!')
 })
+
+ipcMain.handle('fs-openfile', (evt, v) => {
+    console.log(v)
+})

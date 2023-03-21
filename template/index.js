@@ -140,6 +140,7 @@ const fsfunc = async (v=false,isDrive=false) => {
 				fsfunc(fsgetPath() + e.firstChild.innerHTML)
 			}else{
 				console.log(floortype)
+				await window.fs.openfile(fsgetPath() + e.firstChild.innerHTML)
 			}
 		})
 			//Select file
@@ -221,8 +222,9 @@ btn.addEventListener('click', async () => {
 	console.log(JSON.parse(filePath)) 
   })
 */
-document.getElementById('btn').addEventListener('click',()=>{
-	console.log('ding!')
+document.getElementById('btn').addEventListener('click', async ()=>{
+	console.log('deleting!')
+	await window.tag.delDB()
 })
 //Initailizer
 const fsInit = async()=>{

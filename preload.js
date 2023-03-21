@@ -15,7 +15,8 @@ contextBridge.exposeInMainWorld('fs', {
 	type:		(v)=> ipcRenderer.invoke('fs-type',v),
 	path:		()=> ipcRenderer.invoke('fs-path'),
     getDir:     ()=> ipcRenderer.invoke('fs-getDir'),
-    createMeta: ()=> ipcRenderer.invoke('fs-createMeta')
+    createMeta: ()=> ipcRenderer.invoke('fs-createMeta'),
+	openfile:	(v)=> ipcRenderer.invoke('fs-openfile',v)
 })
 
 // ChildWindow
@@ -34,7 +35,6 @@ contextBridge.exposeInMainWorld('tag', {
 	match:		(v)			=> ipcRenderer.invoke('tag-match',v),
 	error:		(v)			=> ipcRenderer.invoke('tag-error',v),
 	delDB:		() 			=> ipcRenderer.invoke('ts-delDB')
-	//getdb:		() => ipcRenderer.invoke('tag-getdb')
 })
 
 
