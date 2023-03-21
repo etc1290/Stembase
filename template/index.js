@@ -59,7 +59,8 @@ const fsfloorInit = ()=>{
 			const floorNumset = document.querySelectorAll('.fs-path-part')
 			const floorCount = document.getElementById('fs-path').childElementCount
 			const floorCurrNum = floorCount - floorCheckIn - 1 + i
-			floorNumset[floorCurrNum].style.background = 'aliceblue'		
+			floorNumset[floorCurrNum].style.background = 'aliceblue'	
+			console.log(floorNum)			
 		})
 		floorset[i].addEventListener('mouseleave',(event)=>{
 			const floorNumset = document.querySelectorAll('.fs-path-part')
@@ -94,7 +95,7 @@ const fsfunc = async (v=false,isDrive=false) => {
 	const path = v
 	
 		//Initialize
-	console.log(floorNum)
+	
 	if(isDrive){
 		v = v + '\\'
 	}
@@ -121,15 +122,22 @@ const fsfunc = async (v=false,isDrive=false) => {
 		e.addEventListener('dblclick',async() =>{
 			const floortype = await window.fs.type(fsgetPath()+e.firstChild.innerHTML)
 			const nextFloor = +floorNum.match(/.$/,'')+1
+			const floorset = document.querySelectorAll('.fs-floor')
 			if(floortype){
 				if(nextFloor > maxFloor - 1){
-					const info = document.getElementById('info')
-					info.id = 'BOOM'
-					console.log(info)
+					console.time('clone')
+					//This function need remake
+					for(var i=0;i<floorset.length-1;i++){
+						const tempFloor = floorset[i+1].innerHTML
+						floorset[i].innerHTML = tempFloor
+					}
+					console.timeEnd('clone')
+					floorNum = 'fs-floor-' + (maxFloor -1)
 				}else{
 					floorNum = 'fs-floor-' + nextFloor
-					fsfunc(fsgetPath() + e.firstChild.innerHTML)
+					//fsfunc(fsgetPath() + e.firstChild.innerHTML)
 				}
+				fsfunc(fsgetPath() + e.firstChild.innerHTML)
 			}else{
 				console.log(floortype)
 			}

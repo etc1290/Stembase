@@ -11,6 +11,8 @@
 		-- finished
 	2. Add fsInit to wrap initializer and clarify the timepoint of rendering
 		-- finished
+	3. Add auto writer to move up floor to low floor when floor over the max limit
+		-- finished
 ---
 	## 2023.03.20		version 0.4.3
 	-- Remove wasted codes

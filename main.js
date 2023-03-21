@@ -1,4 +1,4 @@
-const { app, BrowserWindow, ipcMain, nativeTheme, dialog } = require('electron')
+const { app, BrowserWindow, ipcMain, nativeTheme, dialog, session } = require('electron')
 const path = require('path')
 const fs = require('fs')
 //const {JsonDB,Config} = require('node-json-db')
@@ -7,8 +7,7 @@ const env = require('./static/js/env.js')
 const Stemdb= env('StemdbDir')
 const sqlite3 = require('sqlite3').verbose()
 const db = new sqlite3.Database(Stemdb + '.db')
-
-
+process.env['ELECTRON_DISABLE_SECURITY_WARNINGS'] = 'true'
 app.allowRendererProcessReuse = false
 // Create a new db
 db.get('PRAGMA foreign_keys = ON')
@@ -41,10 +40,14 @@ const WindowMain = async () => {
         width: env('Width'),
         height: env('Height'),
         webPreferences: {
+			disableBlinkFeatures: 'DisallowInsecureUsage,AllowLists',
+			allowlist:['style-src','self'],
             preload: path.join(__dirname, 'preload.js'),
-			contextIsolation:true
-        },
+			contextIsolation:true,
+			nodeIntegration: false
+        }
     })
+	
 	if (env('Debugmode')){
 		win.webContents.openDevTools()
 	}
@@ -80,6 +83,7 @@ const init = () =>{
 				WindowMain()
 			}
 		})
+		
 	})
 }
 init()
