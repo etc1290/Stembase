@@ -51,22 +51,23 @@ const fssetPath = (v)=>{
 	//Main: File User Interface
 let floorNum = 'fs-floor-0'
 let floorCheckIn = 0
-const fsfloorInit = ()=>{
+const fsfloorSign = (v=0)=>{
 	// Floor sign display
 	const floorset = document.querySelectorAll('.fs-floor')	
-	for(let i=0;i<floorset.length;i++){
+	for(let i=v;i<floorset.length;i++){
 		floorset[i].addEventListener('mouseenter',(event)=>{
-			const floorNumset = document.querySelectorAll('.fs-path-part')
-			const floorCount = document.getElementById('fs-path').childElementCount
-			const floorCurrNum = floorCount - floorCheckIn - 1 + i
-			floorNumset[floorCurrNum].style.background = 'aliceblue'	
-			console.log(floorNum)			
+			const pathset = document.querySelectorAll('.fs-path-part')
+			const pathCount = pathset.length
+			const floorStayNum = +event.currentTarget.id.match(/.$/,'')
+			const floorCurrNum = pathCount - floorCheckIn -1 + floorStayNum
+			pathset[floorCurrNum].style.background = 'aliceblue'			
 		})
 		floorset[i].addEventListener('mouseleave',(event)=>{
-			const floorNumset = document.querySelectorAll('.fs-path-part')
-			const floorCount = document.getElementById('fs-path').childElementCount
-			const floorCurrNum = floorCount - floorCheckIn - 1 + i
-			floorNumset[floorCurrNum].style.background = ''
+			const pathset = document.querySelectorAll('.fs-path-part')
+			const pathCount = pathset.length
+			const floorStayNum = +event.currentTarget.id.match(/.$/,'')
+			const floorCurrNum = pathCount - floorCheckIn -1 + floorStayNum
+			pathset[floorCurrNum].style.background = ''
 		})
 	}
 }
@@ -91,7 +92,6 @@ const fsfunc = async (v=false,isDrive=false) => {
 		//Declaration - constant
 	const fspath = document.getElementById('fs-path')
 	const updateDiv = document.getElementById(floorNum)
-	const nowPath = fsgetPath()
 	const path = v
 	
 		//Initialize
@@ -126,13 +126,18 @@ const fsfunc = async (v=false,isDrive=false) => {
 			if(floortype){
 				if(nextFloor > maxFloor - 1){
 					console.time('clone')
-					//This function need remake
-					for(var i=0;i<floorset.length-1;i++){
-						const tempFloor = floorset[i+1].innerHTML
-						floorset[i].innerHTML = tempFloor
+					//Floor overflow handler
+					document.getElementById('fs-floor-0').outerHTML = ''
+					for(var i=1;i<floorset.length;i++){
+						floorset[i].id = 'fs-floor-' + (i-1)
 					}
+					const newFloor = `<div id='fs-floor-4' class='fs-floor'></div>`
+					const fsmain = document.getElementById('fs-main')
+					fsmain.insertAdjacentHTML('beforeend',newFloor)
+					fsfloorInit(maxFloor - 1)
 					console.timeEnd('clone')
 					floorNum = 'fs-floor-' + (maxFloor -1)
+					console.log(floorNum)
 				}else{
 					floorNum = 'fs-floor-' + nextFloor
 					//fsfunc(fsgetPath() + e.firstChild.innerHTML)
@@ -230,7 +235,7 @@ document.getElementById('btn').addEventListener('click', async ()=>{
 const fsInit = async()=>{
 	const isReady = await fsfunc()
 	if(isReady){
-		fsfloorInit()		
+		fsfloorSign()		
 	}
 
 }
