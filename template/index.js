@@ -56,18 +56,23 @@ const fsfloorSign = (v=0)=>{
 	const floorset = document.querySelectorAll('.fs-floor')	
 	for(let i=v;i<floorset.length;i++){
 		floorset[i].addEventListener('mouseenter',(event)=>{
+			
+			const pathPrev = document.querySelector('.this-floor')
+			if(pathPrev){
+				pathPrev.classList.remove('this-floor')
+			}
 			const pathset = document.querySelectorAll('.fs-path-part')
 			const pathCount = pathset.length
 			const floorStayNum = +event.currentTarget.id.match(/.$/,'')
 			const floorCurrNum = pathCount - floorCheckIn -1 + floorStayNum
-			pathset[floorCurrNum].style.background = 'aliceblue'			
+			const pathTarget = pathset[floorCurrNum]
+			pathTarget.style.background = 'aliceblue'
+			pathTarget.classList.add('this-floor')
+			console.log(document.querySelector('.this-floor'))
 		})
 		floorset[i].addEventListener('mouseleave',(event)=>{
-			const pathset = document.querySelectorAll('.fs-path-part')
-			const pathCount = pathset.length
-			const floorStayNum = +event.currentTarget.id.match(/.$/,'')
-			const floorCurrNum = pathCount - floorCheckIn -1 + floorStayNum
-			pathset[floorCurrNum].style.background = ''
+			const pathTarget = document.querySelector('.this-floor')
+			pathTarget.style.background = ''
 		})
 	}
 }
@@ -125,7 +130,6 @@ const fsfunc = async (v=false,isDrive=false) => {
 			const floorset = document.querySelectorAll('.fs-floor')
 			if(floortype){
 				if(nextFloor > maxFloor - 1){
-					console.time('clone')
 					//Floor overflow handler
 					document.getElementById('fs-floor-0').outerHTML = ''
 					for(var i=1;i<floorset.length;i++){
@@ -135,9 +139,7 @@ const fsfunc = async (v=false,isDrive=false) => {
 					const fsmain = document.getElementById('fs-main')
 					fsmain.insertAdjacentHTML('beforeend',newFloor)
 					fsfloorInit(maxFloor - 1)
-					console.timeEnd('clone')
 					floorNum = 'fs-floor-' + (maxFloor -1)
-					console.log(floorNum)
 				}else{
 					floorNum = 'fs-floor-' + nextFloor
 					//fsfunc(fsgetPath() + e.firstChild.innerHTML)
