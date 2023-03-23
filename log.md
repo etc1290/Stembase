@@ -4,8 +4,17 @@
 ---
 	## 2023.03.23		version 0.4.5.2
 	-- Rewrite function
+	-- Bug fix
+	-- Remove wasted codes
 	# Changed
 	1. Rewrite fsfloor sign function with a more flexible and potentially more efficient way 
+		-- finished
+	2. Rewrite fsgetPath function from regular expression to array
+		-- finished
+	# Fixed
+	1. Fix the bug that rename fsfloorInit with fsfloorSign
+		-- finished
+	2. Fix the bug that sometimes pop up 'Not defined' warnings
 		-- finished
 ---
 	## 2023.03.23		version 0.4.5.1

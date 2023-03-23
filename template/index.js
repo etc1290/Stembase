@@ -1,15 +1,17 @@
 // Testing function
 const information = document.getElementById('info')
 information.innerText = `This app is using Chrome (v${versions.chrome()}), Node.js (v${versions.node()}), and Electron (v${versions.electron()})`
-let pathset = []
 
 // FileSystem
 const fsgetPath = ()=>{	
-	const path = document.getElementById('fs-path').innerHTML
-	const rawPath = path.replace(/(\<.*?\>)/gi,'\\')	
-	const newPath = rawPath.replaceAll('\\\\\\','\\')
-	const output = newPath.slice(0,-1).slice(1,newPath.length-1)
-	return output
+	
+	const pathset = document.querySelectorAll('.fs-path-part')
+	const pathArr = []
+	for(var i=0;i<pathset.length;i++){
+		pathArr[i] = pathset[i].innerHTML
+	}
+	const path=pathArr.join('')
+	return path
 }
 const fsfuncPath = (v)=>{
 	const partset = document.querySelectorAll('.fs-path-part')
@@ -56,7 +58,6 @@ const fsfloorSign = (v=0)=>{
 	const floorset = document.querySelectorAll('.fs-floor')	
 	for(let i=v;i<floorset.length;i++){
 		floorset[i].addEventListener('mouseenter',(event)=>{
-			
 			const pathPrev = document.querySelector('.this-floor')
 			if(pathPrev){
 				pathPrev.classList.remove('this-floor')
@@ -66,13 +67,17 @@ const fsfloorSign = (v=0)=>{
 			const floorStayNum = +event.currentTarget.id.match(/.$/,'')
 			const floorCurrNum = pathCount - floorCheckIn -1 + floorStayNum
 			const pathTarget = pathset[floorCurrNum]
-			pathTarget.style.background = 'aliceblue'
-			pathTarget.classList.add('this-floor')
-			console.log(document.querySelector('.this-floor'))
+			if(pathTarget){
+				pathTarget.style.background = 'aliceblue'
+				pathTarget.classList.add('this-floor')
+			}
+			
 		})
 		floorset[i].addEventListener('mouseleave',(event)=>{
 			const pathTarget = document.querySelector('.this-floor')
-			pathTarget.style.background = ''
+			if(pathTarget){
+				pathTarget.style.background = ''
+			}
 		})
 	}
 }
@@ -138,7 +143,7 @@ const fsfunc = async (v=false,isDrive=false) => {
 					const newFloor = `<div id='fs-floor-4' class='fs-floor'></div>`
 					const fsmain = document.getElementById('fs-main')
 					fsmain.insertAdjacentHTML('beforeend',newFloor)
-					fsfloorInit(maxFloor - 1)
+					fsfloorSign(maxFloor - 1)
 					floorNum = 'fs-floor-' + (maxFloor -1)
 				}else{
 					floorNum = 'fs-floor-' + nextFloor
@@ -146,7 +151,7 @@ const fsfunc = async (v=false,isDrive=false) => {
 				}
 				fsfunc(fsgetPath() + e.firstChild.innerHTML)
 			}else{
-				console.log(floortype)
+				// Open it when double clicking
 				await window.fs.openfile(fsgetPath() + e.firstChild.innerHTML)
 			}
 		})
