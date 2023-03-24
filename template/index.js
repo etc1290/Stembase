@@ -3,8 +3,11 @@ const information = document.getElementById('info')
 information.innerText = `This app is using Chrome (v${versions.chrome()}), Node.js (v${versions.node()}), and Electron (v${versions.electron()})`
 
 // FileSystem
-const fsgetPath = ()=>{	
-	
+let floorNum = 'fs-floor-0'
+let floorCheckIn =  floorDist = 0
+const maxFloor = 5
+
+const fsgetPath = (v=0)=>{	
 	const pathset = document.querySelectorAll('.fs-path-part')
 	const pathArr = []
 	for(var i=0;i<pathset.length;i++){
@@ -13,29 +16,71 @@ const fsgetPath = ()=>{
 	const path=pathArr.join('')
 	return path
 }
-const fsfuncPath = (v)=>{
+
+const fsfuncPath = (v=0)=>{
 	const partset = document.querySelectorAll('.fs-path-part')
 	const pathlog = []
 	const pathlogout = []
+	const partLen = partset.length
+	const fspath = document.getElementById('fs-path')
 	// Side: Path function
-	for(let i=0;i<partset.length;i++){
+	for(let i=0;i<partLen;i++){
 		const part = partset[i]
 		const target = document.getElementById(part.id)
 		pathlog[i] = part.innerHTML
 		pathlogout[i] = pathlog.join('')
 		part.addEventListener('mouseover',()=>{
 			target.style.background = 'rgb(255,232,189)'
+			
+			const isOutset = document.getElementById('this-floor')
+			if(!isOutset){
+				fspath.lastChild.classList.add('this-floor')
+			}
+			const floorStart = document.querySelector('.this-floor')
+			const startFloor = Array.prototype.indexOf.call(partset,floorStart)
+			const endFloor = Array.prototype.indexOf.call(partset,partset[i])			
+			floorDist = startFloor - endFloor
+			
 		})
 		part.addEventListener('mouseleave',()=>{
 			target.style.background = ''
 		})
+		let isExec = false
+		const currFloor = +floorNum[floorNum.length-1]
 		part.addEventListener('mousedown',()=>{			
 			target.style.background = 'rgb(255,221,158)'
 			
+			if(floorDist < 0){		
+				const targetFloor = 'fs-floor-' + (currFloor - floorDist - 1)
+				console.log(targetFloor)
+				document.getElementById(targetFloor).scrollIntoView()
+				floorNum = targetFloor
+			}else if(floorDist>0){
+				if(floorDist>currFloor){
+					floorNum = 'fs-floor-0'
+					isExec = true
+				}else{
+					const targetFloor = 'fs-floor-' + (currFloor - floorDist)
+					document.getElementById(targetFloor).scrollIntoView()
+					floorNum = targetFloor
+				}
+			}else{
+				console.log('same')
+			}
+			
 		})
+		const thisFloor = document.querySelector('.this-floor')
+		if(thisFloor){
+			thisFloor.classList.remove('this-floor')
+			document.getElementById(floorNum).classList.add('this-floor')
+		}
+		
+		
 		part.addEventListener('mouseup',()=>{
 			target.style.background = ''
-			fsfunc(pathlogout[i])
+			if(isExec){
+				fsfunc(pathlogout[i])				
+			}
 		})
 	}
 }
@@ -51,13 +96,13 @@ const fssetPath = (v)=>{
 	fsfuncPath()
 }
 	//Main: File User Interface
-let floorNum = 'fs-floor-0'
-let floorCheckIn = 0
+
 const fsfloorSign = (v=0)=>{
 	// Floor sign display
 	const floorset = document.querySelectorAll('.fs-floor')	
 	for(let i=v;i<floorset.length;i++){
 		floorset[i].addEventListener('mouseenter',(event)=>{
+			
 			const pathPrev = document.querySelector('.this-floor')
 			if(pathPrev){
 				pathPrev.classList.remove('this-floor')
@@ -126,7 +171,7 @@ const fsfunc = async (v=false,isDrive=false) => {
 	updateDiv.style.borderLeft = '5px solid rgb(255,238,214)'
 		//Button function
 	let focusStorage = 'fs-info'
-	const maxFloor = 5
+	
 	const fslabelset = document.querySelectorAll('#' + floorNum +' .fs-data-label')
 	fslabelset.forEach(e =>{
 		e.addEventListener('dblclick',async() =>{
@@ -147,7 +192,6 @@ const fsfunc = async (v=false,isDrive=false) => {
 					floorNum = 'fs-floor-' + (maxFloor -1)
 				}else{
 					floorNum = 'fs-floor-' + nextFloor
-					//fsfunc(fsgetPath() + e.firstChild.innerHTML)
 				}
 				fsfunc(fsgetPath() + e.firstChild.innerHTML)
 			}else{
@@ -200,6 +244,7 @@ document.getElementById('fs-home').addEventListener('click', async () =>{
 
 	// Side: Uplevel
 document.getElementById('fs-up').addEventListener('click', async () =>{
+	
 	const currPath = fsgetPath()
 	let path = currPath.split('\\').slice(0,-2).join('\\')
 	if(!path){
@@ -219,6 +264,8 @@ document.getElementById('fs-up').addEventListener('click', async () =>{
 	}else{
 		document.getElementById('fs-info').innerHTML = 'Error in FS Up level'
 	}
+	
+	
 })
 
 // Toolbar
@@ -247,10 +294,4 @@ const fsInit = async()=>{
 
 }
 fsInit()
-
-
-
-
-
-
 

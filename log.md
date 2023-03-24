@@ -2,6 +2,12 @@
  File tagging system
 
 ---
+	## 2023.03.24		version 0.4.6
+	-- Add path support
+	# Added
+	1. Make the oath button can functioned with new fsfloor mechanism 
+		-- bugged
+---
 	## 2023.03.23		version 0.4.5.2
 	-- Rewrite function
 	-- Bug fix
