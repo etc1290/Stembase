@@ -7,12 +7,18 @@ let floorNum = 'fs-floor-0'
 let floorCheckIn =  floorDist = 0
 const maxFloor = 5
 
-const fsgetPath = (v=0)=>{	
+const fsgetPath = (isDetour=false)=>{	
 	const pathset = document.querySelectorAll('.fs-path-part')
 	const pathArr = []
-	for(var i=0;i<pathset.length;i++){
+	let pathLen = pathset.length
+	if(isDetour){
+		pathLen = Array.prototype.indexOf.call(pathset,document.querySelector('.this-floor')) +1
+		console.log(pathLen)
+	}
+	for(var i=0;i<pathLen;i++){
 		pathArr[i] = pathset[i].innerHTML
 	}
+	console.log(pathArr)
 	const path=pathArr.join('')
 	return path
 }
@@ -46,7 +52,7 @@ const fsfuncPath = (v=0)=>{
 			target.style.background = ''
 		})
 		let isExec = false
-		
+		//Floor Jump or Rebuild
 		part.addEventListener('mousedown',()=>{			
 			target.style.background = 'rgb(255,221,158)'
 			const currFloor = +floorNum[floorNum.length-1]
@@ -174,7 +180,7 @@ const fsfunc = async (v=false,isDrive=false) => {
 	const fslabelset = document.querySelectorAll('#' + floorNum +' .fs-data-label')
 	fslabelset.forEach(e =>{
 		e.addEventListener('dblclick',async() =>{
-			const floortype = await window.fs.type(fsgetPath()+e.firstChild.innerHTML)
+			const floortype = await window.fs.type(fsgetPath(true)+e.firstChild.innerHTML)
 			const nextFloor = +floorNum.match(/.$/,'')+1
 			const floorset = document.querySelectorAll('.fs-floor')
 			if(floortype){
@@ -192,7 +198,7 @@ const fsfunc = async (v=false,isDrive=false) => {
 				}else{
 					floorNum = 'fs-floor-' + nextFloor
 				}
-				fsfunc(fsgetPath() + e.firstChild.innerHTML)
+				fsfunc(fsgetPath(true) + e.firstChild.innerHTML)
 			}else{
 				// Open it when double clicking
 				await window.fs.openfile(fsgetPath() + e.firstChild.innerHTML)

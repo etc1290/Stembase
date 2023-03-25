@@ -2,6 +2,12 @@
  File tagging system
 
 ---
+	## 2023.03.25		version 0.4.7
+	-- Function implementation
+	# Added
+	1. Add fully functional support in fslabel redirecting
+		-- finished
+---
 	## 2023.03.25		version 0.4.6.1
 	-- Bug fix
 	# Changed
