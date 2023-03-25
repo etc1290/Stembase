@@ -2,6 +2,12 @@
  File tagging system
 
 ---
+	## 2023.03.25		version 0.4.6.1
+	-- Bug fix
+	# Changed
+	1. Fix the bug that cause this-floor class is duplicate 
+		-- finished
+---
 	## 2023.03.24		version 0.4.6
 	-- Add path support
 	# Added

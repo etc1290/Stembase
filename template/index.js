@@ -32,7 +32,7 @@ const fsfuncPath = (v=0)=>{
 		part.addEventListener('mouseover',()=>{
 			target.style.background = 'rgb(255,232,189)'
 			
-			const isOutset = document.getElementById('this-floor')
+			const isOutset = document.querySelector('.this-floor')
 			if(!isOutset){
 				fspath.lastChild.classList.add('this-floor')
 			}
@@ -46,12 +46,13 @@ const fsfuncPath = (v=0)=>{
 			target.style.background = ''
 		})
 		let isExec = false
-		const currFloor = +floorNum[floorNum.length-1]
+		
 		part.addEventListener('mousedown',()=>{			
 			target.style.background = 'rgb(255,221,158)'
-			
+			const currFloor = +floorNum[floorNum.length-1]
 			if(floorDist < 0){		
-				const targetFloor = 'fs-floor-' + (currFloor - floorDist - 1)
+				
+				const targetFloor = 'fs-floor-' + (currFloor - floorDist)
 				console.log(targetFloor)
 				document.getElementById(targetFloor).scrollIntoView()
 				floorNum = targetFloor
@@ -60,27 +61,25 @@ const fsfuncPath = (v=0)=>{
 					floorNum = 'fs-floor-0'
 					isExec = true
 				}else{
+					
 					const targetFloor = 'fs-floor-' + (currFloor - floorDist)
 					document.getElementById(targetFloor).scrollIntoView()
 					floorNum = targetFloor
 				}
-			}else{
-				console.log('same')
 			}
+			const thisFloor = document.querySelectorAll('.this-floor')
+			for(var i=0;i<thisFloor.length;i++){
+				thisFloor[i].classList.remove('this-floor')
+			}				
 			
 		})
-		const thisFloor = document.querySelector('.this-floor')
-		if(thisFloor){
-			thisFloor.classList.remove('this-floor')
-			document.getElementById(floorNum).classList.add('this-floor')
-		}
 		
-		
-		part.addEventListener('mouseup',()=>{
+		part.addEventListener('mouseup',(event)=>{
 			target.style.background = ''
 			if(isExec){
 				fsfunc(pathlogout[i])				
 			}
+			document.getElementById(event.currentTarget.id).classList.add('this-floor')	
 		})
 	}
 }
