@@ -2,11 +2,14 @@
  File tagging system
 
 ---
-	## 2023.03.25		version 0.4.7.1
+	## 2023.03.25		version 0.4.8
 	-- Remove wasted codes
 	-- Build new data table
+	-- Function implementation
 	# Added
 	1. Add Monitor data table
+		-- finished
+	2. Add Monitored check before tag display
 		-- finished
 ---
 	## 2023.03.25		version 0.4.7

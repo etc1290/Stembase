@@ -1,3 +1,5 @@
+// Global in Tagging System
+let isMonitored = false
 //Tagging System
 
 	// Main: Tag add
@@ -20,13 +22,19 @@ const tagmain = (name) =>{
 	// Side: Tag display
 const tagdisplay = async (name) =>{
 	const tagpath = fsgetPath(true)
-	const taginfo 	= await window.tag.info(name,tagpath)
+	isMonitored = await window.tag.monitor(tagpath)
 	const queryset = []
-	for (var i=0;i<taginfo.length;i++){
-		queryset[i] = `<button class='tag-label'>` + taginfo[i] + `</button><br>` 
-	}
-	if(!taginfo){
-		queryset[0] = 'No Tag found'
+	if(isMonitored[0]){
+		const taginfo 	= await window.tag.info(name,tagpath)	
+		if(!taginfo){
+			queryset[0] = 'No Tag found'
+		}else{
+			for (var i=0;i<taginfo.length;i++){
+				queryset[i] = `<button class='tag-label'>` + taginfo[i] + `</button><br>` 
+			}
+		}		
+	}else{
+		queryset[0] = 'Not Monitored'
 	}
 	tagupdate('tag-display',queryset)
 }

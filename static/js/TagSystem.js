@@ -36,7 +36,6 @@ ipcMain.handle('tag-main', (event,name,tag,path) =>{
 	
 })
 // Side: Display tags
-
 ipcMain.handle('tag-info', async(event,name,path) =>{
 	const sqlmeta = metaParser(path)
 	const cmd =`select tag from Meta where name = ?`
@@ -51,7 +50,23 @@ ipcMain.handle('tag-info', async(event,name,path) =>{
 		})
 	})
 	return output
+})
 
+// Side: Display Monitor
+ipcMain.handle('tag-monitor',async(event,v)=>{
+	const cmd = `select name from Monitor where name = ?`
+	const output = new Promise((resolve)=>{
+		db.all(cmd,[v],(err,res)=>{
+			if(err){
+				resolve(false)
+			}else{
+				const rawdata = res.map(i=>Object.values(i)[0])
+				const data = [...new Set(rawdata)]
+				resolve(data)
+			}
+		})
+	})
+	return output
 })
 // Side: Remove tags
 ipcMain.handle('tag-remove', async(event,file,tag,path) =>{
@@ -60,9 +75,6 @@ ipcMain.handle('tag-remove', async(event,file,tag,path) =>{
 	const output = new Promise((resolve)=>{
 		const cmd = `delete from Meta where name = ? and tag = ?`
 			sqlmeta.run(cmd,[file,tag],(err)=>{
-				if(err){
-				console.log(err)
-				}
 				resolve(true)
 			})
 	})

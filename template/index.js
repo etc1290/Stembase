@@ -2,11 +2,11 @@
 const information = document.getElementById('info')
 information.innerText = `This app is using Chrome (v${versions.chrome()}), Node.js (v${versions.node()}), and Electron (v${versions.electron()})`
 
-// FileSystem
+// Global in FileSystem
 let floorNum = 'fs-floor-0'
 let floorCheckIn =  floorDist = 0
 const maxFloor = 5
-
+// FileSystem
 const fsgetPath = (isDetour=false)=>{	
 	const pathset = document.querySelectorAll('.fs-path-part')
 	const pathArr = []
