@@ -7,6 +7,9 @@
 	# Added
 	1. Add fully functional support in fslabel redirecting
 		-- finished
+	# Changed
+	1. Slightly modify the behavior of uxselect to fit the change of floor structure
+		-- finished
 ---
 	## 2023.03.25		version 0.4.6.1
 	-- Bug fix
