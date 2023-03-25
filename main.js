@@ -1,7 +1,6 @@
 const { app, BrowserWindow, ipcMain, nativeTheme, dialog, session } = require('electron')
 const path = require('path')
 const fs = require('fs')
-//const {JsonDB,Config} = require('node-json-db')
 const glob = require('glob')
 const env = require('./static/js/env.js')
 const Stemdb= env('StemdbDir')
@@ -31,6 +30,12 @@ db.run(`create table "Ref" (
 	foreign key('tagref') references Tag(tag) on delete cascade on update cascade,
 	unique(nameref,tagref)
 )`,()=>{})
+db.run(`create table "Monitor" (
+	"id"	integer not null unique,
+	"name"	text not null unique,
+	primary key("id" autoincrement)
+)`,()=>{console.log('apple')})
+
 
 
 // WindowsCreator

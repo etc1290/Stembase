@@ -1,6 +1,5 @@
 const {ipcMain,dialog} = require('electron')
 const fs = require('fs')
-const {JsonDB,Config} = require('node-json-db')
 const env = require('./env.js')
 const sqlite3 = require('sqlite3').verbose()
 const Stemdb= env('StemdbDir')
@@ -19,6 +18,7 @@ ipcMain.handle('tag-main', (event,name,tag,path) =>{
 			db.run(cmd,[filename,tag],()=>{})
 		})
 	})
+	db.run(`insert or ignore into Monitor(name) values(?)`,[path],()=>{console.log(path)})
 	output = new Promise((resolve)=>{
 		sqlmeta.run(`create table 'Meta'(
 			"id" 	integer not null unique,

@@ -2,6 +2,13 @@
  File tagging system
 
 ---
+	## 2023.03.25		version 0.4.7.1
+	-- Remove wasted codes
+	-- Build new data table
+	# Added
+	1. Add Monitor data table
+		-- finished
+---
 	## 2023.03.25		version 0.4.7
 	-- Function implementation
 	# Added
