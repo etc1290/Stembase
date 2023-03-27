@@ -1,6 +1,22 @@
 # Stembase
  File tagging system
 
+
+---
+	## 2023.03.27		version 0.4.9
+	-- Redesign the style
+	-- Bug fix
+	# Added
+	1. Make fs-floor-0 size fulldiv when there is only one div on board
+		-- finished
+	2. Make each div can be scrolled independently
+		-- finished
+	# Changed
+	1. Rename the index-ux.js with index-tag.js
+		-- finished
+	# Fixed
+	1. Fix the bug that border limited within the initial height and width of div
+		-- finished
 ---
 	## 2023.03.25		version 0.4.8
 	-- Remove wasted codes
