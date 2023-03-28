@@ -1,7 +1,20 @@
 # Stembase
  File tagging system
 
-
+---
+	## 2023.03.28		version 0.4.9.1
+	-- Clear wasted codes
+	-- Add smooth scroll 
+	-- Rewrite function
+	# Added
+	1. Add smooth scroll when append new floor
+		-- Bugged
+	# Bugged
+	1. Stemmeta and Stemdb is visible for this system
+		-- Bugged
+	# Changed
+	1. Rewrite dataMiner from forEach to for loop
+		-- finished
 ---
 	## 2023.03.27		version 0.4.9
 	-- Redesign the style

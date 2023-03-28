@@ -38,6 +38,11 @@ contextBridge.exposeInMainWorld('tag', {
 	delDB:		() 			=> ipcRenderer.invoke('ts-delDB')
 })
 
+// MonitorSystem
+contextBridge.exposeInMainWorld('mnt', {
+	main:		(i)			=> ipcRenderer.invoke('mnt-main',i)
+})
+
 
 
 

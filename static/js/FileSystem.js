@@ -8,9 +8,53 @@ const time = require('./time.js')
     ipcMain.handle('fs-main',	(event,v) => {
 		//Side: File details miner
 		const dataMiner = (path,property) =>{
-			const output = new Array()
-			const v = new Array
-			const pathList = fs.readdirSync(path)		
+			const output = v = new Array()
+			const pathList = fs.readdirSync(path)
+					
+			for(var i=0;i<pathList.length;i++){
+				v[i] = path + '\\' + pathList[i]
+			}
+			for(var i=0;i<property.length;i++){
+				let data = []
+				const attr = property[i]
+				if(attr=='file'){
+					data = pathList
+				}else if(attr=='size'){
+					for(var j=0;j<v.length;j++){
+						try{
+							const {[attr]:k}=fs.statSync(v[j])
+							data[j] = bytes(k)
+						}catch(err){
+							data[j] = false
+						}
+					}
+				}else if(attr=='mtime'){
+					for(var j=0;j<v.length;j++){
+						try{
+							const {[attr]:k}=fs.statSync(v[j])
+							data[j] = time(k)
+						}catch(err){
+							data[j] = false
+						}
+					}
+				}else{
+					for(var j=0;j<v.length;j++){
+						try{
+							const {[attr]:k}=fs.statSync(v[j])
+							data[j] = k
+						}catch(err){
+							data[j] = false
+						}
+					}
+				}
+				if(data){
+					output[attr] = data
+				}				
+			}
+			const outputset = output.filter(n=>n)
+			return output
+			
+			/*
 			pathList.forEach(e=>{
 				v.push(path + '\\' + e)
 			})
@@ -59,8 +103,8 @@ const time = require('./time.js')
 			})
 			
 			const outputset = output.filter(n=>n)
-			
-			return output			
+			console.log(output)
+			return output*/			
 		}
 		// Main function starts here
 		if(typeof v == 'undefined' || !v){

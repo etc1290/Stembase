@@ -34,7 +34,7 @@ db.run(`create table "Monitor" (
 	"id"	integer not null unique,
 	"name"	text not null unique,
 	primary key("id" autoincrement)
-)`,()=>{console.log('apple')})
+)`,()=>{})
 
 
 
