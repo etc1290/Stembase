@@ -141,8 +141,8 @@ const fsfloorfunc = ()=>{
 		floorset[i].style.borderRight = '0px'
 		floorset[i].style.borderBottom = '0px'
 	}
-	//document.getElementById(floorNum).scrollIntoView()
-	uxScroll(floorNum)
+	document.getElementById(floorNum).scrollIntoView()
+	//uxScroll(floorNum)
 		//Floor function
 	
 	for(let i=0;i<floorset.length;i++){

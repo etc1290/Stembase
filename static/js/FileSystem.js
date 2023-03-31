@@ -9,8 +9,8 @@ const time = require('./time.js')
 		//Side: File details miner
 		const dataMiner = (path,property) =>{
 			const output = v = new Array()
-			const pathList = fs.readdirSync(path)
-					
+			const rawList = fs.readdirSync(path)
+			const pathList = rawList.filter(s=>!['Stemmeta.db','Stemdb.db'].includes(s))
 			for(var i=0;i<pathList.length;i++){
 				v[i] = path + '\\' + pathList[i]
 			}

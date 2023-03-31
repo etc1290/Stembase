@@ -2,6 +2,12 @@
  File tagging system
 
 ---
+	## 2023.03.31		version 0.4.9.2
+	-- Bug fix
+	# Fixed
+	1. Stemmeta and Stemdb now is no longer supported to be taggable
+		-- finished
+---
 	## 2023.03.28		version 0.4.9.1
 	-- Clear wasted codes
 	-- Add smooth scroll 
