@@ -7,22 +7,28 @@ let floorNum = 'fs-floor-0'
 let floorCheckIn =  floorDist = 0
 const maxFloor = 5
 // FileSystem
+	// Get path (string)
 const fsgetPath = (isDetour=false)=>{	
 	const pathset = document.querySelectorAll('.fs-path-part')
 	const pathArr = []
 	let pathLen = pathset.length
 	if(isDetour){
 		pathLen = Array.prototype.indexOf.call(pathset,document.querySelector('.this-floor')) +1
-		//console.log(pathLen)
 	}
 	for(var i=0;i<pathLen;i++){
 		pathArr[i] = pathset[i].innerHTML
 	}
-	//console.log(pathArr)
 	const path=pathArr.join('')
 	return path
 }
-
+	// Reset to default status
+const fsreset = ()=>{
+	floorNum = 'fs-floor-0'
+	const fsfloor = document.querySelectorAll('.fs-floor')
+	for(var i=0;i<fsfloor.length;i++){
+		fsfloor[i].innerHTML = ''
+	}
+}
 const fsfuncPath = (v=0)=>{
 	const partset = document.querySelectorAll('.fs-path-part')
 	const pathlog = []

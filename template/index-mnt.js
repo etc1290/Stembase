@@ -4,8 +4,10 @@
 const mntfunc = ()=>{
 	const mntdata = document.querySelectorAll('.mnt-data')
 	for(let i=0;i<mntdata.length;i++){
-		mntdata[i].addEventListener('click',()=>{
+		mntdata[i].addEventListener('dblclick',()=>{
 			console.log(mntdata[i].innerHTML)
+			floorNum = 'fs-floor-0'
+			fsfunc(mntdata[i].innerHTML)
 		})
 	}
 }

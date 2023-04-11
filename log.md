@@ -2,8 +2,11 @@
  File tagging system
 
 ---
-	## 2023.04.11		version 0.5.0.1
+	## 2023.04.11		version 0.5.1
 	-- Bug fix
+	# Added
+	1. Add link function in monitored folder
+		-- finished
 	# Fixed
 	1. Fix monitored folder's path overflow
 		-- finished
