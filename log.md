@@ -2,6 +2,12 @@
  File tagging system
 
 ---
+	## 2023.04.10		version 0.5.0
+	-- Function implementaion
+	# Added
+	1. Load Monitored folders and print
+		-- finished
+---
 	## 2023.03.31		version 0.4.9.2
 	-- Bug fix
 	# Fixed

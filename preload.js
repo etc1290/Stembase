@@ -40,7 +40,7 @@ contextBridge.exposeInMainWorld('tag', {
 
 // MonitorSystem
 contextBridge.exposeInMainWorld('mnt', {
-	main:		(i)			=> ipcRenderer.invoke('mnt-main',i)
+	main:		()			=> ipcRenderer.invoke('mnt-main')
 })
 
 
