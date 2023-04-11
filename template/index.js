@@ -21,14 +21,7 @@ const fsgetPath = (isDetour=false)=>{
 	const path=pathArr.join('')
 	return path
 }
-	// Reset to default status
-const fsreset = ()=>{
-	floorNum = 'fs-floor-0'
-	const fsfloor = document.querySelectorAll('.fs-floor')
-	for(var i=0;i<fsfloor.length;i++){
-		fsfloor[i].innerHTML = ''
-	}
-}
+
 const fsfuncPath = (v=0)=>{
 	const partset = document.querySelectorAll('.fs-path-part')
 	const pathlog = []
@@ -258,6 +251,7 @@ const fsfunc = async (v=false,isDrive=false) => {
 	// Side: Directory browser
 document.getElementById('fs-openDir').addEventListener('click', async () => {
 	const fsbrowse = await window.fs.getDir()
+	floorNum = 'fs-floor-0'
 	fsfunc(fsbrowse[0])
 
 	

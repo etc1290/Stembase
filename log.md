@@ -7,6 +7,8 @@
 	# Added
 	1. Add link function in monitored folder
 		-- finished
+	2. Open directory now reset floor number
+		-- finished
 	# Fixed
 	1. Fix monitored folder's path overflow
 		-- finished
