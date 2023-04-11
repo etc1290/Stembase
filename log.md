@@ -2,6 +2,15 @@
  File tagging system
 
 ---
+	## 2023.04.12		version 0.5.1.1
+	-- Bug fix
+	# Fixed
+	1. Apply class rather than id in mnt-folder-header 
+		-- finished
+	# Changed
+	1. Apply outline on mnt-folder and mnt-folder-header
+		-- finished
+---
 	## 2023.04.11		version 0.5.1
 	-- Bug fix
 	# Added

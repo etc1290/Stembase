@@ -1,6 +1,6 @@
 
 
-
+// Side:	Jump to monitored path
 const mntfunc = ()=>{
 	const mntdata = document.querySelectorAll('.mnt-data')
 	for(let i=0;i<mntdata.length;i++){
