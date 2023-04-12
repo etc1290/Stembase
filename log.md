@@ -9,6 +9,8 @@
 	# Added
 	1. Monitored group expansion and collapsing function
 		-- finished
+	2. Refresh monitored list after tag add
+		-- finished
 	# Fixed
 	1. Apply class rather than id in mnt-folder-header 
 		-- finished

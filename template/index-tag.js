@@ -10,9 +10,11 @@ const tagmain = (name) =>{
 		const name 		= document.getElementById('ux-selected').innerHTML
 		if (taginput == ''){
 			const inputError = await window.tag.error('taginput')
-		}else{
-			
-			const tagwrite = await window.tag.main(name,taginput,tagpath)
+		}else{		
+			const isMonitored = await window.tag.main(name,taginput,tagpath)
+			if(!isMonitored){
+				mntmain()
+			}
 			tagdisplay(name)
 		}
 		

@@ -33,11 +33,12 @@ const mntmain = async()=>{
 		mntdata[i] = `<p class='mnt-data'>` + mntset[i] + `</p>`
 	}
 	updateDiv.innerHTML = mntdata.join('')
-	mntfold()
-	mntfunc()
+		
 }
 //Initailizer
 const mntInit = ()=>{
 	mntmain()
+	mntfold()
+	mntfunc()
 }
 mntInit()

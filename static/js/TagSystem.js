@@ -18,7 +18,6 @@ ipcMain.handle('tag-main', (event,name,tag,path) =>{
 			db.run(cmd,[filename,tag],()=>{})
 		})
 	})
-	db.run(`insert or ignore into Monitor(name) values(?)`,[path],()=>{console.log(path)})
 	output = new Promise((resolve)=>{
 		sqlmeta.run(`create table 'Meta'(
 			"id" 	integer not null unique,
@@ -28,7 +27,13 @@ ipcMain.handle('tag-main', (event,name,tag,path) =>{
 			unique(name,tag))`,()=>{
 				const cmd = `insert or ignore into Meta(name,tag) values(?,?)`
 				sqlmeta.all(cmd,[name,tag],()=>{
-					resolve(true)
+					db.run(`insert into Monitor(name) values(?)`,[path],(err,res)=>{
+						if(err){
+							resolve(true)
+						}else{
+							resolve(false)
+						}
+					})
 				})
 		} )
 	})

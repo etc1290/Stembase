@@ -52,59 +52,7 @@ const time = require('./time.js')
 				}				
 			}
 			const outputset = output.filter(n=>n)
-			return output
-			
-			/*
-			pathList.forEach(e=>{
-				v.push(path + '\\' + e)
-			})
-			
-			property.forEach(i=>{
-				
-				let data = new Array()
-				if (i=='file'){
-					data = pathList
-				}else if(i=='size'){
-					v.forEach(e =>{
-						try{
-							const {[i]:k}=fs.statSync(e)
-							data.push(bytes(k))
-						}catch(e){
-							data.push(false)
-						}
-					})
-					
-				}else if(i=='mtime'){
-					
-					v.forEach(e =>{
-						try{
-							const {[i]:k}=fs.statSync(e)
-							data.push(time(k))
-						}catch(e){
-							data.push(false)
-						}
-					})			
-				}else{
-					
-					v.forEach(e =>{
-						try{
-							const {[i]:k}=fs.statSync(e)
-							data.push(k)
-						}catch(e){
-							data.push(false)
-						}	
-					})
-					
-				}
-				if(data){
-					output[i] = data
-				} 
-				
-			})
-			
-			const outputset = output.filter(n=>n)
-			console.log(output)
-			return output*/			
+			return output		
 		}
 		// Main function starts here
 		if(typeof v == 'undefined' || !v){
