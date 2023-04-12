@@ -2,7 +2,7 @@
  File tagging system
 
 ---
-	## 2023.04.12		version 0.5.1.1
+	## 2023.04.12		version 0.5.2
 	-- Bug fix
 	-- Style change
 	-- Function implementation
