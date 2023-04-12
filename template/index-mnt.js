@@ -1,11 +1,24 @@
 
-
+// Side:	Monitored group collapse and expand
+const mntfold = ()=>{
+	const mntheader = document.querySelectorAll('.mnt-folder-header')
+	const mntcontent = document.querySelectorAll('.mnt-folder-content')
+	for(let i=0;i<mntheader.length;i++){
+		mntheader[i].addEventListener('click',()=>{
+			console.log(mntcontent[i].style.height)
+			if(mntcontent[i].style.height=='0px'){
+				mntcontent[i].style.height = 'auto'
+			}else{
+				mntcontent[i].style.height = '0px'
+			}
+		})
+	}
+}
 // Side:	Jump to monitored path
 const mntfunc = ()=>{
 	const mntdata = document.querySelectorAll('.mnt-data')
 	for(let i=0;i<mntdata.length;i++){
 		mntdata[i].addEventListener('dblclick',()=>{
-			console.log(mntdata[i].innerHTML)
 			floorNum = 'fs-floor-0'
 			fsfunc(mntdata[i].innerHTML)
 		})
@@ -20,6 +33,7 @@ const mntmain = async()=>{
 		mntdata[i] = `<p class='mnt-data'>` + mntset[i] + `</p>`
 	}
 	updateDiv.innerHTML = mntdata.join('')
+	mntfold()
 	mntfunc()
 }
 //Initailizer

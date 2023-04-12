@@ -4,6 +4,11 @@
 ---
 	## 2023.04.12		version 0.5.1.1
 	-- Bug fix
+	-- Style change
+	-- Function implementation
+	# Added
+	1. Monitored group expansion and collapsing function
+		-- finished
 	# Fixed
 	1. Apply class rather than id in mnt-folder-header 
 		-- finished

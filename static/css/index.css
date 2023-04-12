@@ -23,6 +23,9 @@
 	white-space:	nowrap;
 	overflow-x:		auto;
 	overflow-y:		hidden;
+	height:			0px;
+	max-height:		20vh;
+	transition:		0.5s;
 }
 #fs{
 	width:			50%;
