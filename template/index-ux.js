@@ -11,6 +11,21 @@ const uxScroll = (e)=>{
 		behavior: 'smooth'
 	})
 }
+
+const uxContextMenuRemove = ()=>{
+	const contextMenu = document.getElementById('mnt-cm')
+	document.querySelector('body').addEventListener('click',(event)=>{
+		if(event.target.offsetParent !=contextMenu){
+			contextMenu.classList.remove('visible')
+		}
+	})
+	
+}
+// Initialize
+const uxInit = ()=>{
+	uxContextMenuRemove()
+}
+uxInit()
 /*
 function scrollToTargetAdjusted(){
     var element = document.getElementById('targetElement');

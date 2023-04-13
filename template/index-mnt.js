@@ -14,6 +14,20 @@ const mntfold = ()=>{
 		})
 	}
 }
+// Side:	Context menu of monitored data
+const mntmenu = ()=>{
+	const contextMenu = document.getElementById('mnt-cm')
+	const mntfolder = document.querySelectorAll('.mnt-folder')
+	for(let i=0;i<mntfolder.length;i++){
+		mntfolder[i].addEventListener('contextmenu',(event)=>{
+			event.preventDefault()
+			const {clientX: mouseX, clientY: mouseY} = event
+			contextMenu.style.top = `${mouseY}px`
+			contextMenu.style.left= `${mouseX}px`
+			contextMenu.classList.add('visible')
+		})
+	}
+}	
 // Side:	Jump to monitored path
 const mntfunc = ()=>{
 	const mntdata = document.querySelectorAll('.mnt-data')
@@ -39,6 +53,7 @@ const mntmain = async()=>{
 const mntInit = ()=>{
 	mntmain()
 	mntfold()
+	mntmenu()
 	mntfunc()
 }
 mntInit()

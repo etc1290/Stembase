@@ -2,6 +2,15 @@
  File tagging system
 
 ---
+	## 2023.04.13		version 0.5.3
+	-- Remove wasted codes
+	-- Function implementation
+	# Added
+	1. Add Monitored context menu for data manipulation
+		-- finished
+	2. Add auto cancel when click outside monitored menu
+		-- finished
+---
 	## 2023.04.12		version 0.5.2
 	-- Bug fix
 	-- Style change
