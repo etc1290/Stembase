@@ -6,10 +6,10 @@ const mntfold = ()=>{
 	for(let i=0;i<mntheader.length;i++){
 		mntheader[i].addEventListener('click',()=>{
 			console.log(mntcontent[i].style.height)
-			if(mntcontent[i].style.height=='0px'){
+			if(mntcontent[i].style.height==''){
 				mntcontent[i].style.height = 'auto'
 			}else{
-				mntcontent[i].style.height = '0px'
+				mntcontent[i].style.height = ''
 			}
 		})
 	}

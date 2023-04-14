@@ -1,6 +1,12 @@
 # Stembase
  File tagging system
 
+---	
+	## 2023.04.14		version 0.5.3.1
+	-- Bug fix
+	# Fixed
+	1. Fix the bug that first click is ignored at monitored group
+		-- finished
 ---
 	## 2023.04.13		version 0.5.3
 	-- Remove wasted codes
