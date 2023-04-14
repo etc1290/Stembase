@@ -1,11 +1,16 @@
 # Stembase
  File tagging system
 
+
 ---
 	## 2023.04.14		version 0.5.3.2
 	-- Bug fix
+	-- Function implementation
+	# Added
+	1. Basic drag and drop function on monitored data
+		-- finished
 	# Fixed 
-	1. Fix the bbug that monitored function could not properly apply
+	1. Fix the bug that monitored function could not properly apply
 		-- finished
 ---	
 	## 2023.04.14		version 0.5.3.1

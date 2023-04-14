@@ -30,6 +30,7 @@ const mntmenu = ()=>{
 }	
 // Side:	Function of monitored data
 const mntfunc = ()=>{
+	// Data function
 	const mntdata = document.querySelectorAll('.mnt-data')
 	for(let i=0;i<mntdata.length;i++){
 		// Jump to monitored path
@@ -37,6 +38,10 @@ const mntfunc = ()=>{
 		target.addEventListener('dblclick',()=>{
 			floorNum = 'fs-floor-0'
 			fsfunc(target.innerHTML)
+		})
+		// Drag
+		target.addEventListener('dragstart',(event)=>{
+			event.dataTransfer.setData('text/plain',event.target.id)
 		})
 		// Style
 		target.addEventListener('click',()=>{
@@ -50,6 +55,33 @@ const mntfunc = ()=>{
 			target.style.background = 'rgb(154,255,222)'
 		})
 	}
+	
+	// Folder function
+	// Shortcut
+	const mntshortcut = document.getElementById('mnt-shortcut')
+	mntshortcut.addEventListener('dragenter',()=>{
+		mntshortcut.style.height = mntshortcut.clientWidth + 100 + 'px'
+	})
+	// Drop folder
+	const mntdropzone = document.querySelectorAll('.mnt-dropzone')
+	const mntcancel = (event)=>{
+		event.preventDefault()
+		event.stopPropagation()
+		return false
+	}
+	for(let i=0;i<mntdropzone.length;i++){
+		const target = mntdropzone[i]
+		target.addEventListener('drop',(event)=>{
+			mntcancel(event)
+			const id = event.dataTransfer.getData('text/plain')
+			console.log(id)
+			console.log(document.getElementById(id))
+			event.target.appendChild(document.getElementById(id))
+		})
+		target.addEventListener('dragenter',mntcancel)
+		target.addEventListener('dragover',mntcancel)
+	}
+		
 }
 // Main:	Load all monitored data
 const mntmain = async()=>{
@@ -57,7 +89,8 @@ const mntmain = async()=>{
 	const updateDiv = document.getElementById('mnt-main-display')
 	const mntset = await window.mnt.main()
 	for(var i=0;i<mntset.length;i++){
-		mntdata[i] = `<p class='mnt-data'>` + mntset[i] + `</p>`
+		const id = `id='mnt-data-` + i + `'`
+		mntdata[i] = `<p ` + id+ ` class='mnt-data' draggable='true'>` + mntset[i] + `</p>`
 	}
 	updateDiv.innerHTML = mntdata.join('')
 	mntfunc()	
