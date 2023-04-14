@@ -59,8 +59,21 @@ const mntfunc = ()=>{
 	// Folder function
 	// Shortcut
 	const mntshortcut = document.getElementById('mnt-shortcut')
+	let mntheight = 0
 	mntshortcut.addEventListener('dragenter',()=>{
-		mntshortcut.style.height = mntshortcut.clientWidth + 100 + 'px'
+		mntheight = mntshortcut.offsetHeight
+	})
+	mntshortcut.addEventListener('dragover',()=>{
+		mntshortcut.style.height = (mntheight + 50) + 'px'
+		console.log('in')
+	})
+	mntshortcut.addEventListener('dragleave',()=>{
+		console.log('leave')
+		mntshortcut.style.height = 'auto'
+	})
+	mntshortcut.addEventListener('drop',()=>{
+		console.log('drop')
+		mntshortcut.style.height = 'auto'
 	})
 	// Drop folder
 	const mntdropzone = document.querySelectorAll('.mnt-dropzone')
@@ -74,8 +87,6 @@ const mntfunc = ()=>{
 		target.addEventListener('drop',(event)=>{
 			mntcancel(event)
 			const id = event.dataTransfer.getData('text/plain')
-			console.log(id)
-			console.log(document.getElementById(id))
 			event.target.appendChild(document.getElementById(id))
 		})
 		target.addEventListener('dragenter',mntcancel)

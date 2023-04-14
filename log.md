@@ -9,6 +9,8 @@
 	# Added
 	1. Basic drag and drop function on monitored data
 		-- finished
+	2. Resize monitored folders are dragged in and turn back when finished
+		-- finished
 	# Fixed 
 	1. Fix the bug that monitored function could not properly apply
 		-- finished
