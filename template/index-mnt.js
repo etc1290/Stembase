@@ -28,13 +28,26 @@ const mntmenu = ()=>{
 		})
 	}
 }	
-// Side:	Jump to monitored path
+// Side:	Function of monitored data
 const mntfunc = ()=>{
 	const mntdata = document.querySelectorAll('.mnt-data')
 	for(let i=0;i<mntdata.length;i++){
-		mntdata[i].addEventListener('dblclick',()=>{
+		// Jump to monitored path
+		const target = mntdata[i]
+		target.addEventListener('dblclick',()=>{
 			floorNum = 'fs-floor-0'
-			fsfunc(mntdata[i].innerHTML)
+			fsfunc(target.innerHTML)
+		})
+		// Style
+		target.addEventListener('click',()=>{
+			const apple = target.clientWidth
+			console.log(apple)
+		})
+		target.addEventListener('mousedown',()=>{
+			target.style.background = 'rgb(124,225,192)'
+		})
+		target.addEventListener('mouseup',()=>{
+			target.style.background = 'rgb(154,255,222)'
 		})
 	}
 }
@@ -47,13 +60,13 @@ const mntmain = async()=>{
 		mntdata[i] = `<p class='mnt-data'>` + mntset[i] + `</p>`
 	}
 	updateDiv.innerHTML = mntdata.join('')
-		
+	mntfunc()	
 }
 //Initailizer
 const mntInit = ()=>{
 	mntmain()
 	mntfold()
 	mntmenu()
-	mntfunc()
+	
 }
 mntInit()

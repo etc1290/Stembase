@@ -43,8 +43,15 @@
 	overflow-x:		auto;
 	overflow-y:		hidden;
 	height:			0px;
+	width:			auto;
 	max-height:		20vh;
 	transition:		0.5s;
+}
+.mnt-data{
+	width:			100%;
+}
+.mnt-data:hover{
+	background:		rgb(154,255,222);
 }
 #fs{
 	width:			50%;

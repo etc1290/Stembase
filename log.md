@@ -1,12 +1,21 @@
 # Stembase
  File tagging system
 
+---
+	## 2023.04.14		version 0.5.3.2
+	-- Bug fix
+	# Fixed 
+	1. Fix the bbug that monitored function could not properly apply
+		-- finished
 ---	
 	## 2023.04.14		version 0.5.3.1
 	-- Bug fix
+	-- Style change
 	# Fixed
 	1. Fix the bug that first click is ignored at monitored group
 		-- finished
+	# Changed
+	1. Set the hover color 'Aquamarine Green' to monitored data and pressed color
 ---
 	## 2023.04.13		version 0.5.3
 	-- Remove wasted codes
