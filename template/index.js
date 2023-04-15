@@ -2,23 +2,22 @@
 const information = document.getElementById('info')
 information.innerText = `This app is using Chrome (v${versions.chrome()}), Node.js (v${versions.node()}), and Electron (v${versions.electron()})`
 
-// FileSystem
+// Global in FileSystem
 let floorNum = 'fs-floor-0'
 let floorCheckIn =  floorDist = 0
 const maxFloor = 5
-
+// FileSystem
+	// Get path (string)
 const fsgetPath = (isDetour=false)=>{	
 	const pathset = document.querySelectorAll('.fs-path-part')
 	const pathArr = []
 	let pathLen = pathset.length
 	if(isDetour){
 		pathLen = Array.prototype.indexOf.call(pathset,document.querySelector('.this-floor')) +1
-		console.log(pathLen)
 	}
 	for(var i=0;i<pathLen;i++){
 		pathArr[i] = pathset[i].innerHTML
 	}
-	console.log(pathArr)
 	const path=pathArr.join('')
 	return path
 }
@@ -136,8 +135,13 @@ const fsfloorfunc = ()=>{
 	for(var i = +floorNum.match(/.$/,'')+1;i<floorset.length;i++){
 		floorset[i].innerHTML = ''
 		floorset[i].style.width = '0px'
+		//floorset[i].style.outline = '0px'
+		floorset[i].style.overflowY = 'hidden'
+		floorset[i].style.borderRight = '0px'
+		floorset[i].style.borderBottom = '0px'
 	}
 	document.getElementById(floorNum).scrollIntoView()
+	//uxScroll(floorNum)
 		//Floor function
 	
 	for(let i=0;i<floorset.length;i++){
@@ -152,6 +156,7 @@ const fsfunc = async (v=false,isDrive=false) => {
 		//Declaration - constant
 	const fspath = document.getElementById('fs-path')
 	const updateDiv = document.getElementById(floorNum)
+	const initDiv = document.getElementById('fs-floor-0')
 	const path = v
 	
 		//Initialize
@@ -170,10 +175,18 @@ const fsfunc = async (v=false,isDrive=false) => {
 			fsdataset[i] = fsdata
 		}	
 	}
-	updateDiv.innerHTML = fsdataset.join('')		
-	updateDiv.style.width = '532px'
+	updateDiv.innerHTML = fsdataset.join('')
+	if(updateDiv === initDiv){		
+		updateDiv.style.width = '100%'
+	}else{
+		initDiv.style.width = '532px'
+		updateDiv.style.width = '532px'
+	}	
 	floorCheckIn = +floorNum.match(/.$/,'')
-	updateDiv.style.borderLeft = '5px solid rgb(255,238,214)'
+	//updateDiv.style.outline = '5px solid rgb(255,238,214)'
+	updateDiv.style.overflowY = 'scroll'
+	updateDiv.style.borderRight = '5px solid rgb(255,238,214)'
+	updateDiv.style.borderBottom = '5px solid rgb(255,238,214)'
 		//Button function
 	let focusStorage = 'fs-info'
 	
@@ -238,6 +251,7 @@ const fsfunc = async (v=false,isDrive=false) => {
 	// Side: Directory browser
 document.getElementById('fs-openDir').addEventListener('click', async () => {
 	const fsbrowse = await window.fs.getDir()
+	floorNum = 'fs-floor-0'
 	fsfunc(fsbrowse[0])
 
 	

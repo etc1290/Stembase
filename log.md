@@ -1,6 +1,115 @@
 # Stembase
  File tagging system
 
+
+---
+	## 2023.04.14		version 0.5.3.2
+	-- Bug fix
+	-- Function implementation
+	# Added
+	1. Basic drag and drop function on monitored data
+		-- finished
+	2. Resize monitored folders are dragged in and turn back when finished
+		-- finished
+	# Fixed 
+	1. Fix the bug that monitored function could not properly apply
+		-- finished
+---	
+	## 2023.04.14		version 0.5.3.1
+	-- Bug fix
+	-- Style change
+	# Fixed
+	1. Fix the bug that first click is ignored at monitored group
+		-- finished
+	# Changed
+	1. Set the hover color 'Aquamarine Green' to monitored data and pressed color
+---
+	## 2023.04.13		version 0.5.3
+	-- Remove wasted codes
+	-- Function implementation
+	# Added
+	1. Add Monitored context menu for data manipulation
+		-- finished
+	2. Add auto cancel when click outside monitored menu
+		-- finished
+---
+	## 2023.04.12		version 0.5.2
+	-- Bug fix
+	-- Style change
+	-- Function implementation
+	# Added
+	1. Monitored group expansion and collapsing function
+		-- finished
+	2. Refresh monitored list after tag add
+		-- finished
+	# Fixed
+	1. Apply class rather than id in mnt-folder-header 
+		-- finished
+	# Changed
+	1. Apply outline on mnt-folder and mnt-folder-header
+		-- finished
+---
+	## 2023.04.11		version 0.5.1
+	-- Bug fix
+	# Added
+	1. Add link function in monitored folder
+		-- finished
+	2. Open directory now reset floor number
+		-- finished
+	# Fixed
+	1. Fix monitored folder's path overflow
+		-- finished
+---
+	## 2023.04.10		version 0.5.0
+	-- Function implementaion
+	# Added
+	1. Load Monitored folders and print
+		-- finished
+---
+	## 2023.03.31		version 0.4.9.2
+	-- Bug fix
+	# Fixed
+	1. Stemmeta and Stemdb now is no longer supported to be taggable
+		-- finished
+---
+	## 2023.03.28		version 0.4.9.1
+	-- Clear wasted codes
+	-- Add smooth scroll 
+	-- Rewrite function
+	# Added
+	1. Add smooth scroll when append new floor
+		-- Bugged
+	# Bugged
+	1. Stemmeta and Stemdb is visible for this system
+		-- Bugged
+	# Changed
+	1. Rewrite dataMiner from forEach to for loop
+		-- finished
+---
+	## 2023.03.27		version 0.4.9
+	-- Redesign the style
+	-- Bug fix
+	# Added
+	1. Make fs-floor-0 size fulldiv when there is only one div on board
+		-- finished
+	2. Make each div can be scrolled independently
+		-- finished
+	# Changed
+	1. Rename the index-ux.js with index-tag.js
+		-- finished
+	# Fixed
+	1. Fix the bug that border limited within the initial height and width of div
+		-- finished
+---
+	## 2023.03.25		version 0.4.8
+	-- Remove wasted codes
+	-- Build new data table
+	-- Function implementation
+	# Added
+	1. Add Monitor data table
+		-- finished
+	2. Add Monitored check before tag display
+		-- finished
 ---
 	## 2023.03.25		version 0.4.7
 	-- Function implementation
