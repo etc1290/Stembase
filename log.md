@@ -2,6 +2,50 @@
  File tagging system
 
 ---
+	## 2023.03.25		version 0.4.7
+	-- Function implementation
+	# Added
+	1. Add fully functional support in fslabel redirecting
+		-- finished
+	# Changed
+	1. Slightly modify the behavior of uxselect to fit the change of floor structure
+		-- finished
+---
+	## 2023.03.25		version 0.4.6.1
+	-- Bug fix
+	# Changed
+	1. Fix the bug that cause this-floor class is duplicate 
+		-- finished
+---
+	## 2023.03.24		version 0.4.6
+	-- Add path support
+	# Added
+	1. Make the oath button can functioned with new fsfloor mechanism 
+		-- bugged
+---
+	## 2023.03.23		version 0.4.5.2
+	-- Rewrite function
+	-- Bug fix
+	-- Remove wasted codes
+	# Changed
+	1. Rewrite fsfloor sign function with a more flexible and potentially more efficient way 
+		-- finished
+	2. Rewrite fsgetPath function from regular expression to array
+		-- finished
+	# Fixed
+	1. Fix the bug that rename fsfloorInit with fsfloorSign
+		-- finished
+	2. Fix the bug that sometimes pop up 'Not defined' warnings
+		-- finished
+---
+	## 2023.03.23		version 0.4.5.1
+	-- Bug Fix
+	# Fixed
+	1. Fix the CSP warning and performance issue in fsfloor system
+		-- finished
+	2. Fix the bug that floor sign function did not follow the floor overflow
+		-- finished
+---
 	## 2023.03.21		version 0.4.5
 	-- Function Implementation
 	# Added

@@ -19,7 +19,7 @@ const tagmain = (name) =>{
 
 	// Side: Tag display
 const tagdisplay = async (name) =>{
-	const tagpath = fsgetPath()
+	const tagpath = fsgetPath(true)
 	const taginfo 	= await window.tag.info(name,tagpath)
 	const queryset = []
 	for (var i=0;i<taginfo.length;i++){
