@@ -14,6 +14,18 @@ const mntfold = ()=>{
 		})
 	}
 }
+// Side:	The Style of Monitored system
+const mntstyle = ()=>{
+	const mntdropzone = document.querySelectorAll('.mnt-dropzone')
+	for(let i=0;i<mntdropzone.length;i++){
+		mntdropzone[i].addEventListener('mouseener',()=>{
+			mntdropzone[i].firstChild.style.background = 'rgb(124,225,192)'
+		})
+		mntdropzone[i].addEventListener('mouseout',()=>{
+			mntdropzone[i].firstChild.style.background = ''
+		})
+	}
+}
 // Side:	Context menu of monitored data
 const mntmenu = ()=>{
 	const contextMenu = document.getElementById('mnt-cm')
@@ -43,10 +55,12 @@ const mntfunc = ()=>{
 		target.addEventListener('dragstart',(event)=>{
 			event.dataTransfer.setData('text/plain',event.target.id)
 		})
+		target.addEventListener('dragend',()=>{
+			target.style.background = ''
+		})
 		// Style
 		target.addEventListener('click',()=>{
 			const apple = target.clientWidth
-			console.log(apple)
 		})
 		target.addEventListener('mousedown',()=>{
 			target.style.background = 'rgb(124,225,192)'
@@ -58,23 +72,7 @@ const mntfunc = ()=>{
 	
 	// Folder function
 	// Shortcut
-	const mntshortcut = document.getElementById('mnt-shortcut')
-	let mntheight = 0
-	mntshortcut.addEventListener('dragenter',()=>{
-		mntheight = mntshortcut.offsetHeight
-	})
-	mntshortcut.addEventListener('dragover',()=>{
-		mntshortcut.style.height = (mntheight + 50) + 'px'
-		console.log('in')
-	})
-	mntshortcut.addEventListener('dragleave',()=>{
-		console.log('leave')
-		mntshortcut.style.height = 'auto'
-	})
-	mntshortcut.addEventListener('drop',()=>{
-		console.log('drop')
-		mntshortcut.style.height = 'auto'
-	})
+	
 	// Drop folder
 	const mntdropzone = document.querySelectorAll('.mnt-dropzone')
 	const mntcancel = (event)=>{

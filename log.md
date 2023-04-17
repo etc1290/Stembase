@@ -1,7 +1,12 @@
 # Stembase
  File tagging system
 
-
+---
+	## 2023.04.17		version 0.5.3.3
+	-- Bug fix
+	# Fixed
+	1. Fix the bug that monitored path is highlighted after dropping
+		-- finished
 ---
 	## 2023.04.14		version 0.5.3.2
 	-- Bug fix
