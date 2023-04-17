@@ -4,8 +4,12 @@
 ---
 	## 2023.04.17		version 0.5.3.3
 	-- Bug fix
+	-- Style change
 	# Fixed
 	1. Fix the bug that monitored path is highlighted after dropping
+		-- finished
+	# Changed
+	1. When hovering, the header of monitored groups would be highlighted
 		-- finished
 ---
 	## 2023.04.14		version 0.5.3.2

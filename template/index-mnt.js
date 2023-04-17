@@ -17,12 +17,14 @@ const mntfold = ()=>{
 // Side:	The Style of Monitored system
 const mntstyle = ()=>{
 	const mntdropzone = document.querySelectorAll('.mnt-dropzone')
+	const mntfolderheader = document.querySelectorAll('.mnt-folder-header')
 	for(let i=0;i<mntdropzone.length;i++){
-		mntdropzone[i].addEventListener('mouseener',()=>{
-			mntdropzone[i].firstChild.style.background = 'rgb(124,225,192)'
+		mntdropzone[i].addEventListener('mouseenter',()=>{
+			console.log(mntfolderheader[i])
+			mntfolderheader[i].style.background = 'rgb(124,225,192)'
 		})
-		mntdropzone[i].addEventListener('mouseout',()=>{
-			mntdropzone[i].firstChild.style.background = ''
+		mntdropzone[i].addEventListener('mouseleave',()=>{
+			mntfolderheader[i].style.background = ''
 		})
 	}
 }
@@ -108,6 +110,7 @@ const mntmain = async()=>{
 const mntInit = ()=>{
 	mntmain()
 	mntfold()
+	mntstyle()
 	mntmenu()
 	
 }
