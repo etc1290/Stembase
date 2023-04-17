@@ -8,6 +8,8 @@
 	# Fixed
 	1. Fix the bug that monitored path is highlighted after dropping
 		-- finished
+	2. Fix the bug that all objects in a monitored groups are merged
+		-- finished
 	# Changed
 	1. When hovering, the header of monitored groups would be highlighted
 		-- finished

@@ -87,7 +87,7 @@ const mntfunc = ()=>{
 		target.addEventListener('drop',(event)=>{
 			mntcancel(event)
 			const id = event.dataTransfer.getData('text/plain')
-			event.target.appendChild(document.getElementById(id))
+			target.appendChild(document.getElementById(id))
 		})
 		target.addEventListener('dragenter',mntcancel)
 		target.addEventListener('dragover',mntcancel)
