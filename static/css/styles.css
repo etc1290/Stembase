@@ -21,7 +21,9 @@
 		
 	}
 }
-
+body{
+	overflow-y:	hidden;
+}
 button {
 	padding:	0;
 	width:		50%;

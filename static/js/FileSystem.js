@@ -8,59 +8,51 @@ const time = require('./time.js')
     ipcMain.handle('fs-main',	(event,v) => {
 		//Side: File details miner
 		const dataMiner = (path,property) =>{
-			const output = new Array()
-			const v = new Array
-			const pathList = fs.readdirSync(path)		
-			pathList.forEach(e=>{
-				v.push(path + '\\' + e)
-			})
-			
-			property.forEach(i=>{
-				
-				let data = new Array()
-				if (i=='file'){
+			const output = v = new Array()
+			const rawList = fs.readdirSync(path)
+			const pathList = rawList.filter(s=>!['Stemmeta.db','Stemdb.db'].includes(s))
+			for(var i=0;i<pathList.length;i++){
+				v[i] = path + '\\' + pathList[i]
+			}
+			for(var i=0;i<property.length;i++){
+				let data = []
+				const attr = property[i]
+				if(attr=='file'){
 					data = pathList
-				}else if(i=='size'){
-					v.forEach(e =>{
+				}else if(attr=='size'){
+					for(var j=0;j<v.length;j++){
 						try{
-							const {[i]:k}=fs.statSync(e)
-							data.push(bytes(k))
-						}catch(e){
-							data.push(false)
+							const {[attr]:k}=fs.statSync(v[j])
+							data[j] = bytes(k)
+						}catch(err){
+							data[j] = false
 						}
-					})
-					
-				}else if(i=='mtime'){
-					
-					v.forEach(e =>{
+					}
+				}else if(attr=='mtime'){
+					for(var j=0;j<v.length;j++){
 						try{
-							const {[i]:k}=fs.statSync(e)
-							data.push(time(k))
-						}catch(e){
-							data.push(false)
+							const {[attr]:k}=fs.statSync(v[j])
+							data[j] = time(k)
+						}catch(err){
+							data[j] = false
 						}
-					})			
+					}
 				}else{
-					
-					v.forEach(e =>{
+					for(var j=0;j<v.length;j++){
 						try{
-							const {[i]:k}=fs.statSync(e)
-							data.push(k)
-						}catch(e){
-							data.push(false)
-						}	
-					})
-					
+							const {[attr]:k}=fs.statSync(v[j])
+							data[j] = k
+						}catch(err){
+							data[j] = false
+						}
+					}
 				}
 				if(data){
-					output[i] = data
-				} 
-				
-			})
-			
+					output[attr] = data
+				}				
+			}
 			const outputset = output.filter(n=>n)
-			
-			return output			
+			return output		
 		}
 		// Main function starts here
 		if(typeof v == 'undefined' || !v){

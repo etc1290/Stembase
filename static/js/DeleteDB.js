@@ -6,6 +6,7 @@ const db = new sqlite3.Database(Stemdb + '.db')
 const { exec } = require('node:child_process');
 
 function exe(input) {
+    input = 'chcp 65001\n' + input
     exec(input, (error, stdout, stderr) => {
         if (error) {
           console.error(`exec error: ${error}`);
@@ -18,7 +19,7 @@ function exe(input) {
 
 ipcMain.handle('ts-delDB', () => {
     console.log('Deleting!!')
-    exe('dir -a')
+    exe('dir')
 })
 
 ipcMain.handle('fs-openfile', (evt, v) => {
