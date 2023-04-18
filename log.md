@@ -2,6 +2,12 @@
  File tagging system
 
 ---
+	## 2023.04.18		version 0.5.4
+	-- Function re-import
+	# Added
+	1. Fix the dragenter and dragleave bug and re-import resize function
+		-- finished
+---
 	## 2023.04.17		version 0.5.3.3
 	-- Bug fix
 	-- Style change

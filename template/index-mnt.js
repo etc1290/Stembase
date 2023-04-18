@@ -5,7 +5,6 @@ const mntfold = ()=>{
 	const mntcontent = document.querySelectorAll('.mnt-folder-content')
 	for(let i=0;i<mntheader.length;i++){
 		mntheader[i].addEventListener('click',()=>{
-			console.log(mntcontent[i].style.height)
 			if(mntcontent[i].style.height==''){
 				mntcontent[i].style.height = 'auto'
 			}else{
@@ -20,7 +19,6 @@ const mntstyle = ()=>{
 	const mntfolderheader = document.querySelectorAll('.mnt-folder-header')
 	for(let i=0;i<mntdropzone.length;i++){
 		mntdropzone[i].addEventListener('mouseenter',()=>{
-			console.log(mntfolderheader[i])
 			mntfolderheader[i].style.background = 'rgb(124,225,192)'
 		})
 		mntdropzone[i].addEventListener('mouseleave',()=>{
@@ -76,6 +74,7 @@ const mntfunc = ()=>{
 	// Shortcut
 	
 	// Drop folder
+	let counter= false
 	const mntdropzone = document.querySelectorAll('.mnt-dropzone')
 	const mntcancel = (event)=>{
 		event.preventDefault()
@@ -91,6 +90,26 @@ const mntfunc = ()=>{
 		})
 		target.addEventListener('dragenter',mntcancel)
 		target.addEventListener('dragover',mntcancel)
+		target.addEventListener('dragenter',()=>{
+			
+			if(!counter){
+				console.log(target.clientHeight)
+				target.style.height = (target.clientHeight + 100) + 'px'
+				counter = 0
+			}
+			counter++
+		})
+		target.addEventListener('dragleave',()=>{
+			counter--
+			if(counter==0){
+				target.style.height = 'auto'
+				counter = false
+			}
+		})
+		target.addEventListener('drop',()=>{
+			counter = 0
+			target.style.height = 'auto'
+		})
 	}
 		
 }
