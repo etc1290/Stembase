@@ -7,6 +7,9 @@
 	# Added
 	1. Fix the dragenter and dragleave bug and re-import resize function
 		-- finished
+	2. Add smooth expansion and collapsing animation to monitored groups
+		-- finished
+		
 ---
 	## 2023.04.17		version 0.5.3.3
 	-- Bug fix

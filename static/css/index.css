@@ -34,7 +34,6 @@
 }
 .mnt-folder{
 	border-bottom:	5px solid rgb(255,238,214);
-	height:			auto;
 	transition:		0.5s ease;
 }
 .mnt-folder-header{

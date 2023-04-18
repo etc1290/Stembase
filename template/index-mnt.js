@@ -60,7 +60,7 @@ const mntfunc = ()=>{
 		})
 		// Style
 		target.addEventListener('click',()=>{
-			const apple = target.clientWidth
+			
 		})
 		target.addEventListener('mousedown',()=>{
 			target.style.background = 'rgb(124,225,192)'
@@ -81,6 +81,7 @@ const mntfunc = ()=>{
 		event.stopPropagation()
 		return false
 	}
+	/*
 	for(let i=0;i<mntdropzone.length;i++){
 		const target = mntdropzone[i]
 		target.addEventListener('drop',(event)=>{
@@ -110,8 +111,40 @@ const mntfunc = ()=>{
 			counter = 0
 			target.style.height = 'auto'
 		})
-	}
-		
+	}*/
+
+	const mntfoldercontent = document.querySelectorAll('.mnt-folder-content')
+	for(let i=0;i<mntdropzone.length;i++){
+		const target = mntdropzone[i]
+		const content = mntfoldercontent[i]
+		target.addEventListener('drop',(event)=>{
+			mntcancel(event)
+			const id = event.dataTransfer.getData('text/plain')
+			content.appendChild(document.getElementById(id))
+		})
+		target.addEventListener('dragenter',mntcancel)
+		target.addEventListener('dragover',mntcancel)
+		target.addEventListener('dragenter',()=>{
+			
+			if(!counter){
+				console.log(target.clientHeight)
+				content.style.height = (content.clientHeight + 100) + 'px'
+				counter = 0
+			}
+			counter++
+		})
+		target.addEventListener('dragleave',()=>{
+			counter--
+			if(counter==0){
+				content.style.height = ''
+				counter = false
+			}
+		})
+		target.addEventListener('drop',()=>{
+			counter = 0
+			content.style.height = ''
+		})
+	}		
 }
 // Main:	Load all monitored data
 const mntmain = async()=>{
