@@ -4,9 +4,13 @@
 ---
 	## 2023.04.19		version 0.5.4.1
 	-- Funcction iplementation
+	-- Bug fix
 	-- Code rewrite
+	-- Remove wasted codes
 	# Fixed
 	1. Fix smooth effect missing bug
+		-- finished
+	2. Fix monitored data highlight effect last permanently
 		-- finished
 	# Added
 	1. Add expand check in dragging function to prevent collapsing

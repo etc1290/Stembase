@@ -7,7 +7,6 @@ const mntfold = ()=>{
 		mntheader[i].addEventListener('click',()=>{
 			
 			if(mntcontent[i].style.height==''){
-				//mntcontent[i].style.height = 'auto'
 				mntcontent[i].style.height = mntcontent[i].childElementCount*21 + 31 + 'px'
 				mntcontent[i].classList.add('mnt-expanding')
 			}else{
@@ -29,6 +28,14 @@ const mntstyle = ()=>{
 			mntfolderheader[i].style.background = ''
 		})
 	}
+	const mnt = document.getElementById('mnt')
+	mnt.addEventListener('mousedown',()=>{
+		const mntselected = document.querySelector('.mnt-selected')
+		if(mntselected){
+			mntselected.style.background = ''
+			mntselected.classList.remove('mnt-selected')
+		}
+	})
 }
 // Side:	Context menu of monitored data
 const mntmenu = ()=>{
@@ -58,13 +65,17 @@ const mntfunc = ()=>{
 		// Drag
 		target.addEventListener('dragstart',(event)=>{
 			event.dataTransfer.setData('text/plain',event.target.id)
+			/*const clone = target.cloneNode(true)
+			target.parentNode.insertBefore(clone,target)
+			clone.id = event.target.id + '-clone'
+			event.dataTransfer.setData('text/plain',clone.id)*/
 		})
 		target.addEventListener('dragend',()=>{
 			target.style.background = ''
 		})
 		// Style
 		target.addEventListener('click',()=>{
-			
+			target.classList.add('mnt-selected')			
 		})
 		target.addEventListener('mousedown',()=>{
 			target.style.background = 'rgb(124,225,192)'
@@ -76,7 +87,15 @@ const mntfunc = ()=>{
 	
 	// Folder function
 	// Shortcut
-	
+	// All List
+	/*
+	const mntmain = document.getElementById('mnt-main')
+	mntmain.addEventListener('dragstart',()=>{
+		console.log('apple')
+	})
+	mntmain.addEventListener('dragend',()=>{
+		console.log('bana')
+	})*/
 	// Drop folder
 	let counter= false
 	const mntdropzone = document.querySelectorAll('.mnt-dropzone')
@@ -85,37 +104,6 @@ const mntfunc = ()=>{
 		event.stopPropagation()
 		return false
 	}
-	/*
-	for(let i=0;i<mntdropzone.length;i++){
-		const target = mntdropzone[i]
-		target.addEventListener('drop',(event)=>{
-			mntcancel(event)
-			const id = event.dataTransfer.getData('text/plain')
-			target.appendChild(document.getElementById(id))
-		})
-		target.addEventListener('dragenter',mntcancel)
-		target.addEventListener('dragover',mntcancel)
-		target.addEventListener('dragenter',()=>{
-			
-			if(!counter){
-				console.log(target.clientHeight)
-				target.style.height = (target.clientHeight + 100) + 'px'
-				counter = 0
-			}
-			counter++
-		})
-		target.addEventListener('dragleave',()=>{
-			counter--
-			if(counter==0){
-				target.style.height = 'auto'
-				counter = false
-			}
-		})
-		target.addEventListener('drop',()=>{
-			counter = 0
-			target.style.height = 'auto'
-		})
-	}*/
 
 	const mntfoldercontent = document.querySelectorAll('.mnt-folder-content')
 	for(let i=0;i<mntdropzone.length;i++){
@@ -125,6 +113,7 @@ const mntfunc = ()=>{
 		target.addEventListener('drop',(event)=>{
 			mntcancel(event)
 			const id = event.dataTransfer.getData('text/plain')
+			console.log(id)
 			content.appendChild(document.getElementById(id))
 		})
 		target.addEventListener('dragenter',mntcancel)
