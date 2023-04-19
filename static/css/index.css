@@ -34,7 +34,7 @@
 }
 .mnt-folder{
 	border-bottom:	5px solid rgb(255,238,214);
-	transition:		0.5s ease;
+	
 }
 .mnt-folder-header{
 	border-bottom:	5px solid rgb(255,238,214);
@@ -45,8 +45,8 @@
 	overflow-x:		auto;
 	overflow-y:		hidden;
 	height:			0px;
-	width:			auto;
 	max-height:		20vh;	
+	transition:		0.5s ease;
 }
 .mnt-data{
 	width:			100%;
