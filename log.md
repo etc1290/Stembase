@@ -2,6 +2,19 @@
  File tagging system
 
 ---
+	## 2023.04.19		version 0.5.4.1
+	-- Funcction iplementation
+	-- Code rewrite
+	# Added
+	1. Add expand check in dragging function to prevent collapsing
+		-- finished
+	# Changed
+	1. Rewrite some codes from flexible to fixed due to css poor behaviour
+		-- finished
+	# Bugged
+	1. Smooth transition now is missing
+		-- finished
+---
 	## 2023.04.18		version 0.5.4
 	-- Function re-import
 	# Added

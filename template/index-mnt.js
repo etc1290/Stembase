@@ -5,10 +5,14 @@ const mntfold = ()=>{
 	const mntcontent = document.querySelectorAll('.mnt-folder-content')
 	for(let i=0;i<mntheader.length;i++){
 		mntheader[i].addEventListener('click',()=>{
+			
 			if(mntcontent[i].style.height==''){
-				mntcontent[i].style.height = 'auto'
+				//mntcontent[i].style.height = 'auto'
+				mntcontent[i].style.height = mntcontent[i].childElementCount*21 + 31 + 'px'
+				mntcontent[i].classList.add('mnt-expanding')
 			}else{
 				mntcontent[i].style.height = ''
+				mntcontent[i].classList.remove('mnt-expanding')
 			}
 		})
 	}
@@ -117,6 +121,7 @@ const mntfunc = ()=>{
 	for(let i=0;i<mntdropzone.length;i++){
 		const target = mntdropzone[i]
 		const content = mntfoldercontent[i]
+		let isExpand = false
 		target.addEventListener('drop',(event)=>{
 			mntcancel(event)
 			const id = event.dataTransfer.getData('text/plain')
@@ -125,9 +130,7 @@ const mntfunc = ()=>{
 		target.addEventListener('dragenter',mntcancel)
 		target.addEventListener('dragover',mntcancel)
 		target.addEventListener('dragenter',()=>{
-			
 			if(!counter){
-				console.log(target.clientHeight)
 				content.style.height = (content.clientHeight + 100) + 'px'
 				counter = 0
 			}
@@ -136,13 +139,21 @@ const mntfunc = ()=>{
 		target.addEventListener('dragleave',()=>{
 			counter--
 			if(counter==0){
-				content.style.height = ''
+				if(content.classList.contains('mnt-expanding')){
+					content.style.height = content.childElementCount*21 + 31 + 'px'
+				}else{
+					content.style.height = ''
+				}			
 				counter = false
 			}
 		})
 		target.addEventListener('drop',()=>{
 			counter = 0
-			content.style.height = ''
+			if(content.classList.contains('mnt-expanding')){
+				content.style.height = content.childElementCount*21 + 31 + 'px'
+			}else{
+				content.style.height = ''
+			}	
 		})
 	}		
 }
