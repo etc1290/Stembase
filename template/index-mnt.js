@@ -65,18 +65,12 @@ const mntfunc = ()=>{
 		// Drag
 		target.addEventListener('dragstart',(event)=>{
 			event.dataTransfer.setData('text/plain',event.target.id)
-			/*const clone = target.cloneNode(true)
-			target.parentNode.insertBefore(clone,target)
-			clone.id = event.target.id + '-clone'
-			event.dataTransfer.setData('text/plain',clone.id)*/
 		})
 		target.addEventListener('dragend',()=>{
 			target.style.background = ''
 		})
 		// Style
-		target.addEventListener('click',()=>{
-			target.classList.add('mnt-selected')			
-		})
+		target.addEventListener('click',()=>{target.classList.add('mnt-selected')})
 		target.addEventListener('mousedown',()=>{
 			target.style.background = 'rgb(124,225,192)'
 		})
@@ -88,14 +82,6 @@ const mntfunc = ()=>{
 	// Folder function
 	// Shortcut
 	// All List
-	/*
-	const mntmain = document.getElementById('mnt-main')
-	mntmain.addEventListener('dragstart',()=>{
-		console.log('apple')
-	})
-	mntmain.addEventListener('dragend',()=>{
-		console.log('bana')
-	})*/
 	// Drop folder
 	let counter= false
 	const mntdropzone = document.querySelectorAll('.mnt-dropzone')
@@ -112,9 +98,11 @@ const mntfunc = ()=>{
 		let isExpand = false
 		target.addEventListener('drop',(event)=>{
 			mntcancel(event)
-			const id = event.dataTransfer.getData('text/plain')
-			console.log(id)
-			content.appendChild(document.getElementById(id))
+			const dropid = event.dataTransfer.getData('text/plain')
+			const dropdata = document.getElementById(dropid)
+			const dropclone = dropdata.cloneNode(true)
+			dropdata.parentNode.insertBefore(dropclone,dropdata.nextSibling)
+			content.appendChild(dropdata)
 		})
 		target.addEventListener('dragenter',mntcancel)
 		target.addEventListener('dragover',mntcancel)
@@ -156,14 +144,18 @@ const mntmain = async()=>{
 		mntdata[i] = `<p ` + id+ ` class='mnt-data' draggable='true'>` + mntset[i] + `</p>`
 	}
 	updateDiv.innerHTML = mntdata.join('')
-	mntfunc()	
+	return true
 }
 //Initailizer
-const mntInit = ()=>{
-	mntmain()
-	mntfold()
-	mntstyle()
-	mntmenu()
+const mntInit = async()=>{
+	const isReady = await mntmain()
+	if(isReady){
+		mntfunc()
+		mntfold()
+		mntstyle()
+		mntmenu()
+	}
+	
 	
 }
 mntInit()

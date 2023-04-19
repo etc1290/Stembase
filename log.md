@@ -2,6 +2,13 @@
  File tagging system
 
 ---
+	## 2023.04.20		version 0.5.4.2
+	-- Bug fix
+	# Fixed
+	1. Fix the bug that mntfunc run before mntmain over
+		-- finished
+		
+---
 	## 2023.04.19		version 0.5.4.1
 	-- Funcction iplementation
 	-- Bug fix
