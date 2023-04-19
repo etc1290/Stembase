@@ -1,4 +1,4 @@
-const { app, BrowserWindow, ipcMain, nativeTheme, dialog, session } = require('electron')
+const { app, BrowserWindow, ipcMain, dialog, session } = require('electron')
 const path = require('path')
 const fs = require('fs')
 const glob = require('glob')

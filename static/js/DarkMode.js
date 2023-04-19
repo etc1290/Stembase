@@ -1,5 +1,8 @@
 const { ipcMain, nativeTheme } = require('electron')
-	// Main: toggle
+
+nativeTheme.themeSource = 'light'
+
+// Main: toggle
 	
 ipcMain.handle('dm-main',	() =>{
 	if (nativeTheme.shouldUseDarkColors){
@@ -13,5 +16,5 @@ ipcMain.handle('dm-main',	() =>{
 })
 	// Side: Reset to system
 ipcMain.handle('dm-reset',	() =>{
-	nativeTheme.themeSource = 'light'
+	nativeTheme.themeSource = 'system'
 })
