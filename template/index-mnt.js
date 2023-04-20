@@ -38,26 +38,6 @@ const mntstyle = (target)=>{
 			content.style.background = ''
 		})
 	}
-	/*
-	const mntdropzone = document.querySelectorAll('.mnt-dropzone')
-	const mntfolderheader = document.querySelectorAll('.mnt-folder-header')
-	for(let i=0;i<mntdropzone.length;i++){
-		mntdropzone[i].addEventListener('mouseenter',()=>{
-			mntfolderheader[i].style.background = 'rgb(124,225,192)'
-		})
-		mntdropzone[i].addEventListener('mouseleave',()=>{
-			mntfolderheader[i].style.background = ''
-		})
-	}
-	const mnt = document.getElementById('mnt')
-	mnt.addEventListener('mousedown',()=>{
-		const mntselected = document.querySelector('.mnt-selected')
-		if(mntselected){
-			mntselected.style.background = ''
-			mntselected.classList.remove('mnt-selected')
-		}
-	})
-	*/
 }
 // Side:	Context menu of monitored data
 const mntmenu = ()=>{
@@ -101,14 +81,15 @@ const mntfunc = (target)=>{
 			event.target.style.background = ''
 		})
 		// Style
-		el.addEventListener('click',(event)=>{
-			if(mntcheck(event)){
-				event.target.classList.add('mnt-selected')
-			}		
-		})
 		el.addEventListener('mousedown',(event)=>{
 			if(mntcheck(event)){
+				const mntselected = document.querySelectorAll('.mnt-selected')
+				for(let i=0;i<mntselected.length;i++){
+					mntselected[i].classList.remove('mnt-selected')
+					mntselected[i].style.background = ''
+				}
 				event.target.style.background = 'rgb(124,255,192'
+				event.target.classList.add('mnt-selected')
 			}		
 		})
 		el.addEventListener('mouseup',(event)=>{

@@ -2,11 +2,13 @@
  File tagging system
 
 ---
-	## 2023.04.20		version 0.5.4.2
+	## 2023.04.20		version 0.5.5
 	-- Bug fix
 	-- Rewrite function
 	# Fixed
 	1. Fix the bug that mntfunc run before mntmain over
+		-- finished
+	2. Fix the bug that drop cannot trigger highlight remove
 		-- finished
 	# Changed
 	1. Rewrite function in delegation way
