@@ -1,6 +1,6 @@
 
 // Side:	Monitored group collapse and expand
-const mntfold = ()=>{
+const mntfold = (target)=>{
 	const mntheader = document.querySelectorAll('.mnt-folder-header')
 	const mntcontent = document.querySelectorAll('.mnt-folder-content')
 	for(let i=0;i<mntheader.length;i++){
@@ -17,7 +17,7 @@ const mntfold = ()=>{
 	}
 }
 // Side:	The Style of Monitored system
-const mntstyle = ()=>{
+const mntstyle = (target)=>{
 	const mntdropzone = document.querySelectorAll('.mnt-dropzone')
 	const mntfolderheader = document.querySelectorAll('.mnt-folder-header')
 	for(let i=0;i<mntdropzone.length;i++){
@@ -52,33 +52,44 @@ const mntmenu = ()=>{
 	}
 }	
 // Side:	Function of monitored data
-const mntfunc = ()=>{
+const mntfunc = (target)=>{
 	// Data function
-	const mntdata = document.querySelectorAll('.mnt-data')
-	for(let i=0;i<mntdata.length;i++){
+	const mntcheck = (event)=>{
+		return event.target.classList.contains('mnt-data')
+	}
+	for(let i=0;i<target.length;i++){
 		// Jump to monitored path
-		const target = mntdata[i]
-		target.addEventListener('dblclick',()=>{
-			floorNum = 'fs-floor-0'
-			fsfunc(target.innerHTML)
+		const el = target[i]
+		el.addEventListener('dblclick',(event)=>{
+			if(mntcheck(event)){
+				floorNum = 'fs-floor-0'
+				fsfunc(event.target.innerHTML)
+			}		
 		})
 		// Drag
-		target.addEventListener('dragstart',(event)=>{
+		el.addEventListener('dragstart',(event)=>{
 			event.dataTransfer.setData('text/plain',event.target.id)
 		})
-		target.addEventListener('dragend',()=>{
-			target.style.background = ''
+		el.addEventListener('dragend',(event)=>{
+			event.target.style.background = ''
 		})
 		// Style
-		target.addEventListener('click',()=>{target.classList.add('mnt-selected')})
-		target.addEventListener('mousedown',()=>{
-			target.style.background = 'rgb(124,225,192)'
+		el.addEventListener('click',(event)=>{
+			if(mntcheck(event)){
+				event.target.classList.add('mnt-selected')
+			}		
 		})
-		target.addEventListener('mouseup',()=>{
-			target.style.background = 'rgb(154,255,222)'
+		el.addEventListener('mousedown',(event)=>{
+			if(mntcheck(event)){
+				event.target.style.background = 'rgb(124,255,192'
+			}		
+		})
+		el.addEventListener('mouseup',(event)=>{
+			if(mntcheck(event)){
+				event.target.style.background = 'rgb(154,255,222)'
+			}			
 		})
 	}
-	
 	// Folder function
 	// Shortcut
 	// All List
@@ -147,12 +158,16 @@ const mntmain = async()=>{
 	return true
 }
 //Initailizer
+const mntApplier = (target)=>{
+	mntfunc(target)
+	mntfold(target)
+	mntstyle(target)
+}
 const mntInit = async()=>{
 	const isReady = await mntmain()
 	if(isReady){
-		mntfunc()
-		mntfold()
-		mntstyle()
+		const mntfolder = document.querySelectorAll('.mnt-folder')
+		mntApplier(mntfolder)
 		mntmenu()
 	}
 	

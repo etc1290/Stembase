@@ -4,10 +4,21 @@
 ---
 	## 2023.04.20		version 0.5.4.2
 	-- Bug fix
+	-- Rewrite function
 	# Fixed
 	1. Fix the bug that mntfunc run before mntmain over
 		-- finished
-		
+	# Changed
+	1. Rewrite function in delegation way
+		1.1 mntfunc data function
+			-- finished
+		1.2 mntfunc folder function
+			-- processing
+		1.3 mntstyle
+			-- processing
+		1.4 mntfold
+			-- processing
+		-- processing
 ---
 	## 2023.04.19		version 0.5.4.1
 	-- Funcction iplementation
