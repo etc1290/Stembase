@@ -1,6 +1,22 @@
 
 // Side:	Monitored group collapse and expand
 const mntfold = (target)=>{
+	for(let i=0;i<target.length;i++){
+		const el = target[i]
+		el.addEventListener('click',(event)=>{
+			const header = event.currentTarget.querySelector('.mnt-folder-header')
+			const content = event.currentTarget.querySelector('.mnt-folder-content')
+			const isExpand = content.classList.contains('mnt-expanding')
+			if(isExpand){
+				content.style.height = ''
+				content.classList.remove('mnt-expanding')
+			}else{
+				content.style.height = content.childElementCount*21 + 31 + 'px'
+				content.classList.add('mnt-expanding')
+			}
+		})
+	}
+	/*
 	const mntheader = document.querySelectorAll('.mnt-folder-header')
 	const mntcontent = document.querySelectorAll('.mnt-folder-content')
 	for(let i=0;i<mntheader.length;i++){
@@ -14,7 +30,7 @@ const mntfold = (target)=>{
 				mntcontent[i].classList.remove('mnt-expanding')
 			}
 		})
-	}
+	}*/
 }
 // Side:	The Style of Monitored system
 const mntstyle = (target)=>{
@@ -33,7 +49,6 @@ const mntstyle = (target)=>{
 			}
 		})
 		el.addEventListener('mouseleave',(event)=>{
-			console.log(event.currentTarget)
 			const content = event.currentTarget.querySelector('.mnt-folder-header')
 			content.style.background = ''
 		})
@@ -56,13 +71,8 @@ const mntmenu = ()=>{
 // Side:	Function of monitored data
 const mntfunc = (target)=>{
 	// Data function
-	const mntcheck = (event,isFolder = false)=>{
-		if(isFolder){
-			return event.currentTarget.classList.contains('mnt-dropzone')
-		}else{
-			return event.target.classList.contains('mnt-data')
-		}// Should be simplified if no longer need it
-		
+	const mntcheck = (event)=>{
+		return event.currentTarget.classList.contains('mnt-dropzone')		
 	}
 	for(let i=0;i<target.length;i++){
 		// Jump to monitored path

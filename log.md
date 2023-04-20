@@ -13,14 +13,10 @@
 	# Changed
 	1. Rewrite function in delegation way
 		1.1 mntfunc data function
-			-- finished
 		1.2 mntfunc folder function
-			-- finished
 		1.3 mntstyle
-			-- finished
 		1.4 mntfold
-			-- processing
-		-- processing
+		-- finished
 ---
 	## 2023.04.19		version 0.5.4.1
 	-- Funcction iplementation
