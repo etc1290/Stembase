@@ -18,6 +18,27 @@ const mntfold = (target)=>{
 }
 // Side:	The Style of Monitored system
 const mntstyle = (target)=>{
+	const mntcheck = (event)=>{
+		return event.currentTarget.classList.contains('mnt-dropzone')
+	}
+	for(let i=0;i<target.length;i++){
+		const el = target[i]
+		el.addEventListener('mouseenter',(event)=>{
+			const content = event.currentTarget.querySelector('.mnt-folder-header')
+			const isDropzone = mntcheck(event)
+			if(isDropzone){
+				content.style.background = 'rgb(124,255,192)'
+			}else{
+				content.style.background = 'rgb(255,174,189)'
+			}
+		})
+		el.addEventListener('mouseleave',(event)=>{
+			console.log(event.currentTarget)
+			const content = event.currentTarget.querySelector('.mnt-folder-header')
+			content.style.background = ''
+		})
+	}
+	/*
 	const mntdropzone = document.querySelectorAll('.mnt-dropzone')
 	const mntfolderheader = document.querySelectorAll('.mnt-folder-header')
 	for(let i=0;i<mntdropzone.length;i++){
@@ -36,6 +57,7 @@ const mntstyle = (target)=>{
 			mntselected.classList.remove('mnt-selected')
 		}
 	})
+	*/
 }
 // Side:	Context menu of monitored data
 const mntmenu = ()=>{

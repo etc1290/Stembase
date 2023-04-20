@@ -15,7 +15,7 @@
 		1.2 mntfunc folder function
 			-- finished
 		1.3 mntstyle
-			-- processing
+			-- finished
 		1.4 mntfold
 			-- processing
 		-- processing
