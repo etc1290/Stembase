@@ -54,8 +54,13 @@ const mntmenu = ()=>{
 // Side:	Function of monitored data
 const mntfunc = (target)=>{
 	// Data function
-	const mntcheck = (event)=>{
-		return event.target.classList.contains('mnt-data')
+	const mntcheck = (event,isFolder = false)=>{
+		if(isFolder){
+			return event.currentTarget.classList.contains('mnt-dropzone')
+		}else{
+			return event.target.classList.contains('mnt-data')
+		}// Should be simplified if no longer need it
+		
 	}
 	for(let i=0;i<target.length;i++){
 		// Jump to monitored path
@@ -89,11 +94,65 @@ const mntfunc = (target)=>{
 				event.target.style.background = 'rgb(154,255,222)'
 			}			
 		})
+		// Folder Function
+		// Drop Folder
+		let counter = isExpand = false
+		const mntcancel = (event)=>{
+			event.preventDefault()
+			event.stopPropagation()
+			return false
+		}
+		if(el.classList.contains('mnt-dropzone')){
+			el.addEventListener('drop',(event)=>{
+				mntcancel(event)
+				const dropid = event.dataTransfer.getData('text/plain')
+				const dropdata = document.getElementById(dropid)
+				const isClone = dropdata.parentNode.parentNode.classList.contains('mnt-dropzone')
+				if(!isClone){
+					const dropclone = dropdata.cloneNode(true)
+					dropdata.parentNode.insertBefore(dropclone,dropdata.nextSibling)
+				}
+				const content = event.currentTarget.querySelector('.mnt-folder-content')
+				content.appendChild(dropdata)
+			})
+			el.addEventListener('dragenter',mntcancel)
+			el.addEventListener('dragover',mntcancel)
+			el.addEventListener('dragenter',(event)=>{
+				const content = event.currentTarget.querySelector('.mnt-folder-content')
+				if(!counter){
+					content.style.height = (content.clientHeight + 100) + 'px'
+					counter = 0
+				}
+				counter++
+			})
+			const mntexpand = (content)=>{
+				if(content.classList.contains('mnt-expanding')){
+					content.style.height = content.childElementCount*21 + 31 + 'px'
+				}else{
+					content.style.height = ''
+				}
+			}
+			el.addEventListener('dragleave',(event)=>{
+				counter--
+				const content = event.currentTarget.querySelector('.mnt-folder-content')
+				if(counter==0){
+					mntexpand(content)
+					counter = false
+				}
+			})
+			el.addEventListener('drop',(event)=>{
+				counter = 0
+				const content = event.currentTarget.querySelector('.mnt-folder-content')
+				mntexpand(content)
+			})
+		}
 	}
 	// Folder function
 	// Shortcut
 	// All List
 	// Drop folder
+	
+	/*
 	let counter= false
 	const mntdropzone = document.querySelectorAll('.mnt-dropzone')
 	const mntcancel = (event)=>{
@@ -143,7 +202,7 @@ const mntfunc = (target)=>{
 				content.style.height = ''
 			}	
 		})
-	}		
+	}	*/	
 }
 // Main:	Load all monitored data
 const mntmain = async()=>{

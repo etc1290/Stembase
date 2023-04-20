@@ -13,7 +13,7 @@
 		1.1 mntfunc data function
 			-- finished
 		1.2 mntfunc folder function
-			-- processing
+			-- finished
 		1.3 mntstyle
 			-- processing
 		1.4 mntfold
