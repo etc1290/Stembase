@@ -4,7 +4,7 @@
 	display:		flex;
 }
 #main-function{
-	height:			70vh;
+	height:			90vh;
 	width:			100%;
 	display:		flex;
 }
@@ -56,7 +56,7 @@
 	background:		rgb(154,255,222);
 }
 #fs{
-	width:			50%;
+	width:			60%;
 	border-top:		5px solid rgb(255,238,214);
 }
 #fs-info{
@@ -73,7 +73,7 @@
 	height:			3vh;
 }
 #fs-main{
-	height:			90%;
+	height:			96%;
 	overflow-x:		auto;
 	overflow-y:		hidden;
 	display:		flex;
@@ -128,6 +128,8 @@
 #tag{
 	height:			100%;
 	width:			30%;
+	/* resize:			horizontal; */
+    overflow:		auto;
 	text-align:		center;
 	vertical-align: top;
 }
@@ -157,6 +159,7 @@
 }
 #buttonbar{
 	border-top:		5px solid rgb(255,238,214);
+	display: 		flex;
 }
 #tag-match-div{
 	height:			0vh;
