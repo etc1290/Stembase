@@ -5,10 +5,13 @@
 	## 2023.04.24		version 0.5.5.1
 	-- Rewrite function
 	-- Improve contextMenu positioning accuracy
+	-- Style change
 	# Changed
 	1. Rewrite function in delegation way
 		1.1 mntmenu
+		-- finished
 	2. Improve positioning accuracy of contextMenu in mnt
+		-- finished
 ---
 	## 2023.04.20		version 0.5.5
 	-- Bug fix

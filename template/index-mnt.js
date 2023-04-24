@@ -43,7 +43,7 @@ const mntstyle = (target)=>{
 // Side:	Context menu of monitored data
 const mntmenu = (target)=>{
 	
-	// Main menu
+	// Positioner
 	const contextMenu = document.getElementById('mnt-cm')
 	const menuPositioner = (event)=>{
 		const winX = document.body.clientWidth
@@ -70,14 +70,11 @@ const mntmenu = (target)=>{
 		}
 		return [posLeft,posTop]
 	}
+	// Main menu
 	for(let i=0;i<target.length;i++){
 		const el=target[i]
 		el.addEventListener('contextmenu',(event)=>{
 			event.preventDefault()
-			/*
-			const {clientX : mouseX, clientY: mouseY} = event
-			contextMenu.style.top = mouseY + 'px'
-			contextMenu.style.left= mouseX + 'px'*/
 			const [posLeft,posTop] = menuPositioner(event)
 			contextMenu.style.left = posLeft
 			contextMenu.style.top = posTop
@@ -93,6 +90,15 @@ const mntmenu = (target)=>{
 			
 		})
 	}
+	// Style
+	contextMenu.addEventListener('hover',(event)=>{
+		const isOption = event.target.classList.contains('mnt-cm-option')
+		const isSub = event.target.classList.contains('mnt-cm-submenu')
+		const isDrop = event.target.classList.contains('mnt-dropmenu-option')
+		if(isOption){
+			
+		}
+	})
 }	
 // Side:	Function of monitored data
 const mntfunc = (target)=>{
