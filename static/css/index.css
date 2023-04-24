@@ -32,6 +32,9 @@
 #mnt-cm-option:hover{
 	background:		rgb(181,199,208);
 }
+.mnt-cm-dropmenu{
+	display:		none;
+}
 .mnt-folder{
 	border-bottom:	5px solid rgb(255,238,214);
 	

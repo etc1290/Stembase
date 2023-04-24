@@ -17,8 +17,17 @@
 		<div id='main-function'>
 			<div id='mnt'>
 				<div id='mnt-cm' class='context-menu'>
-					<p class='mnt-cm-option'>New</p>
-					<p class='mnt-cm-option'>Remove</p>
+					<p id='mnt-cm-new' class='mnt-cm-option'>New</p>
+					<p id='mnt-cm-move' class='mnt-cm-option mnt-cm-submenu'>Move</p>
+					<div id='mnt-cm-movemenu' class='mnt-cm-dropmenu'>
+						<p id='mnt-movemenu-shortcut'>Move to Shortcut</p>
+					</div>
+					<p id='mnt-cm-remove' class='mnt-cm-option mnt-cm-submenu'>Remove</p>
+					<div id='mnt-cm-removemenu' class='mnt-cm-dropmenu'>
+						<p id='mnt-removemenu-delete'>Delete this record</p>
+						<p id='mnt-removemenu-remove'>Remove from this group</p>
+						<p id='mnt-removemenu-unmonitor'>Remove monitoring</p>
+					</div>
 				</div>
 				<div id='mnt-shortcut' class='mnt-folder mnt-dropzone'>
 					<p class='mnt-folder-header'>Shortcut</p> 

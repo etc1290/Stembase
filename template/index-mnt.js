@@ -16,21 +16,7 @@ const mntfold = (target)=>{
 			}
 		})
 	}
-	/*
-	const mntheader = document.querySelectorAll('.mnt-folder-header')
-	const mntcontent = document.querySelectorAll('.mnt-folder-content')
-	for(let i=0;i<mntheader.length;i++){
-		mntheader[i].addEventListener('click',()=>{
-			
-			if(mntcontent[i].style.height==''){
-				mntcontent[i].style.height = mntcontent[i].childElementCount*21 + 31 + 'px'
-				mntcontent[i].classList.add('mnt-expanding')
-			}else{
-				mntcontent[i].style.height = ''
-				mntcontent[i].classList.remove('mnt-expanding')
-			}
-		})
-	}*/
+
 }
 // Side:	The Style of Monitored system
 const mntstyle = (target)=>{
@@ -55,16 +41,56 @@ const mntstyle = (target)=>{
 	}
 }
 // Side:	Context menu of monitored data
-const mntmenu = ()=>{
+const mntmenu = (target)=>{
+	
+	// Main menu
 	const contextMenu = document.getElementById('mnt-cm')
-	const mntfolder = document.querySelectorAll('.mnt-folder')
-	for(let i=0;i<mntfolder.length;i++){
-		mntfolder[i].addEventListener('contextmenu',(event)=>{
+	const menuPositioner = (event)=>{
+		const winX = document.body.clientWidth
+		const winY = document.body.clientHeight
+		const {clientX : mouseX, clientY: mouseY} = event
+		const menuX = contextMenu.style.width
+		const menuY = contextMenu.style.height
+		const secMargin = 10
+		let posLeft = posTop = ''
+		const overflowLimX = mouseX + menuX + secMargin
+		const overflowLimY = mouseY + menuY + secMargin
+		if(overflowLimX >= winX && overflowLimY >=winY){
+			posLeft = mouseX - menuX - secMargin + 'px'
+			posTop = mouseY - menuY - secMargin + 'px'
+		}else if(overflowLimX >= winX){
+			posLeft = mouseX - menuX - secMargin + 'px'
+			posTop = mouseY + secMargin + 'px'
+		}else if(overflowLimY >= winY){
+			posLeft = clientX + secMargin + 'px'
+			posTop = clientY - menuY - secMargin + 'px'
+		}else{
+			posLeft = clientX + secMargin + 'px'
+			posTop = clientY + secMargin + 'px'
+		}
+		return [posLeft,posTop]
+	}
+	for(let i=0;i<target.length;i++){
+		const el=target[i]
+		el.addEventListener('contextmenu',(event)=>{
 			event.preventDefault()
-			const {clientX: mouseX, clientY: mouseY} = event
-			contextMenu.style.top = `${mouseY}px`
-			contextMenu.style.left= `${mouseX}px`
+			/*
+			const {clientX : mouseX, clientY: mouseY} = event
+			contextMenu.style.top = mouseY + 'px'
+			contextMenu.style.left= mouseX + 'px'*/
+			const [posLeft,posTop] = menuPositioner(event)
+			contextMenu.style.left = posLeft
+			contextMenu.style.top = posTop
 			contextMenu.classList.add('visible')
+		})
+	}
+	// Side menu
+	const submenu = document.querySelectorAll('.mnt-cm-submenu')
+	const dropmenu= document.querySelectorAll('.mnt-cm-dropmenu')
+	for(let i=0;i<submenu.length;i++){
+		const el = submenu[i]
+		el.addEventListener('click',(event)=>{
+			
 		})
 	}
 }	
@@ -234,13 +260,13 @@ const mntApplier = (target)=>{
 	mntfunc(target)
 	mntfold(target)
 	mntstyle(target)
+	mntmenu(target)
 }
 const mntInit = async()=>{
 	const isReady = await mntmain()
 	if(isReady){
 		const mntfolder = document.querySelectorAll('.mnt-folder')
 		mntApplier(mntfolder)
-		mntmenu()
 	}
 	
 	
