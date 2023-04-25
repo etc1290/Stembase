@@ -2,6 +2,12 @@
  File tagging system
 
 ---
+	## 2023.04.25		version 0.5.5.3
+	-- Bug fix
+	# Fixed
+	1. Fix the false position value
+		-- finished
+---
 	## 2023.04.25		version 0.5.5.2
 	-- Submenu function
 	# Added

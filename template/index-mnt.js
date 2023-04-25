@@ -46,23 +46,21 @@ const mntmenu = (target)=>{
 	// Positioner
 	const contextMenu = document.getElementById('mnt-cm')
 	const menuPositioner = (event,isSub = false,dropMenu='')=>{
-		//const winX = document.body.clientWidth
-		//const winY = document.body.clientHeight
 		const winX = window.screen.width
-		const winY = window.screen.height
-		const menuX = contextMenu.style.width
-		const menuY = contextMenu.style.height		
+		const winY = window.screen.height		
+		const menuX = contextMenu.offsetWidth
+		const menuY = contextMenu.offsetHeight
 		const secMargin = 10
 		let posLeft = posTop = overflowLimX = overflowLimY = ''
-		console.log(contextMenu.style.width)
+		console.log(menuX)
 		// Submenu
 		if(isSub){
-			const subX = dropMenu.style.width
-			const subY = dropMenu.style.height
+			
+			const subX = dropMenu.offsetWidth
+			const subY = dropMenu.offsetHeight
 			const optionLeft = event.currentTarget.offsetLeft
 			const optionRight = optionLeft + menuX
 			const optionTop = event.currentTarget.offsetTop
-			console.log(event.currentTarget)
 			overflowLimX = optionRight + subX + secMargin
 			overflowLimY = optionTop - subY - secMargin
 			if(overflowLimX >= winX && overflowLimY <= 0){
@@ -96,11 +94,11 @@ const mntmenu = (target)=>{
 				posLeft = mouseX - menuX - secMargin + 'px'
 				posTop = mouseY + secMargin + 'px'
 			}else if(overflowLimY >= winY){
-				posLeft = clientX + secMargin + 'px'
-				posTop = clientY - menuY - secMargin + 'px'
+				posLeft = mouseX + secMargin + 'px'
+				posTop = mouseY - menuY - secMargin + 'px'
 			}else{
-				posLeft = clientX + secMargin + 'px'
-				posTop = clientY + secMargin + 'px'
+				posLeft = mouseX + secMargin + 'px'
+				posTop = mouseY + secMargin + 'px'
 			}
 		}
 		
