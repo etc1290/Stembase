@@ -52,7 +52,6 @@ const mntmenu = (target)=>{
 		const menuY = contextMenu.offsetHeight
 		const secMargin = 10
 		let posLeft = posTop = overflowLimX = overflowLimY = ''
-		console.log(winX)
 		// Submenu
 		if(isSub){
 			
@@ -66,15 +65,19 @@ const mntmenu = (target)=>{
 			if(overflowLimX >= winX && overflowLimY <= 0){
 				posLeft = optionLeft - subX + 'px'
 				posTop = optionTop + subY + 'px'
+				console.log(1)
 			}else if(overflowLimX >= winX){
 				posLeft = optionLeft - subX + 'px'
 				posTop = optionTop + 'px'
+				console.log(2)
 			}else if(overflowLimY <= 0){
 				posLeft = optionRight + 'px'
 				posTop = optionTop + subY + 'px'
+				console.log(3)
 			}else{
 				posLeft = optionRight + 'px'
 				posTop = optionTop + 'px'
+				console.log(4)
 			}
 		// Mainmenu
 		}else{
@@ -102,6 +105,10 @@ const mntmenu = (target)=>{
 		const el=target[i]
 		el.addEventListener('contextmenu',(event)=>{
 			event.preventDefault()
+			const prevMenu = document.querySelector('.mnt-cm-dropmenu.visible')
+			if(prevMenu){
+				prevMenu.classList.remove('visible')
+			}
 			const [posLeft,posTop] = menuPositioner(event)
 			contextMenu.style.left = posLeft
 			contextMenu.style.top = posTop
@@ -115,6 +122,10 @@ const mntmenu = (target)=>{
 		const el = submenu[i]
 		const subel = dropmenu[i]
 		el.addEventListener('click',(event)=>{
+			const prevMenu = document.querySelector('.mnt-cm-dropmenu.visible')
+			if(prevMenu){
+				prevMenu.classList.remove('visible')
+			}
 			const [posLeft,posTop] = menuPositioner(event,true,subel)
 			subel.style.left = posLeft
 			subel.style.top = posTop
@@ -125,6 +136,10 @@ const mntmenu = (target)=>{
 	const page = document.body
 	page.addEventListener('contextmenu',(event)=>{
 		event.preventDefault()
+		const prevMenu = document.querySelector('.mnt-cm-dropmenu.visible')
+		if(prevMenu){
+			prevMenu.classList.remove('visible')
+		}
 		const [posLeft,posTop] = menuPositioner(event)
 		contextMenu.style.left = posLeft
 		contextMenu.style.top = posTop
