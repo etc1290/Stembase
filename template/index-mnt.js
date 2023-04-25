@@ -45,29 +45,65 @@ const mntmenu = (target)=>{
 	
 	// Positioner
 	const contextMenu = document.getElementById('mnt-cm')
-	const menuPositioner = (event)=>{
-		const winX = document.body.clientWidth
-		const winY = document.body.clientHeight
-		const {clientX : mouseX, clientY: mouseY} = event
+	const menuPositioner = (event,isSub = false,dropMenu='')=>{
+		//const winX = document.body.clientWidth
+		//const winY = document.body.clientHeight
+		const winX = window.screen.width
+		const winY = window.screen.height
 		const menuX = contextMenu.style.width
-		const menuY = contextMenu.style.height
+		const menuY = contextMenu.style.height		
 		const secMargin = 10
-		let posLeft = posTop = ''
-		const overflowLimX = mouseX + menuX + secMargin
-		const overflowLimY = mouseY + menuY + secMargin
-		if(overflowLimX >= winX && overflowLimY >=winY){
-			posLeft = mouseX - menuX - secMargin + 'px'
-			posTop = mouseY - menuY - secMargin + 'px'
-		}else if(overflowLimX >= winX){
-			posLeft = mouseX - menuX - secMargin + 'px'
-			posTop = mouseY + secMargin + 'px'
-		}else if(overflowLimY >= winY){
-			posLeft = clientX + secMargin + 'px'
-			posTop = clientY - menuY - secMargin + 'px'
+		let posLeft = posTop = overflowLimX = overflowLimY = ''
+		console.log(contextMenu.style.width)
+		// Submenu
+		if(isSub){
+			const subX = dropMenu.style.width
+			const subY = dropMenu.style.height
+			const optionLeft = event.currentTarget.offsetLeft
+			const optionRight = optionLeft + menuX
+			const optionTop = event.currentTarget.offsetTop
+			console.log(event.currentTarget)
+			overflowLimX = optionRight + subX + secMargin
+			overflowLimY = optionTop - subY - secMargin
+			if(overflowLimX >= winX && overflowLimY <= 0){
+				posLeft = optionLeft - subX + 'px'
+				posTop = optionTop + subY + 'px'
+				console.log(1)
+			}else if(overflowLimX >= winX){
+				posLeft = optionLeft - subX + 'px'
+				posTop = optionTop + 'px'
+				console.log(2)
+			}else if(overflowLimY <= 0){
+				posLeft = optionRight + 'px'
+				posTop = optionTop + subY + 'px'
+				console.log(3)
+			}else{
+				posLeft = optionRight + 'px'
+				//posLeft = optionLeft + 'px'
+				posTop = optionTop + 'px'
+				console.log(optionLeft)
+				console.log(optionRight)
+			}
+		// Mainmenu
 		}else{
-			posLeft = clientX + secMargin + 'px'
-			posTop = clientY + secMargin + 'px'
+			const {clientX : mouseX, clientY: mouseY} = event
+			overflowLimX = mouseX + menuX + secMargin
+			overflowLimY = mouseY + menuY + secMargin
+			if(overflowLimX >= winX && overflowLimY >=winY){
+				posLeft = mouseX - menuX - secMargin + 'px'
+				posTop = mouseY - menuY - secMargin + 'px'
+			}else if(overflowLimX >= winX){
+				posLeft = mouseX - menuX - secMargin + 'px'
+				posTop = mouseY + secMargin + 'px'
+			}else if(overflowLimY >= winY){
+				posLeft = clientX + secMargin + 'px'
+				posTop = clientY - menuY - secMargin + 'px'
+			}else{
+				posLeft = clientX + secMargin + 'px'
+				posTop = clientY + secMargin + 'px'
+			}
 		}
+		
 		return [posLeft,posTop]
 	}
 	// Main menu
@@ -86,19 +122,14 @@ const mntmenu = (target)=>{
 	const dropmenu= document.querySelectorAll('.mnt-cm-dropmenu')
 	for(let i=0;i<submenu.length;i++){
 		const el = submenu[i]
+		const subel = dropmenu[i]
 		el.addEventListener('click',(event)=>{
-			
+			const [posLeft,posTop] = menuPositioner(event,true,subel)
+			subel.style.left = posLeft
+			subel.style.top = posTop
+			subel.classList.add('visible')
 		})
 	}
-	// Style
-	contextMenu.addEventListener('hover',(event)=>{
-		const isOption = event.target.classList.contains('mnt-cm-option')
-		const isSub = event.target.classList.contains('mnt-cm-submenu')
-		const isDrop = event.target.classList.contains('mnt-dropmenu-option')
-		if(isOption){
-			
-		}
-	})
 }	
 // Side:	Function of monitored data
 const mntfunc = (target)=>{

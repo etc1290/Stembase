@@ -2,6 +2,15 @@
  File tagging system
 
 ---
+	## 2023.04.25		version 0.5.5.2
+	-- Submenu function
+	# Added
+	1. Add multiple layers to contextMenu
+		-- finished
+	# Bugged
+	1. Submenu position is incorrect
+	
+---
 	## 2023.04.24		version 0.5.5.1
 	-- Rewrite function
 	-- Improve contextMenu positioning accuracy
