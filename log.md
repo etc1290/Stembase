@@ -11,6 +11,8 @@
 		-- finished
 	3. Fix the submenu status is inherit to next contextmenu
 		-- finished
+	4. Fix position is not worked at first click
+		-- finished
 ---
 	## 2023.04.25		version 0.5.5.2
 	-- Submenu function

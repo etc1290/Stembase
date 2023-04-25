@@ -40,6 +40,7 @@ const mntstyle = (target)=>{
 		})
 	}
 }
+
 // Side:	Context menu of monitored data
 const mntmenu = (target)=>{
 	// Positioner
