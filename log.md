@@ -7,6 +7,8 @@
 	# Fixed
 	1. Fix the false position value
 		-- finished
+	2. Fix the contextmenu overflow out of page
+		-- finished
 ---
 	## 2023.04.25		version 0.5.5.2
 	-- Submenu function

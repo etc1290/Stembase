@@ -42,17 +42,17 @@ const mntstyle = (target)=>{
 }
 // Side:	Context menu of monitored data
 const mntmenu = (target)=>{
-	
 	// Positioner
 	const contextMenu = document.getElementById('mnt-cm')
 	const menuPositioner = (event,isSub = false,dropMenu='')=>{
-		const winX = window.screen.width
-		const winY = window.screen.height		
+		
+		const winX = document.body.clientWidth
+		const winY = document.body.clientHeight
 		const menuX = contextMenu.offsetWidth
 		const menuY = contextMenu.offsetHeight
 		const secMargin = 10
 		let posLeft = posTop = overflowLimX = overflowLimY = ''
-		console.log(menuX)
+		console.log(winX)
 		// Submenu
 		if(isSub){
 			
@@ -66,21 +66,15 @@ const mntmenu = (target)=>{
 			if(overflowLimX >= winX && overflowLimY <= 0){
 				posLeft = optionLeft - subX + 'px'
 				posTop = optionTop + subY + 'px'
-				console.log(1)
 			}else if(overflowLimX >= winX){
 				posLeft = optionLeft - subX + 'px'
 				posTop = optionTop + 'px'
-				console.log(2)
 			}else if(overflowLimY <= 0){
 				posLeft = optionRight + 'px'
 				posTop = optionTop + subY + 'px'
-				console.log(3)
 			}else{
 				posLeft = optionRight + 'px'
-				//posLeft = optionLeft + 'px'
 				posTop = optionTop + 'px'
-				console.log(optionLeft)
-				console.log(optionRight)
 			}
 		// Mainmenu
 		}else{
@@ -100,8 +94,7 @@ const mntmenu = (target)=>{
 				posLeft = mouseX + secMargin + 'px'
 				posTop = mouseY + secMargin + 'px'
 			}
-		}
-		
+		}	
 		return [posLeft,posTop]
 	}
 	// Main menu
@@ -128,6 +121,16 @@ const mntmenu = (target)=>{
 			subel.classList.add('visible')
 		})
 	}
+	// test
+	const page = document.body
+	page.addEventListener('contextmenu',(event)=>{
+		event.preventDefault()
+		const [posLeft,posTop] = menuPositioner(event)
+		contextMenu.style.left = posLeft
+		contextMenu.style.top = posTop
+		contextMenu.classList.add('visible')
+	})
+	
 }	
 // Side:	Function of monitored data
 const mntfunc = (target)=>{
