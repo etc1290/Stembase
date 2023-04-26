@@ -42,13 +42,18 @@
 .mnt-cm-dropmenu{
 	background:		rgb(119,164,187);
 	color:			rgb(248,250,252);
-	/*visibility:		hidden;*/
+	width:			150px;
 	display:		none;
+	z-index:		9999;
 	position:		absolute;
 }
 .mnt-cm-dropmenu.visible{
 	display:		block;
-	/*visibility:		visible;*/
+}
+.mnt-dropmenu-option{
+	white-space:	nowrap;
+	min-height:		31px;
+	width:			150px;
 }
 .mnt-folder{
 	border-bottom:	5px solid rgb(255,238,214);

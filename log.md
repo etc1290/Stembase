@@ -2,6 +2,14 @@
  File tagging system
 
 ---
+	## 2023.04.26		version 0.5.6
+	-- Bug fix
+	# Fixed
+	1. Submenu now can correctly positioning
+		-- finished
+	2. Fix the bug that when contextmenu is too low, submenu sink into page bottom
+		-- finished
+---
 	## 2023.04.25		version 0.5.5.3
 	-- Bug fix
 	# Fixed
