@@ -55,9 +55,6 @@ const mntmenu = (target)=>{
 		let posLeft = posTop = overflowLimX = overflowLimY = ''
 		// Submenu
 		if(isSub){
-			/*
-			const subX = dropMenu.offsetWidth
-			const subY = dropMenu.offsetHeight*/
 			const menuName = event.currentTarget.id + 'menu'
 			const dropMenu = document.getElementById(menuName)
 			const subX = 150
@@ -144,7 +141,7 @@ const mntmenu = (target)=>{
 			subel.classList.add('visible')
 		})
 	}
-	// test
+	// test: Should be removed after all context related function is completed
 	
 	const page = document.body
 	page.addEventListener('contextmenu',(event)=>{

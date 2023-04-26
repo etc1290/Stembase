@@ -17,7 +17,11 @@ const uxContextMenuRemove = ()=>{
 	document.querySelector('body').addEventListener('click',(event)=>{
 		if(event.target.offsetParent !=contextMenu){
 			contextMenu.classList.remove('visible')
-		}
+			const subMenu = document.querySelector('.mnt-cm-dropmenu.visible')
+			if(subMenu){
+				subMenu.classList.remove('visible')
+			}
+		}	
 	})
 	
 }

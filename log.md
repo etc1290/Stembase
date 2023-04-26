@@ -9,6 +9,8 @@
 		-- finished
 	2. Fix the bug that when contextmenu is too low, submenu sink into page bottom
 		-- finished
+	3. Fix the submenu is existed after contextmenu is off.
+		-- finished
 ---
 	## 2023.04.25		version 0.5.5.3
 	-- Bug fix
