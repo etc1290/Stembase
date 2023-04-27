@@ -267,7 +267,10 @@ const mntmenufunc = async()=>{
 const mntmain = async()=>{
 	const mntdata = []
 	const updateDiv = document.getElementById('mnt-main-display')
-	const mntset = await window.mnt.main()
+	let mntset = await window.mnt.main()
+	if(mntset == undefined){
+		mntset = 0
+	}
 	for(var i=0;i<mntset.length;i++){
 		const id = `id='mnt-data-` + i + `'`
 		mntdata[i] = `<p ` + id+ ` class='mnt-data' draggable='true'>` + mntset[i] + `</p>`

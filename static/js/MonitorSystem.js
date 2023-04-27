@@ -10,16 +10,19 @@ ipcMain.handle('mnt-main', (event) =>{
 	const output = new Promise((resolve)=>{
 		const cmd = `select name from Monitor`
 		db.all(cmd,(err,res)=>{
-			const data = res.map(i=>Object.values(i)[0])
-			resolve(data)
+			if(err){
+				console.log('first')
+				resolve(0)
+			}else{
+				const data = res.map(i=>Object.values(i)[0])
+				resolve(data)
+			}		
 		})
 	})
 	return output
 })
 // Update monitored group members
 ipcMain.handle('mnt-update',(event,folder,name)=>{
-	console.log(folder)
-	console.log(name)
 	const output = new Promise((resolve)=>{
 	})
 })

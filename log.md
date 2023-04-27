@@ -7,6 +7,8 @@
 	# Fixed
 	1. Auto detect essential folders existence
 		-- finished
+	2. Fix the error in mntmain when no data 
+		-- finished
 	# Bugged
 	1. Keep warn 'Database unable to open'
 ---

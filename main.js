@@ -36,22 +36,25 @@ const dbBuild = ()=>{
 		"id"	integer not null unique,
 		"name"	text not null unique,
 		primary key("id" autoincrement)
-	)`,()=>{return true})
-	
+	)`,()=>{})
+
 }
 // Check essential folders
 const firstBuild = ()=>{
 	
 	const dbStorage = env('StemdbStorage')
 	const mdbStorage = env('StemMGDir')
+ 
 	if (!fs.existsSync(dbStorage)){
-		fs.mkdirSync(dbStorage,{recursive:true})
+		fs.mkdir(dbStorage,{recursive:true},()=>{
+			if (!fs.existsSync(mdbStorage)){
+				fs.mkdir(mdbStorage,{recursive:true},()=>{
+					dbBuild()
+				})
+			}
+		})
+		
 	}
-	
-	if (!fs.existsSync(mdbStorage)){
-		fs.mkdirSync(mdbStorage,{recursive:true})
-	}
-	dbBuild()
 }
 
 
@@ -92,7 +95,7 @@ exec('NET SESSION', function(err,so,se) {
       console.log(se.length === 0 ? "admin" : "not admin")
     })	*/
 
-const init = async() =>{  
+const init = () =>{  
 	const Taskmanager = () =>{
 		const funcScript = glob.sync(env('StaticDir') + '/js/*.js')
 		funcScript.forEach((i) =>{require(i)})
@@ -110,14 +113,11 @@ const init = async() =>{
 	})
 	
 }
-const buildInit = async()=>{
-	const isReady = await firstBuild()
-}
-
-if(buildInit()){
-	console.log('a')
+const apple =()=>{
+	firstBuild()
 	init()
 }
+apple()
 // Release all resources of the app
 app.on('window-all-closed', () => {
 	if (process.platform !== 'darwin') {
