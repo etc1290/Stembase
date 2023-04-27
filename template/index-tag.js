@@ -5,8 +5,9 @@ let isMonitored = false
 	// Main: Tag add
 const tagmain = (name) =>{
 	document.getElementById('tag-write').addEventListener('click', async()=>{
+		console.log('aa')
 		const taginput 	= document.getElementById('tag-input').value
-		const tagpath = fsgetPath()
+		const tagpath 	= fsgetPath()
 		const name 		= document.getElementById('ux-selected').innerHTML
 		if (taginput == ''){
 			const inputError = await window.tag.error('taginput')

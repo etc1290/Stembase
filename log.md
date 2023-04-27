@@ -7,8 +7,10 @@
 	# Fixed
 	1. Auto detect essential folders existence
 		-- finished
-	# Bugged
-	1. Keep warn 'Database unable to open'
+	2. Fix the error in mntmain when no data 
+		-- finished
+	3. Fix the unable to open database bug	
+		-- finished
 ---
 	## 2023.04.26		version 0.5.6
 	-- Bug fix
