@@ -5,12 +5,13 @@ const glob = require('glob')
 const env = require('./static/js/env.js')
 const Stemdb= env('StemdbDir')
 const sqlite3 = require('sqlite3').verbose()
-const db = new sqlite3.Database(Stemdb + '.db')
+
 process.env['ELECTRON_DISABLE_SECURITY_WARNINGS'] = 'true'
 app.allowRendererProcessReuse = false
 
 // Create a new db
 const dbBuild = ()=>{
+	const db = new sqlite3.Database(Stemdb + '.db')
 	db.get('PRAGMA foreign_keys = ON')
 	db.run(`create table "File" (
 		"id"	integer not null unique,
@@ -48,9 +49,7 @@ const firstBuild = ()=>{
 	if (!fs.existsSync(dbStorage)){
 		fs.mkdir(dbStorage,{recursive:true},()=>{
 			if (!fs.existsSync(mdbStorage)){
-				fs.mkdir(mdbStorage,{recursive:true},()=>{
-					dbBuild()
-				})
+				fs.mkdir(mdbStorage,{recursive:true},()=>{})
 			}
 		})
 		
@@ -96,6 +95,8 @@ exec('NET SESSION', function(err,so,se) {
     })	*/
 
 const init = () =>{  
+	firstBuild()
+	dbBuild()
 	const Taskmanager = () =>{
 		const funcScript = glob.sync(env('StaticDir') + '/js/*.js')
 		funcScript.forEach((i) =>{require(i)})
@@ -113,11 +114,9 @@ const init = () =>{
 	})
 	
 }
-const apple =()=>{
-	firstBuild()
-	init()
-}
-apple()
+
+init()
+
 // Release all resources of the app
 app.on('window-all-closed', () => {
 	if (process.platform !== 'darwin') {
