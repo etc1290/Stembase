@@ -273,6 +273,10 @@ const mntmain = async()=>{
 		mntdata[i] = `<p ` + id+ ` class='mnt-data' draggable='true'>` + mntset[i] + `</p>`
 	}
 	updateDiv.innerHTML = mntdata.join('')
+	const mntexpand = document.querySelectorAll('.mnt-folder.visible')
+	for(var i=0;i<mntexpand.length;i++){
+		mntexpand[i].style.height = mntexpand[i].childElementCount*21 + 31 + 'px'
+	}
 	return true
 }
 //Initailizer

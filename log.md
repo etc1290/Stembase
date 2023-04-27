@@ -7,6 +7,8 @@
 	# Fixed
 	1. Auto detect essential folders existence
 		-- finished
+	# Bugged
+	1. Keep warn 'Database unable to open'
 ---
 	## 2023.04.26		version 0.5.6
 	-- Bug fix
