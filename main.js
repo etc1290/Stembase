@@ -9,6 +9,14 @@ const db = new sqlite3.Database(Stemdb + '.db')
 process.env['ELECTRON_DISABLE_SECURITY_WARNINGS'] = 'true'
 app.allowRendererProcessReuse = false
 // Create a new db
+const dbStorage = env('StemdbStorage')
+if (!fs.existsSync(dbStorage)){
+	fs.mkdirSync(dbStorage,{recursive:true})
+}
+const mdbStorage = env('StemMGDir')
+if (!fs.existsSync(mdbStorage)){
+	fs.mkdirSync(mdbStorage,{recursive:true})
+}
 db.get('PRAGMA foreign_keys = ON')
 db.run(`create table "File" (
 	"id"	integer not null unique,

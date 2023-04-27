@@ -4,8 +4,6 @@ const uxScroll = (e)=>{
 	const targetPos = (targetDiv.getBoundingClientRect().right + targetDiv.getBoundingClientRect().left)/2
 	const movePos = targetPos + window.pageXOffset - offset
 	
-	console.log(targetPos)
-	console.log(movePos)
 	document.getElementById('fs-main').scrollTo({
 		left: movePos,
 		behavior: 'smooth'

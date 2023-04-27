@@ -103,8 +103,7 @@ const mntmenu = (target)=>{
 			}else{
 				posLeft = mouseX + secMargin + 'px'
 				posTop = mouseY + secMargin + 'px'
-				console.log(posLeft)
-				console.log(posTop)
+				
 			}
 		}	
 		return [posLeft,posTop]
@@ -142,7 +141,7 @@ const mntmenu = (target)=>{
 		})
 	}
 	// test: Should be removed after all context related function is completed
-	
+	/*
 	const page = document.body
 	page.addEventListener('contextmenu',(event)=>{
 		event.preventDefault()
@@ -154,7 +153,7 @@ const mntmenu = (target)=>{
 		contextMenu.style.left = posLeft
 		contextMenu.style.top = posTop
 		contextMenu.classList.add('visible')
-	})
+	})*/
 	
 }	
 // Side:	Function of monitored data
@@ -187,7 +186,7 @@ const mntfunc = (target)=>{
 					mntselected[i].classList.remove('mnt-selected')
 					mntselected[i].style.background = ''
 				}
-				event.target.style.background = 'rgb(124,255,192'
+				event.target.style.background = 'rgb(124,255,192)'
 				event.target.classList.add('mnt-selected')
 			}		
 		})
@@ -205,7 +204,7 @@ const mntfunc = (target)=>{
 			return false
 		}
 		if(el.classList.contains('mnt-dropzone')){
-			el.addEventListener('drop',(event)=>{
+			el.addEventListener('drop',async(event)=>{
 				mntcancel(event)
 				const dropid = event.dataTransfer.getData('text/plain')
 				const dropdata = document.getElementById(dropid)
@@ -216,6 +215,10 @@ const mntfunc = (target)=>{
 				}
 				const content = event.currentTarget.querySelector('.mnt-folder-content')
 				content.appendChild(dropdata)
+				// Monitored group update
+				const dropzoneid = event.currentTarget.id
+				const header = document.querySelector('#' + dropzoneid + ' .mnt-folder-header')				
+				const mntupdate = await window.mnt.update(header.innerHTML,dropdata.innerHTML)
 			})
 			el.addEventListener('dragenter',mntcancel)
 			el.addEventListener('dragover',mntcancel)
@@ -248,64 +251,18 @@ const mntfunc = (target)=>{
 				mntexpand(content)
 			})
 		}
-	}
-	// Folder function
-	// Shortcut
-	// All List
-	// Drop folder
-	
-	/*
-	let counter= false
-	const mntdropzone = document.querySelectorAll('.mnt-dropzone')
-	const mntcancel = (event)=>{
-		event.preventDefault()
-		event.stopPropagation()
-		return false
-	}
-
-	const mntfoldercontent = document.querySelectorAll('.mnt-folder-content')
-	for(let i=0;i<mntdropzone.length;i++){
-		const target = mntdropzone[i]
-		const content = mntfoldercontent[i]
-		let isExpand = false
-		target.addEventListener('drop',(event)=>{
-			mntcancel(event)
-			const dropid = event.dataTransfer.getData('text/plain')
-			const dropdata = document.getElementById(dropid)
-			const dropclone = dropdata.cloneNode(true)
-			dropdata.parentNode.insertBefore(dropclone,dropdata.nextSibling)
-			content.appendChild(dropdata)
-		})
-		target.addEventListener('dragenter',mntcancel)
-		target.addEventListener('dragover',mntcancel)
-		target.addEventListener('dragenter',()=>{
-			if(!counter){
-				content.style.height = (content.clientHeight + 100) + 'px'
-				counter = 0
-			}
-			counter++
-		})
-		target.addEventListener('dragleave',()=>{
-			counter--
-			if(counter==0){
-				if(content.classList.contains('mnt-expanding')){
-					content.style.height = content.childElementCount*21 + 31 + 'px'
-				}else{
-					content.style.height = ''
-				}			
-				counter = false
-			}
-		})
-		target.addEventListener('drop',()=>{
-			counter = 0
-			if(content.classList.contains('mnt-expanding')){
-				content.style.height = content.childElementCount*21 + 31 + 'px'
-			}else{
-				content.style.height = ''
-			}	
-		})
-	}	*/	
+	}	
 }
+// Side:	Contextmenu function
+const mntmenufunc = async()=>{
+	// Create new monitored group
+	const mntcmnew = ()=>{
+		document.getElementById('mnt-cm-new').addEventListener('click',()=>{
+			console.log('create folders')
+		})
+	}
+}
+
 // Main:	Load all monitored data
 const mntmain = async()=>{
 	const mntdata = []
@@ -330,6 +287,7 @@ const mntInit = async()=>{
 	if(isReady){
 		const mntfolder = document.querySelectorAll('.mnt-folder')
 		mntApplier(mntfolder)
+		mntmenufunc()
 	}
 	
 	
