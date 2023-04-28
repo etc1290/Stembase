@@ -29,16 +29,21 @@ const mntstyle = (target)=>{
 	for(let i=0;i<target.length;i++){
 		const el = target[i]
 		el.addEventListener('mouseenter',(event)=>{
-			const content = event.currentTarget.querySelector('.mnt-folder-header')
+			const header = event.currentTarget.querySelector('.mnt-folder-header')
+			const content = event.currentTarget.querySelector('.mnt-folder-content')
 			const isDropzone = mntcheck(event)
 			if(isDropzone){
-				content.style.background = 'rgb(124,255,192)'
+				header.style.background = 'rgb(124,255,192)'
+				content.style.background = 'rgb(235,255,251)'
 			}else{
-				content.style.background = 'rgb(255,174,189)'
+				header.style.background = 'rgb(255,174,189)'
+				content.style.background = 'rgb(255,245,247)'
 			}
 		})
 		el.addEventListener('mouseleave',(event)=>{
-			const content = event.currentTarget.querySelector('.mnt-folder-header')
+			const header = event.currentTarget.querySelector('.mnt-folder-header')
+			const content = event.currentTarget.querySelector('.mnt-folder-content')
+			header.style.background = ''
 			content.style.background = ''
 		})
 	}
@@ -165,13 +170,14 @@ const mntfunc = (target)=>{
 	const mntcheck = (event)=>{
 		return event.currentTarget.classList.contains('mnt-dropzone')		
 	}
+	const mntcontentCheck = (event) =>{
+		return event.target.classList.contains('mnt-data')
+	}
 	for(let i=0;i<target.length;i++){
 		// Jump to monitored path
 		const el = target[i]
 		el.addEventListener('dblclick',(event)=>{
-			const mntcontentCheck = (event) =>{
-				return event.target.classList.contains('mnt-data')
-			}
+			
 			if(mntcontentCheck(event)){
 				floorNum = 'fs-floor-0'
 				fsfunc(event.target.innerHTML)
@@ -192,14 +198,11 @@ const mntfunc = (target)=>{
 					mntselected[i].classList.remove('mnt-selected')
 					mntselected[i].style.background = ''
 				}
-				event.target.style.background = 'rgb(124,255,192)'
-				event.target.classList.add('mnt-selected')
+				if(mntcontentCheck(event)){
+					event.target.style.background = 'rgb(124,255,192)'
+					event.target.classList.add('mnt-selected')
+				}			
 			}		
-		})
-		el.addEventListener('mouseup',(event)=>{
-			if(mntcheck(event)){
-				event.target.style.background = 'rgb(154,255,222)'
-			}			
 		})
 		// Folder Function
 		// Drop Folder

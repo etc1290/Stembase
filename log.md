@@ -4,10 +4,14 @@
 ---
 	## 2023.04.28		version 0.5.7
 	-- Function implementation
+	-- Function rewiring
 	# Added
 	1. Updating monitored group database when dragging in 
 		-- finished
 	2. Auto load monitored data when app ready
+		-- finished
+	# Changed
+	1. Merging highlight monitored group function into mntstyle
 		-- finished
 ---
 	## 2023.04.28		version 0.5.6.2
