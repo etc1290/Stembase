@@ -7,12 +7,15 @@ const mntfold = (target)=>{
 			const header = event.currentTarget.querySelector('.mnt-folder-header')
 			const content = event.currentTarget.querySelector('.mnt-folder-content')
 			const isExpand = content.classList.contains('mnt-expanding')
-			if(isExpand){
-				content.style.height = ''
-				content.classList.remove('mnt-expanding')
-			}else{
-				content.style.height = content.childElementCount*21 + 31 + 'px'
-				content.classList.add('mnt-expanding')
+			const isHeader = event.target == header
+			if(isHeader){
+				if(isExpand){
+					content.style.height = ''
+					content.classList.remove('mnt-expanding')
+				}else{
+					content.style.height = content.childElementCount*21 + 31 + 'px'
+					content.classList.add('mnt-expanding')
+				}
 			}
 		})
 	}
