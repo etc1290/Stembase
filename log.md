@@ -5,13 +5,18 @@
 	## 2023.04.28		version 0.5.7
 	-- Function implementation
 	-- Function rewiring
+	-- Style change
 	# Added
 	1. Updating monitored group database when dragging in 
 		-- finished
 	2. Auto load monitored data when app ready
 		-- finished
+	3. Basic structure of contextmenu function
+		-- finished
 	# Changed
 	1. Merging highlight monitored group function into mntstyle
+		-- finished
+	2. Build mntbuild to control the processing of mnt building
 		-- finished
 ---
 	## 2023.04.28		version 0.5.6.2

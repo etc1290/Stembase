@@ -266,11 +266,17 @@ const mntfunc = (target)=>{
 // Side:	Contextmenu function
 const mntmenufunc = async()=>{
 	// Create new monitored group
-	const mntcmnew = ()=>{
-		document.getElementById('mnt-cm-new').addEventListener('click',()=>{
-			console.log('create folders')
-		})
-	}
+	document.getElementById('mnt-cm-new').addEventListener('click',()=>{
+		console.log('create folders')
+	})
+	// Add this member to Shortcut
+	document.getElementById('mnt-movemenu-shortcut').addEventListener('click',()=>{
+		console.log('add this to shorcut')
+	})
+	// Remove member from this monitored group
+	document.getElementById('mnt-removemenu-remove').addEventListener('click',()=>{
+		console.log('remove from this group')
+	})
 }
 
 //Side:		Monitored group loader
@@ -289,35 +295,39 @@ const mntgroupwrite = async(target) =>{
 	}
 }
 // Main:	Load all monitored data
-const mntmain = ()=>{
-	// All
-	const mntmainAll = async()=>{
-		const mntdata = []
-		const updateDiv = document.getElementById('mnt-main-display')
-		let mntset = await window.mnt.main()
-		if(mntset == undefined){
-			mntset = 0
-		}
-		for(var i=0;i<mntset.length;i++){
-			const id = `id='mnt-data-` + i + `'`
-			mntdata[i] = `<p ` + id+ ` class='mnt-data' draggable='true'>` + mntset[i] + `</p>`
-		}
-		updateDiv.innerHTML = mntdata.join('')
+const mntmain = async()=>{
+	const mntdata = []
+	const updateDiv = document.getElementById('mnt-main-display')
+	let mntset = await window.mnt.main()
+	if(mntset == undefined){
+		mntset = 0
+	}
+	for(var i=0;i<mntset.length;i++){
+		const id = `id='mnt-data-` + i + `'`
+		mntdata[i] = `<p ` + id+ ` class='mnt-data' draggable='true'>` + mntset[i] + `</p>`
+	}
+	updateDiv.innerHTML = mntdata.join('')
 		/*
 		const mntexpand = document.querySelectorAll('.mnt-folder.visible')
 		for(var i=0;i<mntexpand.length;i++){
 			mntexpand[i].style.height = mntexpand[i].childElementCount*21 + 31 + 'px'
-		}*/
-	}	
-	// Shortcut
-	const mntmainShortcut = () =>{
-		const mntdata = []
-		const mntshortcut = document.getElementById('mnt-shortcut')
-		mntgroupwrite(mntshortcut)
-	}
-	mntmainAll()
-	mntmainShortcut()
+		}*/	
 	return true
+}
+//Side:		Load Shortcut data
+const mntshortcut = () =>{
+	const mntdata = []
+	const mntshortcut = document.getElementById('mnt-shortcut')
+	mntgroupwrite(mntshortcut)
+	return true
+}
+//Side:		Initial page structure
+const mntbuild = ()=>{
+	const mainStatus = mntmain()
+	const shortcutStatus = mntshortcut()
+	if(mainStatus && shortcutStatus){
+		return true
+	}
 }
 //Initailizer
 const mntApplier = (target)=>{
@@ -326,8 +336,8 @@ const mntApplier = (target)=>{
 	mntstyle(target)
 	mntmenu(target)
 }
-const mntInit = async()=>{
-	const isReady = await mntmain()
+const mntInit = ()=>{
+	const isReady = mntbuild()
 	if(isReady){
 		const mntfolder = document.querySelectorAll('.mnt-folder')
 		mntApplier(mntfolder)

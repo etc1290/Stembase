@@ -12,6 +12,7 @@ const tagmain = (name) =>{
 		if (taginput == ''){
 			const inputError = await window.tag.error('taginput')
 		}else{		
+		// Link to Monitor System 
 			const isMonitored = await window.tag.main(name,taginput,tagpath)
 			if(!isMonitored){
 				mntmain()
