@@ -2,6 +2,12 @@
  File tagging system
 
 ---
+	## 2023.04.28		version 0.5.7
+	-- Function implementation
+	# Added
+	1. Updating monitored group database when dragging in 
+		-- finished
+---
 	## 2023.04.28		version 0.5.6.2
 	-- Bug fix
 	# Fixed
