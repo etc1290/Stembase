@@ -225,6 +225,7 @@ const mntfunc = (target)=>{
 				const dropzoneid = event.currentTarget.id
 				const header = document.querySelector('#' + dropzoneid + ' .mnt-folder-header')				
 				const mntupdate = await window.mnt.update(header.innerHTML,dropdata.innerHTML)
+				console.log(mntupdate)
 			})
 			el.addEventListener('dragenter',mntcancel)
 			el.addEventListener('dragover',mntcancel)
