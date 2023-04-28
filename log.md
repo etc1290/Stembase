@@ -13,10 +13,18 @@
 		-- finished
 	3. Basic structure of contextmenu function
 		-- finished
+	4. Add contextmenu selected function
+		-- finished
 	# Changed
 	1. Merging highlight monitored group function into mntstyle
 		-- finished
 	2. Build mntbuild to control the processing of mnt building
+		-- finished
+	3. Add submenu hover effect
+		-- finished
+	4. Rebuild mntcheck to handle all class type check 
+		-- finished
+	5. Rebuild mntselected to handle all selected related worked
 		-- finished
 ---
 	## 2023.04.28		version 0.5.6.2

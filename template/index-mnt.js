@@ -1,4 +1,23 @@
-
+// Side:	Target class checker
+const mntcheck = (event,classname,isCurrent=false)=>{
+	if(isCurrent){
+		return event.currentTarget.classList.contains(classname)
+	}else{
+		return event.target.classList.contains(classname)
+	}
+}
+// Side:	Selected monitored members
+const mntselected = (event)=>{
+	const selected = document.querySelectorAll('.mnt-selected')
+	for(let i=0;i<selected.length;i++){
+		selected[i].classList.remove('mnt-selected')
+		selected[i].style.background = ''
+	}
+	if(mntcheck(event,'mnt-data')){
+		event.target.style.background = 'rgb(124,255,192)'
+		event.target.classList.add('mnt-selected')
+	}
+}
 // Side:	Monitored group collapse and expand
 const mntfold = (target)=>{
 	for(let i=0;i<target.length;i++){
@@ -23,15 +42,16 @@ const mntfold = (target)=>{
 }
 // Side:	The Style of Monitored system
 const mntstyle = (target)=>{
+	/*
 	const mntcheck = (event)=>{
 		return event.currentTarget.classList.contains('mnt-dropzone')
-	}
+	}*/
 	for(let i=0;i<target.length;i++){
 		const el = target[i]
 		el.addEventListener('mouseenter',(event)=>{
 			const header = event.currentTarget.querySelector('.mnt-folder-header')
 			const content = event.currentTarget.querySelector('.mnt-folder-content')
-			const isDropzone = mntcheck(event)
+			const isDropzone = mntcheck(event,'mnt-dropzone',true)
 			if(isDropzone){
 				header.style.background = 'rgb(124,255,192)'
 				content.style.background = 'rgb(235,255,251)'
@@ -120,7 +140,12 @@ const mntmenu = (target)=>{
 	for(let i=0;i<target.length;i++){
 		const el=target[i]
 		el.addEventListener('contextmenu',(event)=>{
+			// Select contextmenu target
+			mntselected(event)
+			
+			// Main function
 			event.preventDefault()
+			
 			const prevMenu = document.querySelector('.mnt-cm-dropmenu.visible')
 			if(prevMenu){
 				prevMenu.classList.remove('visible')
@@ -164,21 +189,24 @@ const mntmenu = (target)=>{
 	})*/
 	
 }	
+
+
 // Side:	Function of monitored data
 const mntfunc = (target)=>{
 	// Data function
+	/*
 	const mntcheck = (event)=>{
 		return event.currentTarget.classList.contains('mnt-dropzone')		
-	}
+	}*/
+	/*
 	const mntcontentCheck = (event) =>{
 		return event.target.classList.contains('mnt-data')
-	}
+	}*/
 	for(let i=0;i<target.length;i++){
 		// Jump to monitored path
 		const el = target[i]
 		el.addEventListener('dblclick',(event)=>{
-			
-			if(mntcontentCheck(event)){
+			if(mntcheck(event,'mnt-data')){
 				floorNum = 'fs-floor-0'
 				fsfunc(event.target.innerHTML)
 			}		
@@ -192,17 +220,7 @@ const mntfunc = (target)=>{
 		})
 		// Style
 		el.addEventListener('mousedown',(event)=>{
-			if(mntcheck(event)){
-				const mntselected = document.querySelectorAll('.mnt-selected')
-				for(let i=0;i<mntselected.length;i++){
-					mntselected[i].classList.remove('mnt-selected')
-					mntselected[i].style.background = ''
-				}
-				if(mntcontentCheck(event)){
-					event.target.style.background = 'rgb(124,255,192)'
-					event.target.classList.add('mnt-selected')
-				}			
-			}		
+			mntselected(event)		
 		})
 		// Folder Function
 		// Drop Folder
@@ -275,7 +293,8 @@ const mntmenufunc = async()=>{
 	})
 	// Remove member from this monitored group
 	document.getElementById('mnt-removemenu-remove').addEventListener('click',()=>{
-		console.log('remove from this group')
+		//const data = 
+		//const isRemove = await window.mnt.remove()
 	})
 }
 
@@ -288,7 +307,7 @@ const mntgroupwrite = async(target) =>{
 		const mntset = await window.mnt.load(header.innerHTML)
 		let mntdata = []
 		for(var i=0;i<mntset.length;i++){
-			const id = `id='mnt-data-` + i + `'`
+			const id = `id='mnt-` + header.innerHTML + `-data-` + i + `'`
 			mntdata[i] = `<p ` + id+ ` class='mnt-data' draggable='true'>` + mntset[i] + `</p>`
 		}
 		updateDiv.innerHTML = mntdata.join('')
@@ -303,7 +322,7 @@ const mntmain = async()=>{
 		mntset = 0
 	}
 	for(var i=0;i<mntset.length;i++){
-		const id = `id='mnt-data-` + i + `'`
+		const id = `id='mnt-main-data-` + i + `'`
 		mntdata[i] = `<p ` + id+ ` class='mnt-data' draggable='true'>` + mntset[i] + `</p>`
 	}
 	updateDiv.innerHTML = mntdata.join('')
