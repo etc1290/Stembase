@@ -277,7 +277,12 @@ const mntgroupwrite = async(target) =>{
 		const updateDiv = target.querySelector('.mnt-folder-content')
 		const header = target.querySelector('.mnt-folder-header')
 		const mntset = await window.mnt.load(header.innerHTML)
-		console.log(mntset)
+		let mntdata = []
+		for(var i=0;i<mntset.length;i++){
+			const id = `id='mnt-data-` + i + `'`
+			mntdata[i] = `<p ` + id+ ` class='mnt-data' draggable='true'>` + mntset[i] + `</p>`
+		}
+		updateDiv.innerHTML = mntdata.join('')
 	}
 }
 // Main:	Load all monitored data
@@ -295,10 +300,11 @@ const mntmain = ()=>{
 			mntdata[i] = `<p ` + id+ ` class='mnt-data' draggable='true'>` + mntset[i] + `</p>`
 		}
 		updateDiv.innerHTML = mntdata.join('')
+		/*
 		const mntexpand = document.querySelectorAll('.mnt-folder.visible')
 		for(var i=0;i<mntexpand.length;i++){
 			mntexpand[i].style.height = mntexpand[i].childElementCount*21 + 31 + 'px'
-		}
+		}*/
 	}	
 	// Shortcut
 	const mntmainShortcut = () =>{
