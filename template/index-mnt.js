@@ -166,7 +166,10 @@ const mntfunc = (target)=>{
 		// Jump to monitored path
 		const el = target[i]
 		el.addEventListener('dblclick',(event)=>{
-			if(mntcheck(event)){
+			const mntcontentCheck = (event) =>{
+				return event.target.classList.contains('mnt-data')
+			}
+			if(mntcontentCheck(event)){
 				floorNum = 'fs-floor-0'
 				fsfunc(event.target.innerHTML)
 			}		

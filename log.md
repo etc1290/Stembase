@@ -2,6 +2,12 @@
  File tagging system
 
 ---
+	## 2023.04.28		version 0.5.6.2
+	-- Bug fix
+	# Fixed
+	1. Fix the incorrect check in mntfunc jump function
+		-- finished
+---
 	## 2023.04.27		version 0.5.6.1
 	-- Bug fix
 	# Fixed
