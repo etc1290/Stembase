@@ -41,31 +41,45 @@ ipcMain.handle('mnt-load',(event,folder)=>{
 	})
 	return output
 })
+// Remove monitored members
+ipcMain.handle('mnt-remove',(event,folder,dataset)=>{
+	console.log(folder)
+	
+	const output = new Promise((resolve)=>{
+		const cmd = `delete from Members where name = ?`
+		const mdb = mdbLoader(folder)
+		for(let i=0;i<dataset.length;i++){
+			mdb.run(cmd,dataset[i],(err)=>{
+				if(err){
+					resolve(false)
+				}else{
+					resolve(true)
+				}
+			})
+			
+		}
+	})
+	return output
+})
 // Update monitored group members
 ipcMain.handle('mnt-update',(event,folder,name)=>{
 	const output = new Promise((resolve)=>{
-		/*
-		const mdbStorage = env('StemMGDir')
-		const mdb = new sqlite3.Database(mdbStorage + '//' + folder + '.db')
-		*/
 		const mdb = mdbLoader(folder)
 		mdb.run(`create table 'Members'(
 			"id" 	integer not null unique,
 			"name" 	text not null,
 			primary key("id" autoincrement),
 			unique(name))`,()=>{
-				const cmd = `insert or ignore into Members(name) values(?)`
-				mdb.all(cmd,[name],()=>{resolve(true)})
-		} )
-		
-		/*
-		if (!fs.existsSync(dbStorage)){
-			fs.mkdir(dbStorage,{recursive:true},()=>{
-				if (!fs.existsSync(mdbStorage)){
-					fs.mkdir(mdbStorage,{recursive:true},()=>{})
-				}
-			})	
-		}*/
+				const cmd = `insert into Members(name) values(?)`
+				mdb.all(cmd,[name],(err,res)=>{
+					if(err){
+						resolve(true)
+					}else{
+						resolve(false)
+					}
+				})
+			}
+		)
 	})
 	return output
 })

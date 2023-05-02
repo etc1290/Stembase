@@ -42,10 +42,6 @@ const mntfold = (target)=>{
 }
 // Side:	The Style of Monitored system
 const mntstyle = (target)=>{
-	/*
-	const mntcheck = (event)=>{
-		return event.currentTarget.classList.contains('mnt-dropzone')
-	}*/
 	for(let i=0;i<target.length;i++){
 		const el = target[i]
 		el.addEventListener('mouseenter',(event)=>{
@@ -189,8 +185,24 @@ const mntmenu = (target)=>{
 	})*/
 	
 }	
-
-
+//Side:		Monitored group loader
+const mntgroupwrite = async(target,isLoaded=true) =>{
+	if(isLoaded){
+		isLoaded = target.querySelector('.mnt-data')
+	}
+	if(!isLoaded){
+		const updateDiv = target.querySelector('.mnt-folder-content')
+		const header = target.querySelector('.mnt-folder-header')
+		const mntset = await window.mnt.load(header.innerHTML)
+		console.log(mntset)
+		let mntdata = []
+		for(var i=0;i<mntset.length;i++){
+			const id = `id='mnt-` + header.innerHTML + `-data-` + i + `'`
+			mntdata[i] = `<p ` + id+ ` class='mnt-data' draggable='true'>` + mntset[i] + `</p>`
+		}
+		updateDiv.innerHTML = mntdata.join('')
+	}
+}
 // Side:	Function of monitored data
 const mntfunc = (target)=>{
 	// Data function
@@ -236,17 +248,21 @@ const mntfunc = (target)=>{
 				const dropid = event.dataTransfer.getData('text/plain')
 				const dropdata = document.getElementById(dropid)
 				const isClone = dropdata.parentNode.parentNode.classList.contains('mnt-dropzone')
-				if(!isClone){
-					const dropclone = dropdata.cloneNode(true)
-					dropdata.parentNode.insertBefore(dropclone,dropdata.nextSibling)
-				}
 				const content = event.currentTarget.querySelector('.mnt-folder-content')
-				content.appendChild(dropdata)
+				
 				// Monitored group update
 				const dropzoneid = event.currentTarget.id
 				const header = document.querySelector('#' + dropzoneid + ' .mnt-folder-header')				
-				const mntupdate = await window.mnt.update(header.innerHTML,dropdata.innerHTML)
-				console.log(mntupdate)
+				const isExist = await window.mnt.update(header.innerHTML,dropdata.innerHTML)
+				if(!isExist){
+					// Clone issue not solved
+					content.appendChild(dropdata)
+					
+					if(!isClone){
+						const dropclone = dropdata.cloneNode(true)
+						dropdata.parentNode.insertBefore(dropclone,dropdata.nextSibling)
+					}
+				}
 			})
 			el.addEventListener('dragenter',mntcancel)
 			el.addEventListener('dragover',mntcancel)
@@ -292,27 +308,22 @@ const mntmenufunc = async()=>{
 		console.log('add this to shorcut')
 	})
 	// Remove member from this monitored group
-	document.getElementById('mnt-removemenu-remove').addEventListener('click',()=>{
-		//const data = 
-		//const isRemove = await window.mnt.remove()
+	document.getElementById('mnt-removemenu-remove').addEventListener('click',async()=>{
+		const dataset = document.querySelectorAll('.mnt-selected')
+		const data = []
+		for(var i=0;i<dataset.length;i++){
+			data[i] = dataset[i].innerHTML
+		}
+		const group = dataset[0].parentNode.parentNode
+		const folder = group.querySelector('.mnt-folder-header')
+		const isRemove = await window.mnt.remove(folder.innerHTML,data)	
+		if(isRemove){
+			mntgroupwrite(group,false)
+		}
 	})
 }
 
-//Side:		Monitored group loader
-const mntgroupwrite = async(target) =>{
-	const isLoaded = target.querySelector('.mnt-data')
-	if(!isLoaded){
-		const updateDiv = target.querySelector('.mnt-folder-content')
-		const header = target.querySelector('.mnt-folder-header')
-		const mntset = await window.mnt.load(header.innerHTML)
-		let mntdata = []
-		for(var i=0;i<mntset.length;i++){
-			const id = `id='mnt-` + header.innerHTML + `-data-` + i + `'`
-			mntdata[i] = `<p ` + id+ ` class='mnt-data' draggable='true'>` + mntset[i] + `</p>`
-		}
-		updateDiv.innerHTML = mntdata.join('')
-	}
-}
+
 // Main:	Load all monitored data
 const mntmain = async()=>{
 	const mntdata = []
@@ -333,6 +344,7 @@ const mntmain = async()=>{
 		}*/	
 	return true
 }
+
 //Side:		Load Shortcut data
 const mntshortcut = () =>{
 	const mntdata = []

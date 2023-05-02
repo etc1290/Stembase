@@ -2,10 +2,17 @@
  File tagging system
 
 ---
+	## 2023.05.02		version 0.5.7.1
+	-- Bug Fix
+	# Fixed
+	1. Fix that remove function not refresh
+		-- finished
+---
 	## 2023.04.28		version 0.5.7
 	-- Function implementation
 	-- Function rewiring
 	-- Style change
+	-- Clear wasted codes
 	# Added
 	1. Updating monitored group database when dragging in 
 		-- finished

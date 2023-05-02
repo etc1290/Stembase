@@ -42,6 +42,7 @@ contextBridge.exposeInMainWorld('tag', {
 contextBridge.exposeInMainWorld('mnt', {
 	main:		()			=> ipcRenderer.invoke('mnt-main'),
 	load:		(i)			=> ipcRenderer.invoke('mnt-load',i),
+	remove:		(i,j)			=> ipcRenderer.invoke('mnt-remove',i,j),
 	update:		(i,j)		=> ipcRenderer.invoke('mnt-update',i,j)
 })
 
