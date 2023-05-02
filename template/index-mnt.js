@@ -44,10 +44,10 @@ const mntfold = (target)=>{
 const mntspan = (content) =>{
 	const isExpand = content.classList.contains('mnt-expanding')
 	if(isExpand){
-		console.log(content.childElementCount)
-		content = content.style.height = content.childElementCount*21 + 31 + 'px'
+		content.style.height = content.childElementCount*21 + 31 + 'px'
 	}else{
-		console.log(200)
+		console.log('not expanding')
+		content.style.height = ''
 	}
 	
 }
@@ -211,20 +211,12 @@ const mntgroupwrite = async(target,isLoaded=true) =>{
 			mntdata[i] = `<p ` + id+ ` class='mnt-data' draggable='true'>` + mntset[i] + `</p>`
 		}
 		updateDiv.innerHTML = mntdata.join('')
-		return true
+		mntspan(updateDiv)
 	}
 }
 // Side:	Function of monitored data
 const mntfunc = (target)=>{
 	// Data function
-	/*
-	const mntcheck = (event)=>{
-		return event.currentTarget.classList.contains('mnt-dropzone')		
-	}*/
-	/*
-	const mntcontentCheck = (event) =>{
-		return event.target.classList.contains('mnt-data')
-	}*/
 	for(let i=0;i<target.length;i++){
 		// Jump to monitored path
 		const el = target[i]
@@ -272,6 +264,7 @@ const mntfunc = (target)=>{
 				}
 				if(!isExist){
 					content.appendChild(dropdata)
+					mntspan(content)
 				}
 			})
 			el.addEventListener('dragenter',mntcancel)
@@ -284,25 +277,20 @@ const mntfunc = (target)=>{
 				}
 				counter++
 			})
-			const mntexpand = (content)=>{
-				if(content.classList.contains('mnt-expanding')){
-					content.style.height = content.childElementCount*21 + 31 + 'px'
-				}else{
-					content.style.height = ''
-				}
-			}
+		
 			el.addEventListener('dragleave',(event)=>{
 				counter--
 				const content = event.currentTarget.querySelector('.mnt-folder-content')
 				if(counter==0){
-					mntexpand(content)
+				
+					mntspan(content)
 					counter = false
 				}
 			})
 			el.addEventListener('drop',(event)=>{
 				counter = 0
 				const content = event.currentTarget.querySelector('.mnt-folder-content')
-				mntexpand(content)
+			
 			})
 		}
 	}	
@@ -330,9 +318,6 @@ const mntmenufunc = async()=>{
 		const isRemove = await window.mnt.remove(folder.innerHTML,data)	
 		if(isRemove){
 			const isReady = await mntgroupwrite(group,false)
-			if(isReady){
-				mntspan(content)
-			}
 		}
 	})
 }

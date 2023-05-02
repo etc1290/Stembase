@@ -4,6 +4,7 @@
 ---
 	## 2023.05.02		version 0.5.7.1
 	-- Bug Fix
+	-- Remove some wasted codes
 	# Fixed
 	1. Fix that remove function not refresh
 		-- finished
@@ -11,6 +12,7 @@
 		-- finished
 	3. Fix collapse height auto adjustment bug in some function 
 		3.1 mntremove
+		3.2 drop
 			-- finished
 ---
 	## 2023.04.28		version 0.5.7
