@@ -336,7 +336,7 @@ const mntmain = async()=>{
 		mntdata[i] = `<p ` + id+ ` class='mnt-data' draggable='true'>` + mntset[i] + `</p>`
 	}
 	updateDiv.innerHTML = mntdata.join('')
-	
+	mntspan(updateDiv)
 		/*
 		const mntexpand = document.querySelectorAll('.mnt-folder.visible')
 		for(var i=0;i<mntexpand.length;i++){

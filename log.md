@@ -13,7 +13,8 @@
 	3. Fix collapse height auto adjustment bug in some function 
 		3.1 mntremove
 		3.2 drop
-			-- finished
+		3.3 mntmain
+		-- finished
 ---
 	## 2023.04.28		version 0.5.7
 	-- Function implementation
