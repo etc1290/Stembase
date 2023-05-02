@@ -55,9 +55,13 @@
 	white-space:	nowrap;
 	min-height:		31px;
 	width:			150px;
+	display:		block;
 }
 .mnt-dropmenu-option:hover{
 	background:		rgb(146,182,200);
+}
+.mnt-dropmenu-option.hide{
+	display:		none;
 }
 .mnt-folder{
 	border-bottom:	5px solid rgb(255,238,214);

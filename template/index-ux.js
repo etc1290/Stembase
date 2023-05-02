@@ -11,15 +11,31 @@ const uxScroll = (e)=>{
 }
 
 const uxContextMenuRemove = ()=>{
-	const contextMenu = document.getElementById('mnt-cm')
-	document.querySelector('body').addEventListener('click',(event)=>{
-		if(event.target.offsetParent !=contextMenu){
-			contextMenu.classList.remove('visible')
-			const subMenu = document.querySelector('.mnt-cm-dropmenu.visible')
-			if(subMenu){
-				subMenu.classList.remove('visible')
+	const mainfunc = (isSub=false)=>{
+		const vsbMenu = document.querySelectorAll('.context-menu.visible')
+		const vsbSubMenu = document.querySelectorAll('.submenu.visible')
+		const hideOpt = document.querySelectorAll('.hide')
+		if(!event.target.offsetParent.classList.contains('context-menu')){
+			if(!isSub){
+				for(var i=0;i<vsbMenu.length;i++){
+					vsbMenu[i].classList.remove('visible')				
+				}
 			}
-		}	
+			for(var i=0;i<vsbSubMenu.length;i++){
+				vsbSubMenu[i].classList.remove('visible')
+			}
+			for(var i=0;i<hideOpt.length;i++){
+				hideOpt[i].classList.remove('hide')
+			}			
+		}
+	}
+	const body = document.querySelector('body')
+	body.addEventListener('contextmenu',(event)=>{
+		event.preventDefault()
+		mainfunc(true) 
+	})
+	body.addEventListener('click',(event)=>{
+		mainfunc()	
 	})
 	
 }

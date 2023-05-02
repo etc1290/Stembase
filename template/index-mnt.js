@@ -150,13 +150,15 @@ const mntmenu = (target)=>{
 			// Select contextmenu target
 			mntselected(event)
 			
+			// Customized display
+		
+			if(event.currentTarget.id == 'mnt-main'){
+				console.log('work')
+				const hideOpt = document.getElementById('mnt-removemenu-remove')
+				hideOpt.classList.add('hide')
+			}
 			// Main function
 			event.preventDefault()
-			
-			const prevMenu = document.querySelector('.mnt-cm-dropmenu.visible')
-			if(prevMenu){
-				prevMenu.classList.remove('visible')
-			}
 			const [posLeft,posTop] = menuPositioner(event)
 			contextMenu.style.left = posLeft
 			contextMenu.style.top = posTop

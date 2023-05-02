@@ -2,6 +2,16 @@
  File tagging system
 
 ---
+	## 2023.05.03		version 0.5.8
+	-- Rewrite function
+	-- Function implementation
+	# Added
+	1. Add customized option hide function(contextmenu) globally
+		-- finished
+	# Changed
+	1. Rewrite contextmenu removal mechanism
+		-- finished
+---
 	## 2023.05.02		version 0.5.7.1
 	-- Bug Fix
 	-- Remove some wasted codes
