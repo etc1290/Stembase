@@ -40,6 +40,17 @@ const mntfold = (target)=>{
 	}
 
 }
+// Side:	Monitored group span adjustment
+const mntspan = (content) =>{
+	const isExpand = content.classList.contains('mnt-expanding')
+	if(isExpand){
+		console.log(content.childElementCount)
+		content = content.style.height = content.childElementCount*21 + 31 + 'px'
+	}else{
+		console.log(200)
+	}
+	
+}
 // Side:	The Style of Monitored system
 const mntstyle = (target)=>{
 	for(let i=0;i<target.length;i++){
@@ -194,13 +205,13 @@ const mntgroupwrite = async(target,isLoaded=true) =>{
 		const updateDiv = target.querySelector('.mnt-folder-content')
 		const header = target.querySelector('.mnt-folder-header')
 		const mntset = await window.mnt.load(header.innerHTML)
-		console.log(mntset)
 		let mntdata = []
 		for(var i=0;i<mntset.length;i++){
 			const id = `id='mnt-` + header.innerHTML + `-data-` + i + `'`
 			mntdata[i] = `<p ` + id+ ` class='mnt-data' draggable='true'>` + mntset[i] + `</p>`
 		}
 		updateDiv.innerHTML = mntdata.join('')
+		return true
 	}
 }
 // Side:	Function of monitored data
@@ -313,11 +324,15 @@ const mntmenufunc = async()=>{
 		for(var i=0;i<dataset.length;i++){
 			data[i] = dataset[i].innerHTML
 		}
+		const content = dataset[0].parentNode
 		const group = dataset[0].parentNode.parentNode
 		const folder = group.querySelector('.mnt-folder-header')
 		const isRemove = await window.mnt.remove(folder.innerHTML,data)	
 		if(isRemove){
-			mntgroupwrite(group,false)
+			const isReady = await mntgroupwrite(group,false)
+			if(isReady){
+				mntspan(content)
+			}
 		}
 	})
 }
@@ -336,6 +351,7 @@ const mntmain = async()=>{
 		mntdata[i] = `<p ` + id+ ` class='mnt-data' draggable='true'>` + mntset[i] + `</p>`
 	}
 	updateDiv.innerHTML = mntdata.join('')
+	
 		/*
 		const mntexpand = document.querySelectorAll('.mnt-folder.visible')
 		for(var i=0;i<mntexpand.length;i++){

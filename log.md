@@ -9,6 +9,9 @@
 		-- finished
 	2. Fix data can be duplicated in monitored group
 		-- finished
+	3. Fix collapse height auto adjustment bug in some function 
+		3.1 mntremove
+			-- finished
 ---
 	## 2023.04.28		version 0.5.7
 	-- Function implementation
