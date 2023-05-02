@@ -7,6 +7,8 @@
 	# Fixed
 	1. Fix that remove function not refresh
 		-- finished
+	2. Fix data can be duplicated in monitored group
+		-- finished
 ---
 	## 2023.04.28		version 0.5.7
 	-- Function implementation

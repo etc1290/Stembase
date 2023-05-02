@@ -248,20 +248,19 @@ const mntfunc = (target)=>{
 				const dropid = event.dataTransfer.getData('text/plain')
 				const dropdata = document.getElementById(dropid)
 				const isClone = dropdata.parentNode.parentNode.classList.contains('mnt-dropzone')
+				
 				const content = event.currentTarget.querySelector('.mnt-folder-content')
 				
 				// Monitored group update
 				const dropzoneid = event.currentTarget.id
 				const header = document.querySelector('#' + dropzoneid + ' .mnt-folder-header')				
 				const isExist = await window.mnt.update(header.innerHTML,dropdata.innerHTML)
+				if(!isClone && !isExist){
+					const dropclone = dropdata.cloneNode(true)
+					dropdata.parentNode.insertBefore(dropclone,dropdata.nextSibling)
+				}
 				if(!isExist){
-					// Clone issue not solved
 					content.appendChild(dropdata)
-					
-					if(!isClone){
-						const dropclone = dropdata.cloneNode(true)
-						dropdata.parentNode.insertBefore(dropclone,dropdata.nextSibling)
-					}
 				}
 			})
 			el.addEventListener('dragenter',mntcancel)
