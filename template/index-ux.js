@@ -9,18 +9,7 @@ const uxScroll = (e)=>{
 		behavior: 'smooth'
 	})
 }
-// Contextmenu Select
-const uxContextMenuSelect = (event,id)=>{
-	const selector = []
-	selector['mnt'] = (event)=>{mntselected(event)}
-	
-	try{
-		selector[id](event)
-	}catch(err){
-		console.log('System error message:' + err)
-	}
-	
-}
+
 // Contextmenu Creator
 const uxContextMenuCreate = ()=>{
 	// Positioner
@@ -164,8 +153,23 @@ const uxContextMenuCreate = ()=>{
 		contextMenu.style.top = posTop
 		contextMenu.classList.add('visible')
 		
-		// Select target
-		uxContextMenuSelect(event,funcSection.id)
+		// Contextmenu Select
+		const uxContextMenuSelect = ()=>{
+			const selector = []
+			selector['mnt'] = ()=>{mntselected(event)}
+			try{
+				selector[funcSection.id](event)
+			}catch(err){
+				console.log('System error message:' + err)
+			}
+		}
+		uxContextMenuSelect()
+		// Hiding controllers
+		const uxContextMenuOptHide = ()=>{
+			console.log(event.target)
+		}
+		uxContextMenuOptHide()
+		
 	})
 	
 }	
