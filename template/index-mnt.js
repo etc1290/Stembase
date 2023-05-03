@@ -46,7 +46,6 @@ const mntspan = (content) =>{
 	if(isExpand){
 		content.style.height = content.childElementCount*21 + 31 + 'px'
 	}else{
-		console.log('not expanding')
 		content.style.height = ''
 	}
 	
@@ -77,6 +76,7 @@ const mntstyle = (target)=>{
 }
 
 // Side:	Context menu of monitored data
+/*
 const mntmenu = (target)=>{
 	// Positioner
 	const contextMenu = document.getElementById('mnt-cm')
@@ -183,7 +183,7 @@ const mntmenu = (target)=>{
 		})
 	}
 	// test: Should be removed after all context related function is completed
-	/*
+	
 	const page = document.body
 	page.addEventListener('contextmenu',(event)=>{
 		event.preventDefault()
@@ -195,9 +195,9 @@ const mntmenu = (target)=>{
 		contextMenu.style.left = posLeft
 		contextMenu.style.top = posTop
 		contextMenu.classList.add('visible')
-	})*/
+	})
 	
-}	
+}	*/
 //Side:		Monitored group loader
 const mntgroupwrite = async(target,isLoaded=true) =>{
 	if(isLoaded){
@@ -367,7 +367,7 @@ const mntApplier = (target)=>{
 	mntfunc(target)
 	mntfold(target)
 	mntstyle(target)
-	mntmenu(target)
+	//mntmenu(target)
 }
 const mntInit = ()=>{
 	const isReady = mntbuild()

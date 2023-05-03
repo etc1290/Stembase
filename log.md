@@ -11,6 +11,8 @@
 	# Changed
 	1. Rewrite contextmenu removal mechanism
 		-- finished
+	2. Rewrite contextmenu function in delegation way and transfer into index-ux
+		-- finished
 ---
 	## 2023.05.02		version 0.5.7.1
 	-- Bug Fix
