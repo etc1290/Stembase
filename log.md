@@ -11,6 +11,8 @@
 		-- finished
 	2. Add global context menu target select function with exception handler
 		-- finished
+	3. Add contextmenu create rxception handler
+		-- finished
 	# Changed
 	1. Rewrite contextmenu removal mechanism
 		-- finished

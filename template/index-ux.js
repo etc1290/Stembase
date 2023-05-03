@@ -148,6 +148,9 @@ const uxContextMenuCreate = ()=>{
 		// Display contextmenu
 		const funcSection = event.target.closest('.function-section')
 		const contextMenu = funcSection.querySelector('.context-menu')
+		if(!contextMenu){
+			return false
+		}
 		const [posLeft,posTop] = menuPositioner(event)
 		contextMenu.style.left = posLeft
 		contextMenu.style.top = posTop
