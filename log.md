@@ -13,6 +13,8 @@
 		-- finished
 	3. Add contextmenu create rxception handler
 		-- finished
+	4. Add contextmenu hide setting applier
+		-- finished
 	# Changed
 	1. Rewrite contextmenu removal mechanism
 		-- finished

@@ -140,8 +140,6 @@ const uxContextMenuCreate = ()=>{
 			subel.classList.add('visible')
 		})
 	}*/
-	// test: Should be removed after all context related function is completed
-	
 	const page = document.body
 	page.addEventListener('contextmenu',(event)=>{
 		event.preventDefault()
@@ -161,15 +159,26 @@ const uxContextMenuCreate = ()=>{
 			const selector = []
 			selector['mnt'] = ()=>{mntselected(event)}
 			try{
-				selector[funcSection.id](event)
-			}catch(err){
-				console.log('System error message:' + err)
-			}
+				selector[funcSection.id]()
+			}catch(err){}
 		}
 		uxContextMenuSelect()
-		// Hiding controllers
+		// Hiding controller
 		const uxContextMenuOptHide = ()=>{
-			console.log(event.target)
+			const hideRule = []
+			hideRule['mnt'] = ()=>{
+				const subRule = []
+				subRule['mnt-main'] = ()=>{
+					const hideOpt = document.getElementById('mnt-removemenu-remove')
+					hideOpt.classList.add('hide')
+				}
+				const group = event.target.closest('.mnt-folder')
+		
+				subRule[group.id]()
+			}
+			try{
+				hideRule[funcSection.id]()
+			}catch(err){}
 		}
 		uxContextMenuOptHide()
 		
