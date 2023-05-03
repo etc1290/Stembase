@@ -5,8 +5,11 @@
 	## 2023.05.03		version 0.5.8
 	-- Rewrite function
 	-- Function implementation
+	-- Clear wasted codes
 	# Added
 	1. Add customized option hide function(contextmenu) globally
+		-- finished
+	2. Add global context menu target select function with exception handler
 		-- finished
 	# Changed
 	1. Rewrite contextmenu removal mechanism

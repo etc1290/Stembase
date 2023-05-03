@@ -9,6 +9,18 @@ const uxScroll = (e)=>{
 		behavior: 'smooth'
 	})
 }
+// Contextmenu Select
+const uxContextMenuSelect = (event,id)=>{
+	const selector = []
+	selector['mnt'] = (event)=>{mntselected(event)}
+	
+	try{
+		selector[id](event)
+	}catch(err){
+		console.log('System error message:' + err)
+	}
+	
+}
 // Contextmenu Creator
 const uxContextMenuCreate = ()=>{
 	// Positioner
@@ -16,7 +28,6 @@ const uxContextMenuCreate = ()=>{
 	const menuPositioner = (event,isSub = false)=>{
 		const funcSection = event.target.closest('.function-section')
 		const contextMenu = funcSection.querySelector('.context-menu')
-		console.log(contextMenu)
 		const winX = document.body.clientWidth
 		const winY = document.body.clientHeight
 		const menuX = contextMenu.offsetWidth
@@ -145,12 +156,16 @@ const uxContextMenuCreate = ()=>{
 	const page = document.body
 	page.addEventListener('contextmenu',(event)=>{
 		event.preventDefault()
+		// Display contextmenu
 		const funcSection = event.target.closest('.function-section')
 		const contextMenu = funcSection.querySelector('.context-menu')
 		const [posLeft,posTop] = menuPositioner(event)
 		contextMenu.style.left = posLeft
 		contextMenu.style.top = posTop
 		contextMenu.classList.add('visible')
+		
+		// Select target
+		uxContextMenuSelect(event,funcSection.id)
 	})
 	
 }	
@@ -165,14 +180,17 @@ const uxContextMenuRemove = ()=>{
 				for(var i=0;i<vsbMenu.length;i++){
 					vsbMenu[i].classList.remove('visible')				
 				}
-			}
+			}/*
 			for(var i=0;i<vsbSubMenu.length;i++){
 				vsbSubMenu[i].classList.remove('visible')
-			}
+			}*/
 			for(var i=0;i<hideOpt.length;i++){
 				hideOpt[i].classList.remove('hide')
 			}			
 		}
+		for(var i=0;i<vsbSubMenu.length;i++){
+				vsbSubMenu[i].classList.remove('visible')
+			}
 	}
 	const body = document.querySelector('body')
 	body.addEventListener('contextmenu',(event)=>{
