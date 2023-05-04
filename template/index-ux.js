@@ -141,8 +141,9 @@ const uxContextMenuCreate = ()=>{
 		})
 	}*/
 	const page = document.body
-	page.addEventListener('contextmenu',(event)=>{
+	page.addEventListener('passcheck',(event)=>{
 		event.preventDefault()
+		console.log(event.target)
 		// Display contextmenu
 		const funcSection = event.target.closest('.function-section')
 		const contextMenu = funcSection.querySelector('.context-menu')
@@ -212,6 +213,9 @@ const uxContextMenuRemove = ()=>{
 	body.addEventListener('contextmenu',(event)=>{
 		event.preventDefault()
 		mainfunc(true) 
+		const evt = new Event('passcheck',{'bubbles':true})
+		event.target.dispatchEvent(evt)
+		
 	})
 	body.addEventListener('mousedown',()=>{
 		mainfunc()	

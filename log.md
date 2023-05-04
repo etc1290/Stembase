@@ -2,6 +2,12 @@
  File tagging system
 
 ---
+	## 2023.05.04		version 0.5.8.1
+	-- Rewrite function
+	# Changed
+	1. Rewrite the behavior of uxContextMenuRemove in custom event to fix prority bug
+		-- finished
+---
 	## 2023.05.03		version 0.5.8
 	-- Rewrite function
 	-- Function implementation

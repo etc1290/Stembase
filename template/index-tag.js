@@ -89,7 +89,7 @@ const tagmatch = async()=>{
 	})
 		// Main match function
 	tagsearchbar.addEventListener('input',async()=>{
-		const evt = new Event('click')
+		//const evt = new Event('click')
 		const input = tagsearchbar.value
 		const matchBlock = []
 		const tagset = await tag.match(input)
@@ -243,7 +243,7 @@ const tagsearch = ()=>{
 	}
 	tagbtn.addEventListener('click', async()=>{
 		searchBlock = []
-		const evt = new Event('click')
+		//const evt = new Event('click')
 		const input = taginput.value
 		tagset = await tag.query(input,'tagref','tagref')
 		const fileset = await tag.query(input,'nameref','nameref',false)
