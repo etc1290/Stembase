@@ -117,7 +117,7 @@ const mntfunc = (target)=>{
 			mntselected(event)		
 		})
 		// Folder Function
-		// Drop Folder
+			// Drop Folder
 		let counter = isExpand = false
 		const mntcancel = (event)=>{
 			event.preventDefault()
@@ -169,7 +169,7 @@ const mntfunc = (target)=>{
 			el.addEventListener('drop',(event)=>{
 				counter = 0
 				const content = event.currentTarget.querySelector('.mnt-folder-content')
-			
+				mntspan(content)
 			})
 		}
 	}	

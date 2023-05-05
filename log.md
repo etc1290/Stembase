@@ -29,8 +29,8 @@
 	1. Fix the bug that all submenu functions of contextmenu are passive
 		-- finished
 	# Bugged
-	1. Found bug that drag same data to group may cause duplicate expand
-		-- processing
+	1. Fix the bug that drag data cause duplicate expand
+		-- finished
 ---
 	## 2023.05.04		version 0.5.8.1
 	-- Rewrite function
