@@ -24,5 +24,6 @@ ipcMain.handle('ts-delDB', () => {
 
 ipcMain.handle('fs-openfile', (evt, v) => {
     console.log(v)
+    exe('chcp 65001')
     exe(v)
 })

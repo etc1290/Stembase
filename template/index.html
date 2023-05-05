@@ -7,6 +7,7 @@
     <meta http-equiv="X-Content-Security-Policy" content="default-src 'self'; script-src 'self'" />
 	<link rel='stylesheet' type='text/css' href='../static/css/styles.css'>
 	<link rel='stylesheet' type='text/css' href='../static/css/index.css'>
+	<link rel='stylesheet' href='../static/css/hint.css'>
     <title>Hello from Electron renderer!</title>
 </head>
 
@@ -15,21 +16,34 @@
     <p id="info"></p>
 	<div id='fs-path'></div>
 		<div id='main-function'>
-			<div id='mnt'>
+			<div id='mnt' class='function-section'>
 				<div id='mnt-cm' class='context-menu'>
-					<p class='mnt-cm-option'>Option 1</p>
-					<p class='mnt-cm-option'>Option 2</p>
+					<div>
+						<p id='mnt-cm-new' class='mnt-cm-option'>New</p>
+						<p id='mnt-cm-move' class='mnt-cm-submenu'>Move</p>				
+						<p id='mnt-cm-remove' class='mnt-cm-submenu'>Remove</p>
+					</div>					
+				</div>
+				<div id='mnt-cm-sub'>
+					<div id='mnt-cm-movemenu' class='mnt-cm-dropmenu submenu'>
+						<p id='mnt-movemenu-shortcut' class='mnt-dropmenu-option'>Add to Shortcut</p>
+					</div>
+					<div id='mnt-cm-removemenu' class='mnt-cm-dropmenu submenu'>
+						<p id='mnt-removemenu-delete' class='mnt-dropmenu-option'>Delete this record</p>
+						<p id='mnt-removemenu-remove' class='mnt-dropmenu-option'>Remove from group</p>
+						<p id='mnt-removemenu-unmonitor' class='mnt-dropmenu-option'>Remove monitoring</p>
+					</div>
 				</div>
 				<div id='mnt-shortcut' class='mnt-folder mnt-dropzone'>
 					<p class='mnt-folder-header'>Shortcut</p> 
 					<div id='mnt-shortcut-display' class='mnt-folder-content'></div>
 				</div>
 				<div id='mnt-main' class='mnt-folder'>
-					<p class='mnt-folder-header'>All Files</p>
+					<p class='mnt-folder-header'>All</p>
 					<div id='mnt-main-display' class='mnt-folder-content'></div>
 				</div>
 			</div>
-			<div id='fs'>
+			<div id='fs' class='function-section'>
 				<h1 id='fs-info'></h1>	
 				<div id='fs-toolbar'>
 					<button id='fs-up'>Up Level</button>
@@ -43,7 +57,7 @@
 				</div>
 			
 			</div>
-			<div id='tag'>
+			<div id='tag' class='function-section'>
 				<div id='tag-searchbar'>
 					<input id='tag-search' class='input-field'>
 					<button id='tag-searchbtn'>Search</button>
@@ -69,7 +83,7 @@
 			</div>
 		</div>
 			
-	<div id='buttonbar'>
+	<div id='buttonbar' class='function-section'>
 		<button id='fs-home'>Home</button>
 		<button id='fs-openDir'>Open Folder</button>
 		<button id='cw-setting'>Setting</button>

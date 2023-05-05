@@ -1,3 +1,7 @@
 *.exe
 node_modules
 *.code-workspace
+*.db
+中文/1/2/Stemmeta.db
+中文/1/Stemmeta.db
+中文/Stemmeta.db

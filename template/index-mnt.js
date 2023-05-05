@@ -1,116 +1,382 @@
-
+// Side:	Target class checker
+const mntcheck = (event,classname,isCurrent=false)=>{
+	if(isCurrent){
+		return event.currentTarget.classList.contains(classname)
+	}else{
+		return event.target.classList.contains(classname)
+	}
+}
+// Side:	Selected monitored members
+const mntselected = (event)=>{
+	const selected = document.querySelectorAll('.mnt-selected')
+	for(let i=0;i<selected.length;i++){
+		selected[i].classList.remove('mnt-selected')
+		selected[i].style.background = ''
+	}
+	if(mntcheck(event,'mnt-data')){
+		event.target.style.background = 'rgb(124,255,192)'
+		event.target.classList.add('mnt-selected')
+	}
+}
 // Side:	Monitored group collapse and expand
-const mntfold = ()=>{
-	const mntheader = document.querySelectorAll('.mnt-folder-header')
-	const mntcontent = document.querySelectorAll('.mnt-folder-content')
-	for(let i=0;i<mntheader.length;i++){
-		mntheader[i].addEventListener('click',()=>{
-			console.log(mntcontent[i].style.height)
-			if(mntcontent[i].style.height==''){
-				mntcontent[i].style.height = 'auto'
-			}else{
-				mntcontent[i].style.height = ''
+const mntfold = (target)=>{
+	for(let i=0;i<target.length;i++){
+		const el = target[i]
+		el.addEventListener('click',(event)=>{
+			const header = event.currentTarget.querySelector('.mnt-folder-header')
+			const content = event.currentTarget.querySelector('.mnt-folder-content')
+			const isExpand = content.classList.contains('mnt-expanding')
+			const isHeader = event.target == header
+			if(isHeader){
+				if(isExpand){
+					content.style.height = ''
+					content.classList.remove('mnt-expanding')
+				}else{
+					content.style.height = content.childElementCount*21 + 31 + 'px'
+					content.classList.add('mnt-expanding')
+				}
 			}
 		})
 	}
+
 }
+// Side:	Monitored group span adjustment
+const mntspan = (content) =>{
+	const isExpand = content.classList.contains('mnt-expanding')
+	if(isExpand){
+		content.style.height = content.childElementCount*21 + 31 + 'px'
+	}else{
+		content.style.height = ''
+	}
+	
+}
+// Side:	The Style of Monitored system
+const mntstyle = (target)=>{
+	for(let i=0;i<target.length;i++){
+		const el = target[i]
+		el.addEventListener('mouseenter',(event)=>{
+			const header = event.currentTarget.querySelector('.mnt-folder-header')
+			const content = event.currentTarget.querySelector('.mnt-folder-content')
+			const isDropzone = mntcheck(event,'mnt-dropzone',true)
+			if(isDropzone){
+				header.style.background = 'rgb(124,255,192)'
+				content.style.background = 'rgb(235,255,251)'
+			}else{
+				header.style.background = 'rgb(255,174,189)'
+				content.style.background = 'rgb(255,245,247)'
+			}
+		})
+		el.addEventListener('mouseleave',(event)=>{
+			const header = event.currentTarget.querySelector('.mnt-folder-header')
+			const content = event.currentTarget.querySelector('.mnt-folder-content')
+			header.style.background = ''
+			content.style.background = ''
+		})
+	}
+}
+
 // Side:	Context menu of monitored data
-const mntmenu = ()=>{
+/*
+const mntmenu = (target)=>{
+	// Positioner
 	const contextMenu = document.getElementById('mnt-cm')
-	const mntfolder = document.querySelectorAll('.mnt-folder')
-	for(let i=0;i<mntfolder.length;i++){
-		mntfolder[i].addEventListener('contextmenu',(event)=>{
+	const menuPositioner = (event,isSub = false)=>{
+		
+		const winX = document.body.clientWidth
+		const winY = document.body.clientHeight
+		const menuX = contextMenu.offsetWidth
+		const menuY = contextMenu.offsetHeight
+		const secMargin = 5
+		let posLeft = posTop = overflowLimX = overflowLimY = ''
+		// Submenu
+		if(isSub){
+			const menuName = event.currentTarget.id + 'menu'
+			const dropMenu = document.getElementById(menuName)
+			const subX = 150
+			const subY = dropMenu.childElementCount*31
+			const upAdjustment = 30
+			const downAdjustment = 10
+			const cmPos = contextMenu.getBoundingClientRect()
+			const optPos = event.currentTarget.getBoundingClientRect()
+			const optionLeft = cmPos.left
+			const optionRight = cmPos.right
+			const optionTop = optPos.top
+			const optionBottom = optPos.bottom
+			overflowLimX = optionRight + subX + secMargin
+			overflowLimY = optionTop + subY + secMargin
+			if(overflowLimX >= winX && overflowLimY >= winY){
+				posLeft = optionLeft - subX + 'px'
+				posTop = optionBottom - subY + downAdjustment + 'px'
+				
+			}else if(overflowLimX >= winX){
+				posLeft = optionLeft - subX + 'px'
+				posTop = optionTop + upAdjustment + 'px'
+				
+			}else if(overflowLimY >= winY){
+				posLeft = optionRight + 'px'
+				posTop = optionBottom - subY + downAdjustment + 'px'
+				
+			}else{
+				posLeft = optionRight + 'px'
+				posTop = optionTop + upAdjustment + 'px'
+				
+			}
+		// Mainmenu
+		}else{
+			const {clientX : mouseX, clientY: mouseY} = event
+			overflowLimX = mouseX + menuX + secMargin
+			overflowLimY = mouseY + menuY + secMargin
+			if(overflowLimX >= winX && overflowLimY >=winY){
+				posLeft = mouseX - menuX - secMargin + 'px'
+				posTop = mouseY - menuY - secMargin + 'px'
+			}else if(overflowLimX >= winX){
+				posLeft = mouseX - menuX - secMargin + 'px'
+				posTop = mouseY + secMargin + 'px'
+			}else if(overflowLimY >= winY){
+				posLeft = mouseX + secMargin + 'px'
+				posTop = mouseY - menuY - secMargin + 'px'
+			}else{
+				posLeft = mouseX + secMargin + 'px'
+				posTop = mouseY + secMargin + 'px'
+				
+			}
+		}	
+		return [posLeft,posTop]
+	}
+	// Main menu
+	for(let i=0;i<target.length;i++){
+		const el=target[i]
+		el.addEventListener('contextmenu',(event)=>{
+			// Select contextmenu target
+			mntselected(event)
+			
+			// Customized display
+		
+			if(event.currentTarget.id == 'mnt-main'){
+				console.log('work')
+				const hideOpt = document.getElementById('mnt-removemenu-remove')
+				hideOpt.classList.add('hide')
+			}
+			// Main function
 			event.preventDefault()
-			const {clientX: mouseX, clientY: mouseY} = event
-			contextMenu.style.top = `${mouseY}px`
-			contextMenu.style.left= `${mouseX}px`
+			const [posLeft,posTop] = menuPositioner(event)
+			contextMenu.style.left = posLeft
+			contextMenu.style.top = posTop
 			contextMenu.classList.add('visible')
 		})
 	}
-}	
+	// Side menu
+	const submenu = document.querySelectorAll('.mnt-cm-submenu')
+	const dropmenu= document.querySelectorAll('.mnt-cm-dropmenu')
+	for(let i=0;i<submenu.length;i++){
+		const el = submenu[i]
+		const subel = dropmenu[i]
+		el.addEventListener('click',(event)=>{
+			const prevMenu = document.querySelector('.mnt-cm-dropmenu.visible')
+			if(prevMenu){
+				prevMenu.classList.remove('visible')
+			}
+			const [posLeft,posTop] = menuPositioner(event,true)
+			subel.style.left = posLeft
+			subel.style.top = posTop
+			subel.classList.add('visible')
+		})
+	}
+	// test: Should be removed after all context related function is completed
+	
+	const page = document.body
+	page.addEventListener('contextmenu',(event)=>{
+		event.preventDefault()
+		const prevMenu = document.querySelector('.mnt-cm-dropmenu.visible')
+		if(prevMenu){
+			prevMenu.classList.remove('visible')
+		}
+		const [posLeft,posTop] = menuPositioner(event)
+		contextMenu.style.left = posLeft
+		contextMenu.style.top = posTop
+		contextMenu.classList.add('visible')
+	})
+	
+}	*/
+//Side:		Monitored group loader
+const mntgroupwrite = async(target,isLoaded=true) =>{
+	if(isLoaded){
+		isLoaded = target.querySelector('.mnt-data')
+	}
+	if(!isLoaded){
+		const updateDiv = target.querySelector('.mnt-folder-content')
+		const header = target.querySelector('.mnt-folder-header')
+		const mntset = await window.mnt.load(header.innerHTML)
+		let mntdata = []
+		for(var i=0;i<mntset.length;i++){
+			const id = `id='mnt-` + header.innerHTML + `-data-` + i + `'`
+			mntdata[i] = `<p ` + id+ ` class='mnt-data' draggable='true'>` + mntset[i] + `</p>`
+		}
+		updateDiv.innerHTML = mntdata.join('')
+		mntspan(updateDiv)
+	}
+}
 // Side:	Function of monitored data
-const mntfunc = ()=>{
+const mntfunc = (target)=>{
 	// Data function
-	const mntdata = document.querySelectorAll('.mnt-data')
-	for(let i=0;i<mntdata.length;i++){
+	for(let i=0;i<target.length;i++){
 		// Jump to monitored path
-		const target = mntdata[i]
-		target.addEventListener('dblclick',()=>{
-			floorNum = 'fs-floor-0'
-			fsfunc(target.innerHTML)
+		const el = target[i]
+		el.addEventListener('dblclick',(event)=>{
+			if(mntcheck(event,'mnt-data')){
+				floorNum = 'fs-floor-0'
+				fsfunc(event.target.innerHTML)
+			}		
 		})
 		// Drag
-		target.addEventListener('dragstart',(event)=>{
+		el.addEventListener('dragstart',(event)=>{
 			event.dataTransfer.setData('text/plain',event.target.id)
 		})
+		el.addEventListener('dragend',(event)=>{
+			event.target.style.background = ''
+		})
 		// Style
-		target.addEventListener('click',()=>{
-			const apple = target.clientWidth
-			console.log(apple)
+		el.addEventListener('mousedown',(event)=>{
+			mntselected(event)		
 		})
-		target.addEventListener('mousedown',()=>{
-			target.style.background = 'rgb(124,225,192)'
-		})
-		target.addEventListener('mouseup',()=>{
-			target.style.background = 'rgb(154,255,222)'
-		})
-	}
-	
-	// Folder function
-	// Shortcut
-	const mntshortcut = document.getElementById('mnt-shortcut')
-	let mntheight = 0
-	mntshortcut.addEventListener('dragenter',()=>{
-		mntheight = mntshortcut.offsetHeight
-	})
-	mntshortcut.addEventListener('dragover',()=>{
-		mntshortcut.style.height = (mntheight + 50) + 'px'
-		console.log('in')
-	})
-	mntshortcut.addEventListener('dragleave',()=>{
-		console.log('leave')
-		mntshortcut.style.height = 'auto'
-	})
-	mntshortcut.addEventListener('drop',()=>{
-		console.log('drop')
-		mntshortcut.style.height = 'auto'
-	})
-	// Drop folder
-	const mntdropzone = document.querySelectorAll('.mnt-dropzone')
-	const mntcancel = (event)=>{
-		event.preventDefault()
-		event.stopPropagation()
-		return false
-	}
-	for(let i=0;i<mntdropzone.length;i++){
-		const target = mntdropzone[i]
-		target.addEventListener('drop',(event)=>{
-			mntcancel(event)
-			const id = event.dataTransfer.getData('text/plain')
-			event.target.appendChild(document.getElementById(id))
-		})
-		target.addEventListener('dragenter',mntcancel)
-		target.addEventListener('dragover',mntcancel)
-	}
+		// Folder Function
+		// Drop Folder
+		let counter = isExpand = false
+		const mntcancel = (event)=>{
+			event.preventDefault()
+			event.stopPropagation()
+			return false
+		}
+		if(el.classList.contains('mnt-dropzone')){
+			el.addEventListener('drop',async(event)=>{
+				mntcancel(event)
+				const dropid = event.dataTransfer.getData('text/plain')
+				const dropdata = document.getElementById(dropid)
+				const isClone = dropdata.parentNode.parentNode.classList.contains('mnt-dropzone')
+				
+				const content = event.currentTarget.querySelector('.mnt-folder-content')
+				
+				// Monitored group update
+				const dropzoneid = event.currentTarget.id
+				const header = document.querySelector('#' + dropzoneid + ' .mnt-folder-header')				
+				const isExist = await window.mnt.update(header.innerHTML,dropdata.innerHTML)
+				if(!isClone && !isExist){
+					const dropclone = dropdata.cloneNode(true)
+					dropdata.parentNode.insertBefore(dropclone,dropdata.nextSibling)
+				}
+				if(!isExist){
+					content.appendChild(dropdata)
+					mntspan(content)
+				}
+			})
+			el.addEventListener('dragenter',mntcancel)
+			el.addEventListener('dragover',mntcancel)
+			el.addEventListener('dragenter',(event)=>{
+				const content = event.currentTarget.querySelector('.mnt-folder-content')
+				if(!counter){
+					content.style.height = (content.clientHeight + 100) + 'px'
+					counter = 0
+				}
+				counter++
+			})
 		
+			el.addEventListener('dragleave',(event)=>{
+				counter--
+				const content = event.currentTarget.querySelector('.mnt-folder-content')
+				if(counter==0){
+				
+					mntspan(content)
+					counter = false
+				}
+			})
+			el.addEventListener('drop',(event)=>{
+				counter = 0
+				const content = event.currentTarget.querySelector('.mnt-folder-content')
+			
+			})
+		}
+	}	
 }
+// Side:	Contextmenu function
+const mntmenufunc = async()=>{
+	// Create new monitored group
+	document.getElementById('mnt-cm-new').addEventListener('click',()=>{
+		console.log('create folders')
+	})
+	// Add this member to Shortcut
+	document.getElementById('mnt-movemenu-shortcut').addEventListener('click',()=>{
+		console.log('add this to shorcut')
+	})
+	// Remove member from this monitored group
+	document.getElementById('mnt-removemenu-remove').addEventListener('click',async()=>{
+		const dataset = document.querySelectorAll('.mnt-selected')
+		const data = []
+		for(var i=0;i<dataset.length;i++){
+			data[i] = dataset[i].innerHTML
+		}
+		const content = dataset[0].parentNode
+		const group = dataset[0].parentNode.parentNode
+		const folder = group.querySelector('.mnt-folder-header')
+		const isRemove = await window.mnt.remove(folder.innerHTML,data)	
+		if(isRemove){
+			const isReady = await mntgroupwrite(group,false)
+		}
+	})
+}
+
+
 // Main:	Load all monitored data
 const mntmain = async()=>{
 	const mntdata = []
 	const updateDiv = document.getElementById('mnt-main-display')
-	const mntset = await window.mnt.main()
+	let mntset = await window.mnt.main()
+	if(mntset == undefined){
+		mntset = 0
+	}
 	for(var i=0;i<mntset.length;i++){
-		const id = `id='mnt-data-` + i + `'`
+		const id = `id='mnt-main-data-` + i + `'`
 		mntdata[i] = `<p ` + id+ ` class='mnt-data' draggable='true'>` + mntset[i] + `</p>`
 	}
 	updateDiv.innerHTML = mntdata.join('')
-	mntfunc()	
+	mntspan(updateDiv)
+		/*
+		const mntexpand = document.querySelectorAll('.mnt-folder.visible')
+		for(var i=0;i<mntexpand.length;i++){
+			mntexpand[i].style.height = mntexpand[i].childElementCount*21 + 31 + 'px'
+		}*/	
+	return true
+}
+
+//Side:		Load Shortcut data
+const mntshortcut = () =>{
+	const mntdata = []
+	const mntshortcut = document.getElementById('mnt-shortcut')
+	mntgroupwrite(mntshortcut)
+	return true
+}
+//Side:		Initial page structure
+const mntbuild = ()=>{
+	const mainStatus = mntmain()
+	const shortcutStatus = mntshortcut()
+	if(mainStatus && shortcutStatus){
+		return true
+	}
 }
 //Initailizer
+const mntApplier = (target)=>{
+	mntfunc(target)
+	mntfold(target)
+	mntstyle(target)
+	//mntmenu(target)
+}
 const mntInit = ()=>{
-	mntmain()
-	mntfold()
-	mntmenu()
+	const isReady = mntbuild()
+	if(isReady){
+		const mntfolder = document.querySelectorAll('.mnt-folder')
+		mntApplier(mntfolder)
+		mntmenufunc()
+	}
+	
 	
 }
 mntInit()

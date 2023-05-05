@@ -1,7 +1,188 @@
 # Stembase
  File tagging system
 
-
+---
+	## 2023.05.04		version 0.5.8.1
+	-- Rewrite function
+	# Changed
+	1. Rewrite the behavior of uxContextMenuRemove in custom event to fix prority bug
+		-- finished
+---
+	## 2023.05.03		version 0.5.8
+	-- Rewrite function
+	-- Function implementation
+	-- Clear wasted codes
+	# Added
+	1. Add customized option hide function(contextmenu) globally
+		-- finished
+	2. Add global context menu target select function with exception handler
+		-- finished
+	3. Add contextmenu create rxception handler
+		-- finished
+	4. Add contextmenu hide setting applier
+		-- finished
+	# Changed
+	1. Rewrite contextmenu removal mechanism
+		-- finished
+	2. Rewrite contextmenu function in delegation way and transfer into index-ux
+		-- finished
+	3. Merge contextmenu related function
+		-- finished
+---
+	## 2023.05.02		version 0.5.7.1
+	-- Bug Fix
+	-- Remove some wasted codes
+	# Fixed
+	1. Fix that remove function not refresh
+		-- finished
+	2. Fix data can be duplicated in monitored group
+		-- finished
+	3. Fix collapse height auto adjustment bug in some function 
+		3.1 mntremove
+		3.2 drop
+		3.3 mntmain
+		-- finished
+---
+	## 2023.04.28		version 0.5.7
+	-- Function implementation
+	-- Function rewiring
+	-- Style change
+	-- Clear wasted codes
+	# Added
+	1. Updating monitored group database when dragging in 
+		-- finished
+	2. Auto load monitored data when app ready
+		-- finished
+	3. Basic structure of contextmenu function
+		-- finished
+	4. Add contextmenu selected function
+		-- finished
+	# Changed
+	1. Merging highlight monitored group function into mntstyle
+		-- finished
+	2. Build mntbuild to control the processing of mnt building
+		-- finished
+	3. Add submenu hover effect
+		-- finished
+	4. Rebuild mntcheck to handle all class type check 
+		-- finished
+	5. Rebuild mntselected to handle all selected related worked
+		-- finished
+---
+	## 2023.04.28		version 0.5.6.2
+	-- Bug fix
+	# Fixed
+	1. Fix the incorrect check in mntfunc jump function
+		-- finished
+	2. Fix the incorrect behavior of expanding function
+		-- finished
+---
+	## 2023.04.27		version 0.5.6.1
+	-- Bug fix
+	# Fixed
+	1. Auto detect essential folders existence
+		-- finished
+	2. Fix the error in mntmain when no data 
+		-- finished
+	3. Fix the unable to open database bug	
+		-- finished
+---
+	## 2023.04.26		version 0.5.6
+	-- Bug fix
+	-- Clear wasted codes
+	# Fixed
+	1. Submenu now can correctly positioning
+		-- finished
+	2. Fix the bug that when contextmenu is too low, submenu sink into page bottom
+		-- finished
+	3. Fix the submenu is existed after contextmenu is off.
+		-- finished
+---
+	## 2023.04.25		version 0.5.5.3
+	-- Bug fix
+	# Fixed
+	1. Fix the false position value
+		-- finished
+	2. Fix the contextmenu overflow out of page
+		-- finished
+	3. Fix the submenu status is inherit to next contextmenu
+		-- finished
+	4. Fix position is not worked at first click
+		-- finished
+---
+	## 2023.04.25		version 0.5.5.2
+	-- Submenu function
+	# Added
+	1. Add multiple layers to contextMenu
+		-- finished
+	# Bugged
+	1. Submenu position is incorrect
+	
+---
+	## 2023.04.24		version 0.5.5.1
+	-- Rewrite function
+	-- Improve contextMenu positioning accuracy
+	-- Style change
+	# Changed
+	1. Rewrite function in delegation way
+		1.1 mntmenu
+		-- finished
+	2. Improve positioning accuracy of contextMenu in mnt
+		-- finished
+---
+	## 2023.04.20		version 0.5.5
+	-- Bug fix
+	-- Rewrite function
+	# Fixed
+	1. Fix the bug that mntfunc run before mntmain over
+		-- finished
+	2. Fix the bug that drop cannot trigger highlight remove
+		-- finished
+	# Changed
+	1. Rewrite function in delegation way
+		1.1 mntfunc data function
+		1.2 mntfunc folder function
+		1.3 mntstyle
+		1.4 mntfold
+		-- finished
+---
+	## 2023.04.19		version 0.5.4.1
+	-- Funcction iplementation
+	-- Bug fix
+	-- Code rewrite
+	-- Remove wasted codes
+	# Fixed
+	1. Fix smooth effect missing bug
+		-- finished
+	2. Fix monitored data highlight effect last permanently
+		-- finished
+	# Added
+	1. Add expand check in dragging function to prevent collapsing
+		-- finished
+	# Changed
+	1. Rewrite some codes from flexible to fixed due to css poor behaviour
+		-- finished
+---
+	## 2023.04.18		version 0.5.4
+	-- Function re-import
+	# Added
+	1. Fix the dragenter and dragleave bug and re-import resize function
+		-- finished
+	2. Add smooth expansion and collapsing animation to monitored groups
+		-- finished
+		
+---
+	## 2023.04.17		version 0.5.3.3
+	-- Bug fix
+	-- Style change
+	# Fixed
+	1. Fix the bug that monitored path is highlighted after dropping
+		-- finished
+	2. Fix the bug that all objects in a monitored groups are merged
+		-- finished
+	# Changed
+	1. When hovering, the header of monitored groups would be highlighted
+		-- finished
 ---
 	## 2023.04.14		version 0.5.3.2
 	-- Bug fix

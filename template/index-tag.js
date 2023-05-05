@@ -5,12 +5,14 @@ let isMonitored = false
 	// Main: Tag add
 const tagmain = (name) =>{
 	document.getElementById('tag-write').addEventListener('click', async()=>{
+		console.log('aa')
 		const taginput 	= document.getElementById('tag-input').value
-		const tagpath = fsgetPath()
+		const tagpath 	= fsgetPath()
 		const name 		= document.getElementById('ux-selected').innerHTML
 		if (taginput == ''){
 			const inputError = await window.tag.error('taginput')
 		}else{		
+		// Link to Monitor System 
 			const isMonitored = await window.tag.main(name,taginput,tagpath)
 			if(!isMonitored){
 				mntmain()
@@ -87,7 +89,7 @@ const tagmatch = async()=>{
 	})
 		// Main match function
 	tagsearchbar.addEventListener('input',async()=>{
-		const evt = new Event('click')
+		//const evt = new Event('click')
 		const input = tagsearchbar.value
 		const matchBlock = []
 		const tagset = await tag.match(input)
@@ -241,7 +243,7 @@ const tagsearch = ()=>{
 	}
 	tagbtn.addEventListener('click', async()=>{
 		searchBlock = []
-		const evt = new Event('click')
+		//const evt = new Event('click')
 		const input = taginput.value
 		tagset = await tag.query(input,'tagref','tagref')
 		const fileset = await tag.query(input,'nameref','nameref',false)
