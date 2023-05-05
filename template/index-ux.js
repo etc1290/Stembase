@@ -199,7 +199,7 @@ const uxContextMenuCreate = ()=>{
 				for(let i=0;i<classArr.length;i++){
 					try{
 						mainRule[classArr[i] + '']()
-					}catch(err){console.log(classArr[i])}				
+					}catch(err){}				
 				}			
 			}
 			try{

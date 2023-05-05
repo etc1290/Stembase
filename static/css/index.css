@@ -2,6 +2,7 @@
 #fs-path{
 	height:			5vh;
 	display:		flex;
+	align-items:	flex-end;
 }
 #main-function{
 	height:			90vh;

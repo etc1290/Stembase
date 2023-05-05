@@ -7,6 +7,7 @@
 	-- Implement function
 	-- Remove wasted code
 	-- Bug fix
+	-- Style Change
 	# Added
 	1. Implement custom class reader for more flexible class-based function executer
 		-- finished
@@ -16,6 +17,10 @@
 	1. Rewrite event to customevent to handle complicated data 
 		-- finished
 	2. Add more details in mnt for more complete condition
+		-- finished
+	3. Remove fs-info because it is no longer need
+		-- finished
+	4. Arrange fs-path to the bottom by flexbox
 		-- finished
 	# Fixed
 	1. Fix the bug that all submenu functions of contextmenu are passive
