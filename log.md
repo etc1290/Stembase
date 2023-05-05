@@ -5,8 +5,11 @@
 	## 2023.05.05		version 0.5.9
 	-- Rewrite function
 	-- Implement function
+	-- Remove wasted code
 	# Added
 	1. Implement custom class reader for more flexible class-based function executer
+		-- finished
+	2. Apply hiding controll in contextmenu function
 		-- finished
 	# Changed
 	1. Rewrite event to customevent to handle complicated data 

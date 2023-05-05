@@ -175,28 +175,14 @@ const uxContextMenuCreate = ()=>{
 			}
 			// Hide table
 			hideRule['mnt'] = ()=>{
-				/*
-				const mainRule = []
-				console.log(event.target.className)
-					const subRule = []
-					subRule['mnt-main'] = ()=>{
-						const hideOpt = document.getElementById('mnt-removemenu-remove')
-						hideOpt.classList.add('hide')
-					}
-					const group = event.target.closest('.mnt-folder')
-		
-					subRule[group.id]()
-				*/
 				mainRule['mnt-folder-header'] = ()=>{
 					hideOpt[0] = document.getElementById('mnt-datacm')
-					console.log('header')
 				}
 				mainRule['mnt-data'] = ()=>{
 					hideOpt[0] = document.getElementById('mnt-headercm')
 					const subRule = []
 					subRule['mnt-main'] = ()=>{
-						hideOpt[1] = document.getElementById('mnt-cm-remove')
-						console.log('sub')						
+						hideOpt[1] = document.getElementById('mnt-cm-remove')						
 					}
 					try{
 						const group = event.target.closest('.mnt-folder')
@@ -215,7 +201,7 @@ const uxContextMenuCreate = ()=>{
 			}catch(err){}
 			mnthide(hideOpt)
 		}
-		//uxContextMenuOptHide()		
+		uxContextMenuOptHide()		
 	})	
 }	
 // Contextmenu Removal and hide

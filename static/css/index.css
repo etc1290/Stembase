@@ -60,10 +60,10 @@
 .mnt-dropmenu-option:hover{
 	background:		rgb(146,182,200);
 }
-
+/*
 .mnt-dropmenu-option.hide{
 	display:		none;
-}
+}*/
 .mnt-folder{
 	border-bottom:	5px solid rgb(255,238,214);
 	
@@ -228,7 +228,7 @@
 	overflow:		hidden;
 	white-space:	nowrap;
 }
-/*
+
 .hide{
-	visibility:		hidden;
-}*/
+	display:		none;
+}
