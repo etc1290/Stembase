@@ -15,6 +15,8 @@
 	# Changed
 	1. Rewrite event to customevent to handle complicated data 
 		-- finished
+	2. Add more details in mnt for more complete condition
+		-- finished
 	# Fixed
 	1. Fix the bug that all submenu functions of contextmenu are passive
 		-- finished

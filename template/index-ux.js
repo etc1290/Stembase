@@ -163,7 +163,7 @@ const uxContextMenuCreate = ()=>{
 		}
 		uxContextMenuSelect()
 		// Hiding controller
-		const uxContextMenuOptHide = ()=>{
+		const uxContextMenuOptRule = ()=>{
 			const hideRule = mainRule = hideOpt = []
 			const classArr = event.target.className.split(' ')
 			// Hide function
@@ -174,8 +174,13 @@ const uxContextMenuCreate = ()=>{
 			}
 			// Hide table
 			hideRule['mnt'] = ()=>{
+				mainRule['function-section'] = ()=>{
+					hideOpt[0] = document.getElementById('mnt-cm-remove')
+					hideOpt[1] = document.getElementById('mnt-cm-move')
+					hideOpt[2] = document.getElementById('mnt-headercm')
+				}
 				mainRule['mnt-folder-header'] = ()=>{
-					hideOpt[0] = document.getElementById('mnt-datacm')
+					hideOpt[0] = document.getElementById('mnt-datacm')					
 				}
 				mainRule['mnt-data'] = ()=>{
 					hideOpt[0] = document.getElementById('mnt-headercm')
@@ -188,11 +193,13 @@ const uxContextMenuCreate = ()=>{
 						subRule[group.id]()
 					}catch(err){}				
 				}
+				mainRule['mnt-folder-content'] = ()=>{
+					mainRule['function-section']()
+				}
 				for(let i=0;i<classArr.length;i++){
 					try{
-						mntclass = classArr[i]
-						mainRule[mntclass + '']()
-					}catch(err){}				
+						mainRule[classArr[i] + '']()
+					}catch(err){console.log(classArr[i])}				
 				}			
 			}
 			try{
@@ -200,7 +207,7 @@ const uxContextMenuCreate = ()=>{
 			}catch(err){}
 			mnthide(hideOpt)
 		}
-		uxContextMenuOptHide()		
+		uxContextMenuOptRule()		
 	})	
 }	
 // Contextmenu Removal and hide
