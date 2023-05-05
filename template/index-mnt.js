@@ -75,130 +75,7 @@ const mntstyle = (target)=>{
 	}
 }
 
-// Side:	Context menu of monitored data
-/*
-const mntmenu = (target)=>{
-	// Positioner
-	const contextMenu = document.getElementById('mnt-cm')
-	const menuPositioner = (event,isSub = false)=>{
-		
-		const winX = document.body.clientWidth
-		const winY = document.body.clientHeight
-		const menuX = contextMenu.offsetWidth
-		const menuY = contextMenu.offsetHeight
-		const secMargin = 5
-		let posLeft = posTop = overflowLimX = overflowLimY = ''
-		// Submenu
-		if(isSub){
-			const menuName = event.currentTarget.id + 'menu'
-			const dropMenu = document.getElementById(menuName)
-			const subX = 150
-			const subY = dropMenu.childElementCount*31
-			const upAdjustment = 30
-			const downAdjustment = 10
-			const cmPos = contextMenu.getBoundingClientRect()
-			const optPos = event.currentTarget.getBoundingClientRect()
-			const optionLeft = cmPos.left
-			const optionRight = cmPos.right
-			const optionTop = optPos.top
-			const optionBottom = optPos.bottom
-			overflowLimX = optionRight + subX + secMargin
-			overflowLimY = optionTop + subY + secMargin
-			if(overflowLimX >= winX && overflowLimY >= winY){
-				posLeft = optionLeft - subX + 'px'
-				posTop = optionBottom - subY + downAdjustment + 'px'
-				
-			}else if(overflowLimX >= winX){
-				posLeft = optionLeft - subX + 'px'
-				posTop = optionTop + upAdjustment + 'px'
-				
-			}else if(overflowLimY >= winY){
-				posLeft = optionRight + 'px'
-				posTop = optionBottom - subY + downAdjustment + 'px'
-				
-			}else{
-				posLeft = optionRight + 'px'
-				posTop = optionTop + upAdjustment + 'px'
-				
-			}
-		// Mainmenu
-		}else{
-			const {clientX : mouseX, clientY: mouseY} = event
-			overflowLimX = mouseX + menuX + secMargin
-			overflowLimY = mouseY + menuY + secMargin
-			if(overflowLimX >= winX && overflowLimY >=winY){
-				posLeft = mouseX - menuX - secMargin + 'px'
-				posTop = mouseY - menuY - secMargin + 'px'
-			}else if(overflowLimX >= winX){
-				posLeft = mouseX - menuX - secMargin + 'px'
-				posTop = mouseY + secMargin + 'px'
-			}else if(overflowLimY >= winY){
-				posLeft = mouseX + secMargin + 'px'
-				posTop = mouseY - menuY - secMargin + 'px'
-			}else{
-				posLeft = mouseX + secMargin + 'px'
-				posTop = mouseY + secMargin + 'px'
-				
-			}
-		}	
-		return [posLeft,posTop]
-	}
-	// Main menu
-	for(let i=0;i<target.length;i++){
-		const el=target[i]
-		el.addEventListener('contextmenu',(event)=>{
-			// Select contextmenu target
-			mntselected(event)
-			
-			// Customized display
-		
-			if(event.currentTarget.id == 'mnt-main'){
-				console.log('work')
-				const hideOpt = document.getElementById('mnt-removemenu-remove')
-				hideOpt.classList.add('hide')
-			}
-			// Main function
-			event.preventDefault()
-			const [posLeft,posTop] = menuPositioner(event)
-			contextMenu.style.left = posLeft
-			contextMenu.style.top = posTop
-			contextMenu.classList.add('visible')
-		})
-	}
-	// Side menu
-	const submenu = document.querySelectorAll('.mnt-cm-submenu')
-	const dropmenu= document.querySelectorAll('.mnt-cm-dropmenu')
-	for(let i=0;i<submenu.length;i++){
-		const el = submenu[i]
-		const subel = dropmenu[i]
-		el.addEventListener('click',(event)=>{
-			const prevMenu = document.querySelector('.mnt-cm-dropmenu.visible')
-			if(prevMenu){
-				prevMenu.classList.remove('visible')
-			}
-			const [posLeft,posTop] = menuPositioner(event,true)
-			subel.style.left = posLeft
-			subel.style.top = posTop
-			subel.classList.add('visible')
-		})
-	}
-	// test: Should be removed after all context related function is completed
-	
-	const page = document.body
-	page.addEventListener('contextmenu',(event)=>{
-		event.preventDefault()
-		const prevMenu = document.querySelector('.mnt-cm-dropmenu.visible')
-		if(prevMenu){
-			prevMenu.classList.remove('visible')
-		}
-		const [posLeft,posTop] = menuPositioner(event)
-		contextMenu.style.left = posLeft
-		contextMenu.style.top = posTop
-		contextMenu.classList.add('visible')
-	})
-	
-}	*/
-//Side:		Monitored group loader
+// Side:		Monitored group loader
 const mntgroupwrite = async(target,isLoaded=true) =>{
 	if(isLoaded){
 		isLoaded = target.querySelector('.mnt-data')
@@ -300,8 +177,12 @@ const mntfunc = (target)=>{
 // Side:	Contextmenu function
 const mntmenufunc = async()=>{
 	// Create new monitored group
-	document.getElementById('mnt-cm-new').addEventListener('mousedown',()=>{
-		console.log('create folders')
+	document.getElementById('mnt-cm-new').addEventListener('mousedown',async()=>{
+		const isCreate = await window.mnt.create()		
+		if(isCreate){
+			console.log('active')			
+			//const isReady = await mntgroupwrite(group,false)
+		}
 	})
 	// Add this member to Shortcut
 	document.getElementById('mnt-movemenu-shortcut').addEventListener('mousedown',()=>{
@@ -313,7 +194,6 @@ const mntmenufunc = async()=>{
 	})
 	// Remove member from this monitored group
 	document.getElementById('mnt-removemenu-remove').addEventListener('mousedown',async()=>{
-		console.log('remove function')
 		const dataset = document.querySelectorAll('.mnt-selected')
 		const data = []
 		for(var i=0;i<dataset.length;i++){
@@ -345,11 +225,6 @@ const mntmain = async()=>{
 	}
 	updateDiv.innerHTML = mntdata.join('')
 	mntspan(updateDiv)
-		/*
-		const mntexpand = document.querySelectorAll('.mnt-folder.visible')
-		for(var i=0;i<mntexpand.length;i++){
-			mntexpand[i].style.height = mntexpand[i].childElementCount*21 + 31 + 'px'
-		}*/	
 	return true
 }
 

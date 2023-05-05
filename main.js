@@ -1,7 +1,7 @@
 const { app, BrowserWindow, ipcMain, dialog, session } = require('electron')
 const path = require('path')
 const fs = require('fs')
-const glob = require('glob')
+//const glob = require('glob')
 const env = require('./static/js/env.js')
 const Stemdb= env('StemdbDir')
 const sqlite3 = require('sqlite3').verbose()
@@ -98,8 +98,14 @@ const init = () =>{
 	firstBuild()
 	dbBuild()
 	const Taskmanager = () =>{
+		/*
 		const funcScript = glob.sync(env('StaticDir') + '/js/*.js')
-		funcScript.forEach((i) =>{require(i)})
+		funcScript.forEach((i) =>{require(i)})*/
+		const scriptDir = env('StaticDir') + 'js/'
+		const filelist = fs.readdirSync(scriptDir)
+		for(var i=0;i<filelist.length;i++){
+			require(scriptDir + filelist[i])
+		}
 	}
 	Taskmanager() 
 	app.whenReady().then(() => {

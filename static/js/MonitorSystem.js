@@ -61,6 +61,14 @@ ipcMain.handle('mnt-remove',(event,folder,dataset)=>{
 	})
 	return output
 })
+// Create new monitored group
+ipcMain.handle('mnt-create',(event)=>{
+	const output = new Promise((resolve)=>{
+		const filelist = fs.readdirSync(mdbStorage)	
+		resolve(true)
+	})
+	return output
+})
 // Update monitored group members
 ipcMain.handle('mnt-update',(event,folder,name)=>{
 	const output = new Promise((resolve)=>{
@@ -83,3 +91,4 @@ ipcMain.handle('mnt-update',(event,folder,name)=>{
 	})
 	return output
 })
+

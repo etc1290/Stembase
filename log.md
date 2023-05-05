@@ -8,6 +8,7 @@
 	-- Remove wasted code
 	-- Bug fix
 	-- Style Change
+	-- Remove dependency
 	# Added
 	1. Implement custom class reader for more flexible class-based function executer
 		-- finished
@@ -22,9 +23,14 @@
 		-- finished
 	4. Arrange fs-path to the bottom by flexbox
 		-- finished
+	5. Remove the dependency of glob module
+		-- finished
 	# Fixed
 	1. Fix the bug that all submenu functions of contextmenu are passive
 		-- finished
+	# Bugged
+	1. Found bug that drag same data to group may cause duplicate expand
+		-- processing
 ---
 	## 2023.05.04		version 0.5.8.1
 	-- Rewrite function
