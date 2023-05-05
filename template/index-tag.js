@@ -146,7 +146,7 @@ const tagLabelfunc = ()=>{
 		
 	}
 }
-	//Side: Truncate the display path
+	//Side: Truncate the display path this is not applied in anywhere now
 const Truncation = (path)=>{
 	const maxLen = 20
 	const bricks = path.split('\\')

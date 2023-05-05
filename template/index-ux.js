@@ -169,7 +169,6 @@ const uxContextMenuCreate = ()=>{
 			// Hide function
 			const mnthide = (e)=>{
 				for(var i=0;i<e.length;i++){
-					console.log(e[i])
 					e[i].classList.add('hide')
 				}
 			}
@@ -232,7 +231,7 @@ const uxContextMenuRemove = ()=>{
 		event.target.dispatchEvent(evt)
 		
 	})
-	body.addEventListener('mousedown',()=>{
+	body.addEventListener('mouseup',()=>{
 		mainfunc()	
 	})
 	

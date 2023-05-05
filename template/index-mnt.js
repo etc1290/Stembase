@@ -300,15 +300,20 @@ const mntfunc = (target)=>{
 // Side:	Contextmenu function
 const mntmenufunc = async()=>{
 	// Create new monitored group
-	document.getElementById('mnt-cm-new').addEventListener('click',()=>{
+	document.getElementById('mnt-cm-new').addEventListener('mousedown',()=>{
 		console.log('create folders')
 	})
 	// Add this member to Shortcut
-	document.getElementById('mnt-movemenu-shortcut').addEventListener('click',()=>{
+	document.getElementById('mnt-movemenu-shortcut').addEventListener('mousedown',()=>{
 		console.log('add this to shorcut')
 	})
+	// Delete all tags and meta and remove monitored status of this member
+	document.getElementById('mnt-removemenu-delete').addEventListener('mousedown',()=>{
+		console.log('delete function')
+	})
 	// Remove member from this monitored group
-	document.getElementById('mnt-removemenu-remove').addEventListener('click',async()=>{
+	document.getElementById('mnt-removemenu-remove').addEventListener('mousedown',async()=>{
+		console.log('remove function')
 		const dataset = document.querySelectorAll('.mnt-selected')
 		const data = []
 		for(var i=0;i<dataset.length;i++){
@@ -322,6 +327,7 @@ const mntmenufunc = async()=>{
 			const isReady = await mntgroupwrite(group,false)
 		}
 	})
+	
 }
 
 

@@ -6,6 +6,7 @@
 	-- Rewrite function
 	-- Implement function
 	-- Remove wasted code
+	-- Bug fix
 	# Added
 	1. Implement custom class reader for more flexible class-based function executer
 		-- finished
@@ -13,6 +14,9 @@
 		-- finished
 	# Changed
 	1. Rewrite event to customevent to handle complicated data 
+		-- finished
+	# Fixed
+	1. Fix the bug that all submenu functions of contextmenu are passive
 		-- finished
 ---
 	## 2023.05.04		version 0.5.8.1
