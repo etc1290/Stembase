@@ -122,8 +122,11 @@
 }
 .fs-data{
 	width:			50%;
-	text-align:		left;
-	display:		inline-block;	
+	text-align:		left;	
+	text-overflow: 	ellipsis;
+	overflow-x: 	hidden;
+    /* overflow-y: 	visible; */
+	white-space: 	nowrap;
 	padding:		15px;
 }
 .fs-data:hover{
@@ -133,6 +136,7 @@
 /* Columbia Blue */
 .fs-data-label{
 	width:			532px;
+	overflow-y: 	visible;
 }
 .fs-data-label:hover{
 	background:		rgb(211,229,238);

@@ -290,7 +290,7 @@
 
 .hint--bottom-left:before, .hint--bottom-left:after {
   top: 100%;
-  left: 50%; }
+  left: 70%; }
 
 .hint--bottom-left:before {
   left: calc(50% - 6px); }
