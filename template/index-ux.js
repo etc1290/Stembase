@@ -56,7 +56,7 @@ const uxContextMenuCreate = ()=>{
 				posTop = optionTop + upAdjustment + 'px'
 				
 			}
-		// Mainmenu
+		// Main menu
 		}else{
 			const {clientX : mouseX, clientY: mouseY} = event
 			overflowLimX = mouseX + menuX + secMargin
@@ -73,7 +73,6 @@ const uxContextMenuCreate = ()=>{
 			}else{
 				posLeft = mouseX + secMargin + 'px'
 				posTop = mouseY + secMargin + 'px'
-				
 			}
 		}	
 		return [posLeft,posTop]
@@ -143,14 +142,13 @@ const uxContextMenuCreate = ()=>{
 	const page = document.body
 	page.addEventListener('passcheck',(event)=>{
 		event.preventDefault()
-		console.log(event.target)
 		// Display contextmenu
 		const funcSection = event.target.closest('.function-section')
 		const contextMenu = funcSection.querySelector('.context-menu')
 		if(!contextMenu){
 			return false
 		}
-		const [posLeft,posTop] = menuPositioner(event)
+		const [posLeft,posTop] = menuPositioner(event.detail.data)
 		contextMenu.style.left = posLeft
 		contextMenu.style.top = posTop
 		contextMenu.classList.add('visible')
@@ -166,25 +164,59 @@ const uxContextMenuCreate = ()=>{
 		uxContextMenuSelect()
 		// Hiding controller
 		const uxContextMenuOptHide = ()=>{
-			const hideRule = []
-			hideRule['mnt'] = ()=>{
-				const subRule = []
-				subRule['mnt-main'] = ()=>{
-					const hideOpt = document.getElementById('mnt-removemenu-remove')
-					hideOpt.classList.add('hide')
+			const hideRule = mainRule = hideOpt = []
+			const classArr = event.target.className.split(' ')
+			// Hide function
+			const mnthide = (e)=>{
+				for(var i=0;i<e.length;i++){
+					console.log(e[i])
+					e[i].classList.add('hide')
 				}
-				const group = event.target.closest('.mnt-folder')
+			}
+			// Hide table
+			hideRule['mnt'] = ()=>{
+				/*
+				const mainRule = []
+				console.log(event.target.className)
+					const subRule = []
+					subRule['mnt-main'] = ()=>{
+						const hideOpt = document.getElementById('mnt-removemenu-remove')
+						hideOpt.classList.add('hide')
+					}
+					const group = event.target.closest('.mnt-folder')
 		
-				subRule[group.id]()
+					subRule[group.id]()
+				*/
+				mainRule['mnt-folder-header'] = ()=>{
+					hideOpt[0] = document.getElementById('mnt-datacm')
+					console.log('header')
+				}
+				mainRule['mnt-data'] = ()=>{
+					hideOpt[0] = document.getElementById('mnt-headercm')
+					const subRule = []
+					subRule['mnt-main'] = ()=>{
+						hideOpt[1] = document.getElementById('mnt-cm-remove')
+						console.log('sub')						
+					}
+					try{
+						const group = event.target.closest('.mnt-folder')
+						subRule[group.id]()
+					}catch(err){}				
+				}
+				for(let i=0;i<classArr.length;i++){
+					try{
+						mntclass = classArr[i]
+						mainRule[mntclass + '']()
+					}catch(err){}				
+				}			
 			}
 			try{
 				hideRule[funcSection.id]()
 			}catch(err){}
+			mnthide(hideOpt)
 		}
-		uxContextMenuOptHide()
-		
-	})
-	
+		//uxContextMenuOptHide()		
+	})	
 }	
 // Contextmenu Removal and hide
 const uxContextMenuRemove = ()=>{
@@ -197,10 +229,7 @@ const uxContextMenuRemove = ()=>{
 				for(var i=0;i<vsbMenu.length;i++){
 					vsbMenu[i].classList.remove('visible')				
 				}
-			}/*
-			for(var i=0;i<vsbSubMenu.length;i++){
-				vsbSubMenu[i].classList.remove('visible')
-			}*/
+			}
 			for(var i=0;i<hideOpt.length;i++){
 				hideOpt[i].classList.remove('hide')
 			}			
@@ -209,11 +238,11 @@ const uxContextMenuRemove = ()=>{
 				vsbSubMenu[i].classList.remove('visible')
 			}
 	}
-	const body = document.querySelector('body')
+	const body = document.body
 	body.addEventListener('contextmenu',(event)=>{
 		event.preventDefault()
 		mainfunc(true) 
-		const evt = new Event('passcheck',{'bubbles':true})
+		const evt = new CustomEvent('passcheck',{detail:{data:event},bubbles:true})
 		event.target.dispatchEvent(evt)
 		
 	})

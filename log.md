@@ -2,6 +2,16 @@
  File tagging system
 
 ---
+	## 2023.05.05		version 0.5.9
+	-- Rewrite function
+	-- Implement function
+	# Added
+	1. Implement custom class reader for more flexible class-based function executer
+		-- finished
+	# Changed
+	1. Rewrite event to customevent to handle complicated data 
+		-- finished
+---
 	## 2023.05.04		version 0.5.8.1
 	-- Rewrite function
 	# Changed

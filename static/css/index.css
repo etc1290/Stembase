@@ -60,6 +60,7 @@
 .mnt-dropmenu-option:hover{
 	background:		rgb(146,182,200);
 }
+
 .mnt-dropmenu-option.hide{
 	display:		none;
 }
@@ -227,3 +228,7 @@
 	overflow:		hidden;
 	white-space:	nowrap;
 }
+/*
+.hide{
+	visibility:		hidden;
+}*/
