@@ -44,6 +44,7 @@ contextBridge.exposeInMainWorld('mnt', {
 	load:		(i)			=> ipcRenderer.invoke('mnt-load',i),
 	remove:		(i,j)		=> ipcRenderer.invoke('mnt-remove',i,j),
 	create:		()			=> ipcRenderer.invoke('mnt-create'),
+	group:		()			=> ipcRenderer.invoke('mnt-group'),
 	update:		(i,j)		=> ipcRenderer.invoke('mnt-update',i,j)
 
 })

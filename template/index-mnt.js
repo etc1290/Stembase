@@ -210,7 +210,23 @@ const mntmenufunc = async()=>{
 	
 }
 
-
+// Side:	Load all monitored group
+const mntgroup = async()=>{
+	
+	const updateDiv = document.getElementById('mnt-group-display')
+	const grouplist = await window.mnt.group()
+	console.log(grouplist)
+	const mntdata = []
+	for(var i=0;i<grouplist.length;i++){
+		const header = `<p class='mnt-folder-header'>` + grouplist[i] + `</p>`
+		const content= `<div class='mnt-folder-content'></div>`
+		const folder = `<div class='mnt-folder mnt-dropzone mnt-subfolder'>` + header + content + `</div>`
+		mntdata[i] = folder
+	}
+	updateDiv.innerHTML = mntdata.join('')
+	mntspan(updateDiv)
+	return true
+}
 // Main:	Load all monitored data
 const mntmain = async()=>{
 	const mntdata = []
@@ -238,8 +254,9 @@ const mntshortcut = () =>{
 //Side:		Initial page structure
 const mntbuild = ()=>{
 	const mainStatus = mntmain()
+	const groupStatus = mntgroup()
 	const shortcutStatus = mntshortcut()
-	if(mainStatus && shortcutStatus){
+	if(mainStatus && shortcutStatus && groupStatus){
 		return true
 	}
 }

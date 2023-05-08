@@ -7,6 +7,8 @@
 	# Added
 	1. Add create group function
 		-- finished
+	2. Add custom group loading function
+		-- finished
 ---
 	## 2023.05.05		version 0.5.9
 	-- Rewrite function

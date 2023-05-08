@@ -89,6 +89,25 @@ ipcMain.handle('mnt-create',(event)=>{
 	})
 	return output
 })
+// Load monitored groups
+ipcMain.handle('mnt-group',(event)=>{
+	const output = new Promise((resolve)=>{
+		const filelist = fs.readdirSync(mdbStorage)
+		const grouplist = filelist.filter((e)=>{return e.endsWith('.db')})
+		const idlist = []
+		//const cmd = 'PRAGMA intergrity_check'
+		
+		for(let i=0;i<grouplist.length;i++){
+			const s = grouplist[i]
+			const groupid = s.substring(0,s.lastIndexOf('.'))
+			if(groupid!=='All' && groupid!=='Shortcut'){
+				idlist[idlist.length] = groupid
+			}			
+		}
+		resolve(idlist)
+	})
+	return output
+})
 // Update monitored group members
 ipcMain.handle('mnt-update',(event,folder,name)=>{
 	const output = new Promise((resolve)=>{
