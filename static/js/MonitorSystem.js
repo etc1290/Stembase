@@ -63,6 +63,28 @@ ipcMain.handle('mnt-remove',(event,folder,dataset)=>{
 ipcMain.handle('mnt-create',(event)=>{
 	const output = new Promise((resolve)=>{
 		const filelist = fs.readdirSync(mdbStorage)	
+		const grouplist = filelist.filter((e)=>{return e.startsWith('New Group #')})
+		const idlist =[]
+		let newid = false
+		// Duplicate group check
+		for(let i=0;i<grouplist.length;i++){
+			const s = grouplist[i]
+			const groupid = s.substring(s.indexOf('#')+1,s.lastIndexOf('.'))
+			const number = Number(groupid)
+			if(!Number.isNaN(number)){
+				idlist[i] = number
+			}
+		}
+		for(var i=0;i<idlist.length;i++){
+			if(idlist.indexOf(i+1)==-1){
+				newid=i+1
+			}
+		}
+		if(!newid){
+			newid = idlist.length + 1
+		}
+		const newname = 'New Group #' + newid
+		const mdb = mdbLoader(newname)
 		resolve(true)
 	})
 	return output

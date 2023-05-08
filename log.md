@@ -2,6 +2,12 @@
  File tagging system
 
 ---
+	## 2023.05.08		version 0.6.0
+	-- Implement function
+	# Added
+	1. Add create group function
+		-- finished
+---
 	## 2023.05.05		version 0.5.9
 	-- Rewrite function
 	-- Implement function
