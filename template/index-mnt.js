@@ -20,6 +20,7 @@ const mntselected = (event)=>{
 }
 // Side:	Monitored group collapse and expand
 const mntfold = (target)=>{
+	/*
 	for(let i=0;i<target.length;i++){
 		const el = target[i]
 		el.addEventListener('click',(event)=>{
@@ -38,6 +39,22 @@ const mntfold = (target)=>{
 			}
 		})
 	}
+	*/
+	document.body.addEventListener('click',(event)=>{
+		const isHeader = mntcheck(event,'mnt-folder-header')
+		if(isHeader){
+			const content = event.target.nextElementSibling
+			console.log(content)
+			const isExpand = content.classList.contains('mnt-expanding')
+			if(isExpand){
+				content.style.height = ''
+				content.classList.remove('mnt-expanding')
+			}else{
+				content.style.height = content.childElementCount*21 + 31 +'px'
+				content.classList.add('mnt-expanding')
+			}
+		}
+	})
 
 }
 // Side:	Monitored group span adjustment

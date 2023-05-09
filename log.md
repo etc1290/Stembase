@@ -2,6 +2,13 @@
  File tagging system
 
 ---
+	## 2023.05.09		version 0.6.0.1
+	-- Rewrite function
+	# Changed
+	1. Rewrite mntfold in a delegation way
+		-- finished
+		
+---
 	## 2023.05.08		version 0.6.0
 	-- Implement function
 	# Added
