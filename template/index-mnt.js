@@ -19,32 +19,11 @@ const mntselected = (event)=>{
 	}
 }
 // Side:	Monitored group collapse and expand
-const mntfold = (target)=>{
-	/*
-	for(let i=0;i<target.length;i++){
-		const el = target[i]
-		el.addEventListener('click',(event)=>{
-			const header = event.currentTarget.querySelector('.mnt-folder-header')
-			const content = event.currentTarget.querySelector('.mnt-folder-content')
-			const isExpand = content.classList.contains('mnt-expanding')
-			const isHeader = event.target == header
-			if(isHeader){
-				if(isExpand){
-					content.style.height = ''
-					content.classList.remove('mnt-expanding')
-				}else{
-					content.style.height = content.childElementCount*21 + 31 + 'px'
-					content.classList.add('mnt-expanding')
-				}
-			}
-		})
-	}
-	*/
+const mntfold = ()=>{
 	document.body.addEventListener('click',(event)=>{
 		const isHeader = mntcheck(event,'mnt-folder-header')
 		if(isHeader){
 			const content = event.target.nextElementSibling
-			console.log(content)
 			const isExpand = content.classList.contains('mnt-expanding')
 			if(isExpand){
 				content.style.height = ''
@@ -69,6 +48,7 @@ const mntspan = (content) =>{
 }
 // Side:	The Style of Monitored system
 const mntstyle = (target)=>{
+	
 	for(let i=0;i<target.length;i++){
 		const el = target[i]
 		el.addEventListener('mouseenter',(event)=>{
@@ -232,7 +212,6 @@ const mntgroup = async()=>{
 	
 	const updateDiv = document.getElementById('mnt-group-display')
 	const grouplist = await window.mnt.group()
-	console.log(grouplist)
 	const mntdata = []
 	for(var i=0;i<grouplist.length;i++){
 		const header = `<p class='mnt-folder-header'>` + grouplist[i] + `</p>`
@@ -242,6 +221,8 @@ const mntgroup = async()=>{
 	}
 	updateDiv.innerHTML = mntdata.join('')
 	mntspan(updateDiv)
+	const group = updateDiv.querySelectorAll('.mnt-subfolder')
+	mntApplier(group)
 	return true
 }
 // Main:	Load all monitored data
@@ -279,14 +260,14 @@ const mntbuild = ()=>{
 }
 //Initailizer
 const mntApplier = (target)=>{
-	mntfunc(target)
-	mntfold(target)
+	mntfunc(target)	
 	mntstyle(target)
 	//mntmenu(target)
 }
 const mntInit = ()=>{
 	const isReady = mntbuild()
 	if(isReady){
+		mntfold()
 		const mntfolder = document.querySelectorAll('.mnt-folder')
 		mntApplier(mntfolder)
 		mntmenufunc()

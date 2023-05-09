@@ -3,7 +3,12 @@
 
 ---
 	## 2023.05.09		version 0.6.0.1
+	-- Function implementation
 	-- Rewrite function
+	-- Remove wasted codes
+	# Added
+	1. Apply basic function at subgroup
+		-- finished
 	# Changed
 	1. Rewrite mntfold in a delegation way
 		-- finished
