@@ -144,27 +144,49 @@ const mntfunc = (target)=>{
 				const dropid = event.dataTransfer.getData('text/plain')
 				const dropdata = document.getElementById(dropid)
 				const isClone = dropdata.parentNode.parentNode.classList.contains('mnt-dropzone')
-				
-				const content = event.currentTarget.querySelector('.mnt-folder-content')
+				const folder = event.target.closest('.mnt-folder')			
+				const content = folder.children[1]
+				const header = folder.children[0]
 				
 				// Monitored group update
 				const dropzoneid = event.currentTarget.id
-				const header = document.querySelector('#' + dropzoneid + ' .mnt-folder-header')				
-				const isExist = await window.mnt.update(header.innerHTML,dropdata.innerHTML)
+				//const header = document.querySelector('#' + dropzoneid + ' .mnt-folder-header')				
+				//const header = folder.querySelector('.mnt-folder-header')
+				let isExist = true
+				if(header.innerHTML!=='Groups'){
+					isExist = await window.mnt.update(header.innerHTML,dropdata.innerHTML)
+				}
+				//const isExist = await window.mnt.update(header.innerHTML,dropdata.innerHTML)
 				if(!isClone && !isExist){
 					const dropclone = dropdata.cloneNode(true)
 					dropdata.parentNode.insertBefore(dropclone,dropdata.nextSibling)
 				}
 				if(!isExist){
-					content.appendChild(dropdata)
-					mntspan(content)
+					const isFolderOnly = folder.classList.contains('folder-only')						
+					if(isFolderOnly){
+						const isFolder = dropdata.classList.contains('mnt-folder')
+						if(isFolder){
+							content.appenchild(dropdata)
+							mntspan(content)
+						}
+					}else{
+						content.appendChild(dropdata)
+						mntspan(content)
+					}
+					
 				}
 			})
 			el.addEventListener('dragenter',mntcancel)
 			el.addEventListener('dragover',mntcancel)
 			el.addEventListener('dragenter',(event)=>{
-				const content = event.currentTarget.querySelector('.mnt-folder-content')
-				if(!counter){
+				//const content = event.currentTarget.querySelector('.mnt-folder-content')
+				const content = event.target.closest('.mnt-folder').children[1]
+				
+				if(!counter){	
+					console.log('enter:' + event.target.closest('.mnt-folder').children[0].innerHTML)
+					//content.classList.add('mnt-expanding-drag')
+					
+					
 					content.style.height = (content.clientHeight + 100) + 'px'
 					counter = 0
 				}
@@ -173,16 +195,20 @@ const mntfunc = (target)=>{
 		
 			el.addEventListener('dragleave',(event)=>{
 				counter--
-				const content = event.currentTarget.querySelector('.mnt-folder-content')
-				if(counter==0){
+				//const content = event.currentTarget.querySelector('.mnt-folder-content')
+				const content = event.target.closest('.mnt-folder').children[1]
 				
+				if(counter==0){		
+					console.log('leave:' + event.target.closest('.mnt-folder').children[0].innerHTML)
 					mntspan(content)
 					counter = false
 				}
 			})
 			el.addEventListener('drop',(event)=>{
 				counter = 0
-				const content = event.currentTarget.querySelector('.mnt-folder-content')
+				//const content = event.currentTarget.querySelector('.mnt-folder-content')
+				const content = event.target.closest('.mnt-folder').children[1]
+				content.classList.remove('mnt-expanding-drag')
 				mntspan(content)
 			})
 		}
