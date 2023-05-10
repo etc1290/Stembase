@@ -22,19 +22,36 @@ const mntselected = (event)=>{
 const mntfold = ()=>{
 	document.body.addEventListener('click',(event)=>{
 		const isHeader = mntcheck(event,'mnt-folder-header')
+		const folder = event.target.parentNode
+		const content = event.target.nextElementSibling
+		let subLen = 0
 		if(isHeader){
-			const content = event.target.nextElementSibling
+			
 			const isExpand = content.classList.contains('mnt-expanding')
+			
+			content.classList.toggle('mnt-expanding')
+			const mainFolder = event.target.closest('.mnt-mainfolder')
+			const mainContent = mainFolder.children[1]
+			const baseLen = mainContent.childElementCount*21 + 31			
+			const subGroup = mainContent.querySelectorAll('.mnt-expanding')
+	
+			if(subGroup){
+				for(let i=0;i<subGroup.length;i++){
+					subLen = subLen + subGroup[i].childElementCount*21 + Boolean(subGroup[i]) * 31 
+				}
+			}
+			const mainLen = baseLen + subLen
+			const isMain = mainFolder == folder
+			if(!isMain){
+				mainContent.style.height = mainLen + 'px'
+			}
 			if(isExpand){
 				content.style.height = ''
-				content.classList.remove('mnt-expanding')
 			}else{
 				content.style.height = content.childElementCount*21 + 31 +'px'
-				content.classList.add('mnt-expanding')
-			}
-		}
+			}	
+		}		
 	})
-
 }
 // Side:	Monitored group span adjustment
 const mntspan = (content) =>{
@@ -216,7 +233,7 @@ const mntgroup = async()=>{
 	for(var i=0;i<grouplist.length;i++){
 		const header = `<p class='mnt-folder-header'>` + grouplist[i] + `</p>`
 		const content= `<div class='mnt-folder-content'></div>`
-		const folder = `<div class='mnt-folder mnt-dropzone mnt-subfolder'>` + header + content + `</div>`
+		const folder = `<div class='mnt-folder mnt-dropzone'>` + header + content + `</div>`
 		mntdata[i] = folder
 	}
 	updateDiv.innerHTML = mntdata.join('')

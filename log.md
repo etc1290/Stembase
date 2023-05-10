@@ -2,6 +2,12 @@
  File tagging system
 
 ---
+	## 2023.05.10		version 0.6.1
+	-- Rewrite function
+	# Added
+	1. Rewrite mntfold to react the case of subgroup
+		-- finished
+---
 	## 2023.05.09		version 0.6.0.1
 	-- Function implementation
 	-- Rewrite function
