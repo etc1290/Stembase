@@ -113,6 +113,7 @@ const mntfunc = (target)=>{
 	for(let i=0;i<target.length;i++){
 		// Jump to monitored path
 		const el = target[i]
+		
 		el.addEventListener('dblclick',(event)=>{
 			if(mntcheck(event,'mnt-data')){
 				floorNum = 'fs-floor-0'
@@ -176,23 +177,39 @@ const mntfunc = (target)=>{
 					
 				}
 			})
+			/*
 			el.addEventListener('dragenter',mntcancel)
 			el.addEventListener('dragover',mntcancel)
+			*/
+			
 			el.addEventListener('dragenter',(event)=>{
 				//const content = event.currentTarget.querySelector('.mnt-folder-content')
 				const content = event.target.closest('.mnt-folder').children[1]
-				
+				const contentList = []
 				if(!counter){	
 					console.log('enter:' + event.target.closest('.mnt-folder').children[0].innerHTML)
 					//content.classList.add('mnt-expanding-drag')
-					
-					
-					content.style.height = (content.clientHeight + 100) + 'px'
+					let node = content
+					if(!content.classList.contains('mnt-expancding-drag')){
+						contentList[0] = content
+					}					
+					while(!node.parentNode.classList.contains('mnt-mainfolder')){
+						node = node.parentNode.parentNode
+						if(!node.classList.contains('mnt-expanding-drag')){
+							contentList.push(node)
+						}								
+					}
+					//content.style.height = (content.clientHeight + 100) + 'px'
+					for(var i=0;i<contentList.length;i++){
+						const c = contentList[i]
+						c.style.height = (c.clientHeight + 100) + 'px'
+						c.classList.add('mnt-expanding-drag')
+					}
 					counter = 0
 				}
 				counter++
 			})
-		
+			
 			el.addEventListener('dragleave',(event)=>{
 				counter--
 				//const content = event.currentTarget.querySelector('.mnt-folder-content')
@@ -204,6 +221,7 @@ const mntfunc = (target)=>{
 					counter = false
 				}
 			})
+			
 			el.addEventListener('drop',(event)=>{
 				counter = 0
 				//const content = event.currentTarget.querySelector('.mnt-folder-content')
@@ -259,11 +277,10 @@ const mntgroup = async()=>{
 	for(var i=0;i<grouplist.length;i++){
 		const header = `<p class='mnt-folder-header'>` + grouplist[i] + `</p>`
 		const content= `<div class='mnt-folder-content'></div>`
-		const folder = `<div class='mnt-folder mnt-dropzone'>` + header + content + `</div>`
+		const folder = `<div class='mnt-folder mnt-dropzone mnt-subfolder'>` + header + content + `</div>`
 		mntdata[i] = folder
 	}
 	updateDiv.innerHTML = mntdata.join('')
-	mntspan(updateDiv)
 	const group = updateDiv.querySelectorAll('.mnt-subfolder')
 	mntApplier(group)
 	return true
@@ -305,13 +322,25 @@ const mntbuild = ()=>{
 const mntApplier = (target)=>{
 	mntfunc(target)	
 	mntstyle(target)
-	//mntmenu(target)
+	for(var i=0;i<target.length;i++){
+		if(target[i].classList.contains('mnt-dropzone')){
+			new mntdrag(target[i])		
+		}
+
+	}
+	
 }
 const mntInit = ()=>{
 	const isReady = mntbuild()
 	if(isReady){
 		mntfold()
 		const mntfolder = document.querySelectorAll('.mnt-folder')
+		document.addEventListener('mntdrag:enter',()=>{
+			console.log('enter:' + event.target.closest('.mnt-folder').children[0].innerHTML)
+		})
+		document.addEventListener('mntdrag:leave',()=>{
+			console.log('leave:' + event.target.closest('.mnt-folder').children[0].innerHTML)
+		})
 		mntApplier(mntfolder)
 		mntmenufunc()
 	}

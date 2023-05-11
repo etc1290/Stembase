@@ -2,6 +2,12 @@
  File tagging system
 
 ---
+	## 2023.05.11		version 0.6.2
+	-- Rewire function
+	# Changed 
+	1. Rewire the original crappy drag and drop to new event listener mntdrag
+		-- finished
+---
 	## 2023.05.10		version 0.6.1
 	-- Rewrite function
 	# Changed

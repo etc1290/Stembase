@@ -13,81 +13,81 @@
 
 <body>
 	<div id='fs-path'></div>
-		<div id='main-function'>
-			<div id='mnt' class='function-section'>
-				<div id='mnt-cm' class='context-menu'>
-					<div id='mnt-datacm'>
-						<p id='mnt-cm-new' class='mnt-cm-option'>New</p>
-						<p id='mnt-cm-move' class='mnt-cm-submenu'>Move</p>				
-						<p id='mnt-cm-remove' class='mnt-cm-submenu'>Remove</p>
-					</div>
-					<div id='mnt-headercm'>
-						<p id='mnt-cm-groupremove' class='mnt-cm-option'>Remove this group</p>
-					</div>					
+	<div id='main-function'>
+		<div id='mnt' class='function-section'>
+			<div id='mnt-cm' class='context-menu'>
+				<div id='mnt-datacm'>
+					<p id='mnt-cm-new' class='mnt-cm-option'>New</p>
+					<p id='mnt-cm-move' class='mnt-cm-submenu'>Move</p>				
+					<p id='mnt-cm-remove' class='mnt-cm-submenu'>Remove</p>
 				</div>
-				<div id='mnt-cm-sub'>
-					<div id='mnt-cm-movemenu' class='mnt-cm-dropmenu submenu'>
-						<p id='mnt-movemenu-shortcut' class='mnt-dropmenu-option'>Add to Shortcut</p>
-					</div>
-					<div id='mnt-cm-removemenu' class='mnt-cm-dropmenu submenu'>
-						<p id='mnt-removemenu-delete' class='mnt-dropmenu-option'>Delete this record</p>
-						<p id='mnt-removemenu-remove' class='mnt-dropmenu-option'>Remove from group</p>
-						<p id='mnt-removemenu-ungroup' class='mnt-dropmenu-option'>Remove grouping</p>
-					</div>
+				<div id='mnt-headercm'>
+					<p id='mnt-cm-groupremove' class='mnt-cm-option'>Remove this group</p>
+				</div>					
+			</div>
+			<div id='mnt-cm-sub'>
+				<div id='mnt-cm-movemenu' class='mnt-cm-dropmenu submenu'>
+					<p id='mnt-movemenu-shortcut' class='mnt-dropmenu-option'>Add to Shortcut</p>
 				</div>
+				<div id='mnt-cm-removemenu' class='mnt-cm-dropmenu submenu'>
+					<p id='mnt-removemenu-delete' class='mnt-dropmenu-option'>Delete this record</p>
+					<p id='mnt-removemenu-remove' class='mnt-dropmenu-option'>Remove from group</p>
+					<p id='mnt-removemenu-ungroup' class='mnt-dropmenu-option'>Remove grouping</p>
+				</div>
+			</div>
 				
-				<div id='mnt-shortcut' class='mnt-folder mnt-dropzone mnt-mainfolder'>
-					<p class='mnt-folder-header'>Shortcut</p> 
-					<div id='mnt-shortcut-display' class='mnt-folder-content'></div>
-				</div>
-				<div id='mnt-group' class='mnt-folder mnt-mainfolder mnt-dropzone folder-only'>
-					<p class='mnt-folder-header'>Groups</p>
-					<div id='mnt-group-display' class='mnt-folder-content'></div>
-				</div>
-				<div id='mnt-main' class='mnt-folder mnt-mainfolder'>
-					<p class='mnt-folder-header'>All</p>
-					<div id='mnt-main-display' class='mnt-folder-content'></div>
-				</div>
+			<div id='mnt-shortcut' class='mnt-folder mnt-dropzone mnt-mainfolder'>
+				<p class='mnt-folder-header'>Shortcut</p> 
+				<div id='mnt-shortcut-display' class='mnt-folder-content'></div>
 			</div>
-			<div id='fs' class='function-section'>
-				<h1 id='fs-info'></h1>	
-				<div id='fs-toolbar'>
-					<button id='fs-up'>Up Level</button>
-				</div>				
-				<div id='fs-main'>
-					<div id='fs-floor-0' class='fs-floor'></div>
-					<div id='fs-floor-1' class='fs-floor'></div>
-					<div id='fs-floor-2' class='fs-floor'></div>
-					<div id='fs-floor-3' class='fs-floor'></div>
-					<div id='fs-floor-4' class='fs-floor'></div>
-				</div>
+			<div id='mnt-group' class='mnt-folder mnt-mainfolder mnt-dropzone folder-only'>
+				<p class='mnt-folder-header'>Groups</p>
+				<div id='mnt-group-display' class='mnt-folder-content'></div>
+			</div>
+			<div id='mnt-main' class='mnt-folder mnt-mainfolder'>
+				<p class='mnt-folder-header'>All</p>
+				<div id='mnt-main-display' class='mnt-folder-content'></div>
+			</div>
+		</div>
+		<div id='fs' class='function-section'>
+			<h1 id='fs-info'></h1>	
+			<div id='fs-toolbar'>
+				<button id='fs-up'>Up Level</button>
+			</div>				
+			<div id='fs-main'>
+				<div id='fs-floor-0' class='fs-floor'></div>
+				<div id='fs-floor-1' class='fs-floor'></div>
+				<div id='fs-floor-2' class='fs-floor'></div>
+				<div id='fs-floor-3' class='fs-floor'></div>
+				<div id='fs-floor-4' class='fs-floor'></div>
+			</div>
 			
-			</div>
-			<div id='tag' class='function-section'>
-				<div id='tag-searchbar'>
-					<input id='tag-search' class='input-field'>
-					<button id='tag-searchbtn'>Search</button>
-					<div id='tag-match'>
-						<div id='tag-match-div'></div>
-					</div>
-					<div id='tag-search-output'></div>				
+		</div>
+		<div id='tag' class='function-section'>
+			<div id='tag-searchbar'>
+				<input id='tag-search' class='input-field'>
+				<button id='tag-searchbtn'>Search</button>
+				<div id='tag-match'>
+					<div id='tag-match-div'></div>
 				</div>
-				<div id='tag-window'>
-					<p id='ux-selected'>File is not selected</p>
-					<input id='tag-input' class='input-field'>
-					<div id='tag-btn'>
-						<button id='tag-write'>Add Tag</button>
-					</div>
-					<div id='tag-display'></div>
-					<div id='tag-placeholder'>
-						<button id ='tag-delete'>Delete Tag</button>
-						<div id='tag-info'>
-							<p id ='tag-selected'>No tag selected</p>
-						</div>
+				<div id='tag-search-output'></div>				
+			</div>
+			<div id='tag-window'>
+				<p id='ux-selected'>File is not selected</p>
+				<input id='tag-input' class='input-field'>
+				<div id='tag-btn'>
+					<button id='tag-write'>Add Tag</button>
+				</div>
+				<div id='tag-display'></div>
+				<div id='tag-placeholder'>
+					<button id ='tag-delete'>Delete Tag</button>
+					<div id='tag-info'>
+						<p id ='tag-selected'>No tag selected</p>
 					</div>
 				</div>
 			</div>
 		</div>
+	</div>
 			
 	<div id='buttonbar' class='function-section'>
 		<button id='fs-home'>Home</button>
@@ -97,6 +97,7 @@
 	</div>
     
 </body>
+<script src="./mntdrag.js"></script>
 <script src="./index-ux.js"></script>
 <script src="./index-tag.js"></script>
 <script src="./index-mnt.js"></script>
