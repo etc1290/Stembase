@@ -1,4 +1,4 @@
-// Side: drag remake
+// Side: 	Drag remake
 const mntdragSetup = function() {
   var mntdrag,
     __bind = function(fn, me){ return function(){ return fn.apply(me, arguments) } }
@@ -72,7 +72,7 @@ const mntdragSetup = function() {
   })()
   window.mntdrag = mntdrag
 }
-mntdragSetup()
+
 // Side:	Target class checker
 const mntcheck = (event,classname,isCurrent=false)=>{
 	if(isCurrent){
@@ -255,19 +255,20 @@ const mntfunc = (target)=>{
 			/*
 			el.addEventListener('dragenter',mntcancel)
 			el.addEventListener('dragover',mntcancel)
-			*/
+			
 			
 			el.addEventListener('dragenter',(event)=>{
 				//const content = event.currentTarget.querySelector('.mnt-folder-content')
 				const content = event.target.closest('.mnt-folder').children[1]
 				const contentList = []
 				if(!counter){	
-					console.log('enter:' + event.target.closest('.mnt-folder').children[0].innerHTML)
+					//console.log('enter:' + event.target.closest('.mnt-folder').children[0].innerHTML)
 					//content.classList.add('mnt-expanding-drag')
 					let node = content
-					if(!content.classList.contains('mnt-expancding-drag')){
+					
+					if(!content.classList.contains('mnt-expanding-drag')){
 						contentList[0] = content
-					}					
+					}				
 					while(!node.parentNode.classList.contains('mnt-mainfolder')){
 						node = node.parentNode.parentNode
 						if(!node.classList.contains('mnt-expanding-drag')){
@@ -277,6 +278,7 @@ const mntfunc = (target)=>{
 					//content.style.height = (content.clientHeight + 100) + 'px'
 					for(var i=0;i<contentList.length;i++){
 						const c = contentList[i]
+						console.log(c)
 						c.style.height = (c.clientHeight + 100) + 'px'
 						c.classList.add('mnt-expanding-drag')
 					}
@@ -291,7 +293,8 @@ const mntfunc = (target)=>{
 				const content = event.target.closest('.mnt-folder').children[1]
 				
 				if(counter==0){		
-					console.log('leave:' + event.target.closest('.mnt-folder').children[0].innerHTML)
+					//console.log('leave:' + event.target.closest('.mnt-folder').children[0].innerHTML)
+					event.target.classList.remove('mnt-expanding-mnt')
 					mntspan(content)
 					counter = false
 				}
@@ -300,12 +303,39 @@ const mntfunc = (target)=>{
 			el.addEventListener('drop',(event)=>{
 				counter = 0
 				//const content = event.currentTarget.querySelector('.mnt-folder-content')
+				const expandgroup = document.querySelectorAll('.mnt-expanding-group')
+				for(var i=0;i<expandgroup.length;i++){
+					expandgroup[i].classList.remove('.mnt-expanding-mnt')
+				}
 				const content = event.target.closest('.mnt-folder').children[1]
 				content.classList.remove('mnt-expanding-drag')
 				mntspan(content)
-			})
+			})*/
 		}
 	}	
+}
+// Side:	Handle drag-related function
+const mntdragfunc = ()=>{
+	document.addEventListener('mntdrag:enter',(event)=>{
+		const contentList = []
+		let node = 0
+		const folder = event.target.closest('.mnt-folder')
+		const content = folder.children[1]
+		node = content
+		while(!node.classList.contains('function-section')){
+			contentList.push(node)
+			node = node.parentNode.parentNode
+		}
+		for(var i=0;i<contentList.length;i++){
+			const c = contentList[i]
+			c.style.height = c.clientHeight+100+'px'
+		}
+	})
+	document.addEventListener('mntdrag:leave',(event)=>{
+		const folder = event.target.closest('.mnt-folder')
+		const content = folder.children[1]
+		mntspan(content)
+	})
 }
 // Side:	Contextmenu function
 const mntmenufunc = async()=>{
@@ -397,25 +427,20 @@ const mntbuild = ()=>{
 const mntApplier = (target)=>{
 	mntfunc(target)	
 	mntstyle(target)
+	
 	for(var i=0;i<target.length;i++){
 		if(target[i].classList.contains('mnt-dropzone')){
 			new mntdrag(target[i])		
 		}
-
-	}
-	
+	}	
 }
 const mntInit = ()=>{
+	mntdragSetup()
 	const isReady = mntbuild()
 	if(isReady){
 		mntfold()
 		const mntfolder = document.querySelectorAll('.mnt-folder')
-		document.addEventListener('mntdrag:enter',()=>{
-			console.log('enter:' + event.target.closest('.mnt-folder').children[0].innerHTML)
-		})
-		document.addEventListener('mntdrag:leave',()=>{
-			console.log('leave:' + event.target.closest('.mnt-folder').children[0].innerHTML)
-		})
+		mntdragfunc()
 		mntApplier(mntfolder)
 		mntmenufunc()
 	}

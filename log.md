@@ -4,6 +4,10 @@
 ---
 	## 2023.05.11		version 0.6.2
 	-- Rewire function
+	-- Function implementation
+	# Added
+	1. Add mntdragfunc to implement new mntdrag event listener
+		-- finished
 	# Changed 
 	1. Rewire the original crappy drag and drop to new event listener mntdrag
 		-- finished
