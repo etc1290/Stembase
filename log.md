@@ -5,8 +5,12 @@
 	## 2023.05.11		version 0.6.2
 	-- Rewire function
 	-- Function implementation
+	-- Clear wasted codes
+	-- Build infrastructure
 	# Added
 	1. Add mntdragfunc to implement new mntdrag event listener
+		-- finished
+	2. Add more option to contextmenu
 		-- finished
 	# Changed 
 	1. Rewire the original crappy drag and drop to new event listener mntdrag

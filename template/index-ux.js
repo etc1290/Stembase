@@ -13,7 +13,7 @@ const uxScroll = (e)=>{
 // Contextmenu Creator
 const uxContextMenuCreate = ()=>{
 	// Positioner
-	//const contextMenu = document.getElementById('mnt-cm')
+	
 	const menuPositioner = (event,isSub = false)=>{
 		const funcSection = event.target.closest('.function-section')
 		const contextMenu = funcSection.querySelector('.context-menu')
@@ -78,31 +78,6 @@ const uxContextMenuCreate = ()=>{
 		return [posLeft,posTop]
 	}
 	// Main menu
-	/*
-	for(let i=0;i<target.length;i++){
-		const el=target[i]
-		el.addEventListener('contextmenu',(event)=>{
-			// Select contextmenu target
-			mntselected(event)
-			
-			// Customized display
-		
-			if(event.currentTarget.id == 'mnt-main'){
-				const hideOpt = document.getElementById('mnt-removemenu-remove')
-				hideOpt.classList.add('hide')
-			}
-			// Main function
-			event.preventDefault()
-			const [posLeft,posTop] = menuPositioner(event)
-			contextMenu.style.left = posLeft
-			contextMenu.style.top = posTop
-			contextMenu.classList.add('visible')
-		})
-	}*/
-	// Side menu
-	/*
-	const submenu = document.querySelectorAll('.mnt-cm-submenu')
-	const dropmenu= document.querySelectorAll('.mnt-cm-dropmenu')*/
 	const cmmenu = document.querySelectorAll('.context-menu')
 	for(var i=0;i<cmmenu.length;i++){
 		const cm = cmmenu[i]
@@ -121,24 +96,7 @@ const uxContextMenuCreate = ()=>{
 			})
 		}
 	}
-	/*
-	const submenu = contextMenu.querySelectorAll(contextMenu.id + '-submenu')
-	const dropmenu= contextMenu.querySelectorAll(contextMenu.id + '-dropmenu')
-	for(let i=0;i<submenu.length;i++){
-		const el = submenu[i]
-		const subel = dropmenu[i]
-		el.addEventListener('click',(event)=>{
-			
-			const prevMenu = document.querySelector('.mnt-cm-dropmenu.visible')
-			if(prevMenu){
-				prevMenu.classList.remove('visible')
-			}
-			const [posLeft,posTop] = menuPositioner(event,true)
-			subel.style.left = posLeft
-			subel.style.top = posTop
-			subel.classList.add('visible')
-		})
-	}*/
+	
 	const page = document.body
 	page.addEventListener('passcheck',(event)=>{
 		event.preventDefault()

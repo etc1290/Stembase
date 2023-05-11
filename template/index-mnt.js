@@ -318,10 +318,9 @@ const mntfunc = (target)=>{
 const mntdragfunc = ()=>{
 	document.addEventListener('mntdrag:enter',(event)=>{
 		const contentList = []
-		let node = 0
 		const folder = event.target.closest('.mnt-folder')
 		const content = folder.children[1]
-		node = content
+		let node = content
 		while(!node.classList.contains('function-section')){
 			contentList.push(node)
 			node = node.parentNode.parentNode
@@ -339,7 +338,8 @@ const mntdragfunc = ()=>{
 }
 // Side:	Contextmenu function
 const mntmenufunc = async()=>{
-	// Create new monitored group
+	// Data
+		// New:							Create new monitored group
 	document.getElementById('mnt-cm-new').addEventListener('mousedown',async()=>{
 		const isCreate = await window.mnt.create()		
 		if(isCreate){
@@ -347,15 +347,15 @@ const mntmenufunc = async()=>{
 			//const isReady = await mntgroupwrite(group,false)
 		}
 	})
-	// Add this member to Shortcut
+		// Move(Add to Shortcut):		Add this member to Shortcut
 	document.getElementById('mnt-movemenu-shortcut').addEventListener('mousedown',()=>{
 		console.log('add this to shorcut')
 	})
-	// Delete all tags and meta and remove monitored status of this member
+		// Remove(Delete this record):	Delete all tags and meta and remove monitored status of this member
 	document.getElementById('mnt-removemenu-delete').addEventListener('mousedown',()=>{
 		console.log('delete function')
 	})
-	// Remove member from this monitored group
+		// Remove(Remove from group):	Remove member from this monitored group
 	document.getElementById('mnt-removemenu-remove').addEventListener('mousedown',async()=>{
 		const dataset = document.querySelectorAll('.mnt-selected')
 		const data = []
@@ -370,7 +370,19 @@ const mntmenufunc = async()=>{
 			const isReady = await mntgroupwrite(group,false)
 		}
 	})
-	
+		// Remove(Remove grouping):		Remove member from all monitored groups
+	document.getElementById('mnt-removemenu-ungroup').addEventListener('mousedown',async()=>{
+		console.log('ungrouping')
+	})
+	// Header
+		// Remove:						Remove this group
+	document.getElementById('mnt-cm-groupremove').addEventListener('mousedown',async()=>{
+		console.log('group remove')
+	})
+		// Rename:						Rename this group
+	document.getElementById('mnt-cm-grouprename').addEventListener('mousedown',async()=>{
+		console.log('group rename')
+	})
 }
 
 // Side:	Load all monitored group
