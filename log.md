@@ -6,6 +6,7 @@
 	-- Function implementation
 	-- Bug fix
 	-- Clear wasted codes
+	-- Style change
 	# Added
 	1. Add group rename function
 		1.1 Rename when click
@@ -14,6 +15,8 @@
 		-- finished
 	# Changed
 	1. Apply idPicker at group create function
+		-- finished
+	2. Make Groups in monitored section is scrollable and increase max height
 		-- finished
 	# Fixed
 	1. Solve the bug that cannot select folder

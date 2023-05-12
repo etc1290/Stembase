@@ -25,6 +25,9 @@
 #mnt-cm.visible{
 	visibility:		visible;
 }
+#mnt-group-display{
+	max-height:		100vh;
+}
 .mnt-cm-option{
 	padding:		8px 10px;	
 	cursor:			pointer;	
@@ -70,7 +73,7 @@
 	
 }
 .mnt-folder-header{
-	border-bottom:	5px solid rgb(255,238,214);
+	padding-bottom:	5px solid rgb(255,238,214);
 	height:			26px;
 }
 .mnt-folder-header.mnt-selected{
@@ -79,7 +82,7 @@
 .mnt-folder-content{
 	white-space:	nowrap;
 	overflow-x:		auto;
-	overflow-y:		hidden;
+	overflow-y:		scroll;
 	height:			0px;
 	max-height:		20vh;	
 	transition:		0.5s ease;

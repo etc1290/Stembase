@@ -193,11 +193,7 @@ const mntrename = ()=>{
 			if(isMonitored){
 				if(event.which==13){
 					event.preventDefault()
-					mainfunc()/*
-					const isReady = await window.mnt.rename(oldname,newname)
-					if(isReady){
-						mntgroup()
-					}*/
+					mainfunc()
 				}
 			}
 		}
@@ -381,8 +377,8 @@ const mntmenufunc = async()=>{
 		const isCreate = await window.mnt.create()		
 		if(isCreate){
 			console.log('active')		
-			mntgroup()			
-			//const isReady = await mntgroupwrite(group,false)
+			mntgroup()	
+			
 		}
 	})
 		// Move(Add to Shortcut):		Add this member to Shortcut
@@ -422,26 +418,6 @@ const mntmenufunc = async()=>{
 		const group = document.querySelector('.mnt-selected')
 		oldname = group.innerHTML
 		group.contentEditable = 'true'
-		//const data = document.querySelector('.mnt-selected').innerHTML
-		/*
-		const group = document.querySelector('.mnt-selected')
-		const oldname = group.innerHTML
-		group.contentEditable = 'true'
-		const mainfunc = (event)=>{
-			console.log(event)
-			if(event.which==13){
-				console.log('enter')
-				const newname = group.innerHTML
-				const isReady = await.mnt.rename(oldname,newname)
-				mntgroup()
-			}
-		}
-		group.addEventListener('keydown',mainfunc(event))
-		
-		let newname = 'Rename test'
-		console.log(newname)
-		const isReady = await window.mnt.rename(oldname,newname)
-		mntgroup()*/
 	})
 }
 
@@ -460,6 +436,7 @@ const mntgroup = async()=>{
 	updateDiv.innerHTML = mntdata.join('')
 	const group = updateDiv.querySelectorAll('.mnt-subfolder')
 	mntApplier(group)
+	mntspan(updateDiv)
 	return true
 }
 // Main:	Load all monitored data
