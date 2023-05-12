@@ -163,7 +163,26 @@ const mntstyle = (target)=>{
 		})
 	}
 }
-
+// Side: 	Rename function
+let oldname = 0
+const mntrename = ()=>{
+	document.addEventListener('keydown',async(event)=>{
+		const isEditable = event.target.contentEditable == 'true'			
+		if(isEditable){
+			const isMonitored= mntcheck(event,'mnt-folder-header')
+			if(isMonitored){
+				if(event.which==13){
+					event.preventDefault()
+					const newname = event.target.innerHTML
+					const isReady = await window.mnt.rename(oldname,newname)
+					if(isReady){
+						mntgroup()
+					}
+				}
+			}
+		}
+	})
+}
 // Side:		Monitored group loader
 const mntgroupwrite = async(target,isLoaded=true) =>{
 	if(isLoaded){
@@ -379,11 +398,29 @@ const mntmenufunc = async()=>{
 	})
 		// Rename:						Rename this group
 	document.getElementById('mnt-cm-grouprename').addEventListener('mousedown',async(event)=>{
-		const data = document.querySelector('.mnt-selected').innerHTML
-		const newname = 'Rename test'
+		const group = document.querySelector('.mnt-selected')
+		oldname = group.innerHTML
+		group.contentEditable = 'true'
+		//const data = document.querySelector('.mnt-selected').innerHTML
+		/*
+		const group = document.querySelector('.mnt-selected')
+		const oldname = group.innerHTML
+		group.contentEditable = 'true'
+		const mainfunc = (event)=>{
+			console.log(event)
+			if(event.which==13){
+				console.log('enter')
+				const newname = group.innerHTML
+				const isReady = await.mnt.rename(oldname,newname)
+				mntgroup()
+			}
+		}
+		group.addEventListener('keydown',mainfunc(event))
+		
+		let newname = 'Rename test'
 		console.log(newname)
-		const isReady = await window.mnt.rename(data,newname)
-		mntgroup()
+		const isReady = await window.mnt.rename(oldname,newname)
+		mntgroup()*/
 	})
 }
 
@@ -453,6 +490,7 @@ const mntInit = ()=>{
 	const isReady = mntbuild()
 	if(isReady){
 		mntfold()
+		mntrename()
 		const mntfolder = document.querySelectorAll('.mnt-folder')
 		mntdragfunc()
 		mntApplier(mntfolder)

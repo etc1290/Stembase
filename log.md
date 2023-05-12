@@ -8,7 +8,7 @@
 	-- Clear wasted codes
 	# Added
 	1. Add group rename function	
-		-- processing
+		-- finished
 	# Fixed
 	1. Solve the bug that cannot select folder
 		-- finished
