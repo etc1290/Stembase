@@ -5,11 +5,14 @@
 	## 2023.05.12		version 0.6.3
 	-- Function implementation
 	-- Bug fix
+	-- Clear wasted codes
 	# Added
 	1. Add group rename function	
 		-- processing
 	# Fixed
 	1. Solve the bug that cannot select folder
+		-- finished
+	2. Fix the bug that selected header not highlighted
 		-- finished
 ---
 	## 2023.05.11		version 0.6.2

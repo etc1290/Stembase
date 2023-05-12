@@ -73,6 +73,9 @@
 	border-bottom:	5px solid rgb(255,238,214);
 	height:			26px;
 }
+.mnt-folder-header.mnt-selected{
+	background:		rgb(124,255,192);
+}
 .mnt-folder-content{
 	white-space:	nowrap;
 	overflow-x:		auto;

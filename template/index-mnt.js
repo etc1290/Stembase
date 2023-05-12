@@ -226,8 +226,6 @@ const mntfunc = (target)=>{
 				
 				// Monitored group update
 				const dropzoneid = event.currentTarget.id
-				//const header = document.querySelector('#' + dropzoneid + ' .mnt-folder-header')				
-				//const header = folder.querySelector('.mnt-folder-header')
 				let isExist = true
 				if(header.innerHTML!=='Groups'){
 					isExist = await window.mnt.update(header.innerHTML,dropdata.innerHTML)
