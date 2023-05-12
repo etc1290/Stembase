@@ -109,7 +109,6 @@ ipcMain.handle('mnt-group',(event)=>{
 })
 // Rename monitored group
 ipcMain.handle('mnt-rename', (event,data,name)=>{
-	console.log(name)
 	const output = new Promise((resolve)=>{
 		fs.rename(mdbStorage + '//' + data + '.db',mdbStorage + '//' + name + '.db',(err)=>{
 			console.log(err)

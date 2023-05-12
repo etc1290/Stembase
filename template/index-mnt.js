@@ -166,18 +166,35 @@ const mntstyle = (target)=>{
 // Side: 	Rename function
 let oldname = 0
 const mntrename = ()=>{
-	document.addEventListener('keydown',async(event)=>{
-		const isEditable = event.target.contentEditable == 'true'			
+	let newname = 0
+	const mainfunc = async()=>{
+		const isReady = await window.mnt.rename(oldname,newname)
+		if(isReady){
+			document.querySelector('.mnt-editing').classList.remove('mnt-editing')
+			mntgroup()
+		}
+	}
+	document.addEventListener('click',(event)=>{
+		const target = document.querySelector('.mnt-editing')
+		if(target){
+			newname = target.innerHTML
+			mainfunc()
+		}
+	})
+	document.addEventListener('keydown',(event)=>{
+		const isEditable = event.target.contentEditable == 'true'	
+		event.target.classList.add('mnt-editing')
 		if(isEditable){
+			newname = event.target.innerHTML
 			const isMonitored= mntcheck(event,'mnt-folder-header')
 			if(isMonitored){
 				if(event.which==13){
 					event.preventDefault()
-					const newname = event.target.innerHTML
+					mainfunc()/*
 					const isReady = await window.mnt.rename(oldname,newname)
 					if(isReady){
 						mntgroup()
-					}
+					}*/
 				}
 			}
 		}

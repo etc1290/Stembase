@@ -7,7 +7,8 @@
 	-- Bug fix
 	-- Clear wasted codes
 	# Added
-	1. Add group rename function	
+	1. Add group rename function
+		1.1 Rename when click
 		-- finished
 	# Fixed
 	1. Solve the bug that cannot select folder
