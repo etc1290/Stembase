@@ -176,9 +176,12 @@ const mntrename = ()=>{
 	}
 	document.addEventListener('click',(event)=>{
 		const target = document.querySelector('.mnt-editing')
+		const isInside = event.target == target
 		if(target){
-			newname = target.innerHTML
-			mainfunc()
+			if(!isInside){
+				newname = target.innerHTML
+				mainfunc()
+			}			
 		}
 	})
 	document.addEventListener('keydown',(event)=>{

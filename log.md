@@ -15,6 +15,8 @@
 		-- finished
 	2. Fix the bug that selected header not highlighted
 		-- finished
+	3. Fix the bug that click inside the editable block would parse data
+		-- finished
 ---
 	## 2023.05.11		version 0.6.2
 	-- Rewire function
