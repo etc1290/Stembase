@@ -10,12 +10,16 @@
 	1. Add group rename function
 		1.1 Rename when click
 		-- finished
+	2. Add idPicker to handle all duplicate naming problem
+		-- finished
 	# Fixed
 	1. Solve the bug that cannot select folder
 		-- finished
 	2. Fix the bug that selected header not highlighted
 		-- finished
 	3. Fix the bug that click inside the editable block would parse data
+		-- finished
+	4. Fix when group rename is duplicate would overwrite the older same name db
 		-- finished
 ---
 	## 2023.05.11		version 0.6.2

@@ -10,6 +10,15 @@ const mdbStorage = env('StemMGDir')
 const mdbLoader = (folder) =>{
 	return new sqlite3.Database(mdbStorage + '//' + folder + '.db')
 }	
+const idPicker = (arr) =>{
+	let counter = id = 0
+	while(counter == id){
+		const s = arr[counter]
+		counter = counter + 1
+		id = s.substring(s.indexOf('#')+1,s.lastIndexOf('.'))
+	}
+	return counter
+}
 // Load all data
 ipcMain.handle('mnt-main', (event) =>{
 	const output = new Promise((resolve)=>{
@@ -108,9 +117,17 @@ ipcMain.handle('mnt-group',(event)=>{
 	return output
 })
 // Rename monitored group
-ipcMain.handle('mnt-rename', (event,data,name)=>{
+ipcMain.handle('mnt-rename', (event,oldname,newname)=>{
 	const output = new Promise((resolve)=>{
-		fs.rename(mdbStorage + '//' + data + '.db',mdbStorage + '//' + name + '.db',(err)=>{
+		const filelist = fs.readdirSync(mdbStorage)
+		const grouplist= filelist.filter((e)=>{return e.startsWith(newname)})
+		console.log(grouplist)
+		if(grouplist[0]){
+			const id = idPicker(grouplist)
+			newname = newname + '#' + id
+		}
+		
+		fs.rename(mdbStorage + '//' + oldname + '.db',mdbStorage + '//' + newname + '.db',(err)=>{
 			console.log(err)
 			resolve(true)
 		})
