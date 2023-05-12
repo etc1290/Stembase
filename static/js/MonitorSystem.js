@@ -95,7 +95,6 @@ ipcMain.handle('mnt-group',(event)=>{
 		const filelist = fs.readdirSync(mdbStorage)
 		const grouplist = filelist.filter((e)=>{return e.endsWith('.db')})
 		const idlist = []
-		//const cmd = 'PRAGMA intergrity_check'
 		
 		for(let i=0;i<grouplist.length;i++){
 			const s = grouplist[i]
@@ -105,6 +104,17 @@ ipcMain.handle('mnt-group',(event)=>{
 			}			
 		}
 		resolve(idlist)
+	})
+	return output
+})
+// Rename monitored group
+ipcMain.handle('mnt-rename', (event,data,name)=>{
+	console.log(name)
+	const output = new Promise((resolve)=>{
+		fs.rename(mdbStorage + '//' + data + '.db',mdbStorage + '//' + name + '.db',(err)=>{
+			console.log(err)
+			resolve(true)
+		})
 	})
 	return output
 })

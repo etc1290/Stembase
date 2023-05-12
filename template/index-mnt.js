@@ -88,7 +88,7 @@ const mntselected = (event)=>{
 		selected[i].classList.remove('mnt-selected')
 		selected[i].style.background = ''
 	}
-	if(mntcheck(event,'mnt-data')){
+	if(mntcheck(event,'mnt-data') || mntcheck(event,'mnt-folder-header')){
 		event.target.style.background = 'rgb(124,255,192)'
 		event.target.classList.add('mnt-selected')
 	}
@@ -380,8 +380,12 @@ const mntmenufunc = async()=>{
 		console.log('group remove')
 	})
 		// Rename:						Rename this group
-	document.getElementById('mnt-cm-grouprename').addEventListener('mousedown',async()=>{
-		console.log('group rename')
+	document.getElementById('mnt-cm-grouprename').addEventListener('mousedown',async(event)=>{
+		const data = document.querySelector('.mnt-selected').innerHTML
+		const newname = 'Rename test'
+		console.log(newname)
+		const isReady = await window.mnt.rename(data,newname)
+		mntgroup()
 	})
 }
 

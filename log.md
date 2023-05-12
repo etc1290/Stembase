@@ -2,6 +2,16 @@
  File tagging system
 
 ---
+	## 2023.05.12		version 0.6.3
+	-- Function implementation
+	-- Bug fix
+	# Added
+	1. Add group rename function	
+		-- processing
+	# Fixed
+	1. Solve the bug that cannot select folder
+		-- finished
+---
 	## 2023.05.11		version 0.6.2
 	-- Rewire function
 	-- Function implementation
