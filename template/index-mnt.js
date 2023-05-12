@@ -380,7 +380,8 @@ const mntmenufunc = async()=>{
 	document.getElementById('mnt-cm-new').addEventListener('mousedown',async()=>{
 		const isCreate = await window.mnt.create()		
 		if(isCreate){
-			console.log('active')			
+			console.log('active')		
+			mntgroup()			
 			//const isReady = await mntgroupwrite(group,false)
 		}
 	})

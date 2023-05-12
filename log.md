@@ -12,6 +12,9 @@
 		-- finished
 	2. Add idPicker to handle all duplicate naming problem
 		-- finished
+	# Changed
+	1. Apply idPicker at group create function
+		-- finished
 	# Fixed
 	1. Solve the bug that cannot select folder
 		-- finished
@@ -20,6 +23,8 @@
 	3. Fix the bug that click inside the editable block would parse data
 		-- finished
 	4. Fix when group rename is duplicate would overwrite the older same name db
+		-- finished
+	5. Reload group after new group created
 		-- finished
 ---
 	## 2023.05.11		version 0.6.2

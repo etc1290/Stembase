@@ -12,10 +12,18 @@ const mdbLoader = (folder) =>{
 }	
 const idPicker = (arr) =>{
 	let counter = id = 0
+	if(!arr[0]){
+		return 1
+	}
 	while(counter == id){
 		const s = arr[counter]
 		counter = counter + 1
-		id = s.substring(s.indexOf('#')+1,s.lastIndexOf('.'))
+		try{
+			id = s.substring(s.indexOf('#')+1,s.lastIndexOf('.'))
+		}catch(err){
+			id = err
+		}
+		
 	}
 	return counter
 }
@@ -73,6 +81,8 @@ ipcMain.handle('mnt-create',(event)=>{
 	const output = new Promise((resolve)=>{
 		const filelist = fs.readdirSync(mdbStorage)	
 		const grouplist = filelist.filter((e)=>{return e.startsWith('New Group #')})
+		const id = idPicker(grouplist)
+		/*
 		const idlist =[]
 		let newid = false
 		// Duplicate group check
@@ -91,8 +101,8 @@ ipcMain.handle('mnt-create',(event)=>{
 		}
 		if(!newid){
 			newid = idlist.length + 1
-		}
-		const newname = 'New Group #' + newid
+		}*/
+		const newname = 'New Group #' + id
 		const mdb = mdbLoader(newname)
 		resolve(true)
 	})
@@ -121,11 +131,11 @@ ipcMain.handle('mnt-rename', (event,oldname,newname)=>{
 	const output = new Promise((resolve)=>{
 		const filelist = fs.readdirSync(mdbStorage)
 		const grouplist= filelist.filter((e)=>{return e.startsWith(newname)})
-		console.log(grouplist)
 		if(grouplist[0]){
 			const id = idPicker(grouplist)
 			newname = newname + '#' + id
 		}
+		//const id = idPicker(grouplist)
 		
 		fs.rename(mdbStorage + '//' + oldname + '.db',mdbStorage + '//' + newname + '.db',(err)=>{
 			console.log(err)
