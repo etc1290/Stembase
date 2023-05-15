@@ -84,7 +84,7 @@ ipcMain.handle('mnt-create',(event)=>{
 		const id = idPicker(grouplist)
 		const newname = 'New Group #' + id
 		const mdb = mdbLoader(newname)
-		resolve(true)
+		resolve(newname)
 	})
 	return output
 })

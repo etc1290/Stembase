@@ -91,6 +91,8 @@ const mntselected = (event)=>{
 	if(mntcheck(event,'mnt-data') || mntcheck(event,'mnt-folder-header')){
 		event.target.style.background = 'rgb(124,255,192)'
 		event.target.classList.add('mnt-selected')
+	}else if(mntcheck(event,'mnt-folder-content')){
+		event.target.classList.add('mnt-selected')
 	}
 }
 // Side:	Monitored group collapse and expand
@@ -203,8 +205,7 @@ const mntrename = ()=>{
 const mntgroupwrite = async(target,isLoaded=true) =>{
 	if(isLoaded){
 		isLoaded = target.querySelector('.mnt-data')
-	}
-	if(!isLoaded){
+	}else{
 		const updateDiv = target.querySelector('.mnt-folder-content')
 		const header = target.querySelector('.mnt-folder-header')
 		const mntset = await window.mnt.load(header.innerHTML)
@@ -265,7 +266,6 @@ const mntfunc = (target)=>{
 				if(header.innerHTML!=='Groups'){
 					isExist = await window.mnt.update(header.innerHTML,dropdata.innerHTML)
 				}
-				//const isExist = await window.mnt.update(header.innerHTML,dropdata.innerHTML)
 				if(!isClone && !isExist){
 					const dropclone = dropdata.cloneNode(true)
 					dropdata.parentNode.insertBefore(dropclone,dropdata.nextSibling)
@@ -285,65 +285,6 @@ const mntfunc = (target)=>{
 					
 				}
 			})
-			/*
-			el.addEventListener('dragenter',mntcancel)
-			el.addEventListener('dragover',mntcancel)
-			
-			
-			el.addEventListener('dragenter',(event)=>{
-				//const content = event.currentTarget.querySelector('.mnt-folder-content')
-				const content = event.target.closest('.mnt-folder').children[1]
-				const contentList = []
-				if(!counter){	
-					//console.log('enter:' + event.target.closest('.mnt-folder').children[0].innerHTML)
-					//content.classList.add('mnt-expanding-drag')
-					let node = content
-					
-					if(!content.classList.contains('mnt-expanding-drag')){
-						contentList[0] = content
-					}				
-					while(!node.parentNode.classList.contains('mnt-mainfolder')){
-						node = node.parentNode.parentNode
-						if(!node.classList.contains('mnt-expanding-drag')){
-							contentList.push(node)
-						}								
-					}
-					//content.style.height = (content.clientHeight + 100) + 'px'
-					for(var i=0;i<contentList.length;i++){
-						const c = contentList[i]
-						console.log(c)
-						c.style.height = (c.clientHeight + 100) + 'px'
-						c.classList.add('mnt-expanding-drag')
-					}
-					counter = 0
-				}
-				counter++
-			})
-			
-			el.addEventListener('dragleave',(event)=>{
-				counter--
-				//const content = event.currentTarget.querySelector('.mnt-folder-content')
-				const content = event.target.closest('.mnt-folder').children[1]
-				
-				if(counter==0){		
-					//console.log('leave:' + event.target.closest('.mnt-folder').children[0].innerHTML)
-					event.target.classList.remove('mnt-expanding-mnt')
-					mntspan(content)
-					counter = false
-				}
-			})
-			
-			el.addEventListener('drop',(event)=>{
-				counter = 0
-				//const content = event.currentTarget.querySelector('.mnt-folder-content')
-				const expandgroup = document.querySelectorAll('.mnt-expanding-group')
-				for(var i=0;i<expandgroup.length;i++){
-					expandgroup[i].classList.remove('.mnt-expanding-mnt')
-				}
-				const content = event.target.closest('.mnt-folder').children[1]
-				content.classList.remove('mnt-expanding-drag')
-				mntspan(content)
-			})*/
 		}
 	}	
 }
@@ -374,11 +315,19 @@ const mntmenufunc = async()=>{
 	// Data
 		// New:							Create new monitored group
 	document.getElementById('mnt-cm-new').addEventListener('mousedown',async()=>{
-		const isCreate = await window.mnt.create()		
-		if(isCreate){
-			console.log('active')		
-			mntgroup()	
-			
+		const group = document.querySelector('.mnt-selected').closest('.mnt-folder')
+		console.log(group)
+		const header = group.children[0].innerHTML
+		const isGroups = group.id == 'mnt-group'
+		const newGroup = await window.mnt.create()		
+		if(newGroup){
+			if(!isGroups){
+				const isCreate = await window.mnt.update(header,newGroup)
+				if(isCreate){
+					mntgroupwrite(group,false)
+				}
+			}	
+			mntgroup()
 		}
 	})
 		// Move(Add to Shortcut):		Add this member to Shortcut
@@ -406,7 +355,20 @@ const mntmenufunc = async()=>{
 	})
 		// Remove(Remove grouping):		Remove member from all monitored groups
 	document.getElementById('mnt-removemenu-ungroup').addEventListener('mousedown',async()=>{
-		console.log('ungrouping')
+		const dataset = document.querySelectorAll('.mnt-selected')
+		const data = []
+		for(let i=0;i<dataset.length;i++){
+			if(!dataset[i].classList.contains('.mnt-mainfolder')){
+				data[i] = dataset[i].innerHTML
+			}
+		}
+		const group = dataset[0].parentNode.parentNode
+		if(data[0]){
+			const isRemove = await window.mnt.remove(group.innerHTML,data)
+			if(isRemove){
+				mntgroupwrite(group,false)
+			}
+		}
 	})
 	// Header
 		// Remove:						Remove this group
@@ -460,7 +422,7 @@ const mntmain = async()=>{
 const mntshortcut = () =>{
 	const mntdata = []
 	const mntshortcut = document.getElementById('mnt-shortcut')
-	mntgroupwrite(mntshortcut)
+	mntgroupwrite(mntshortcut,false)
 	return true
 }
 //Side:		Initial page structure

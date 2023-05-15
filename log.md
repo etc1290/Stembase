@@ -5,9 +5,14 @@
 	## 2023.05.15		version 0.6.3.1
 	-- Update function
 	-- Rewrite function
+	-- Code re-arrangement
 	# Added
 	1. Add unhide function to handle exception case
 		-- finished
+	2. Create new group support created in a group
+		-- processing
+	3. Remove groups from all groups
+		-- processing
 	# Changed
 	1. Add grouprename and groupremove function into hide list
 		-- finished
