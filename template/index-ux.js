@@ -130,8 +130,26 @@ const uxContextMenuCreate = ()=>{
 					e[i].classList.add('hide')
 				}
 			}
-			const hide = (e)=>{
-				hideOpt.push(e)
+			const hide = (e,isAggreg=false)=>{
+				if(isAggreg){
+					e = e.children				
+					for(var i=0;i<e.length;i++){
+						hideOpt.push(e[i])
+					}
+				}else{
+					hideOpt.push(e)
+				}
+			}
+			const unhide = (e,isAggreg=false)=>{
+				if(isAggreg){
+					e = e.children				
+					for(var i=0;i<e.length;i++){
+						hideOpt.push(e[i])
+					}
+				}else{
+					hideOpt.splice(hideOpt.indexOf(e),1)
+				}
+				
 			}
 			// Hide table
 			hideRule['mnt'] = ()=>{
@@ -141,11 +159,14 @@ const uxContextMenuCreate = ()=>{
 					hide(document.getElementById('mnt-headercm'))
 				}
 				mainRule['mnt-folder-header'] = ()=>{
-					hide(document.getElementById('mnt-datacm'))	
+					hide(document.getElementById('mnt-datacm'),true)	
 					const subRule = []
 					subRule['mnt-mainfolder'] = ()=>{
 						hide(document.getElementById('mnt-cm-groupremove'))
 						hide(document.getElementById('mnt-cm-grouprename'))
+					}
+					subRule['mnt-subfolder'] = ()=>{
+						unhide(document.getElementById('mnt-cm-new'))
 					}
 					const group = event.target.closest('.mnt-folder')
 					const groupClass = group.className.split(' ')

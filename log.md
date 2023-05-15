@@ -5,10 +5,15 @@
 	## 2023.05.15		version 0.6.3.1
 	-- Update function
 	-- Rewrite function
+	# Added
+	1. Add unhide function to handle exception case
+		-- finished
 	# Changed
 	1. Add grouprename and groupremove function into hide list
 		-- finished
-	2. Make hide functio for massive codes reduction
+	2. Make hide function for massive codes reduction
+		-- finished
+	3. Unhide new function in Groups
 		-- finished
 ---
 	## 2023.05.12		version 0.6.3
