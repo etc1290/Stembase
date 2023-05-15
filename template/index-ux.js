@@ -130,21 +130,36 @@ const uxContextMenuCreate = ()=>{
 					e[i].classList.add('hide')
 				}
 			}
+			const hide = (e)=>{
+				hideOpt.push(e)
+			}
 			// Hide table
 			hideRule['mnt'] = ()=>{
 				mainRule['function-section'] = ()=>{
-					hideOpt[0] = document.getElementById('mnt-cm-remove')
-					hideOpt[1] = document.getElementById('mnt-cm-move')
-					hideOpt[2] = document.getElementById('mnt-headercm')
+					hide(document.getElementById('mnt-cm-remove'))
+					hide(document.getElementById('mnt-cm-move'))
+					hide(document.getElementById('mnt-headercm'))
 				}
 				mainRule['mnt-folder-header'] = ()=>{
-					hideOpt[0] = document.getElementById('mnt-datacm')					
+					hide(document.getElementById('mnt-datacm'))	
+					const subRule = []
+					subRule['mnt-mainfolder'] = ()=>{
+						hide(document.getElementById('mnt-cm-groupremove'))
+						hide(document.getElementById('mnt-cm-grouprename'))
+					}
+					const group = event.target.closest('.mnt-folder')
+					const groupClass = group.className.split(' ')
+					for(var i=0;i<groupClass.length;i++){
+						try{
+							subRule[groupClass[i]]()					
+						}catch(err){}
+					}
 				}
 				mainRule['mnt-data'] = ()=>{
-					hideOpt[0] = document.getElementById('mnt-headercm')
+					hide(document.getElementById('mnt-headercm'))
 					const subRule = []
 					subRule['mnt-main'] = ()=>{
-						hideOpt[1] = document.getElementById('mnt-cm-remove')						
+						hide(document.getElementById('mnt-cm-remove'))						
 					}
 					try{
 						const group = event.target.closest('.mnt-folder')

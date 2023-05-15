@@ -2,6 +2,15 @@
  File tagging system
 
 ---
+	## 2023.05.15		version 0.6.3.1
+	-- Update function
+	-- Rewrite function
+	# Changed
+	1. Add grouprename and groupremove function into hide list
+		-- finished
+	2. Make hide functio for massive codes reduction
+		-- finished
+---
 	## 2023.05.12		version 0.6.3
 	-- Function implementation
 	-- Bug fix
