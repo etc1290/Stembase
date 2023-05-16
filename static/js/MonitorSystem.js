@@ -78,6 +78,30 @@ ipcMain.handle('mnt-remove',(event,folderset,dataset)=>{
 	})
 	return output
 })
+// Delete monitored groups
+ipcMain.handle('mnt-delete',(event,folderset,dataset)=>{
+	console.log(dataset)
+	const output = new Promise((resolve)=>{
+		const mdb = mdbLoader('Groups')
+		const mdbs= mdbLoader('Shortcut') 
+		const cmd = `delete from Members where name =?`
+		const idlist = []
+		for(let i=0;i<dataset.length;i++){
+			console.log(1)
+			mdbs.all(cmd,[dataset[i]],(err,res)=>{
+				console.log(2)
+				if(res){
+					idlist[0] = 'mnt-shortcut'
+				}
+				mdb.all(cmd,[dataset[i]],()=>{
+					console.log(3)
+					resolve(idlist)
+				})
+			})
+		}
+	})
+	return output
+})
 // Create new monitored group
 ipcMain.handle('mnt-create',(event)=>{
 	const output = new Promise((resolve)=>{

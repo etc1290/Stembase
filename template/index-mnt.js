@@ -206,10 +206,6 @@ const mntgroupwrite = async(target,isLoaded=true) =>{
 	//if(isLoaded){
 	//	isLoaded = target.querySelector('.mnt-data')
 	//}else{
-		/*
-		const updateDiv = target.querySelector('.mnt-folder-content')
-		const header = target.querySelector('.mnt-folder-header')*/
-		console.log(target)
 		const header = target.children[0]
 		const updateDiv = target.children[1]
 		const mntset = await window.mnt.load(header.innerHTML)
@@ -348,24 +344,13 @@ const mntmenufunc = async()=>{
 	})
 		// Remove(Remove from group):	Remove member from this monitored group
 	document.getElementById('mnt-removemenu-remove').addEventListener('mousedown',async()=>{
-		/*
-		const dataset = document.querySelectorAll('.mnt-selected')
-		const data = []
-		for(var i=0;i<dataset.length;i++){
-			data[i] = dataset[i].innerHTML
-		}*/
+		
 		const selected = uxSelect('mnt')
-		/*
-		const group = selected[0].parentNode.parentNode
-		const folder = group.querySelector('.mnt-folder-header')
-		const isRemove = await window.mnt.remove(folder.innerHTML,selected)	*/
 		const isRemove = await window.mnt.remove(selected['Folder'],selected['Data'])
 		if(isRemove){
 			for(var i=0;i<selected['Node'].length;i++){
-				console.log(selected['Node'][i])
 				mntgroupwrite(document.getElementById(selected['Node'][i]),false)
 			}
-			//const isReady = await mntgroupwrite(group,false)
 		}
 	})
 		// Remove(Remove grouping):		Remove member from all monitored groups
@@ -386,21 +371,16 @@ const mntmenufunc = async()=>{
 		}
 	})
 	// Header
-		// Remove:						Remove this group
-	document.getElementById('mnt-cm-groupremove').addEventListener('mousedown',async()=>{
-		/*
-		const dataset = document.querySelectorAll('.mnt-selected')
-		const data = []
-		for(var i=0;i<dataset[i];i++){
-			data[i] = dataset[i].innerHTML
-		}*/
-		/*
+		// Remove:						Delete this group
+	document.getElementById('mnt-cm-groupdelete').addEventListener('mousedown',async()=>{
 		const selected = uxSelect('mnt')
-		const group = group.querySelector('.mnt-folder-header')
-		const isRemove = await window.mnt.remove(folder.innerHTML,selected)
-		if(isRemove){
-			const is
-		}*/
+		const updateArr = await window.mnt.delete(selected['Folder'],selected['Data'])
+		if(updateArr[0]){
+			mntgroup()
+			for(var i=0;i<updateArr.length;i++){
+				mntgroupwrite(document.getElementById(updateArr[i]),false)
+			}
+		}
 	})
 		// Rename:						Rename this group
 	document.getElementById('mnt-cm-grouprename').addEventListener('mousedown',async(event)=>{
@@ -419,7 +399,7 @@ const mntgroup = async(parent,child)=>{
 		for(var i=0;i<grouplist.length;i++){
 			const header = `<p class='mnt-folder-header'>` + grouplist[i] + `</p>`
 			const content= `<div class='mnt-folder-content'></div>`
-			const folder = `<div class='mnt-folder mnt-dropzone mnt-subfolder'>` + header + content + `</div>`
+			const folder = `<div id='mnt-user-` + grouplist[i] + `' class='mnt-folder mnt-dropzone mnt-subfolder'>` + header + content + `</div>`
 			mntdata[i] = folder
 		}
 		updateDiv.innerHTML = mntdata.join('')

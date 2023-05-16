@@ -6,12 +6,15 @@
 	-- Rewrite function
 	-- Bug fix
 	-- Finction implementation
+	-- Clear wasted codes
 	# Added
 	1. Auto Configure and update Groups after creating a new one
 		-- finished
 	2. Create group function now support in other groups
 		-- finished
 	3. Add uxSelect function to deal with select-related actions
+		-- finished
+	4. Add group delete function
 		-- finished
 	# Changed 
 	1. Change mntgroup into db-based style
