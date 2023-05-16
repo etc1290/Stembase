@@ -9,6 +9,8 @@
 	# Added
 	1. Auto Configure and update Groups after creating a new one
 		-- finished
+	2. Create group function now support in other groups
+		-- finished
 	# Changed 
 	1. Change mntgroup into db-based style
 		-- finished

@@ -201,7 +201,7 @@ const mntrename = ()=>{
 		}
 	})
 }
-// Side:		Monitored group loader
+// Side:	Monitored group loader
 const mntgroupwrite = async(target,isLoaded=true) =>{
 	if(isLoaded){
 		isLoaded = target.querySelector('.mnt-data')
@@ -404,6 +404,9 @@ const mntgroup = async(parent,child)=>{
 		mntApplier(group)
 		mntspan(updateDiv)
 		return true	
+	}
+	if(parent == 'Shortcut'){
+		parent = 'Groups'
 	}
 	if(parent){
 		const isAppend = await window.mnt.group(parent,child)
