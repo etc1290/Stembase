@@ -10,16 +10,7 @@ const mdbStorage = env('StemMGDir')
 const mdbLoader = (folder) =>{
 	return new sqlite3.Database(mdbStorage + '//' + folder + '.db')
 }	
-// Create database
-const mntdbBuild = ()=>{
-	const mdb = mdbLoader('Groups')
-	mdb.run(`create table "Members" (
-		"id"	integer not null unique,
-		"name"	text not null unique,
-		"subgroups"	text not null,
-		primary key("id" autoincrement)
-	)`,()=>{})
-}
+
 const idPicker = (arr) =>{
 	let counter = id = 0
 	if(!arr[0]){
@@ -96,11 +87,15 @@ ipcMain.handle('mnt-create',(event)=>{
 		const newdb = mdbLoader(newname)
 		const mdb = mdbLoader('Groups')
 		const cmd = `insert into Members(name) values(?)`
-		mdb.all(cmd,[newname],()=>{
-			console.log(newname)
-			resolve(newname)
+		mdb.run(`create table "Members" (
+			"id"	integer not null unique,
+			"name"	text not null unique,
+			"subgroups"	text,
+			primary key("id" autoincrement)
+		)`,()=>{
+			mdb.all(cmd,[newname],()=>{
+				resolve(newname)})
 		})
-		//resolve(newname)
 	})
 	return output
 })
@@ -191,4 +186,4 @@ ipcMain.handle('mnt-update',(event,folder,name)=>{
 	return output
 })
 // Initialize
-mntdbBuild()
+

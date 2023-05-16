@@ -5,6 +5,10 @@
 	## 2023.05.16		version 0.6.4
 	-- Rewrite function
 	-- Bug fix
+	-- Finction implementation
+	# Added
+	1. Auto Configure and update Groups after creating a new one
+		-- finished
 	# Changed 
 	1. Change mntgroup into db-based style
 		-- finished
