@@ -9,7 +9,27 @@ const uxScroll = (e)=>{
 		behavior: 'smooth'
 	})
 }
-
+// Multiple Selector
+const uxSelect = (funcSection)=>{
+	const selCode = '.' + funcSection + '-selected'
+	const input = document.querySelectorAll(selCode)
+	const selMode = []
+	selMode['mnt'] = ()=>{
+		const selHeader = []
+		const selFolder = []
+		const selNode   = []
+		for(let i=0;i<input.length;i++){
+			const folder = input[i].parentNode.closest('.mnt-folder')
+			selHeader[i] = input[i].innerHTML
+			selNode[i]	 = folder.id
+			selFolder[i] = folder.children[0].innerHTML		
+		}
+		const selArr = {'Folder':selFolder,'Data':selHeader,'Node':selNode}
+		return selArr
+	}
+	const output = selMode[funcSection]()
+	return output
+}
 // Contextmenu Creator
 const uxContextMenuCreate = ()=>{
 	// Positioner

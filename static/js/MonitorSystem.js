@@ -60,11 +60,12 @@ ipcMain.handle('mnt-load',(event,folder)=>{
 	return output
 })
 // Remove monitored members
-ipcMain.handle('mnt-remove',(event,folder,dataset)=>{
+ipcMain.handle('mnt-remove',(event,folderset,dataset)=>{
 	const output = new Promise((resolve)=>{
 		const cmd = `delete from Members where name = ?`
-		const mdb = mdbLoader(folder)
+		
 		for(let i=0;i<dataset.length;i++){
+			const mdb = mdbLoader(folderset[i])
 			mdb.run(cmd,dataset[i],(err)=>{
 				if(err){
 					resolve(false)

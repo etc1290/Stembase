@@ -11,8 +11,12 @@
 		-- finished
 	2. Create group function now support in other groups
 		-- finished
+	3. Add uxSelect function to deal with select-related actions
+		-- finished
 	# Changed 
 	1. Change mntgroup into db-based style
+		-- finished
+	2. Rewrite remove function in contextmenu and mntgroupwrite to fit new uxSelect mechanism
 		-- finished
 	# Fixed
 	1. Fix when you create outside all groups it would crash
