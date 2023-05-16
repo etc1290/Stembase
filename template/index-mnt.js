@@ -326,8 +326,11 @@ const mntmenufunc = async()=>{
 		const newGroup = await window.mnt.create()		
 		if(newGroup){
 			if(!isGroups){
+				console.log(header)
 				const isCreate = await window.mnt.update(header,newGroup)
+				console.log(isCreate)
 				if(isCreate){
+					console.log(group)
 					mntgroupwrite(group,false)
 				}
 			}	

@@ -19,6 +19,8 @@
 		-- finished
 	2. Fix the bug that Groups cannot update after creating new group
 		-- finished
+	3. Fix the bug that some groups cannot update after group create function
+		-- finished
 ---
 	## 2023.05.15		version 0.6.3.1
 	-- Update function

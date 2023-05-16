@@ -175,13 +175,7 @@ ipcMain.handle('mnt-update',(event,folder,name)=>{
 			primary key("id" autoincrement),
 			unique(name))`,()=>{
 				const cmd = `insert into Members(name) values(?)`
-				mdb.all(cmd,[name],(err,res)=>{
-					if(err){
-						resolve(true)
-					}else{
-						resolve(false)
-					}
-				})
+				mdb.all(cmd,[name],(err,res)=>{resolve(true)})
 			}
 		)
 	})
