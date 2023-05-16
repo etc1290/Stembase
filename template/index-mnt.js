@@ -327,7 +327,6 @@ const mntmenufunc = async()=>{
 		if(newGroup){
 			if(!isGroups){
 				const isCreate = await window.mnt.update(header,newGroup)
-				console.log(isCreate)
 				if(isCreate){
 					mntgroupwrite(group,false)
 				}
@@ -390,11 +389,7 @@ const mntmenufunc = async()=>{
 
 // Side:	Load all monitored group
 const mntgroup = async(parent,child)=>{
-	let isAppend = false
-
-	if(parent){
-		isAppend = await window.mnt.group(parent,child)		
-	}
+	const mainfunc = async()=>{
 		const updateDiv = document.getElementById('mnt-group-display')
 		const grouplist = await window.mnt.load('Groups')
 		const mntdata = []
@@ -408,8 +403,17 @@ const mntgroup = async(parent,child)=>{
 		const group = updateDiv.querySelectorAll('.mnt-subfolder')
 		mntApplier(group)
 		mntspan(updateDiv)
-		return true
-	
+		return true	
+	}
+	if(parent){
+		const isAppend = await window.mnt.group(parent,child)
+		if(isAppend){
+			mainfunc()
+		}		
+	}else{
+		mainfunc()
+	}
+		
 }
 // Main:	Load all monitored data
 const mntmain = async()=>{

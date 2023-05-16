@@ -85,17 +85,7 @@ ipcMain.handle('mnt-create',(event)=>{
 		const id = idPicker(grouplist)
 		const newname = 'New Group #' + id
 		const newdb = mdbLoader(newname)
-		const mdb = mdbLoader('Groups')
-		const cmd = `insert into Members(name) values(?)`
-		mdb.run(`create table "Members" (
-			"id"	integer not null unique,
-			"name"	text not null unique,
-			"subgroups"	text,
-			primary key("id" autoincrement)
-		)`,()=>{
-			mdb.all(cmd,[newname],()=>{
-				resolve(newname)})
-		})
+		resolve(newname)
 	})
 	return output
 })
@@ -123,8 +113,19 @@ ipcMain.handle('mnt-group',(event,parent,child)=>{
 	const output = new Promise((resolve)=>{
 		const mdb = mdbLoader('Groups')
 		if(isGroups){
-			const cmd = `insert into Members(name) values(?)`
-			mdb.all(cmd,[child],(err,res)=>{resolve(true)})
+			const mdb = mdbLoader('Groups')
+			const cmda = `create table "Members" (
+				"id"	integer not null unique,
+				"name"	text not null unique,
+				"subgroups"	text,
+				primary key("id" autoincrement)
+				)`
+			const cmdb = `insert into Members(name) values(?)`
+			mdb.run(cmda,()=>{
+				mdb.all(cmdb,[child],()=>{
+					resolve(true)
+				})
+			})
 		}else{
 			const cmda = `select subgroups from Members where name = ?`
 			db.all(cmda,[parent],(err,data)=>{
@@ -145,6 +146,7 @@ ipcMain.handle('mnt-group',(event,parent,child)=>{
 			})
 		}
 	})
+	return output
 })
 
 // Rename monitored group

@@ -15,6 +15,8 @@
 	# Fixed
 	1. Fix when you create outside all groups it would crash
 		-- finished
+	2. Fix the bug that Groups cannot update after creating new group
+		-- finished
 ---
 	## 2023.05.15		version 0.6.3.1
 	-- Update function
