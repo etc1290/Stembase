@@ -2,6 +2,16 @@
  File tagging system
 
 ---
+	## 2023.05.16		version 0.6.4
+	-- Rewrite function
+	-- Bug fix
+	# Changed 
+	1. Change mntgroup into db-based style
+		-- finished
+	# Fixed
+	1. Fix when you create outside all groups it would crash
+		-- finished
+---
 	## 2023.05.15		version 0.6.3.1
 	-- Update function
 	-- Rewrite function

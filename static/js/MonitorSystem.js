@@ -6,10 +6,20 @@ const Stemdb = env('StemdbDir')
 const db = new sqlite3.Database(Stemdb + '.db')
 const mdbStorage = env('StemMGDir')
 
-
+// Monitored database loader
 const mdbLoader = (folder) =>{
 	return new sqlite3.Database(mdbStorage + '//' + folder + '.db')
 }	
+// Create database
+const mntdbBuild = ()=>{
+	const mdb = mdbLoader('Groups')
+	mdb.run(`create table "Members" (
+		"id"	integer not null unique,
+		"name"	text not null unique,
+		"subgroups"	text not null,
+		primary key("id" autoincrement)
+	)`,()=>{})
+}
 const idPicker = (arr) =>{
 	let counter = id = 0
 	if(!arr[0]){
@@ -83,13 +93,21 @@ ipcMain.handle('mnt-create',(event)=>{
 		const grouplist = filelist.filter((e)=>{return e.startsWith('New Group #')})
 		const id = idPicker(grouplist)
 		const newname = 'New Group #' + id
-		const mdb = mdbLoader(newname)
-		resolve(newname)
+		const newdb = mdbLoader(newname)
+		const mdb = mdbLoader('Groups')
+		const cmd = `insert into Members(name) values(?)`
+		mdb.all(cmd,[newname],()=>{
+			console.log(newname)
+			resolve(newname)
+		})
+		//resolve(newname)
 	})
 	return output
 })
 // Load monitored groups
-ipcMain.handle('mnt-group',(event)=>{
+
+ipcMain.handle('mnt-group',(event,parent,child)=>{
+	/*
 	const output = new Promise((resolve)=>{
 		const filelist = fs.readdirSync(mdbStorage)
 		const grouplist = filelist.filter((e)=>{return e.endsWith('.db')})
@@ -105,7 +123,35 @@ ipcMain.handle('mnt-group',(event)=>{
 		resolve(idlist)
 	})
 	return output
+	*/
+	const isGroups = parent == 'Groups'
+	const output = new Promise((resolve)=>{
+		const mdb = mdbLoader('Groups')
+		if(isGroups){
+			const cmd = `insert into Members(name) values(?)`
+			mdb.all(cmd,[child],(err,res)=>{resolve(true)})
+		}else{
+			const cmda = `select subgroups from Members where name = ?`
+			db.all(cmda,[parent],(err,data)=>{
+				if(err){
+					resolve(false)
+				}else{
+					const grouplist = data.split(',')
+					grouplist.push(child)
+					const cmdb = `update subgroups from Members where name=?`
+					db.all(cmdb,[grouplist+''],(err,res)=>{
+						if(err){
+							resolve(false)
+						}else{
+							resolve(true)
+						}
+					})
+				}
+			})
+		}
+	})
 })
+
 // Rename monitored group
 ipcMain.handle('mnt-rename', (event,oldname,newname)=>{
 	const output = new Promise((resolve)=>{
@@ -144,4 +190,5 @@ ipcMain.handle('mnt-update',(event,folder,name)=>{
 	})
 	return output
 })
-
+// Initialize
+mntdbBuild()

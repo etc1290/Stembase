@@ -315,19 +315,24 @@ const mntmenufunc = async()=>{
 	// Data
 		// New:							Create new monitored group
 	document.getElementById('mnt-cm-new').addEventListener('mousedown',async()=>{
-		const group = document.querySelector('.mnt-selected').closest('.mnt-folder')
-		console.log(group)
+		let group = 0
+		try{
+			group = document.querySelector('.mnt-selected').closest('.mnt-folder')
+		}catch(err){
+			group = document.getElementById('mnt-group')
+		}
 		const header = group.children[0].innerHTML
 		const isGroups = group.id == 'mnt-group'
 		const newGroup = await window.mnt.create()		
 		if(newGroup){
 			if(!isGroups){
 				const isCreate = await window.mnt.update(header,newGroup)
+				console.log(isCreate)
 				if(isCreate){
 					mntgroupwrite(group,false)
 				}
 			}	
-			mntgroup()
+			mntgroup(header,newGroup)
 		}
 	})
 		// Move(Add to Shortcut):		Add this member to Shortcut
@@ -384,22 +389,27 @@ const mntmenufunc = async()=>{
 }
 
 // Side:	Load all monitored group
-const mntgroup = async()=>{
-	
-	const updateDiv = document.getElementById('mnt-group-display')
-	const grouplist = await window.mnt.group()
-	const mntdata = []
-	for(var i=0;i<grouplist.length;i++){
-		const header = `<p class='mnt-folder-header'>` + grouplist[i] + `</p>`
-		const content= `<div class='mnt-folder-content'></div>`
-		const folder = `<div class='mnt-folder mnt-dropzone mnt-subfolder'>` + header + content + `</div>`
-		mntdata[i] = folder
+const mntgroup = async(parent,child)=>{
+	let isAppend = false
+
+	if(parent){
+		isAppend = await window.mnt.group(parent,child)		
 	}
-	updateDiv.innerHTML = mntdata.join('')
-	const group = updateDiv.querySelectorAll('.mnt-subfolder')
-	mntApplier(group)
-	mntspan(updateDiv)
-	return true
+		const updateDiv = document.getElementById('mnt-group-display')
+		const grouplist = await window.mnt.load('Groups')
+		const mntdata = []
+		for(var i=0;i<grouplist.length;i++){
+			const header = `<p class='mnt-folder-header'>` + grouplist[i] + `</p>`
+			const content= `<div class='mnt-folder-content'></div>`
+			const folder = `<div class='mnt-folder mnt-dropzone mnt-subfolder'>` + header + content + `</div>`
+			mntdata[i] = folder
+		}
+		updateDiv.innerHTML = mntdata.join('')
+		const group = updateDiv.querySelectorAll('.mnt-subfolder')
+		mntApplier(group)
+		mntspan(updateDiv)
+		return true
+	
 }
 // Main:	Load all monitored data
 const mntmain = async()=>{
@@ -418,14 +428,14 @@ const mntmain = async()=>{
 	return true
 }
 
-//Side:		Load Shortcut data
+// Side:		Load Shortcut data
 const mntshortcut = () =>{
 	const mntdata = []
 	const mntshortcut = document.getElementById('mnt-shortcut')
 	mntgroupwrite(mntshortcut,false)
 	return true
 }
-//Side:		Initial page structure
+// Side:		Initial page structure
 const mntbuild = ()=>{
 	const mainStatus = mntmain()
 	const groupStatus = mntgroup()
