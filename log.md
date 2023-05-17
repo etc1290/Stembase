@@ -2,6 +2,12 @@
  File tagging system
 
 ---
+	## 2023.05.17		version 0.6.4.1
+	-- Rebuild database
+	# Added
+	1. Add parent and child into Groups.db and remove subgroup
+		-- finished
+---
 	## 2023.05.16		version 0.6.4
 	-- Rewrite function
 	-- Bug fix

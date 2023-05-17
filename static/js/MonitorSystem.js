@@ -142,7 +142,8 @@ ipcMain.handle('mnt-group',(event,parent,child)=>{
 			const cmda = `create table "Members" (
 				"id"	integer not null unique,
 				"name"	text not null unique,
-				"subgroups"	text,
+				"parent"text,
+				"child"	text,
 				primary key("id" autoincrement)
 				)`
 			const cmdb = `insert into Members(name) values(?)`
