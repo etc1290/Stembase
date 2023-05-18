@@ -2,6 +2,16 @@
  File tagging system
 
 ---
+	## 2023.05.18		version 0.6.5
+	-- Rewrite function
+	-- Bug fix
+	# Changed
+	1. Rewrite mntload function to fit new Groups-based database structure
+		-- finished
+	# Fixed
+	1. Fix the bug that Group append empty item
+		-- finished
+---
 	## 2023.05.17		version 0.6.4.1
 	-- Rebuild database
 	# Added

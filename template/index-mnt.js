@@ -208,13 +208,20 @@ const mntgroupwrite = async(target,isLoaded=true) =>{
 	//}else{
 		const header = target.children[0]
 		const updateDiv = target.children[1]
-		const mntset = await window.mnt.load(header.innerHTML)
-		let mntdata = []
-		for(var i=0;i<mntset.length;i++){
-			const id = `id='mnt-` + header.innerHTML + `-data-` + i + `'`
-			mntdata[i] = `<p ` + id+ ` class='mnt-data' draggable='true'>` + mntset[i] + `</p>`
+		//const dataset = await window.mnt.load(header.innerHTML)
+		const [groupset,dataset] = await window.mnt.load(header.innerHTML)
+		const mntdata = []
+		const groups = []
+		for(var i=0;i<groupset.length;i++){
+			const id = `id='mnt-` + header.innerHTML + `-group-` + i + `'`
+			groups[i]=`<p ` + id + ` class='mnt-data' draggable='false'>` + groupset[i] + `</p>`
 		}
-		updateDiv.innerHTML = mntdata.join('')
+		for(var i=0;i<dataset.length;i++){
+			const id = `id='mnt-` + header.innerHTML + `-data-` + i + `'`
+			mntdata[i] = `<p ` + id+ ` class='mnt-data' draggable='true'>` + dataset[i] + `</p>`
+		}
+		groups.push.apply(groups,mntdata)
+		updateDiv.innerHTML = groups.join('')
 		mntspan(updateDiv)
 	//}
 }
@@ -394,7 +401,7 @@ const mntmenufunc = async()=>{
 const mntgroup = async(parent,child)=>{
 	const mainfunc = async()=>{
 		const updateDiv = document.getElementById('mnt-group-display')
-		const grouplist = await window.mnt.load('Groups')
+		const [,grouplist] = await window.mnt.load('Groups')
 		const mntdata = []
 		for(var i=0;i<grouplist.length;i++){
 			const header = `<p class='mnt-folder-header'>` + grouplist[i] + `</p>`

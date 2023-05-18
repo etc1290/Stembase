@@ -44,17 +44,24 @@ ipcMain.handle('mnt-main', (event) =>{
 	return output
 })
 // Load monitored group data
-ipcMain.handle('mnt-load',(event,folder)=>{
+ipcMain.handle('mnt-load',(event,name)=>{
 	const output = new Promise((resolve)=>{
-		const mdb = mdbLoader(folder)
-		const cmd = `select name from Members`
-		mdb.all(cmd,(err,res)=>{
-			if(err){
-				resolve(false)
-			}else{
-				const data = res.map(i=>Object.values(i)[0])
-				resolve(data)
+		let groupArr= []
+		let dataArr = []
+		const mdb = mdbLoader('Groups')
+		const cmda = `select child from Members where name = ?`
+		mdb.all(cmda,name,(err,res)=>{
+			if(res[0]){
+				groupArr = res.map(i=>Object.values(i)[0])
 			}
+			const mdbs = mdbLoader(name)
+			const cmdb = `select name from Members`
+			mdbs.all(cmdb,(err,res)=>{
+				if(res[0]){
+					dataArr = res.map(i=>Object.values(i)[0])
+				}	
+				resolve([groupArr,dataArr])
+			})
 		})
 	})
 	return output
@@ -80,7 +87,6 @@ ipcMain.handle('mnt-remove',(event,folderset,dataset)=>{
 })
 // Delete monitored groups
 ipcMain.handle('mnt-delete',(event,folderset,dataset)=>{
-	console.log(dataset)
 	const output = new Promise((resolve)=>{
 		const mdb = mdbLoader('Groups')
 		const mdbs= mdbLoader('Shortcut') 
