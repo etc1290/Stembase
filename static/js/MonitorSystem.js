@@ -93,14 +93,14 @@ ipcMain.handle('mnt-delete',(event,folderset,dataset)=>{
 		const cmd = `delete from Members where name =?`
 		const idlist = []
 		for(let i=0;i<dataset.length;i++){
-			console.log(1)
+			//console.log(1)
 			mdbs.all(cmd,[dataset[i]],(err,res)=>{
-				console.log(2)
+			//	console.log(2)
 				if(res){
 					idlist[0] = 'mnt-shortcut'
 				}
 				mdb.all(cmd,[dataset[i]],()=>{
-					console.log(3)
+				//	console.log(3)
 					resolve(idlist)
 				})
 			})
@@ -116,6 +116,7 @@ ipcMain.handle('mnt-create',(event)=>{
 		const id = idPicker(grouplist)
 		const newname = 'New Group #' + id
 		const newdb = mdbLoader(newname)
+		newdb.close()
 		resolve(newname)
 	})
 	return output
@@ -160,14 +161,14 @@ ipcMain.handle('mnt-group',(event,parent,child)=>{
 			})
 		}else{
 			const cmda = `select subgroups from Members where name = ?`
-			db.all(cmda,[parent],(err,data)=>{
+			mdb.all(cmda,[parent],(err,data)=>{
 				if(err){
 					resolve(false)
 				}else{
 					const grouplist = data.split(',')
 					grouplist.push(child)
 					const cmdb = `update subgroups from Members where name=?`
-					db.all(cmdb,[grouplist+''],(err,res)=>{
+					mdb.all(cmdb,[grouplist+''],(err,res)=>{
 						if(err){
 							resolve(false)
 						}else{
@@ -186,13 +187,25 @@ ipcMain.handle('mnt-rename', (event,oldname,newname)=>{
 	const output = new Promise((resolve)=>{
 		const filelist = fs.readdirSync(mdbStorage)
 		const grouplist= filelist.filter((e)=>{return e.startsWith(newname)})
-		if(grouplist[0]){
+		const isDuplicate = filelist.indexOf(newname+'.db')
+		console.log(isDuplicate)
+		if(isDuplicate+1){
+			console.log(grouplist)
 			const id = idPicker(grouplist)
 			newname = newname + '#' + id
 		}
-		fs.rename(mdbStorage + '//' + oldname + '.db',mdbStorage + '//' + newname + '.db',(err)=>{
+		const mdb = mdbLoader('Groups')
+		const cmd = `update Members set name = ? where name =?`
+		mdb.all(cmd,[newname,oldname],(err)=>{
+			console.log(newname)
 			console.log(err)
+			mdb.close()
 			resolve(true)
+		})
+		//console.log(newname)
+		fs.rename(mdbStorage + '//' + oldname + '.db',mdbStorage + '//' + newname + '.db',(err)=>{
+			//console.log(err)
+			
 		})
 	})
 	return output

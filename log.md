@@ -8,8 +8,12 @@
 	# Changed
 	1. Rewrite mntload function to fit new Groups-based database structure
 		-- finished
+	2. Rewrite rename function in new group-based method
+		-- finished
 	# Fixed
 	1. Fix the bug that Group append empty item
+		-- finished
+	2. Fix the bug that duplicate file would miss in rename function
 		-- finished
 ---
 	## 2023.05.17		version 0.6.4.1

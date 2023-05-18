@@ -172,6 +172,7 @@ const mntrename = ()=>{
 	const mainfunc = async()=>{
 		const isReady = await window.mnt.rename(oldname,newname)
 		if(isReady){
+			console.log(1)
 			document.querySelector('.mnt-editing').classList.remove('mnt-editing')
 			mntgroup()
 		}
