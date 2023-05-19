@@ -6,8 +6,14 @@
 ---
 	## 2023.05.19		version 0.6.5.1
 	-- Bug fix
+	-- Style changed
+	# Changed
+	1. Add border to header 
+		-- finished
 	# Fixed
 	1. Fix the bug that group height would stack by dragging
+		-- finished
+	2. Fix the bug that drop event never fire
 		-- finished
 ---
 	## 2023.05.18		version 0.6.5

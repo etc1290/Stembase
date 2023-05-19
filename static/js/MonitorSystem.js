@@ -208,6 +208,7 @@ ipcMain.handle('mnt-rename', (event,oldname,newname)=>{
 ipcMain.handle('mnt-update',(event,folder,name)=>{
 	const output = new Promise(async(resolve)=>{
 		console.log(1)
+		/*
 		const mdbg= mdbLoader('Groups')
 		const cmda = `select id from Members where name = ?`
 		mdbg.all(cmda,name,(err,res)=>{
@@ -230,9 +231,9 @@ ipcMain.handle('mnt-update',(event,folder,name)=>{
 					resolve(true)
 				})
 			}
-		})
+		})*/
 		
-		/*
+		
 		const mdb = mdbLoader(folder)
 		mdb.run(`create table 'Members'(
 			"id" 	integer not null unique,
@@ -242,7 +243,7 @@ ipcMain.handle('mnt-update',(event,folder,name)=>{
 				const cmd = `insert into Members(name) values(?)`
 				mdb.all(cmd,[name],(err,res)=>{resolve(true)})
 			}
-		)*/
+		)
 	})
 	return output
 })

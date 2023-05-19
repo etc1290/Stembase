@@ -73,7 +73,7 @@
 	
 }
 .mnt-folder-header{
-	padding-bottom:	5px solid rgb(255,238,214);
+	border-bottom:	5px solid rgb(255,238,214);
 	height:			26px;
 }
 .mnt-folder-header.mnt-selected{

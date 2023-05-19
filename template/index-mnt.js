@@ -204,35 +204,35 @@ const mntrename = ()=>{
 }
 // Side:	Monitored group loader
 const mntgroupwrite = async(target,isLoaded=true) =>{
-	//if(isLoaded){
-	//	isLoaded = target.querySelector('.mnt-data')
-	//}else{
-		const header = target.children[0]
-		const updateDiv = target.children[1]
-		//const dataset = await window.mnt.load(header.innerHTML)
-		const [groupset,dataset] = await window.mnt.load(header.innerHTML)
-		const mntdata = []
-		const groups = []
-		for(var i=0;i<groupset.length;i++){
-			const id = `id='mnt-` + header.innerHTML + `-group-` + i + `'`
-			groups[i]=`<p ` + id + ` class='mnt-data' draggable='false'>` + groupset[i] + `</p>`
-		}
-		for(var i=0;i<dataset.length;i++){
-			const id = `id='mnt-` + header.innerHTML + `-data-` + i + `'`
-			mntdata[i] = `<p ` + id+ ` class='mnt-data' draggable='true'>` + dataset[i] + `</p>`
-		}
-		groups.push.apply(groups,mntdata)
-		updateDiv.innerHTML = groups.join('')
-		mntspan(updateDiv)
-	//}
+	const header = target.children[0]
+	const updateDiv = target.children[1]
+	//const dataset = await window.mnt.load(header.innerHTML)
+	const [groupset,dataset] = await window.mnt.load(header.innerHTML)
+	const mntdata = []
+	const groups = []
+	for(var i=0;i<groupset.length;i++){
+		const id = `id='mnt-` + header.innerHTML + `-group-` + i + `'`
+		groups[i]=`<p ` + id + ` class='mnt-data' draggable='false'>` + groupset[i] + `</p>`
+	}
+	for(var i=0;i<dataset.length;i++){
+		const id = `id='mnt-` + header.innerHTML + `-data-` + i + `'`
+		mntdata[i] = `<p ` + id+ ` class='mnt-data' draggable='true'>` + dataset[i] + `</p>`
+	}
+	groups.push.apply(groups,mntdata)
+	updateDiv.innerHTML = groups.join('')
+	mntspan(updateDiv)
 }
+const mntcancel = (event)=>{
+			event.preventDefault()
+			//event.stopPropagation()
+			return false
+		}
 // Side:	Function of monitored data
 const mntfunc = (target)=>{
 	// Data function
 	for(let i=0;i<target.length;i++){
 		// Jump to monitored path
-		const el = target[i]
-		
+		const el = target[i]	
 		el.addEventListener('dblclick',(event)=>{
 			if(mntcheck(event,'mnt-data')){
 				floorNum = 'fs-floor-0'
@@ -245,6 +245,7 @@ const mntfunc = (target)=>{
 		})
 		el.addEventListener('dragend',(event)=>{
 			event.target.style.background = ''
+			mntcancel(event)
 		})
 		// Style
 		el.addEventListener('mousedown',(event)=>{
@@ -252,15 +253,14 @@ const mntfunc = (target)=>{
 		})
 		// Folder Function
 			// Drop Folder
-		let counter = isExpand = false
-		const mntcancel = (event)=>{
-			event.preventDefault()
-			event.stopPropagation()
-			return false
-		}
+		let counter = isExpand = false		
 		if(el.classList.contains('mnt-dropzone')){
+			el.addEventListener('dragover',(event)=>{
+				mntcancel(event)
+			})
 			el.addEventListener('drop',async(event)=>{
 				mntcancel(event)
+				console.log(1)
 				const dropid = event.dataTransfer.getData('text/plain')
 				const dropdata = document.getElementById(dropid)
 				const isClone = dropdata.parentNode.parentNode.classList.contains('mnt-dropzone')
@@ -271,7 +271,6 @@ const mntfunc = (target)=>{
 				// Monitored group update
 				const dropzoneid = event.currentTarget.id
 				let isExist = true
-				console.log(header.innerHTML)
 				if(header.innerHTML!=='Groups'){
 					isExist = await window.mnt.update(header.innerHTML,dropdata.innerHTML)
 				}
@@ -300,12 +299,11 @@ const mntfunc = (target)=>{
 // Side:	Handle drag-related function
 const mntdragfunc = ()=>{
 	document.addEventListener('mntdrag:enter',(event)=>{
-		
+		//mntcancel(event)
 		const contentList = []
 		const folder = event.target.closest('.mnt-folder')
 		const content = folder.children[1]
 		let node = content
-		console.log(folder.id + ':enter')
 		while(!node.classList.contains('function-section')){
 			contentList.push(node)
 			node = node.parentNode.parentNode
@@ -316,10 +314,10 @@ const mntdragfunc = ()=>{
 		}
 	})
 	document.addEventListener('mntdrag:leave',(event)=>{
+		//mntcancel(event)
 		const contentList = []
 		const folder = event.target.closest('.mnt-folder')
 		const content = folder.children[1]
-		console.log(folder.id + ':leave')
 		let node = content
 		while(!node.classList.contains('function-section')){
 			contentList.push(node)
@@ -503,8 +501,9 @@ const mntInit = ()=>{
 		mntrename()
 		const mntfolder = document.querySelectorAll('.mnt-folder')
 		mntdragfunc()
-		mntApplier(mntfolder)
 		mntmenufunc()
+		mntApplier(mntfolder)
+		
 	}
 	
 	
