@@ -240,6 +240,7 @@ const mntfunc = (target)=>{
 			}		
 		})
 		// Drag
+		
 		el.addEventListener('dragstart',(event)=>{
 			event.dataTransfer.setData('text/plain',event.target.id)
 		})
@@ -260,7 +261,7 @@ const mntfunc = (target)=>{
 			})
 			el.addEventListener('drop',async(event)=>{
 				mntcancel(event)
-				console.log(1)
+				
 				const dropid = event.dataTransfer.getData('text/plain')
 				const dropdata = document.getElementById(dropid)
 				const isClone = dropdata.parentNode.parentNode.classList.contains('mnt-dropzone')
@@ -270,14 +271,43 @@ const mntfunc = (target)=>{
 				
 				// Monitored group update
 				const dropzoneid = event.currentTarget.id
-				let isExist = true
+				const dropzone = event.currentTarget
+				//let isExist = true
 				if(header.innerHTML!=='Groups'){
-					isExist = await window.mnt.update(header.innerHTML,dropdata.innerHTML)
+					const isExist = await window.mnt.update(header.innerHTML,dropdata.innerHTML)
+					if(!isClone && !isExist){
+						console.log(278)										
+						const dropclone = dropdata.cloneNode(true)
+						dropdata.parentNode.insertBefore(dropclone,dropdata.nextSibling)
+					
+					}
+					if(!isExist){
+						console.log(283)
+						const isFolderOnly = folder.classList.contains('folder-only')						
+						if(isFolderOnly){
+							console.log(286)
+							const isFolder = dropdata.classList.contains('mnt-folder')
+							if(isFolder){
+								console.log(289)
+								content.appenchild(dropdata)
+								mntspan(content)
+							}
+						}else{
+							//content.appendChild(dropdata)
+							console.log(dropzoneid)
+							mntgroupwrite(dropzone)
+							mntspan(content)
+						}
+					
+					}
 				}
+				/*
 				if(!isClone && !isExist){
-					console.log(278)
+					console.log(278)										
 					const dropclone = dropdata.cloneNode(true)
 					dropdata.parentNode.insertBefore(dropclone,dropdata.nextSibling)
+					
+					//event.dataTransfer.dropEffect='copy'
 				}
 				if(!isExist){
 					console.log(283)
@@ -298,6 +328,7 @@ const mntfunc = (target)=>{
 					}
 					
 				}
+				*/
 			})
 		}
 	}	
@@ -433,7 +464,7 @@ const mntgroup = async(parent,child)=>{
 		for(var i=0;i<grouplist.length;i++){
 			const header = `<p class='mnt-folder-header'>` + grouplist[i] + `</p>`
 			const content= `<div class='mnt-folder-content'></div>`
-			const folder = `<div id='mnt-user-` + grouplist[i] + `' class='mnt-folder mnt-dropzone mnt-subfolder'>` + header + content + `</div>`
+			const folder = `<div id='mnt-user-` + grouplist[i] + `' class='mnt-folder mnt-dropzone mnt-subfolder' draggable='true'>` + header + content + `</div>`
 			mntdata[i] = folder
 		}
 		updateDiv.innerHTML = mntdata.join('')

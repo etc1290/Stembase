@@ -219,11 +219,16 @@ ipcMain.handle('mnt-update',(event,folder,name)=>{
 				mdbg.all(cmdb,folder,(err,res)=>{
 					console.log('220:' + res)
 					children = res.map(i=>Object.values(i)[0])
-					children.push(id)
-					const cmdc = `update Members set child = ? where name = ?`
-					mdbg.all(cmdc,folder,(err,res)=>{
+					const isExist  = children.indexOf(id)
+					if(isExist){
 						resolve(true)
-					})
+					}else{
+						children.push(id)
+						const cmdc = `update Members set child = ? where name = ?`
+						mdbg.all(cmdc,[children,folder],(err,res)=>{
+							resolve(false)
+						})
+					}
 				})
 			}else{
 				console.log('229-' + res)
@@ -231,7 +236,11 @@ ipcMain.handle('mnt-update',(event,folder,name)=>{
 				const cmd = `insert into Members(name) values(?)`
 				mdb.all(cmd,name,(err,res)=>{
 					console.log('233-' + res)
-					resolve(true)
+					if(err){
+						resolve(true)
+					}else{
+						resolve(false)
+					}
 				})
 			}
 		})

@@ -18,6 +18,8 @@
 		-- finished
 	2. Fix the bug that drop event never fire
 		-- finished
+	3. Fix the bug that group cannot update properly
+		-- finished
 ---
 	## 2023.05.18		version 0.6.5
 	-- Rewrite function
