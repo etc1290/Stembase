@@ -188,23 +188,17 @@ ipcMain.handle('mnt-rename', (event,oldname,newname)=>{
 		const filelist = fs.readdirSync(mdbStorage)
 		const grouplist= filelist.filter((e)=>{return e.startsWith(newname)})
 		const isDuplicate = filelist.indexOf(newname+'.db')
-		console.log(isDuplicate)
 		if(isDuplicate+1){
-			console.log(grouplist)
 			const id = idPicker(grouplist)
 			newname = newname + '#' + id
 		}
 		const mdb = mdbLoader('Groups')
 		const cmd = `update Members set name = ? where name =?`
 		mdb.all(cmd,[newname,oldname],(err)=>{
-			console.log(newname)
-			console.log(err)
 			mdb.close()
 			resolve(true)
 		})
-		//console.log(newname)
 		fs.rename(mdbStorage + '//' + oldname + '.db',mdbStorage + '//' + newname + '.db',(err)=>{
-			//console.log(err)
 			
 		})
 	})
@@ -212,7 +206,33 @@ ipcMain.handle('mnt-rename', (event,oldname,newname)=>{
 })
 // Update monitored group members
 ipcMain.handle('mnt-update',(event,folder,name)=>{
-	const output = new Promise((resolve)=>{
+	const output = new Promise(async(resolve)=>{
+		console.log(1)
+		const mdbg= mdbLoader('Groups')
+		const cmda = `select id from Members where name = ?`
+		mdbg.all(cmda,name,(err,res)=>{
+			console.log(res)
+			if(res){
+				const id = res
+				const cmdb = `select child from Members where name = ?`
+				mdbg.all(cmdb,folder,(err,res)=>{
+					children = res.map(i=>Object.values(i)[0])
+					children.push(id)
+					const cmdc = `update Members set child = ? where name = ?`
+					mdbg.all(cmdc,folder,(err,res)=>{
+						resolve(true)
+					})
+				})
+			}else{
+				const mdb = mdbLoader(folder)
+				const cmd = `insert into Members(name) values(?)`
+				mdb.all(cmd,name,(err,res)=>{
+					resolve(true)
+				})
+			}
+		})
+		
+		/*
 		const mdb = mdbLoader(folder)
 		mdb.run(`create table 'Members'(
 			"id" 	integer not null unique,
@@ -222,7 +242,7 @@ ipcMain.handle('mnt-update',(event,folder,name)=>{
 				const cmd = `insert into Members(name) values(?)`
 				mdb.all(cmd,[name],(err,res)=>{resolve(true)})
 			}
-		)
+		)*/
 	})
 	return output
 })

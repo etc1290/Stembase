@@ -271,6 +271,7 @@ const mntfunc = (target)=>{
 				// Monitored group update
 				const dropzoneid = event.currentTarget.id
 				let isExist = true
+				console.log(header.innerHTML)
 				if(header.innerHTML!=='Groups'){
 					isExist = await window.mnt.update(header.innerHTML,dropdata.innerHTML)
 				}
@@ -299,10 +300,12 @@ const mntfunc = (target)=>{
 // Side:	Handle drag-related function
 const mntdragfunc = ()=>{
 	document.addEventListener('mntdrag:enter',(event)=>{
+		
 		const contentList = []
 		const folder = event.target.closest('.mnt-folder')
 		const content = folder.children[1]
 		let node = content
+		console.log(folder.id + ':enter')
 		while(!node.classList.contains('function-section')){
 			contentList.push(node)
 			node = node.parentNode.parentNode
@@ -313,8 +316,19 @@ const mntdragfunc = ()=>{
 		}
 	})
 	document.addEventListener('mntdrag:leave',(event)=>{
+		const contentList = []
 		const folder = event.target.closest('.mnt-folder')
 		const content = folder.children[1]
+		console.log(folder.id + ':leave')
+		let node = content
+		while(!node.classList.contains('function-section')){
+			contentList.push(node)
+			node = node.parentNode.parentNode
+		}
+		for(var i=0;i<contentList.length;i++){
+			const c = contentList[i]
+			c.style.height = c.clientHeight-100+'px'
+		}
 		mntspan(content)
 	})
 }
@@ -343,8 +357,16 @@ const mntmenufunc = async()=>{
 		}
 	})
 		// Move(Add to Shortcut):		Add this member to Shortcut
-	document.getElementById('mnt-movemenu-shortcut').addEventListener('mousedown',()=>{
-		console.log('add this to shorcut')
+	
+	document.getElementById('mnt-movemenu-shortcut').addEventListener('mousedown',async()=>{
+		console.log('Add to shortcut')
+		/*
+		const selected = uxSelect('mnt')
+		let isFinished = false
+		for(var i=0;i<selected['Data'].length;i++){
+			isFinished = await window.mnt.update('Shortcut',selected['Data'][i])
+		}	*/
+		
 	})
 		// Remove(Delete this record):	Delete all tags and meta and remove monitored status of this member
 	document.getElementById('mnt-removemenu-delete').addEventListener('mousedown',()=>{

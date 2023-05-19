@@ -1,6 +1,14 @@
 # Stembase
  File tagging system
 
+
+
+---
+	## 2023.05.19		version 0.6.5.1
+	-- Bug fix
+	# Fixed
+	1. Fix the bug that group height would stack by dragging
+		-- finished
 ---
 	## 2023.05.18		version 0.6.5
 	-- Rewrite function
