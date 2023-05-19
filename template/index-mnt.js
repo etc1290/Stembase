@@ -275,19 +275,25 @@ const mntfunc = (target)=>{
 					isExist = await window.mnt.update(header.innerHTML,dropdata.innerHTML)
 				}
 				if(!isClone && !isExist){
+					console.log(278)
 					const dropclone = dropdata.cloneNode(true)
 					dropdata.parentNode.insertBefore(dropclone,dropdata.nextSibling)
 				}
 				if(!isExist){
+					console.log(283)
 					const isFolderOnly = folder.classList.contains('folder-only')						
 					if(isFolderOnly){
+						console.log(286)
 						const isFolder = dropdata.classList.contains('mnt-folder')
 						if(isFolder){
+							console.log(289)
 							content.appenchild(dropdata)
 							mntspan(content)
 						}
 					}else{
-						content.appendChild(dropdata)
+						//content.appendChild(dropdata)
+						console.log(event.currentTarget.id)
+						mntgroupwrite(event.currentTarget.id)
 						mntspan(content)
 					}
 					

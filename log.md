@@ -7,8 +7,11 @@
 	## 2023.05.19		version 0.6.5.1
 	-- Bug fix
 	-- Style changed
+	-- Rewrite function
 	# Changed
 	1. Add border to header 
+		-- finished
+	2. Rewrite mnt-update function in group-based method
 		-- finished
 	# Fixed
 	1. Fix the bug that group height would stack by dragging

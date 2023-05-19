@@ -208,15 +208,16 @@ ipcMain.handle('mnt-rename', (event,oldname,newname)=>{
 ipcMain.handle('mnt-update',(event,folder,name)=>{
 	const output = new Promise(async(resolve)=>{
 		console.log(1)
-		/*
+		
 		const mdbg= mdbLoader('Groups')
 		const cmda = `select id from Members where name = ?`
 		mdbg.all(cmda,name,(err,res)=>{
-			console.log(res)
-			if(res){
+			//console.log('215:' + res)
+			if(res[0]){
 				const id = res
 				const cmdb = `select child from Members where name = ?`
 				mdbg.all(cmdb,folder,(err,res)=>{
+					console.log('220:' + res)
 					children = res.map(i=>Object.values(i)[0])
 					children.push(id)
 					const cmdc = `update Members set child = ? where name = ?`
@@ -225,15 +226,17 @@ ipcMain.handle('mnt-update',(event,folder,name)=>{
 					})
 				})
 			}else{
+				console.log('229-' + res)
 				const mdb = mdbLoader(folder)
 				const cmd = `insert into Members(name) values(?)`
 				mdb.all(cmd,name,(err,res)=>{
+					console.log('233-' + res)
 					resolve(true)
 				})
 			}
-		})*/
+		})
 		
-		
+		/*
 		const mdb = mdbLoader(folder)
 		mdb.run(`create table 'Members'(
 			"id" 	integer not null unique,
@@ -243,7 +246,7 @@ ipcMain.handle('mnt-update',(event,folder,name)=>{
 				const cmd = `insert into Members(name) values(?)`
 				mdb.all(cmd,[name],(err,res)=>{resolve(true)})
 			}
-		)
+		)*/
 	})
 	return output
 })
