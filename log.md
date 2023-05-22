@@ -16,6 +16,8 @@
 	# Changed
 	1. Rewrite mnt-update in multiple promise method
 		-- finished
+	2. Rewrite mntfunc function to adapt multiple promise feature
+		-- finished
 	# Fixed
 	1. Fix the bug that table of monitored group is missing
 		-- finished

@@ -272,67 +272,33 @@ const mntfunc = (target)=>{
 				// Monitored group update
 				const dropzoneid = event.currentTarget.id
 				const dropzone = event.currentTarget
-				//let isExist = true
 				if(header.innerHTML!=='Groups'){
-					//const isExist = await window.mnt.update(header.innerHTML,dropdata.innerHTML)
 					const existArr = await window.mnt.update([header.innerHTML],[dropdata.innerHTML])
-					const isExist = existArr[0]
-					console.log(isExist)
-					if(!isClone && !isExist){
-						console.log(278)										
-						const dropclone = dropdata.cloneNode(true)
-						dropdata.parentNode.insertBefore(dropclone,dropdata.nextSibling)
-					
-					}
-					if(!isExist){
-						console.log(283)
-						const isFolderOnly = folder.classList.contains('folder-only')						
-						if(isFolderOnly){
-							console.log(286)
-							const isFolder = dropdata.classList.contains('mnt-folder')
-							if(isFolder){
-								console.log(289)
-								//content.appenchild(dropdata)
-								mntgroupwrite(dropzone)
-								//mntspan(content)
-							}
-						}else{
-							//content.appendChild(dropdata)
-							console.log(dropzoneid)
-							mntgroupwrite(dropzone)
-							//mntspan(content)
-						}				
-					}
-					mntspan(content)
-				}
-				/*
-				if(!isClone && !isExist){
-					console.log(278)										
-					const dropclone = dropdata.cloneNode(true)
-					dropdata.parentNode.insertBefore(dropclone,dropdata.nextSibling)
-					
-					//event.dataTransfer.dropEffect='copy'
-				}
-				if(!isExist){
-					console.log(283)
-					const isFolderOnly = folder.classList.contains('folder-only')						
-					if(isFolderOnly){
-						console.log(286)
-						const isFolder = dropdata.classList.contains('mnt-folder')
-						if(isFolder){
-							console.log(289)
-							content.appenchild(dropdata)
-							mntspan(content)
+					for(var i=0;i<existArr.length;i++){
+						const isExist = existArr[i]
+						if(!isClone && !isExist){
+							console.log(278)										
+							const dropclone = dropdata.cloneNode(true)
+							dropdata.parentNode.insertBefore(dropclone,dropdata.nextSibling)					
 						}
-					}else{
-						//content.appendChild(dropdata)
-						console.log(event.currentTarget.id)
-						mntgroupwrite(event.currentTarget.id)
+						if(!isExist){
+							console.log(283)
+							const isFolderOnly = folder.classList.contains('folder-only')						
+							if(isFolderOnly){
+								console.log(286)
+								const isFolder = dropdata.classList.contains('mnt-folder')
+								if(isFolder){
+									console.log(289)
+									mntgroupwrite(dropzone)
+								}
+							}else{
+								console.log(dropzoneid)
+								mntgroupwrite(dropzone)
+							}				
+						}
 						mntspan(content)
-					}
-					
+					}					
 				}
-				*/
 			})
 		}
 	}	
