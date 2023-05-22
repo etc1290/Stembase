@@ -213,58 +213,46 @@ ipcMain.handle('mnt-rename', (event,oldname,newname)=>{
 	return output
 })
 // Update monitored group members
-ipcMain.handle('mnt-update',(event,folder,name)=>{
-	const output = new Promise(async(resolve)=>{
-		console.log(1)
-		
+ipcMain.handle('mnt-update',(event,folderset,nameset)=>{
+	const promiseArr = []
+	const cmda = `select id from Members where name = ?`
+	for(var i=0;i<folderset.length;i++){
+		const folder = folderset[i]
+		const name	 = nameset[i]
 		const mdbg= mdbLoader('Groups')
-		const cmda = `select id from Members where name = ?`
-		mdbg.all(cmda,name,(err,res)=>{
-			//console.log('215:' + res)
-			if(res[0]){
-				const id = res
-				const cmdb = `select child from Members where name = ?`
-				mdbg.all(cmdb,folder,(err,res)=>{
-					console.log('220:' + res)
-					children = res.map(i=>Object.values(i)[0])
-					const isExist  = children.indexOf(id)
-					if(isExist){
-						resolve(true)
-					}else{
-						children.push(id)
-						const cmdc = `update Members set child = ? where name = ?`
-						mdbg.all(cmdc,[children,folder],(err,res)=>{
+		promiseArr[i] = new Promise((resolve)=>{
+			mdbg.all(cmda,name,(err,res)=>{
+				if(res[0]){
+					const id = res
+					const cmdb = `select child from Members where name = ?`
+					mdbg.all(cmdb,folder,(err,res)=>{
+						children = res.map(i=>Object.values(i)[0])
+						const isExist  = children.indexOf(id)
+						if(isExist){
+							resolve(true)
+						}else{
+							children.push(id)
+							const cmdc = `update Members set child = ? where name = ?`
+							mdbg.all(cmdc,[children,folder],(err,res)=>{
+								resolve(false)
+							})
+						}
+					})
+				}else{
+					const mdb = mdbLoader(folder)
+					const cmd = `insert into Members(name) values(?)`
+					mdb.all(cmd,name,(err,res)=>{
+						if(err){
+							resolve(true)
+						}else{
 							resolve(false)
-						})
-					}
-				})
-			}else{
-				console.log('229-' + res)
-				const mdb = mdbLoader(folder)
-				const cmd = `insert into Members(name) values(?)`
-				mdb.all(cmd,name,(err,res)=>{
-					console.log('233-' + res)
-					if(err){
-						resolve(true)
-					}else{
-						resolve(false)
-					}
-				})
-			}
+						}
+					})
+				}
+			})
 		})
-		
-		/*
-		const mdb = mdbLoader(folder)
-		mdb.run(`create table 'Members'(
-			"id" 	integer not null unique,
-			"name" 	text not null,
-			primary key("id" autoincrement),
-			unique(name))`,()=>{
-				const cmd = `insert into Members(name) values(?)`
-				mdb.all(cmd,[name],(err,res)=>{resolve(true)})
-			}
-		)*/
-	})
+	}
+	const output = Promise.all(promiseArr)
 	return output
 })
 // Setting Support

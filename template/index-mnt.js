@@ -274,7 +274,10 @@ const mntfunc = (target)=>{
 				const dropzone = event.currentTarget
 				//let isExist = true
 				if(header.innerHTML!=='Groups'){
-					const isExist = await window.mnt.update(header.innerHTML,dropdata.innerHTML)
+					//const isExist = await window.mnt.update(header.innerHTML,dropdata.innerHTML)
+					const existArr = await window.mnt.update([header.innerHTML],[dropdata.innerHTML])
+					const isExist = existArr[0]
+					console.log(isExist)
 					if(!isClone && !isExist){
 						console.log(278)										
 						const dropclone = dropdata.cloneNode(true)
@@ -337,7 +340,7 @@ const mntfunc = (target)=>{
 // Side:	Handle drag-related function
 const mntdragfunc = ()=>{
 	document.addEventListener('mntdrag:enter',(event)=>{
-		//mntcancel(event)
+		mntcancel(event)
 		const contentList = []
 		const folder = event.target.closest('.mnt-folder')
 		const content = folder.children[1]
@@ -352,7 +355,7 @@ const mntdragfunc = ()=>{
 		}
 	})
 	document.addEventListener('mntdrag:leave',(event)=>{
-		//mntcancel(event)
+		mntcancel(event)
 		const contentList = []
 		const folder = event.target.closest('.mnt-folder')
 		const content = folder.children[1]
@@ -384,7 +387,8 @@ const mntmenufunc = async()=>{
 		const newGroup = await window.mnt.create()		
 		if(newGroup){
 			if(!isGroups){
-				const isCreate = await window.mnt.update(header,newGroup)
+				//const isCreate = await window.mnt.update(header,newGroup)
+				const isCreate = await window.mnt.update([header],[newGroup])
 				if(isCreate){
 					mntgroupwrite(group,false)
 				}
@@ -401,7 +405,8 @@ const mntmenufunc = async()=>{
 		let isFinished = false
 		for(var i=0;i<selected['Data'].length;i++){
 			isFinished = await window.mnt.update('Shortcut',selected['Data'][i])
-		}	*/
+		}
+		*/
 		
 	})
 		// Remove(Delete this record):	Delete all tags and meta and remove monitored status of this member

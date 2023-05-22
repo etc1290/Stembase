@@ -6,11 +6,15 @@
 ---	
 	## 2023.05.22		version 0.6.6
 	-- Function implementation
+	-- Rewrite function
 	-- Bug fix
 	# Added
 	1. Add monitored groups missing scan function
 		-- finished
 	2. Add more functions at mnt-delete
+		-- finished
+	# Changed
+	1. Rewrite mnt-update in multiple promise method
 		-- finished
 	# Fixed
 	1. Fix the bug that table of monitored group is missing
