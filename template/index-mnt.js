@@ -365,15 +365,11 @@ const mntmenufunc = async()=>{
 		// Move(Add to Shortcut):		Add this member to Shortcut
 	
 	document.getElementById('mnt-movemenu-shortcut').addEventListener('mousedown',async()=>{
-		console.log('Add to shortcut')
-		/*
 		const selected = uxSelect('mnt')
-		let isFinished = false
-		for(var i=0;i<selected['Data'].length;i++){
-			isFinished = await window.mnt.update('Shortcut',selected['Data'][i])
-		}
-		*/
-		
+		const shortcutArr = [...selected['Data']].fill('Shortcut')
+		const isFinished = await window.mnt.update(shortcutArr,selected['Data'])
+		const group = document.getElementById('mnt-shortcut')
+		mntgroupwrite(group)
 	})
 		// Remove(Delete this record):	Delete all tags and meta and remove monitored status of this member
 	document.getElementById('mnt-removemenu-delete').addEventListener('mousedown',()=>{

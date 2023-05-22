@@ -13,6 +13,8 @@
 		-- finished
 	2. Add more functions at mnt-delete
 		-- finished
+	3. Add 'Add to Shortcut' function
+		-- finished
 	# Changed
 	1. Rewrite mnt-update in multiple promise method
 		-- finished
