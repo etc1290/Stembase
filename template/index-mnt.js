@@ -268,7 +268,7 @@ const mntfunc = (target)=>{
 				const folder = event.target.closest('.mnt-folder')			
 				const content = folder.children[1]
 				const header = folder.children[0]
-				
+				console.log(dropid)
 				// Monitored group update
 				const dropzoneid = event.currentTarget.id
 				const dropzone = event.currentTarget
@@ -289,7 +289,8 @@ const mntfunc = (target)=>{
 							const isFolder = dropdata.classList.contains('mnt-folder')
 							if(isFolder){
 								console.log(289)
-								content.appenchild(dropdata)
+								//content.appenchild(dropdata)
+								mntgroupwrite(dropzone)
 								mntspan(content)
 							}
 						}else{

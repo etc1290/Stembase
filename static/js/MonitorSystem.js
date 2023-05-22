@@ -259,5 +259,53 @@ ipcMain.handle('mnt-update',(event,folder,name)=>{
 	})
 	return output
 })
-// Initialize
+// Setting Support
+ipcMain.handle('mnt-groupscan',async(event)=>{
+	const promiseArr = []
+	const mdb = mdbLoader('Groups')
+	const cmd = `select name from Members`
+	const cmda = `insert or ignore into Members(name) values(?)`
+	const filelist = fs.readdirSync(mdbStorage)
+	const grouplist= filelist.filter((e)=>{return e.endsWith('.db')})
+	grouplist.splice(grouplist.indexOf('Groups'),1)
+	grouplist.splice(grouplist.indexOf('Shortcut'),1)
+	for(let i=0;i<grouplist.length;i++){
+		promiseArr[i] =new Promise((resolve)=>{
+			mdb.all(cmd,[],()=>{	
+				name = grouplist[i].slice(0,-3)
+				mdb.all(cmda,name,(err,res)=>{
+					resolve(true)
+				})
+			})
+		})
+	}
+	const output = await Promise.all(promiseArr)	
+	return output
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
