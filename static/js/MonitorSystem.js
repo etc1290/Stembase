@@ -87,25 +87,26 @@ ipcMain.handle('mnt-remove',(event,folderset,dataset)=>{
 })
 // Delete monitored groups
 ipcMain.handle('mnt-delete',(event,folderset,dataset)=>{
-	const output = new Promise((resolve)=>{
-		const mdb = mdbLoader('Groups')
-		const mdbs= mdbLoader('Shortcut') 
-		const cmd = `delete from Members where name =?`
-		const idlist = []
-		for(let i=0;i<dataset.length;i++){
-			//console.log(1)
+	const mdb = mdbLoader('Groups')
+	const mdbs= mdbLoader('Shortcut') 
+	const cmd = `delete from Members where name =?`
+	const idlist = []
+	const promiseArr = []
+	for(let i=0;i<dataset.length;i++){
+		promiseArr[i] = new Promise((resolve)=>{
 			mdbs.all(cmd,[dataset[i]],(err,res)=>{
-			//	console.log(2)
 				if(res){
 					idlist[0] = 'mnt-shortcut'
 				}
 				mdb.all(cmd,[dataset[i]],()=>{
-				//	console.log(3)
-					resolve(idlist)
+					fs.unlink(mdbStorage + '\\' + dataset[i] + '.db',(err)=>{
+						resolve(idlist)
+					})					
 				})
 			})
-		}
-	})
+		})
+	}
+	const output = Promise.all(promiseArr)
 	return output
 })
 // Create new monitored group
@@ -268,7 +269,7 @@ ipcMain.handle('mnt-update',(event,folder,name)=>{
 })
 // Setting Support
 // Restore the missing records in Groups 
-ipcMain.handle('mnt-groupscan',async(event)=>{
+ipcMain.handle('mnt-groupscan',(event)=>{
 	const promiseArr = []
 	const mdb = mdbLoader('Groups')
 	const cmd = `select name from Members`
@@ -287,7 +288,7 @@ ipcMain.handle('mnt-groupscan',async(event)=>{
 			})
 		})
 	}
-	const output = await Promise.all(promiseArr)	
+	const output = Promise.all(promiseArr)	
 	return output
 })
 

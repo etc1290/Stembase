@@ -10,6 +10,8 @@
 	# Added
 	1. Add monitored groups missing scan function
 		-- finished
+	2. Add more functions at mnt-delete
+		-- finished
 	# Fixed
 	1. Fix the bug that table of monitored group is missing
 		-- finished
