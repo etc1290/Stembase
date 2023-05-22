@@ -291,16 +291,16 @@ const mntfunc = (target)=>{
 								console.log(289)
 								//content.appenchild(dropdata)
 								mntgroupwrite(dropzone)
-								mntspan(content)
+								//mntspan(content)
 							}
 						}else{
 							//content.appendChild(dropdata)
 							console.log(dropzoneid)
 							mntgroupwrite(dropzone)
-							mntspan(content)
-						}
-					
+							//mntspan(content)
+						}				
 					}
+					mntspan(content)
 				}
 				/*
 				if(!isClone && !isExist){

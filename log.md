@@ -6,8 +6,12 @@
 ---	
 	## 2023.05.22		version 0.6.6
 	-- Function implementation
+	-- Bug fix
 	# Added
 	1. Add monitored groups missing scan function
+		-- finished
+	# Fixed
+	1. Fix the bug that table of monitored group is missing
 		-- finished
 ---
 	## 2023.05.19		version 0.6.5.1

@@ -116,8 +116,15 @@ ipcMain.handle('mnt-create',(event)=>{
 		const id = idPicker(grouplist)
 		const newname = 'New Group #' + id
 		const newdb = mdbLoader(newname)
-		newdb.close()
-		resolve(newname)
+		const cmd = `create table 'Members'(
+			"id" 	integer not null unique,
+			"name" 	text not null,
+			primary key("id" autoincrement),
+			unique(name))`
+		newdb.run(cmd,()=>{
+			newdb.close()
+			resolve(newname)
+		})		
 	})
 	return output
 })
@@ -260,6 +267,7 @@ ipcMain.handle('mnt-update',(event,folder,name)=>{
 	return output
 })
 // Setting Support
+// Restore the missing records in Groups 
 ipcMain.handle('mnt-groupscan',async(event)=>{
 	const promiseArr = []
 	const mdb = mdbLoader('Groups')
