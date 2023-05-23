@@ -3,9 +3,13 @@
 
 
 ---
-	## 2023.05.23		version 0.6.6.1
+	## 2023.05.23		version 0.6.7
+	-- Function implementation
 	-- Rewrite function
 	-- Adjust contextmenu display setting
+	# Added
+	1. Add an unpack function to handle query data from sqlite
+		-- finished
 	# Changed
 	1. Rewrite mnt-update to make support group add
 		-- finished

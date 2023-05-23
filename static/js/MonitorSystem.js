@@ -10,7 +10,10 @@ const mdbStorage = env('StemMGDir')
 const mdbLoader = (folder) =>{
 	return new sqlite3.Database(mdbStorage + '//' + folder + '.db')
 }	
-
+// Unpack db result
+const unpack = (res)=>{
+	return res.map(i=>Object.values(i)[0]).filter(Boolean)
+}
 const idPicker = (arr) =>{
 	let counter = id = 0
 	if(!arr[0]){
@@ -222,10 +225,12 @@ ipcMain.handle('mnt-update',(event,folderset,nameset)=>{
 		promiseArr[i] = new Promise((resolve)=>{
 			mdbg.all(cmda,name,(err,res)=>{
 				if(res[0]){
-					const id = res.map(i=>Object.values(i)[0])
+					//const id = res.map(i=>Object.values(i)[0])
+					const id = unpack(res)
 					const cmdb = `select child from Members where name = ?`
 					mdbg.all(cmdb,folder,(err,res)=>{
-						const children = res.map(i=>Object.values(i)[0])
+						//const children = res.map(i=>Object.values(i)[0])
+						const children = unpack(res)
 						const isExist  = children.indexOf(id)
 						if(isExist+1){
 							resolve(true)
@@ -235,7 +240,22 @@ ipcMain.handle('mnt-update',(event,folderset,nameset)=>{
 							mdbg.all(cmdc,folder,()=>{
 								const cmdd = `update Members set child = ? where name = ?`
 								mdbg.all(cmdd,[children+'',folder],(err,res)=>{
-									resolve(false)
+									//resolve(false)
+									const cmde =`select parent from Members where id = ?`
+									mdbg.all(cmde,id,(err,res)=>{
+										//const parents = res.map(i=>Object.values(i)[0]).filter(Boolean)
+										const parents = unpack(res)
+										console.log(parents)
+										mdbg.all(cmda,folder,(err,res)=>{
+											//parents.push(res.map(i=>Object.values(i)[0]))		
+											const parents = unpack(res)
+											const cmdf = `update Members set parent = ? where id = ?`
+											mdbg.all(cmdf,[parents+'',id],(err,res)=>{
+												resolve(false)
+											})
+										})
+										
+									})
 								})								
 							})
 						}
