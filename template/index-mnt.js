@@ -208,6 +208,8 @@ const mntgroupwrite = async(target,isLoaded=true) =>{
 	const updateDiv = target.children[1]
 	//const dataset = await window.mnt.load(header.innerHTML)
 	const [groupset,dataset] = await window.mnt.load(header.innerHTML)
+	console.log(groupset)
+	console.log(dataset)
 	const mntdata = []
 	const groups = []
 	for(var i=0;i<groupset.length;i++){

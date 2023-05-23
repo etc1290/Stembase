@@ -27,7 +27,6 @@ const idPicker = (arr) =>{
 		}catch(err){
 			id = err
 		}
-		
 	}
 	return counter
 }
@@ -39,7 +38,8 @@ ipcMain.handle('mnt-main', (event) =>{
 			if(err){
 				resolve(0)
 			}else{
-				const data = res.map(i=>Object.values(i)[0])
+				//const data = res.map(i=>Object.values(i)[0])
+				const data = unpack(res)
 				resolve(data)
 			}		
 		})
@@ -47,27 +47,76 @@ ipcMain.handle('mnt-main', (event) =>{
 	return output
 })
 // Load monitored group data
-ipcMain.handle('mnt-load',(event,name)=>{
+ipcMain.handle('mnt-load',async(event,name)=>{
+	/*
 	const output = new Promise((resolve)=>{
-		let groupArr= []
+		const groupArr= []
 		let dataArr = []
 		const mdb = mdbLoader('Groups')
 		const cmda = `select child from Members where name = ?`
 		mdb.all(cmda,name,(err,res)=>{
 			if(res[0]){
-				groupArr = res.map(i=>Object.values(i)[0])
+				//groupArr = res.map(i=>Object.values(i)[0])
+				idArr = unpack(res)
+				for(let i=0;i<idArr.length;i++){
+					const cmdc = `select name from Members where id =?`
+					mdb.all(cmdc,idArr[i],(err,res)=>{
+						if(res){
+							groupArr[i] = unpack(res)
+						}
+					})
+				}
 			}
 			const mdbs = mdbLoader(name)
 			const cmdb = `select name from Members`
 			mdbs.all(cmdb,(err,res)=>{
 				if(res[0]){
-					dataArr = res.map(i=>Object.values(i)[0])
-				}	
+					dataArr = unpack(res)
+					//dataArr = res.map(i=>Object.values(i)[0])
+				}
+				console.log(groupArr)
+				console.log(dataArr)
 				resolve([groupArr,dataArr])
 			})
 		})
 	})
 	return output
+	*/
+	const promiseArr = []
+	const mdb = mdbLoader('Groups')
+	const cmda = `select child from Members where name = ?`
+	const cmdb = `select name from Members where id = ?`
+	console.log(1)
+	console.log(name)
+	mdb.all(cmda,name,(err,res)=>{
+		const idArr = unpack(res)	
+		console.log(2)
+		for(let i=0;i<idArr.length;i++){
+			promiseArr[i] = new Promise((resolve)=>{
+				console.log(3)
+				mdb.all(cmdb,idArr[i],(err,res)=>{
+					if(res){
+						resolve(unpack(res))
+					}else{
+						resolve(false)
+					}
+				})	
+			})			
+		}
+	})
+	const groupArr = Promise.all(promiseArr)
+	const cmdc = `select name from Members`
+	const mdbs = mdbLoader(name)
+	const dataArr = new Promise((resolve)=>{
+		mdbs.all(cmdc,(err,res)=>{
+			if(res[0]){
+				resolve(unpack(res))
+			}
+		})
+	})
+	const output = [await groupArr,await dataArr]
+	return output
+	
 })
 // Remove monitored members
 ipcMain.handle('mnt-remove',(event,folderset,dataset)=>{

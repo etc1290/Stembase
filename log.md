@@ -15,6 +15,8 @@
 		-- finished
 	2. Unhide move menu from groups
 		-- finished
+	3. Rewrite mnt-load function in multiple promise method
+		-- finished
 ---	
 	## 2023.05.22		version 0.6.6
 	-- Function implementation
