@@ -130,7 +130,6 @@ ipcMain.handle('mnt-create',(event)=>{
 	return output
 })
 // Load monitored groups
-
 ipcMain.handle('mnt-group',(event,parent,child)=>{
 	/*
 	const output = new Promise((resolve)=>{
@@ -168,14 +167,14 @@ ipcMain.handle('mnt-group',(event,parent,child)=>{
 				})
 			})
 		}else{
-			const cmda = `select subgroups from Members where name = ?`
+			const cmda = `select child from Members where name = ?`
 			mdb.all(cmda,[parent],(err,data)=>{
 				if(err){
 					resolve(false)
 				}else{
 					const grouplist = data.split(',')
 					grouplist.push(child)
-					const cmdb = `update subgroups from Members where name=?`
+					const cmdb = `update child from Members where name=?`
 					mdb.all(cmdb,[grouplist+''],(err,res)=>{
 						if(err){
 							resolve(false)
@@ -223,18 +222,21 @@ ipcMain.handle('mnt-update',(event,folderset,nameset)=>{
 		promiseArr[i] = new Promise((resolve)=>{
 			mdbg.all(cmda,name,(err,res)=>{
 				if(res[0]){
-					const id = res
+					const id = res.map(i=>Object.values(i)[0])
 					const cmdb = `select child from Members where name = ?`
 					mdbg.all(cmdb,folder,(err,res)=>{
-						children = res.map(i=>Object.values(i)[0])
+						const children = res.map(i=>Object.values(i)[0])
 						const isExist  = children.indexOf(id)
-						if(isExist){
+						if(isExist+1){
 							resolve(true)
 						}else{
 							children.push(id)
-							const cmdc = `update Members set child = ? where name = ?`
-							mdbg.all(cmdc,[children,folder],(err,res)=>{
-								resolve(false)
+							const cmdc = `insert or ignore into Members(name) values(?)`
+							mdbg.all(cmdc,folder,()=>{
+								const cmdd = `update Members set child = ? where name = ?`
+								mdbg.all(cmdd,[children+'',folder],(err,res)=>{
+									resolve(false)
+								})								
 							})
 						}
 					})

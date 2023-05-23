@@ -2,7 +2,15 @@
  File tagging system
 
 
-
+---
+	## 2023.05.23		version 0.6.6.1
+	-- Rewrite function
+	-- Adjust contextmenu display setting
+	# Changed
+	1. Rewrite mnt-update to make support group add
+		-- finished
+	2. Unhide move menu from groups
+		-- finished
 ---	
 	## 2023.05.22		version 0.6.6
 	-- Function implementation

@@ -363,7 +363,6 @@ const mntmenufunc = async()=>{
 		}
 	})
 		// Move(Add to Shortcut):		Add this member to Shortcut
-	
 	document.getElementById('mnt-movemenu-shortcut').addEventListener('mousedown',async()=>{
 		const selected = uxSelect('mnt')
 		const shortcutArr = [...selected['Data']].fill('Shortcut')
@@ -441,6 +440,8 @@ const mntgroup = async(parent,child)=>{
 		mntspan(updateDiv)
 		return true	
 	}
+	mainfunc()
+	/*
 	if(parent == 'Shortcut'){
 		parent = 'Groups'
 	}
@@ -451,7 +452,7 @@ const mntgroup = async(parent,child)=>{
 		}		
 	}else{
 		mainfunc()
-	}
+	}*/
 		
 }
 // Main:	Load all monitored data

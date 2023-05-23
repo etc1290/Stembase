@@ -187,6 +187,7 @@ const uxContextMenuCreate = ()=>{
 					}
 					subRule['mnt-subfolder'] = ()=>{
 						unhide(document.getElementById('mnt-cm-new'))
+						unhide(document.getElementById('mnt-cm-move'))
 					}
 					const group = event.target.closest('.mnt-folder')
 					const groupClass = group.className.split(' ')
