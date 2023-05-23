@@ -7,6 +7,7 @@
 	-- Function implementation
 	-- Rewrite function
 	-- Adjust contextmenu display setting
+	-- Bug fix
 	# Added
 	1. Add an unpack function to handle query data from sqlite
 		-- finished
@@ -16,6 +17,9 @@
 	2. Unhide move menu from groups
 		-- finished
 	3. Rewrite mnt-load function in multiple promise method
+		-- finished
+	# Fixed
+	1. Fix the bug that Shortcut is counted as a monitored group and load into Groups
 		-- finished
 ---	
 	## 2023.05.22		version 0.6.6

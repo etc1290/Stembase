@@ -208,8 +208,6 @@ const mntgroupwrite = async(target,isLoaded=true) =>{
 	const updateDiv = target.children[1]
 	//const dataset = await window.mnt.load(header.innerHTML)
 	const [groupset,dataset] = await window.mnt.load(header.innerHTML)
-	console.log(groupset)
-	console.log(dataset)
 	const mntdata = []
 	const groups = []
 	for(var i=0;i<groupset.length;i++){
@@ -429,6 +427,8 @@ const mntgroup = async(parent,child)=>{
 	const mainfunc = async()=>{
 		const updateDiv = document.getElementById('mnt-group-display')
 		const [,grouplist] = await window.mnt.load('Groups')
+		const id = grouplist.indexOf('Groups')
+		grouplist.splice(id,1)
 		const mntdata = []
 		for(var i=0;i<grouplist.length;i++){
 			const header = `<p class='mnt-folder-header'>` + grouplist[i] + `</p>`
