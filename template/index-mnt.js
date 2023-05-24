@@ -207,12 +207,19 @@ const mntgroupwrite = async(target,isLoaded=true) =>{
 	const header = target.children[0]
 	const updateDiv = target.children[1]
 	const [groupset,dataset] = await window.mnt.load(header.innerHTML)
+	console.log(groupset)
+	console.log(dataset)
 	const mntdata = []
 	const groups = []
-	console.log(groupset)
 	for(var i=0;i<groupset.length;i++){
 		const id = `id='mnt-` + header.innerHTML + `-group-` + i + `'`
-		groups[i]=`<p ` + id + ` class='mnt-data' draggable='false'>` + groupset[i] + `</p>`
+		const subheader = `<p class='mnt-folder-header mnt-data'>` + groupset[i] + `</p>`
+		const subcontent= `<div class='mnt-folder-content'></div>`
+		const subfolder = `<div id='` + id 
+			+ `' class='mnt-folder mnt-dropzone mnt-subfolder' draggable = 'true'>` 
+			+ subheader + subcontent + `</div>`
+		groups[i] = subfolder
+		//groups[i]=`<p ` + id + ` class='mnt-data' draggable='false'>` + groupset[i] + `</p>`
 	}
 	for(var i=0;i<dataset.length;i++){
 		const id = `id='mnt-` + header.innerHTML + `-data-` + i + `'`
@@ -222,6 +229,20 @@ const mntgroupwrite = async(target,isLoaded=true) =>{
 	updateDiv.innerHTML = groups.join('')
 	mntspan(updateDiv)
 }
+// Side:	Load data in monitored groups 
+const mntgroupload = ()=>{
+	document.body.addEventListener('click',async(event)=>{
+		const group = event.target.closest('.mnt-folder')
+		if(group.classList.contains('mnt-folder')){
+			const content = group.children[1]
+			console.log(group.id)
+			if(!content.innerHTML){
+				mntgroupwrite(group)
+			}
+		}
+	})
+}
+// Side:	Cancel current actions for contextmenu and drag function
 const mntcancel = (event)=>{
 			event.preventDefault()
 			//event.stopPropagation()
@@ -432,7 +453,9 @@ const mntgroup = async(parent,child)=>{
 		for(var i=0;i<grouplist.length;i++){
 			const header = `<p class='mnt-folder-header'>` + grouplist[i] + `</p>`
 			const content= `<div class='mnt-folder-content'></div>`
-			const folder = `<div id='mnt-user-` + grouplist[i] + `' class='mnt-folder mnt-dropzone mnt-subfolder' draggable='true'>` + header + content + `</div>`
+			const folder = `<div id='mnt-user-` + grouplist[i]
+				+ `' class='mnt-folder mnt-dropzone mnt-subfolder' draggable='true'>` 
+				+ header + content + `</div>`
 			mntdata[i] = folder
 		}
 		updateDiv.innerHTML = mntdata.join('')
@@ -509,6 +532,7 @@ const mntInit = ()=>{
 		const mntfolder = document.querySelectorAll('.mnt-folder')
 		mntdragfunc()
 		mntmenufunc()
+		mntgroupload()
 		mntApplier(mntfolder)
 		
 	}

@@ -127,25 +127,23 @@ ipcMain.handle('mnt-load',async(event,name)=>{
 				if(res){
 					resolve(unpack(res))
 				}else{
-					resolve(false)
+					resolve([])
 				}
 			})
 		})
 	}
 	const groupArr = Promise.all(promiseArr)
-		
-	//const groupArr =Promise.all(promiseArr)
 	const cmdc = `select name from Members`
 	const mdbs = mdbLoader(name)
 	const dataArr = new Promise((resolve)=>{
 		mdbs.all(cmdc,(err,res)=>{
 			if(res[0]){
 				resolve(unpack(res))
+			}else{
+				resolve([])
 			}
 		})
 	})
-	console.log(name)
-	//console.log(await groupArr)
 	const output = [await groupArr,await dataArr]
 	return output
 	

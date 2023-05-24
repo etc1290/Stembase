@@ -5,6 +5,10 @@
 ---
 	## 2023.05.24		version 0.6.7.1
 	-- Bug fix
+	-- Function demo build
+	# Added
+	1. Build a demo function mntgroupload for testing monitored groups loading
+		-- finished		
 	# Fixed
 	1. Fix the bug that when parents over two, return value will be undefined
 		-- finished
