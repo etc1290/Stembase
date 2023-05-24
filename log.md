@@ -3,6 +3,12 @@
 
 
 ---
+	## 2023.05.24		version 0.6.7.1
+	-- Bug fix
+	# Fixed
+	1. Fix the bug that when parents over two, return value will be undefined
+		-- finished
+---
 	## 2023.05.23		version 0.6.7
 	-- Function implementation
 	-- Rewrite function

@@ -206,10 +206,10 @@ const mntrename = ()=>{
 const mntgroupwrite = async(target,isLoaded=true) =>{
 	const header = target.children[0]
 	const updateDiv = target.children[1]
-	//const dataset = await window.mnt.load(header.innerHTML)
 	const [groupset,dataset] = await window.mnt.load(header.innerHTML)
 	const mntdata = []
 	const groups = []
+	console.log(groupset)
 	for(var i=0;i<groupset.length;i++){
 		const id = `id='mnt-` + header.innerHTML + `-group-` + i + `'`
 		groups[i]=`<p ` + id + ` class='mnt-data' draggable='false'>` + groupset[i] + `</p>`
@@ -353,7 +353,6 @@ const mntmenufunc = async()=>{
 		const newGroup = await window.mnt.create()		
 		if(newGroup){
 			if(!isGroups){
-				//const isCreate = await window.mnt.update(header,newGroup)
 				const isCreate = await window.mnt.update([header],[newGroup])
 				if(isCreate){
 					mntgroupwrite(group,false)
