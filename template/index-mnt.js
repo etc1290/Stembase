@@ -207,8 +207,8 @@ const mntgroupwrite = async(target,isLoaded=true) =>{
 	const header = target.children[0]
 	const updateDiv = target.children[1]
 	const [groupset,dataset] = await window.mnt.load(header.innerHTML)
-	console.log(groupset)
-	console.log(dataset)
+	//console.log(groupset)
+	//console.log(dataset)
 	const mntdata = []
 	const groups = []
 	for(var i=0;i<groupset.length;i++){
@@ -244,10 +244,10 @@ const mntgroupload = ()=>{
 }
 // Side:	Cancel current actions for contextmenu and drag function
 const mntcancel = (event)=>{
-			event.preventDefault()
-			//event.stopPropagation()
-			return false
-		}
+	event.preventDefault()
+	//event.stopPropagation()
+	return false
+}
 // Side:	Function of monitored data
 const mntfunc = (target)=>{
 	// Data function
@@ -441,7 +441,27 @@ const mntmenufunc = async()=>{
 		group.contentEditable = 'true'
 	})
 }
-
+// Side:	Add more option to movemenu 
+const mntmenuMovemenuCreate = async()=>{
+	const [,groups] = await window.mnt.load('Groups')
+	console.log(groups)
+	const sid = groups.indexOf('Shortcut')
+	groups.splice(sid,1)
+	console.log(groups)
+	const optionArr = []
+	for(var i=0;i<groups.length;i++){
+		console.log(groups[i])
+		const id = `'mnt-movemenu-` + groups[i] + `'`
+		const text = 'Add to' + groups[i]
+		const option = `<p id=` + id + `class='mnt-dropmenu-option'>` + text + `</p>`
+		optionArr[i] = option
+	}
+	const addition = optionArr.join('')
+	const updateDiv = document.getElementById('mnt-cm-movemenu')
+	console.log(updateDiv.innerHTML)
+	const content = updateDiv.innerHTML + addition
+	updateDiv.innerHTML = content
+}
 // Side:	Load all monitored group
 const mntgroup = async(parent,child)=>{
 	const mainfunc = async()=>{
@@ -464,20 +484,7 @@ const mntgroup = async(parent,child)=>{
 		mntspan(updateDiv)
 		return true	
 	}
-	mainfunc()
-	/*
-	if(parent == 'Shortcut'){
-		parent = 'Groups'
-	}
-	if(parent){
-		const isAppend = await window.mnt.group(parent,child)
-		if(isAppend){
-			mainfunc()
-		}		
-	}else{
-		mainfunc()
-	}*/
-		
+	mainfunc()	
 }
 // Main:	Load all monitored data
 const mntmain = async()=>{
@@ -532,6 +539,7 @@ const mntInit = ()=>{
 		const mntfolder = document.querySelectorAll('.mnt-folder')
 		mntdragfunc()
 		mntmenufunc()
+		mntmenuMovemenuCreate()
 		mntgroupload()
 		mntApplier(mntfolder)
 		
