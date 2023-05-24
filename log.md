@@ -8,6 +8,8 @@
 	# Fixed
 	1. Fix the bug that when parents over two, return value will be undefined
 		-- finished
+	2. Fix the bug that when children is zero causing error
+		-- finished
 ---
 	## 2023.05.23		version 0.6.7
 	-- Function implementation

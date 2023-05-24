@@ -109,10 +109,10 @@ ipcMain.handle('mnt-load',async(event,name)=>{
 	const promiseChain = ()=>{
 		const output = new Promise((resolve)=>{
 			mdb.all(cmda,name,(err,res)=>{
-				if(res[0]){
-					const raw = unpack(res)[0].split(',')
-					console.log(raw)
-					resolve(raw)		
+				const raw = unpack(res)
+				if(raw[0]){
+					const rawArr = raw[0].split(',')
+					resolve(rawArr)		
 				}else{
 					resolve(unpack(res))
 				}
