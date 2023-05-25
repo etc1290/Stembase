@@ -142,11 +142,14 @@ const uxContextMenuCreate = ()=>{
 		uxContextMenuSelect()
 		// Hiding controller
 		const uxContextMenuOptRule = ()=>{
-			const hideRule = mainRule = hideOpt = []
+			const hideRule = []
+			const mainRule = []
+			const hideOpt = []
 			const classArr = event.target.className.split(' ')
 			// Hide function
 			const mnthide = (e)=>{
 				for(var i=0;i<e.length;i++){
+					console.log(e[i])
 					e[i].classList.add('hide')
 				}
 			}
@@ -182,7 +185,7 @@ const uxContextMenuCreate = ()=>{
 					hide(document.getElementById('mnt-datacm'),true)	
 					const subRule = []
 					subRule['mnt-mainfolder'] = ()=>{
-						hide(document.getElementById('mnt-cm-groupremove'))
+						hide(document.getElementById('mnt-cm-groupdelete'))
 						hide(document.getElementById('mnt-cm-grouprename'))
 					}
 					subRule['mnt-subfolder'] = ()=>{
@@ -220,6 +223,7 @@ const uxContextMenuCreate = ()=>{
 			try{
 				hideRule[funcSection.id]()
 			}catch(err){}
+			console.log(hideOpt)
 			mnthide(hideOpt)
 		}
 		uxContextMenuOptRule()		

@@ -446,13 +446,10 @@ const mntmenufunc = async()=>{
 // Side:	Add more option to movemenu 
 const mntmenuMovemenuCreate = async()=>{
 	const [,groups] = await window.mnt.load('Groups')
-	console.log(groups)
 	const sid = groups.indexOf('Shortcut')
 	groups.splice(sid,1)
-	console.log(groups)
 	const optionArr = []
 	for(var i=0;i<groups.length;i++){
-		console.log(groups[i])
 		const id = `'mnt-movemenu-` + groups[i] + `'`
 		const text = 'Add to' + groups[i]
 		const option = `<p id=` + id + `class='mnt-dropmenu-option'>` + text + `</p>`
@@ -460,7 +457,6 @@ const mntmenuMovemenuCreate = async()=>{
 	}
 	const addition = optionArr.join('')
 	const updateDiv = document.getElementById('mnt-cm-movemenu')
-	console.log(updateDiv.innerHTML)
 	const content = updateDiv.innerHTML + addition
 	updateDiv.innerHTML = content
 }

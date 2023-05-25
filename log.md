@@ -8,6 +8,8 @@
 	# Fixed
 	1. Fix the error in mntgroupload when call at non-header
 		-- finished
+	2. Fix the bug that hide table have null value
+		-- finished
 ---
 	## 2023.05.24		version 0.6.8
 	-- Bug fix
