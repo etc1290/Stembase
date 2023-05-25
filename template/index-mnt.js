@@ -165,17 +165,26 @@ const mntstyle = (target)=>{
 		})
 	}
 }
-// Side: 	Rename function
+// Side: 	Rename main function
 let oldname = 0
 const mntrename = ()=>{
 	let newname = 0
 	const mainfunc = async()=>{
-		const isReady = await window.mnt.rename(oldname,newname)
-		if(isReady){
-			console.log(1)
-			document.querySelector('.mnt-editing').classList.remove('mnt-editing')
-			mntgroup()
+		// Check if contains reserved or illegal characters
+		const censorCheck = (name)=>{
+			const restriction = /[`9!@$%^&*+\=\[\]{};':"\\|,<>\/?~]/
+			return restriction.test(name)
 		}
+		const isBanned = censorCheck(newname)
+		if(isBanned){
+			const mnterror = await window.mnt.error('mntrename')
+		}else{
+			const isReady = await window.mnt.rename(oldname,newname)
+			if(isReady){
+				document.querySelector('.mnt-editing').classList.remove('mnt-editing')
+				mntgroup()
+			}
+		}	
 	}
 	document.addEventListener('click',(event)=>{
 		const target = document.querySelector('.mnt-editing')
@@ -204,22 +213,24 @@ const mntrename = ()=>{
 }
 // Side:	Monitored group loader
 const mntgroupwrite = async(target,isLoaded=true) =>{
+
 	const header = target.children[0]
 	const updateDiv = target.children[1]
+	//console.log(header.innerHTML)
 	const [groupset,dataset] = await window.mnt.load(header.innerHTML)
-	//console.log(groupset)
-	//console.log(dataset)
+	console.log(groupset)
+	console.log(dataset)
 	const mntdata = []
 	const groups = []
 	for(var i=0;i<groupset.length;i++){
 		const id = `id='mnt-` + header.innerHTML + `-group-` + i + `'`
 		const subheader = `<p class='mnt-folder-header mnt-data'>` + groupset[i] + `</p>`
 		const subcontent= `<div class='mnt-folder-content'></div>`
+		const uniqClass = `mnt-usergroup-` + groupset[i]
 		const subfolder = `<div id='` + id 
-			+ `' class='mnt-folder mnt-dropzone mnt-subfolder' draggable = 'true'>` 
+			+ `' class='mnt-folder mnt-dropzone ` + uniqClass + ` mnt-subfolder' draggable = 'true'>` 
 			+ subheader + subcontent + `</div>`
 		groups[i] = subfolder
-		//groups[i]=`<p ` + id + ` class='mnt-data' draggable='false'>` + groupset[i] + `</p>`
 	}
 	for(var i=0;i<dataset.length;i++){
 		const id = `id='mnt-` + header.innerHTML + `-data-` + i + `'`
@@ -471,8 +482,9 @@ const mntgroup = async(parent,child)=>{
 		for(var i=0;i<grouplist.length;i++){
 			const header = `<p class='mnt-folder-header'>` + grouplist[i] + `</p>`
 			const content= `<div class='mnt-folder-content'></div>`
+			const uniqClass = `mnt-usergroup-` + grouplist[i]
 			const folder = `<div id='mnt-user-` + grouplist[i]
-				+ `' class='mnt-folder mnt-dropzone mnt-subfolder' draggable='true'>` 
+				+ `' class='mnt-folder mnt-dropzone ` + uniqClass + ` mnt-subfolder' draggable='true'>` 
 				+ header + content + `</div>`
 			mntdata[i] = folder
 		}

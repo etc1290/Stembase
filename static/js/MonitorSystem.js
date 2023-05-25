@@ -1,4 +1,4 @@
-const {ipcMain} = require('electron')
+const {ipcMain,dialog} = require('electron')
 const fs = require('fs')
 const env = require('./env.js')
 const sqlite3 = require('sqlite3').verbose()
@@ -356,6 +356,13 @@ ipcMain.handle('mnt-update',(event,folderset,nameset)=>{
 	const output = Promise.all(promiseArr)
 	return output
 })
+// Exception handler
+ipcMain.handle('mnt-error',(event,err)=>{
+	const warn = []
+	warn['mntrename'] = `Groups name cannot contain` + '`!`@$%^&*+\\=[]{};' + `:"|,<>/?~`
+	dialog.showErrorBox('ERROR',warn[err])
+})
+
 // Setting Support
 // Restore the missing records in Groups 
 ipcMain.handle('mnt-groupscan',(event)=>{
@@ -380,6 +387,7 @@ ipcMain.handle('mnt-groupscan',(event)=>{
 	const output = Promise.all(promiseArr)	
 	return output
 })
+
 
 
 

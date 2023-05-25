@@ -5,6 +5,16 @@
 ---
 	## 2023.05.25		version 0.6.8.1
 	-- Bug fix
+	-- Rewrite function
+	-- Function implementation
+	# Added
+	1. Add exception handler(mnterror)
+		-- finished
+	# Changed
+	1. Add unique class for each monitored group
+		-- finished
+	2. Add reserved or illegal character examine in mntrename
+		-- finished
 	# Fixed
 	1. Fix the error in mntgroupload when call at non-header
 		-- finished

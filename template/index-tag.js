@@ -243,7 +243,6 @@ const tagsearch = ()=>{
 	}
 	tagbtn.addEventListener('click', async()=>{
 		searchBlock = []
-		//const evt = new Event('click')
 		const input = taginput.value
 		tagset = await tag.query(input,'tagref','tagref')
 		const fileset = await tag.query(input,'nameref','nameref',false)
