@@ -3,6 +3,12 @@
 
 
 ---
+	## 2023.05.25		version 0.6.8.1
+	-- Bug fix
+	# Fixed
+	1. Fix the error in mntgroupload when call at non-header
+		-- finished
+---
 	## 2023.05.24		version 0.6.8
 	-- Bug fix
 	-- Function demo build

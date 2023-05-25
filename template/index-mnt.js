@@ -232,14 +232,16 @@ const mntgroupwrite = async(target,isLoaded=true) =>{
 // Side:	Load data in monitored groups 
 const mntgroupload = ()=>{
 	document.body.addEventListener('click',async(event)=>{
-		const group = event.target.closest('.mnt-folder')
-		if(group.classList.contains('mnt-folder')){
-			const content = group.children[1]
-			console.log(group.id)
-			if(!content.innerHTML){
-				mntgroupwrite(group)
+		if(mntcheck(event,'mnt-folder-header')){
+			const group = event.target.closest('.mnt-folder')
+			if(group.classList.contains('mnt-folder')){
+				const content = group.children[1]
+				console.log(group.id)
+				if(!content.innerHTML){
+					mntgroupwrite(group)
+				}
 			}
-		}
+		}	
 	})
 }
 // Side:	Cancel current actions for contextmenu and drag function
