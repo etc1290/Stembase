@@ -144,6 +144,7 @@ ipcMain.handle('mnt-load',async(event,name)=>{
 			}
 		})
 	})
+	console.log(groupArr)
 	const output = [await groupArr,await dataArr]
 	return output
 	

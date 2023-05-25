@@ -216,17 +216,18 @@ const mntgroupwrite = async(target,isLoaded=true) =>{
 
 	const header = target.children[0]
 	const updateDiv = target.children[1]
-	//console.log(header.innerHTML)
 	const [groupset,dataset] = await window.mnt.load(header.innerHTML)
 	console.log(groupset)
 	console.log(dataset)
 	const mntdata = []
 	const groups = []
 	for(var i=0;i<groupset.length;i++){
+		const modName = groupset[i][0].replace(/ /g,'@')
 		const id = `id='mnt-` + header.innerHTML + `-group-` + i + `'`
 		const subheader = `<p class='mnt-folder-header mnt-data'>` + groupset[i] + `</p>`
 		const subcontent= `<div class='mnt-folder-content'></div>`
-		const uniqClass = `mnt-usergroup-` + groupset[i]
+		//const uniqClass = `mnt-usergroup-` + groupset[i]
+		const uniqClass = `mnt-usergroup-` + modName
 		const subfolder = `<div id='` + id 
 			+ `' class='mnt-folder mnt-dropzone ` + uniqClass + ` mnt-subfolder' draggable = 'true'>` 
 			+ subheader + subcontent + `</div>`
@@ -480,9 +481,11 @@ const mntgroup = async(parent,child)=>{
 		grouplist.splice(id,1)
 		const mntdata = []
 		for(var i=0;i<grouplist.length;i++){
+			const modName = grouplist[i][0].replace(/ /g,'@')
 			const header = `<p class='mnt-folder-header'>` + grouplist[i] + `</p>`
 			const content= `<div class='mnt-folder-content'></div>`
-			const uniqClass = `mnt-usergroup-` + grouplist[i]
+			//const uniqClass = `mnt-usergroup-` + grouplist[i]
+			const uniqClass = `mnt-usergroup-` + modName
 			const folder = `<div id='mnt-user-` + grouplist[i]
 				+ `' class='mnt-folder mnt-dropzone ` + uniqClass + ` mnt-subfolder' draggable='true'>` 
 				+ header + content + `</div>`

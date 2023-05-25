@@ -3,7 +3,7 @@
 
 
 ---
-	## 2023.05.25		version 0.6.8.1
+	## 2023.05.25		version 0.6.9
 	-- Bug fix
 	-- Rewrite function
 	-- Function implementation
@@ -14,6 +14,8 @@
 	1. Add unique class for each monitored group
 		-- finished
 	2. Add reserved or illegal character examine in mntrename
+		-- finished
+	3. Replace white space with reserved charcter to prevent class forked
 		-- finished
 	# Fixed
 	1. Fix the error in mntgroupload when call at non-header
