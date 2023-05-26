@@ -75,6 +75,9 @@ const mntdragSetup = function() {
 
 // Side:	Target class checker
 const mntcheck = (event,classname,isCurrent=false)=>{
+	if(!event){
+		console.log('event is . Did you remember to call it ?')
+	}
 	if(isCurrent){
 		return event.currentTarget.classList.contains(classname)
 	}else{
@@ -216,13 +219,16 @@ const mntgroupwrite = async(target,isLoaded=true) =>{
 
 	const header = target.children[0]
 	const updateDiv = target.children[1]
+	console.log(target)
 	const [groupset,dataset] = await window.mnt.load(header.innerHTML)
-	console.log(groupset)
-	console.log(dataset)
+	//console.log(groupset)
+	//console.log(dataset)
 	const mntdata = []
 	const groups = []
 	for(var i=0;i<groupset.length;i++){
-		const modName = groupset[i][0].replace(/ /g,'@')
+		console.log(header)
+		console.log(groupset)
+		const modName = groupset[i].replace(/ /g,'@')
 		const id = `id='mnt-` + header.innerHTML + `-group-` + i + `'`
 		const subheader = `<p class='mnt-folder-header mnt-data'>` + groupset[i] + `</p>`
 		const subcontent= `<div class='mnt-folder-content'></div>`
@@ -397,13 +403,14 @@ const mntmenufunc = async()=>{
 		}
 	})
 		// Move(Add to Shortcut):		Add this member to Shortcut
-	document.getElementById('mnt-movemenu-shortcut').addEventListener('mousedown',async()=>{
+	/*document.getElementById('mnt-movemenu-shortcut').addEventListener('mousedown',async()=>{
+		console.log(1)
 		const selected = uxSelect('mnt')
 		const shortcutArr = [...selected['Data']].fill('Shortcut')
 		const isFinished = await window.mnt.update(shortcutArr,selected['Data'])
 		const group = document.getElementById('mnt-shortcut')
 		mntgroupwrite(group)
-	})
+	})*/
 		// Remove(Delete this record):	Delete all tags and meta and remove monitored status of this member
 	document.getElementById('mnt-removemenu-delete').addEventListener('mousedown',()=>{
 		console.log('delete function')
@@ -455,22 +462,50 @@ const mntmenufunc = async()=>{
 		group.contentEditable = 'true'
 	})
 }
-// Side:	Add more option to movemenu 
-const mntmenuMovemenuCreate = async()=>{
-	const [,groups] = await window.mnt.load('Groups')
-	const sid = groups.indexOf('Shortcut')
-	groups.splice(sid,1)
-	const optionArr = []
-	for(var i=0;i<groups.length;i++){
-		const id = `'mnt-movemenu-` + groups[i] + `'`
-		const text = 'Add to' + groups[i]
-		const option = `<p id=` + id + `class='mnt-dropmenu-option'>` + text + `</p>`
-		optionArr[i] = option
+
+// Side: Contextmenu addition
+const mntmenuAddition = ()=>{
+	// Movemenu additional creation
+	const mntMovemenuCreate = async()=>{
+		const [,groups] = await window.mnt.load('Groups')
+		/*const sid = groups.indexOf('Shortcut')
+		groups.splice(sid,1)*/
+		const optionArr = []
+		for(var i=0;i<groups.length;i++){
+			const id = `'mnt-movemenu-` + groups[i] + `'`
+			const text = 'Add to' + groups[i]
+			const option = `<p id=` + id + `class='mnt-dropmenu-option mnt-movemenu-addition'>` + text + `</p>`
+			optionArr[i] = option
+		}
+		const addition = optionArr.join('')
+		const updateDiv = document.getElementById('mnt-cm-movemenu')
+		const content = updateDiv.innerHTML + addition
+		updateDiv.innerHTML = content
 	}
-	const addition = optionArr.join('')
-	const updateDiv = document.getElementById('mnt-cm-movemenu')
-	const content = updateDiv.innerHTML + addition
-	updateDiv.innerHTML = content
+	const mntMovemenuFunc = ()=>{
+		document.body.addEventListener('click',async(event)=>{
+			if(mntcheck(event,'mnt-movemenu-addition')){
+				const id = event.target.id
+				const name = id.substring(13)
+				const selected = uxSelect('mnt')
+				const groupArr = [...selected['Data']].fill(name)
+				const isFinished = await window.mnt.update(groupArr,selected['Data'])	
+				const nodelist = []
+				if(name == 'Shortcut'){
+					nodelist = document.getElementById('mnt-shortcut')
+				}else{
+					const modName = name.replace(/ /g,'@')
+					console.log(modName)
+					nodelist = document.querySelectorAll('.' + modName)
+				}
+				//const group = document.getElementById(id)
+				console.log(nodelist)
+				mntgroupwrite(nodelist)
+			}
+		})
+	}
+	mntMovemenuCreate()
+	mntMovemenuFunc()
 }
 // Side:	Load all monitored group
 const mntgroup = async(parent,child)=>{
@@ -552,7 +587,7 @@ const mntInit = ()=>{
 		const mntfolder = document.querySelectorAll('.mnt-folder')
 		mntdragfunc()
 		mntmenufunc()
-		mntmenuMovemenuCreate()
+		mntmenuAddition()
 		mntgroupload()
 		mntApplier(mntfolder)
 		

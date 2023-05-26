@@ -9,6 +9,8 @@
 	# Fixed
 	1. Fix the bug that created monitored groups are not configured in Groups
 		-- finished
+	2. Fix the bug that multiple level of array appears in promiseChain
+		-- finished
 ---
 	## 2023.05.25		version 0.6.9
 	-- Bug fix

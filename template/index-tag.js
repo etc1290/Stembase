@@ -18,8 +18,7 @@ const tagmain = (name) =>{
 				mntmain()
 			}
 			tagdisplay(name)
-		}
-		
+		}		
 	})
 }
 

@@ -52,15 +52,16 @@ ipcMain.handle('mnt-load',async(event,name)=>{
 	const promiseArr = []
 	const mdb = mdbLoader('Groups')
 	const cmda = `select child from Members where name = ?`
-	const cmdb = `select name from Members where id = ?`
+
 	const promiseChain = ()=>{
 		const output = new Promise((resolve)=>{
 			mdb.all(cmda,name,(err,res)=>{
 				const raw = unpack(res)
 				if(raw[0]){
-					const rawArr = raw[0].split(',')
+					const rawArr = raw[0].split(',')					
 					resolve(rawArr)		
 				}else{
+					
 					resolve(unpack(res))
 				}
 			})
@@ -68,7 +69,9 @@ ipcMain.handle('mnt-load',async(event,name)=>{
 		return output		
 	}
 	const idArr = await promiseChain()
+	const cmdb = `select name from Members where id = ?`
 	for(let i=0;i<idArr.length;i++){
+		console.log(i)
 		promiseArr[i] = new Promise((resolve)=>{
 			mdb.all(cmdb,Number(idArr[i]),(err,res)=>{
 				if(res){
@@ -79,7 +82,14 @@ ipcMain.handle('mnt-load',async(event,name)=>{
 			})
 		})
 	}
-	const groupArr = Promise.all(promiseArr)
+	
+	const groupArr = await Promise.all(promiseArr)
+	for(var i=0;i<groupArr.length;i++){
+		groupArr[i] = groupArr[i][0]
+	}
+	
+	//console.log(name)
+	//console.log(await groupArr)
 	const cmdc = `select name from Members`
 	const mdbs = mdbLoader(name)
 	const dataArr = new Promise((resolve)=>{
@@ -91,7 +101,9 @@ ipcMain.handle('mnt-load',async(event,name)=>{
 			}
 		})
 	})
-	const output = [await groupArr,await dataArr]
+	
+	//console.log(await groupArr)
+	const output = [groupArr,await dataArr]
 	return output
 	
 })
