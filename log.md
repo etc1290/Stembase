@@ -3,6 +3,13 @@
 
 
 ---
+	## 2023.05.26		version 0.6.9.1
+	-- Clear wasted codes
+	-- Bug fix
+	# Fixed
+	1. Fix the bug that created monitored groups are not configured in Groups
+		-- finished
+---
 	## 2023.05.25		version 0.6.9
 	-- Bug fix
 	-- Rewrite function

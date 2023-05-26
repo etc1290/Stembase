@@ -48,64 +48,11 @@ ipcMain.handle('mnt-main', (event) =>{
 })
 // Load monitored group data
 ipcMain.handle('mnt-load',async(event,name)=>{
-	/*
-	const output = new Promise((resolve)=>{
-		const groupArr= []
-		let dataArr = []
-		const mdb = mdbLoader('Groups')
-		const cmda = `select child from Members where name = ?`
-		mdb.all(cmda,name,(err,res)=>{
-			if(res[0]){
-				//groupArr = res.map(i=>Object.values(i)[0])
-				idArr = unpack(res)
-				for(let i=0;i<idArr.length;i++){
-					const cmdc = `select name from Members where id =?`
-					mdb.all(cmdc,idArr[i],(err,res)=>{
-						if(res){
-							groupArr[i] = unpack(res)
-						}
-					})
-				}
-			}
-			const mdbs = mdbLoader(name)
-			const cmdb = `select name from Members`
-			mdbs.all(cmdb,(err,res)=>{
-				if(res[0]){
-					dataArr = unpack(res)
-					//dataArr = res.map(i=>Object.values(i)[0])
-				}
-				console.log(groupArr)
-				console.log(dataArr)
-				resolve([groupArr,dataArr])
-			})
-		})
-	})
-	return output
-	*/
+
 	const promiseArr = []
 	const mdb = mdbLoader('Groups')
 	const cmda = `select child from Members where name = ?`
 	const cmdb = `select name from Members where id = ?`
-
-/*
-	mdb.all(cmda,name,(err,res)=>{
-		const idArr = unpack(res)	
-		for(let i=0;i<idArr.length;i++){
-			promiseArr[i] = new Promise((resolve)=>{
-				mdb.all(cmdb,idArr[i],(err,res)=>{
-					if(res){
-						//console.log(1)
-						console.log(unpack(res))
-						resolve(unpack(res))
-						
-					}else{
-						resolve(false)
-					}
-				})	
-			})			
-		}
-	})
-*/
 	const promiseChain = ()=>{
 		const output = new Promise((resolve)=>{
 			mdb.all(cmda,name,(err,res)=>{
@@ -144,7 +91,6 @@ ipcMain.handle('mnt-load',async(event,name)=>{
 			}
 		})
 	})
-	console.log(groupArr)
 	const output = [await groupArr,await dataArr]
 	return output
 	
@@ -207,7 +153,11 @@ ipcMain.handle('mnt-create',(event)=>{
 			unique(name))`
 		newdb.run(cmd,()=>{
 			newdb.close()
-			resolve(newname)
+			const mdb = mdbLoader('Groups')
+			const cmda = `insert into Members(name) values(?)`
+			mdb.all(cmda,newname,()=>{
+				resolve(newname)
+			})			
 		})		
 	})
 	return output
