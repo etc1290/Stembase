@@ -9,6 +9,9 @@
 	# Added
 	1. Finish monitored group delete function
 		-- finished
+	# Fixed
+	1. Fix the bug that physic db not deleted after run the function
+		-- finished
 ---
 	## 2023.05.26		version 0.6.9.1
 	-- Clear wasted codes

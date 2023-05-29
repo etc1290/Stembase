@@ -451,9 +451,11 @@ const mntmenufunc = async()=>{
 		const updateArr = await window.mnt.delete(selected['Data'])
 		if(updateArr[0]){
 			mntgroup()
+			console.log(updateArr)
+			/*
 			for(var i=0;i<updateArr.length;i++){
 				mntgroupwrite(document.getElementById(updateArr[i]),false)
-			}
+			}*/
 		}
 	})
 		// Rename:						Rename this group

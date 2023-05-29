@@ -131,12 +131,13 @@ ipcMain.handle('mnt-remove',(event,folderset,dataset)=>{
 // Delete monitored groups
 ipcMain.handle('mnt-delete',(event,dataset)=>{
 	const mdb = mdbLoader('Groups')
-	const mdbs= mdbLoader('Shortcut') 
+	//const mdbs= mdbLoader('Shortcut') 
 	const cmd  = `select id from Members where name = ?`
 	const cmda = `delete from Members where id =?`
 	const cmdb = `select parent from Members where id =?`
 	const cmdc = `select child from Members where id =?`
 	const cmdd = `update Members set child = ? where id = ?`
+	const cmde = `select name from Members where id = ?`
 	
 	const idlist = []
 	const promiseArr = []
@@ -150,7 +151,10 @@ ipcMain.handle('mnt-delete',(event,dataset)=>{
 					const position = child.indexOf(id+'')
 					const dump = child.splice(position,1)
 					mdb.all(cmdd,[child,pid],(err,res)=>{
-						resolve(true)
+						mdb.all(cmde,pid,(err,res)=>{
+							idlist.push(unpack(res)[0])
+							resolve(true)
+						})
 					})
 				})
 			})
@@ -159,18 +163,50 @@ ipcMain.handle('mnt-delete',(event,dataset)=>{
 		return reply
 	}
 	for(let i=0;i<dataset.length;i++){
+		const name = dataset[i]
 		promiseArr[i] = new Promise((resolve)=>{
 			mdb.all(cmd,dataset[i],async(err,res)=>{
 				const id = unpack(res)
+				//mdb.all(cmda,id,()=>{})
 				mdb.all(cmdb,id,async(err,res)=>{
 					const parent = unpack(res,true)		
 					const isFinished = await promiseChain(parent,id)
 					if(isFinished){
-						mdb.all(cmda,id,()=>{resolve(isFinished)})
+						console.log(1)
+						mdb.all(cmda,id,()=>{
+							console.log(2)
+							fs.unlink(mdbStorage + '\\' + name + '.db',(err)=>{
+								console.log(idlist)
+								resolve(idlist)
+							})
+						})
 					}
+					/*
+					for(let j=0;j<parent.length;j++){
+						const pid = parent[j]
+						mdb.all(cmdc,pid,(err,res)=>{
+							const child = unpack(res,true)
+							const position = child.indexOf(id+'')
+							const dump = child.splice(position,1)
+							mdb.all(cmdd,[child,pid],(err,res)=>{
+								console.log(j)
+							})
+						})
+					}*/
 				})	
 				
 			})
+			
+			/*mdbs.all(cmd,[dataset[i]],(err,res)=>{
+				if(res){
+					idlist[0] = 'mnt-shortcut'
+				}
+				mdb.all(cmdc,[dataset[i]],()=>{
+					fs.unlink(mdbStorage + '\\' + dataset[i] + '.db',(err)=>{
+						resolve(idlist)
+					})					
+				})
+			})*/
 		})
 	}
 	
