@@ -447,7 +447,8 @@ const mntmenufunc = async()=>{
 		// Remove:						Delete this group
 	document.getElementById('mnt-cm-groupdelete').addEventListener('mousedown',async()=>{
 		const selected = uxSelect('mnt')
-		const updateArr = await window.mnt.delete(selected['Folder'],selected['Data'])
+		//const updateArr = await window.mnt.delete(selected['Folder'],selected['Data'])
+		const updateArr = await window.mnt.delete(selected['Data'])
 		if(updateArr[0]){
 			mntgroup()
 			for(var i=0;i<updateArr.length;i++){
@@ -490,7 +491,7 @@ const mntmenuAddition = ()=>{
 				const selected = uxSelect('mnt')
 				const groupArr = [...selected['Data']].fill(name)
 				const isFinished = await window.mnt.update(groupArr,selected['Data'])	
-				const nodelist = []
+				let nodelist = []
 				if(name == 'Shortcut'){
 					nodelist = document.getElementById('mnt-shortcut')
 				}else{
@@ -498,8 +499,6 @@ const mntmenuAddition = ()=>{
 					console.log(modName)
 					nodelist = document.querySelectorAll('.' + modName)
 				}
-				//const group = document.getElementById(id)
-				console.log(nodelist)
 				mntgroupwrite(nodelist)
 			}
 		})

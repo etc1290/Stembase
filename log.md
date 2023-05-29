@@ -2,6 +2,13 @@
  File tagging system
 
 
+
+---
+	## 2023.05.29		version 0.7.0
+	-- Function implementation
+	# Added
+	1. Finish monitored group delete function
+		-- finished
 ---
 	## 2023.05.26		version 0.6.9.1
 	-- Clear wasted codes

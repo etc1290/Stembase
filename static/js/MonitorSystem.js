@@ -11,8 +11,12 @@ const mdbLoader = (folder) =>{
 	return new sqlite3.Database(mdbStorage + '//' + folder + '.db')
 }	
 // Unpack db result
-const unpack = (res)=>{
-	return res.map(i=>Object.values(i)[0]).filter(Boolean)
+const unpack = (res,isArr=false)=>{
+	let gift = res.map(i=>Object.values(i)[0]).filter(Boolean)
+	if(isArr){
+		gift = gift[0].split(',')
+	}
+	return gift
 }
 const idPicker = (arr) =>{
 	let counter = id = 0
@@ -71,7 +75,6 @@ ipcMain.handle('mnt-load',async(event,name)=>{
 	const idArr = await promiseChain()
 	const cmdb = `select name from Members where id = ?`
 	for(let i=0;i<idArr.length;i++){
-		console.log(i)
 		promiseArr[i] = new Promise((resolve)=>{
 			mdb.all(cmdb,Number(idArr[i]),(err,res)=>{
 				if(res){
@@ -101,8 +104,7 @@ ipcMain.handle('mnt-load',async(event,name)=>{
 			}
 		})
 	})
-	
-	//console.log(await groupArr)
+	//console.log(groupArr)
 	const output = [groupArr,await dataArr]
 	return output
 	
@@ -111,7 +113,7 @@ ipcMain.handle('mnt-load',async(event,name)=>{
 ipcMain.handle('mnt-remove',(event,folderset,dataset)=>{
 	const output = new Promise((resolve)=>{
 		const cmd = `delete from Members where name = ?`
-		
+		const cmda = `select parent from Members where name = ?`
 		for(let i=0;i<dataset.length;i++){
 			const mdb = mdbLoader(folderset[i])
 			mdb.run(cmd,dataset[i],(err)=>{
@@ -127,26 +129,51 @@ ipcMain.handle('mnt-remove',(event,folderset,dataset)=>{
 	return output
 })
 // Delete monitored groups
-ipcMain.handle('mnt-delete',(event,folderset,dataset)=>{
+ipcMain.handle('mnt-delete',(event,dataset)=>{
 	const mdb = mdbLoader('Groups')
 	const mdbs= mdbLoader('Shortcut') 
-	const cmd = `delete from Members where name =?`
+	const cmd  = `select id from Members where name = ?`
+	const cmda = `delete from Members where id =?`
+	const cmdb = `select parent from Members where id =?`
+	const cmdc = `select child from Members where id =?`
+	const cmdd = `update Members set child = ? where id = ?`
+	
 	const idlist = []
 	const promiseArr = []
+	const promiseChain = (parent,id)=>{
+		const chainArr = []
+		for(let j=0;j<parent.length;j++){
+			chainArr[j] = new Promise((resolve)=>{
+				const pid = parent[j]
+				mdb.all(cmdc,pid,(err,res)=>{
+					const child = unpack(res,true)
+					const position = child.indexOf(id+'')
+					const dump = child.splice(position,1)
+					mdb.all(cmdd,[child,pid],(err,res)=>{
+						resolve(true)
+					})
+				})
+			})
+		}
+		const reply = Promise.all(chainArr)
+		return reply
+	}
 	for(let i=0;i<dataset.length;i++){
 		promiseArr[i] = new Promise((resolve)=>{
-			mdbs.all(cmd,[dataset[i]],(err,res)=>{
-				if(res){
-					idlist[0] = 'mnt-shortcut'
-				}
-				mdb.all(cmd,[dataset[i]],()=>{
-					fs.unlink(mdbStorage + '\\' + dataset[i] + '.db',(err)=>{
-						resolve(idlist)
-					})					
-				})
+			mdb.all(cmd,dataset[i],async(err,res)=>{
+				const id = unpack(res)
+				mdb.all(cmdb,id,async(err,res)=>{
+					const parent = unpack(res,true)		
+					const isFinished = await promiseChain(parent,id)
+					if(isFinished){
+						mdb.all(cmda,id,()=>{resolve(isFinished)})
+					}
+				})	
+				
 			})
 		})
 	}
+	
 	const output = Promise.all(promiseArr)
 	return output
 })
@@ -282,14 +309,11 @@ ipcMain.handle('mnt-update',(event,folderset,nameset)=>{
 							mdbg.all(cmdc,folder,()=>{
 								const cmdd = `update Members set child = ? where name = ?`
 								mdbg.all(cmdd,[children+'',folder],(err,res)=>{
-									//resolve(false)
 									const cmde =`select parent from Members where id = ?`
 									mdbg.all(cmde,id,(err,res)=>{
-										//const parents = res.map(i=>Object.values(i)[0]).filter(Boolean)
 										const parents = unpack(res)
-										console.log(parents)
-										mdbg.all(cmda,folder,(err,res)=>{
-											//parents.push(res.map(i=>Object.values(i)[0]))		
+										//console.log(parents)
+										mdbg.all(cmda,folder,(err,res)=>{		
 											const parents = unpack(res)
 											const cmdf = `update Members set parent = ? where id = ?`
 											mdbg.all(cmdf,[parents+'',id],(err,res)=>{
