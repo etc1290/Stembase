@@ -3,6 +3,13 @@
 
 
 
+
+---
+	## 2023.05.30		version 0.7.0.1
+	-- Function implementation
+	# Added
+	1. Add mntreplace to centralize unique classname
+		-- finished
 ---
 	## 2023.05.29		version 0.7.0
 	-- Function implementation

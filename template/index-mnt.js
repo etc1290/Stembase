@@ -84,6 +84,10 @@ const mntcheck = (event,classname,isCurrent=false)=>{
 		return event.target.classList.contains(classname)
 	}
 }
+// Side:	Reserved characters replacer
+const mntreplace = (name)=>{
+	return name.replace(/ /g,'@')
+}
 // Side:	Selected monitored members
 const mntselected = (event)=>{
 	const selected = document.querySelectorAll('.mnt-selected')
@@ -219,7 +223,6 @@ const mntgroupwrite = async(target,isLoaded=true) =>{
 
 	const header = target.children[0]
 	const updateDiv = target.children[1]
-	console.log(target)
 	const [groupset,dataset] = await window.mnt.load(header.innerHTML)
 	//console.log(groupset)
 	//console.log(dataset)
@@ -228,7 +231,7 @@ const mntgroupwrite = async(target,isLoaded=true) =>{
 	for(var i=0;i<groupset.length;i++){
 		console.log(header)
 		console.log(groupset)
-		const modName = groupset[i].replace(/ /g,'@')
+		const modName = mntreplace(groupset[i])
 		const id = `id='mnt-` + header.innerHTML + `-group-` + i + `'`
 		const subheader = `<p class='mnt-folder-header mnt-data'>` + groupset[i] + `</p>`
 		const subcontent= `<div class='mnt-folder-content'></div>`
@@ -452,6 +455,16 @@ const mntmenufunc = async()=>{
 		if(updateArr[0]){
 			mntgroup()
 			console.log(updateArr)
+			for(var i=0;i<updateArr.length;i++){
+				const node = updateArr[i]
+				if(node == 'Shortcut'){
+					mntgroupwrite(document.getElementById('mnt-shortcut'))
+				}else{
+					const modName = mntreplace(node)
+					const nodelist = document.getElementsByClassName(modName)
+					mntgroupwrite(nodelist)
+				}
+			}
 			/*
 			for(var i=0;i<updateArr.length;i++){
 				mntgroupwrite(document.getElementById(updateArr[i]),false)
@@ -497,9 +510,10 @@ const mntmenuAddition = ()=>{
 				if(name == 'Shortcut'){
 					nodelist = document.getElementById('mnt-shortcut')
 				}else{
-					const modName = name.replace(/ /g,'@')
+					const modName = mntreplace(name)
 					console.log(modName)
-					nodelist = document.querySelectorAll('.' + modName)
+					//nodelist = document.querySelectorAll('.' + modName)
+					nodelist = document.getElementsByClassName(modName)
 				}
 				mntgroupwrite(nodelist)
 			}
@@ -517,7 +531,7 @@ const mntgroup = async(parent,child)=>{
 		grouplist.splice(id,1)
 		const mntdata = []
 		for(var i=0;i<grouplist.length;i++){
-			const modName = grouplist[i][0].replace(/ /g,'@')
+			const modName = mntreplace(grouplist[i][0])
 			const header = `<p class='mnt-folder-header'>` + grouplist[i] + `</p>`
 			const content= `<div class='mnt-folder-content'></div>`
 			//const uniqClass = `mnt-usergroup-` + grouplist[i]
