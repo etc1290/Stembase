@@ -60,6 +60,7 @@
 	min-height:		31px;
 	width:			150px;
 	display:		block;
+	font-size:		12px;
 }
 .mnt-dropmenu-option:hover{
 	background:		rgb(146,182,200);

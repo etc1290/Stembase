@@ -457,7 +457,6 @@ const mntmenufunc = async()=>{
 		// Remove:						Delete this group
 	document.getElementById('mnt-cm-groupdelete').addEventListener('mousedown',async()=>{
 		const selected = uxSelect('mnt')
-		//const updateArr = await window.mnt.delete(selected['Folder'],selected['Data'])
 		const updateArr = await window.mnt.delete(selected['Data'])
 		if(updateArr[0]){
 			mntgroup()
@@ -467,7 +466,6 @@ const mntmenufunc = async()=>{
 				if(node == 'Shortcut'){
 					mntgroupwrite(document.getElementById('mnt-shortcut'))
 				}else{
-					console.log(node)
 					const modName = mntreplace(node)
 					const nodelist = document.getElementsByClassName(modName)
 					if(nodelist[0]){
@@ -475,10 +473,6 @@ const mntmenufunc = async()=>{
 					}				
 				}
 			}
-			/*
-			for(var i=0;i<updateArr.length;i++){
-				mntgroupwrite(document.getElementById(updateArr[i]),false)
-			}*/
 		}
 	})
 		// Rename:						Rename this group
@@ -499,12 +493,14 @@ const mntmenuAddition = ()=>{
 		const optionArr = []
 		for(var i=0;i<groups.length;i++){
 			const id = `'mnt-movemenu-` + groups[i] + `'`
-			const text = 'Add to' + groups[i]
+			const text = 'to ' + groups[i]
+			const modName = mntreplace(groups[i])
 			const option = `<p id=` + id + `class='mnt-dropmenu-option mnt-movemenu-addition'>` + text + `</p>`
 			optionArr[i] = option
 		}
 		const addition = optionArr.join('')
 		const updateDiv = document.getElementById('mnt-cm-movemenu')
+		console.log(updateDiv.innerHTML)
 		const content = updateDiv.innerHTML + addition
 		updateDiv.innerHTML = content
 	}
@@ -521,8 +517,6 @@ const mntmenuAddition = ()=>{
 					nodelist = document.getElementById('mnt-shortcut')
 				}else{
 					const modName = mntreplace(name)
-					console.log(modName)
-					//nodelist = document.querySelectorAll('.' + modName)
 					nodelist = document.getElementsByClassName(modName)
 				}
 				mntgroupwrite(nodelist)

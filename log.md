@@ -5,11 +5,18 @@
 
 
 ---
-	## 2023.05.30		version 0.7.0.1
+	## 2023.05.30		version 0.7.1
 	-- Function implementation
 	-- Bug fix
+	-- Clear wasted codes
+	-- Style change
 	# Added
 	1. Add mntreplace to centralize unique classname
+		-- finished
+	2. Hide movemenu dropdown option sharing with the same group name
+		-- finished
+	# Changed
+	1. Change the font-size of dropmenu options
 		-- finished
 	# Fixed
 	1. Fix the bug that when deleted groups have no parents or children would not work
