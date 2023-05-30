@@ -14,6 +14,8 @@
 	# Fixed
 	1. Fix the bug that when deleted groups have no parents or children would not work
 		-- finished
+	2. Fix the bug that replace reserved characters function sometimes not worl well 
+		-- finished
 ---
 	## 2023.05.29		version 0.7.0
 	-- Function implementation

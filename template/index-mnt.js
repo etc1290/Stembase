@@ -86,8 +86,15 @@ const mntcheck = (event,classname,isCurrent=false)=>{
 }
 // Side:	Reserved characters replacer
 const mntreplace = (name)=>{
-	console.log(name)
-	return name.replace(/ /g,'@')
+	const c = '@'
+	const isArr = name.constructor == Array
+	if(isArr){
+		for(var i=0;i<name.length;i++){
+			name[i] = name[i].replace(/ /g,c)
+		}
+		return name
+	}
+	return name.replace(/ /g,c)
 }
 // Side:	Selected monitored members
 const mntselected = (event)=>{
@@ -258,7 +265,6 @@ const mntgroupload = ()=>{
 			const group = event.target.closest('.mnt-folder')
 			if(group.classList.contains('mnt-folder')){
 				const content = group.children[1]
-				console.log(group.id)
 				if(!content.innerHTML){
 					mntgroupwrite(group)
 				}
@@ -461,9 +467,12 @@ const mntmenufunc = async()=>{
 				if(node == 'Shortcut'){
 					mntgroupwrite(document.getElementById('mnt-shortcut'))
 				}else{
+					console.log(node)
 					const modName = mntreplace(node)
 					const nodelist = document.getElementsByClassName(modName)
-					mntgroupwrite(nodelist)
+					if(nodelist[0]){
+						mntgroupwrite(nodelist)
+					}				
 				}
 			}
 			/*

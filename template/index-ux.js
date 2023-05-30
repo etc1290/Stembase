@@ -149,7 +149,6 @@ const uxContextMenuCreate = ()=>{
 			// Hide function
 			const mnthide = (e)=>{
 				for(var i=0;i<e.length;i++){
-					console.log(e[i])
 					e[i].classList.add('hide')
 				}
 			}
@@ -223,7 +222,6 @@ const uxContextMenuCreate = ()=>{
 			try{
 				hideRule[funcSection.id]()
 			}catch(err){}
-			console.log(hideOpt)
 			mnthide(hideOpt)
 		}
 		uxContextMenuOptRule()		
