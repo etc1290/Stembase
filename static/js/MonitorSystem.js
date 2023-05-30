@@ -14,7 +14,9 @@ const mdbLoader = (folder) =>{
 const unpack = (res,isArr=false)=>{
 	let gift = res.map(i=>Object.values(i)[0]).filter(Boolean)
 	if(isArr){
-		gift = gift[0].split(',')
+		try{
+			gift = gift[0].split(',')
+		}catch(err){}
 	}
 	return gift
 }

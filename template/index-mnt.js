@@ -86,6 +86,7 @@ const mntcheck = (event,classname,isCurrent=false)=>{
 }
 // Side:	Reserved characters replacer
 const mntreplace = (name)=>{
+	console.log(name)
 	return name.replace(/ /g,'@')
 }
 // Side:	Selected monitored members

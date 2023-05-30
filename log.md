@@ -7,8 +7,12 @@
 ---
 	## 2023.05.30		version 0.7.0.1
 	-- Function implementation
+	-- Bug fix
 	# Added
 	1. Add mntreplace to centralize unique classname
+		-- finished
+	# Fixed
+	1. Fix the bug that when deleted groups have no parents or children would not work
 		-- finished
 ---
 	## 2023.05.29		version 0.7.0
