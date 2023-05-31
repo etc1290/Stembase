@@ -413,15 +413,6 @@ const mntmenufunc = async()=>{
 			mntmenuAddition('create','movemenu')
 		}
 	})
-		// Move(Add to Shortcut):		Add this member to Shortcut
-	/*document.getElementById('mnt-movemenu-shortcut').addEventListener('mousedown',async()=>{
-		console.log(1)
-		const selected = uxSelect('mnt')
-		const shortcutArr = [...selected['Data']].fill('Shortcut')
-		const isFinished = await window.mnt.update(shortcutArr,selected['Data'])
-		const group = document.getElementById('mnt-shortcut')
-		mntgroupwrite(group)
-	})*/
 		// Remove(Delete this record):	Delete all tags and meta and remove monitored status of this member
 	document.getElementById('mnt-removemenu-delete').addEventListener('mousedown',()=>{
 		console.log('delete function')

@@ -104,6 +104,7 @@ ipcMain.handle('mnt-load',async(event,name)=>{
 			}else{
 				resolve([])
 			}
+			mdbs.close()
 		})
 	})
 	//console.log(groupArr)
@@ -124,6 +125,7 @@ ipcMain.handle('mnt-remove',(event,folderset,dataset)=>{
 				}else{
 					resolve(true)
 				}
+				mdb.close()
 			})
 			
 		}
@@ -178,7 +180,6 @@ ipcMain.handle('mnt-delete',(event,dataset)=>{
 						mdb.all(cmda,id,()=>{
 							console.log(2)
 							fs.unlink(mdbStorage + '\\' + name + '.db',(err)=>{
-								console.log(idlist)
 								resolve(idlist)
 							})
 						})
@@ -368,11 +369,12 @@ ipcMain.handle('mnt-update',(event,folderset,nameset)=>{
 					const mdb = mdbLoader(folder)
 					const cmd = `insert into Members(name) values(?)`
 					mdb.all(cmd,name,(err,res)=>{
-						if(err){
+						if(err){						
 							resolve(true)
 						}else{
 							resolve(false)
 						}
+						mdb.close()
 					})
 				}
 			})

@@ -13,9 +13,9 @@
 		-- finished
 	2. Append groupdelete and groupcreate function recreate movemenu after execution
 		-- finished
-	# Bugged
+	# Fixed
 	1. Sometimes group delete cannot delete the physical db
-		-- processing
+		-- finished
 		
 ---
 	## 2023.05.30		version 0.7.1
