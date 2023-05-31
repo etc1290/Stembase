@@ -228,7 +228,7 @@ const mntrename = ()=>{
 }
 // Side:	Monitored group loader
 const mntgroupwrite = async(target,isLoaded=true) =>{
-
+	console.log(target)
 	const header = target.children[0]
 	const updateDiv = target.children[1]
 	const [groupset,dataset] = await window.mnt.load(header.innerHTML)
@@ -237,8 +237,6 @@ const mntgroupwrite = async(target,isLoaded=true) =>{
 	const mntdata = []
 	const groups = []
 	for(var i=0;i<groupset.length;i++){
-		console.log(header)
-		console.log(groupset)
 		const modName = mntreplace(groupset[i])
 		const id = `id='mnt-` + header.innerHTML + `-group-` + i + `'`
 		const subheader = `<p class='mnt-folder-header mnt-data'>` + groupset[i] + `</p>`
@@ -520,12 +518,15 @@ const mntmenuAddition = (cmda='all',cmdb)=>{
 					const isFinished = await window.mnt.update(groupArr,selected['Data'])	
 					let nodelist = []
 					if(name == 'Shortcut'){
-						nodelist = document.getElementById('mnt-shortcut')
+						nodelist = [document.getElementById('mnt-shortcut')]
 					}else{
 						const modName = mntreplace(name)
-						nodelist = document.getElementsByClassName(modName)
+						nodelist = [...document.getElementsByClassName(modName)]
 					}
-					mntgroupwrite(nodelist)
+					for(var i;i<nodelist.length;i++){
+						console.log(nodelist[i])
+						mntgroupwrite(nodelist[i])
+					}					
 				}
 			})
 		}

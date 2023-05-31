@@ -333,13 +333,13 @@ ipcMain.handle('mnt-update',(event,folderset,nameset)=>{
 		promiseArr[i] = new Promise((resolve)=>{
 			mdbg.all(cmda,name,(err,res)=>{
 				if(res[0]){
-					//const id = res.map(i=>Object.values(i)[0])
 					const id = unpack(res)
 					const cmdb = `select child from Members where name = ?`
 					mdbg.all(cmdb,folder,(err,res)=>{
-						//const children = res.map(i=>Object.values(i)[0])
 						const children = unpack(res)
-						const isExist  = children.indexOf(id)
+						console.log(id)
+						console.log(children)
+						const isExist  = children.indexOf(id+'')
 						if(isExist+1){
 							resolve(true)
 						}else{
@@ -367,7 +367,7 @@ ipcMain.handle('mnt-update',(event,folderset,nameset)=>{
 					})
 				}else{
 					const mdb = mdbLoader(folder)
-					const cmd = `insert into Members(name) values(?)`
+					const cmd = `insert or ignore into Members(name) values(?)`
 					mdb.all(cmd,name,(err,res)=>{
 						if(err){						
 							resolve(true)
