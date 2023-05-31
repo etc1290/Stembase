@@ -8,6 +8,7 @@
 	## 2023.05.31		version 0.7.1.1
 	-- Rewrite function
 	-- Clear wasted codes
+	-- Bug fix
 	# Changed
 	1. Rewrite mntmenuAddition in dynamic function 
 		-- finished
@@ -17,6 +18,8 @@
 	1. Sometimes group delete cannot delete the physical db
 		-- finished
 	2. Monitored groups and data can be duplicate when adding
+		-- finished
+	3. Fix the bug that when drop in subgroups would duplicate rendering
 		-- finished
 		
 ---

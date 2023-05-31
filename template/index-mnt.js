@@ -273,7 +273,7 @@ const mntgroupload = ()=>{
 // Side:	Cancel current actions for contextmenu and drag function
 const mntcancel = (event)=>{
 	event.preventDefault()
-	//event.stopPropagation()
+	event.stopPropagation()
 	return false
 }
 // Side:	Function of monitored data
@@ -309,15 +309,13 @@ const mntfunc = (target)=>{
 				mntcancel(event)
 			})
 			el.addEventListener('drop',async(event)=>{
-				mntcancel(event)
-				
+				mntcancel(event)			
 				const dropid = event.dataTransfer.getData('text/plain')
 				const dropdata = document.getElementById(dropid)
 				const isClone = dropdata.parentNode.parentNode.classList.contains('mnt-dropzone')
 				const folder = event.target.closest('.mnt-folder')			
 				const content = folder.children[1]
 				const header = folder.children[0]
-				console.log(dropid)
 				// Monitored group update
 				const dropzoneid = event.currentTarget.id
 				const dropzone = event.currentTarget
@@ -325,19 +323,16 @@ const mntfunc = (target)=>{
 					const existArr = await window.mnt.update([header.innerHTML],[dropdata.innerHTML])
 					for(var i=0;i<existArr.length;i++){
 						const isExist = existArr[i]
-						if(!isClone && !isExist){
-							console.log(278)										
+						if(!isClone && !isExist){									
 							const dropclone = dropdata.cloneNode(true)
 							dropdata.parentNode.insertBefore(dropclone,dropdata.nextSibling)					
 						}
 						if(!isExist){
-							console.log(283)
+							console.log('1:' + dropzone.id + '  2:' + event.target.id)
 							const isFolderOnly = folder.classList.contains('folder-only')						
 							if(isFolderOnly){
-								console.log(286)
 								const isFolder = dropdata.classList.contains('mnt-folder')
 								if(isFolder){
-									console.log(289)
 									mntgroupwrite(dropzone)
 								}
 							}else{
@@ -356,8 +351,10 @@ const mntfunc = (target)=>{
 const mntdragfunc = ()=>{
 	document.addEventListener('mntdrag:enter',(event)=>{
 		mntcancel(event)
+		
 		const contentList = []
 		const folder = event.target.closest('.mnt-folder')
+		console.log('enter:' + folder.id)
 		const content = folder.children[1]
 		let node = content
 		while(!node.classList.contains('function-section')){
@@ -373,6 +370,7 @@ const mntdragfunc = ()=>{
 		mntcancel(event)
 		const contentList = []
 		const folder = event.target.closest('.mnt-folder')
+		console.log('leave:' + folder.id)
 		const content = folder.children[1]
 		let node = content
 		while(!node.classList.contains('function-section')){
