@@ -410,6 +410,7 @@ const mntmenufunc = async()=>{
 				}
 			}	
 			mntgroup(header,newGroup)
+			mntmenuAddition('create','movemenu')
 		}
 	})
 		// Move(Add to Shortcut):		Add this member to Shortcut
@@ -460,7 +461,6 @@ const mntmenufunc = async()=>{
 		const updateArr = await window.mnt.delete(selected['Data'])
 		if(updateArr[0]){
 			mntgroup()
-			console.log(updateArr)
 			for(var i=0;i<updateArr.length;i++){
 				const node = updateArr[i]
 				if(node == 'Shortcut'){
@@ -469,10 +469,12 @@ const mntmenufunc = async()=>{
 					const modName = mntreplace(node)
 					const nodelist = document.getElementsByClassName(modName)
 					if(nodelist[0]){
-						mntgroupwrite(nodelist)
+						mntgroupwrite(nodelist)						
 					}				
 				}
 			}
+			mntmenuAddition('create','movemenu')
+			console.log(1)
 		}
 	})
 		// Rename:						Rename this group
@@ -485,43 +487,6 @@ const mntmenufunc = async()=>{
 
 // Side: Contextmenu addition
 const mntmenuAddition = (cmda='all',cmdb)=>{
-	// Movemenu additional creation
-	/*const mntMovemenuCreate = async()=>{		
-		const [,groups] = await window.mnt.load('Groups')
-		const optionArr = []
-		for(var i=0;i<groups.length;i++){
-			const id = `'mnt-movemenu-` + groups[i] + `'`
-			const text = 'to ' + groups[i]
-			const modName = mntreplace(groups[i])
-			const option = `<p id=` + id + `class='mnt-dropmenu-option mnt-movemenu-addition'>` + text + `</p>`
-			optionArr[i] = option
-		}
-		const addition = optionArr.join('')
-		const updateDiv = document.getElementById('mnt-cm-movemenu')
-		updateDiv.innerHTML = addition
-	}
-	const mntMovemenuFunc = ()=>{
-		document.body.addEventListener('click',async(event)=>{
-			if(mntcheck(event,'mnt-movemenu-addition')){
-				const id = event.target.id
-				const name = id.substring(13)
-				const selected = uxSelect('mnt')
-				const groupArr = [...selected['Data']].fill(name)
-				const isFinished = await window.mnt.update(groupArr,selected['Data'])	
-				let nodelist = []
-				if(name == 'Shortcut'){
-					nodelist = document.getElementById('mnt-shortcut')
-				}else{
-					const modName = mntreplace(name)
-					nodelist = document.getElementsByClassName(modName)
-				}
-				mntgroupwrite(nodelist)
-			}
-		})
-	}
-	mntMovemenuCreate()
-	mntMovemenuFunc()
-	*/
 	const mode = []
 	const cmdset= ['create','func']
 	const menuset = ['movemenu']

@@ -7,9 +7,15 @@
 ---
 	## 2023.05.31		version 0.7.1.1
 	-- Rewrite function
+	-- Clear wasted codes
 	# Changed
 	1. Rewrite mntmenuAddition in dynamic function 
 		-- finished
+	2. Append groupdelete and groupcreate function recreate movemenu after execution
+		-- finished
+	# Bugged
+	1. Sometimes group delete cannot delete the physical db
+		-- processing
 		
 ---
 	## 2023.05.30		version 0.7.1
