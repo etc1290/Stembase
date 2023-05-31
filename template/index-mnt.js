@@ -484,12 +484,10 @@ const mntmenufunc = async()=>{
 }
 
 // Side: Contextmenu addition
-const mntmenuAddition = ()=>{
+const mntmenuAddition = (cmda='all',cmdb)=>{
 	// Movemenu additional creation
-	const mntMovemenuCreate = async()=>{
+	/*const mntMovemenuCreate = async()=>{		
 		const [,groups] = await window.mnt.load('Groups')
-		/*const sid = groups.indexOf('Shortcut')
-		groups.splice(sid,1)*/
 		const optionArr = []
 		for(var i=0;i<groups.length;i++){
 			const id = `'mnt-movemenu-` + groups[i] + `'`
@@ -500,9 +498,7 @@ const mntmenuAddition = ()=>{
 		}
 		const addition = optionArr.join('')
 		const updateDiv = document.getElementById('mnt-cm-movemenu')
-		console.log(updateDiv.innerHTML)
-		const content = updateDiv.innerHTML + addition
-		updateDiv.innerHTML = content
+		updateDiv.innerHTML = addition
 	}
 	const mntMovemenuFunc = ()=>{
 		document.body.addEventListener('click',async(event)=>{
@@ -525,6 +521,66 @@ const mntmenuAddition = ()=>{
 	}
 	mntMovemenuCreate()
 	mntMovemenuFunc()
+	*/
+	const mode = []
+	const cmdset= ['create','func']
+	const menuset = ['movemenu']
+	// General Modes
+	mode['all'] = ()=>{
+		for(var i=0;i<cmdset.length;i++){
+			mode[cmdset[i]]('all')
+		}
+	}
+	mode['create'] = (cmdb)=>{
+		mode['movemenu'] = async()=>{
+			const [,groups] = await window.mnt.load('Groups')
+			const optionArr = []
+			for(var i=0;i<groups.length;i++){
+				const id = `'mnt-movemenu-` + groups[i] + `'`
+				const text = 'to ' + groups[i]
+				const modName = mntreplace(groups[i])
+				const option = `<p id=` + id + `class='mnt-dropmenu-option mnt-movemenu-addition'>` + text + `</p>`
+				optionArr[i] = option
+			}
+			const addition = optionArr.join('')
+			const updateDiv = document.getElementById('mnt-cm-movemenu')
+			updateDiv.innerHTML = addition
+		}
+		mode['all'] = ()=>{
+			for(var i=0;i<menuset.length;i++){
+				mode[menuset[i]]()
+			}
+		}
+		mode[cmdb]()
+	}
+	mode['func'] = (cmdb)=>{
+		mode['movemenu'] = ()=>{
+			document.body.addEventListener('click',async(event)=>{
+				if(mntcheck(event,'mnt-movemenu-addition')){
+					const id = event.target.id
+					const name = id.substring(13)
+					const selected = uxSelect('mnt')
+					const groupArr = [...selected['Data']].fill(name)
+					const isFinished = await window.mnt.update(groupArr,selected['Data'])	
+					let nodelist = []
+					if(name == 'Shortcut'){
+						nodelist = document.getElementById('mnt-shortcut')
+					}else{
+						const modName = mntreplace(name)
+						nodelist = document.getElementsByClassName(modName)
+					}
+					mntgroupwrite(nodelist)
+				}
+			})
+		}
+		mode['all'] = ()=>{
+			for(var i=0;i<menuset.length;i++){
+				mode[menuset[i]]()
+			}
+		}
+		mode[cmdb]()
+	}
+	mode[cmda](cmdb)
 }
 // Side:	Load all monitored group
 const mntgroup = async(parent,child)=>{

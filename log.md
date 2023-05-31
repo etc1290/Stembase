@@ -5,6 +5,13 @@
 
 
 ---
+	## 2023.05.31		version 0.7.1.1
+	-- Rewrite function
+	# Changed
+	1. Rewrite mntmenuAddition in dynamic function 
+		-- finished
+		
+---
 	## 2023.05.30		version 0.7.1
 	-- Function implementation
 	-- Bug fix

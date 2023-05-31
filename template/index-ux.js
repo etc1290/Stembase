@@ -181,12 +181,7 @@ const uxContextMenuCreate = ()=>{
 					hide(document.getElementById('mnt-headercm'))
 				}
 				mainRule['mnt-folder-header'] = ()=>{
-					hide(document.getElementById('mnt-datacm'),true)
-					/*
-					const name = event.target.innerHTML
-					if(document.getElementById('mnt-movemenu-' + name)){
-						hide(document.getElementById('mnt-movemenu-' + name))
-					}	*/				
+					hide(document.getElementById('mnt-datacm'),true)			
 					const subRule = []
 					subRule['mnt-mainfolder'] = ()=>{
 						hide(document.getElementById('mnt-cm-groupdelete'))
@@ -223,7 +218,6 @@ const uxContextMenuCreate = ()=>{
 				}
 				for(let i=0;i<classArr.length;i++){
 					try{
-						//console.log(classArr[i])
 						mainRule[classArr[i] + '']()
 					}catch(err){}				
 				}			
