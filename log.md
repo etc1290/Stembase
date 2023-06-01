@@ -10,6 +10,8 @@
 	# Fixed
 	1. Fix the bug that monitored group can be added to itself
 		-- finished
+	2. Fix the bug that monitored groups naming error
+		-- finished
 ---
 	## 2023.05.31		version 0.7.1.1
 	-- Rewrite function

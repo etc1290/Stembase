@@ -198,6 +198,15 @@ const mntrename = ()=>{
 			if(isReady){
 				document.querySelector('.mnt-editing').classList.remove('mnt-editing')
 				mntgroup()
+				const oldmodName = `mnt-usergroup-` + mntreplace(oldname)
+				const newmodName = `mnt-usergroup-` + mntreplace(newname)
+				const oldclass = document.getElementsByClassName(mntreplace(oldmodName))
+				for(var i=0;i<oldclass.length;i++){
+					oldclass[i].classList.remove(oldmodeName)
+					oldclass[i].classList.add(newmodName)
+					oldclass[i].innerHTML = newname
+				}
+				
 			}
 		}	
 	}
@@ -243,6 +252,7 @@ const mntgroupwrite = async(target,isLoaded=true) =>{
 		const subcontent= `<div class='mnt-folder-content'></div>`
 		//const uniqClass = `mnt-usergroup-` + groupset[i]
 		const uniqClass = `mnt-usergroup-` + modName
+		console.log(uniqClass)
 		const subfolder = `<div id='` + id 
 			+ `' class='mnt-folder mnt-dropzone ` + uniqClass + ` mnt-subfolder' draggable = 'true'>` 
 			+ subheader + subcontent + `</div>`
@@ -565,10 +575,11 @@ const mntgroup = async(parent,child)=>{
 		grouplist.splice(id,1)
 		const mntdata = []
 		for(var i=0;i<grouplist.length;i++){
-			const modName = mntreplace(grouplist[i][0])
+			const modName = mntreplace(grouplist[i])
 			const header = `<p class='mnt-folder-header'>` + grouplist[i] + `</p>`
 			const content= `<div class='mnt-folder-content'></div>`
 			const uniqClass = `mnt-usergroup-` + modName
+			console.log('aa:' + uniqClass)
 			const folder = `<div id='mnt-user-` + grouplist[i]
 				+ `' class='mnt-folder mnt-dropzone ` + uniqClass + ` mnt-subfolder' draggable='true'>` 
 				+ header + content + `</div>`
