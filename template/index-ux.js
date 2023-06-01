@@ -225,6 +225,7 @@ const uxContextMenuCreate = ()=>{
 			try{
 				hideRule[funcSection.id]()
 			}catch(err){}
+			console.log(hideOpt)
 			mnthide(hideOpt)
 		}
 		uxContextMenuOptRule()		

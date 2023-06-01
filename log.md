@@ -8,9 +8,11 @@
 	-- Bug fix
 	-- Clear wasted codes
 	# Fixed
-	1. Fix the bug that monitored group can be added to itself
+	1. Fix the bug that monitored groups can be added to itself
 		-- finished
 	2. Fix the bug that monitored groups naming error
+		-- finished
+	3. Fix the bug that movemenu not update with rename function
 		-- finished
 ---
 	## 2023.05.31		version 0.7.1.1
