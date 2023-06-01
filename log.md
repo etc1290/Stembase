@@ -14,6 +14,8 @@
 		-- finished
 	3. Fix the bug that movemenu not update with rename function
 		-- finished
+	4. Fix the naming error when monitored groups writing
+		-- finished
 ---
 	## 2023.05.31		version 0.7.1.1
 	-- Rewrite function

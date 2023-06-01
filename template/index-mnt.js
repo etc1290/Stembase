@@ -248,15 +248,16 @@ const mntgroupwrite = async(target,isLoaded=true) =>{
 	const groups = []
 	for(var i=0;i<groupset.length;i++){
 		const modName = mntreplace(groupset[i])
-		const id = `id='mnt-` + header.innerHTML + `-group-` + i + `'`
+		const id = `'mnt-` + header.innerHTML + `-group-` + i + `'`
 		const subheader = `<p class='mnt-folder-header mnt-data'>` + groupset[i] + `</p>`
 		const subcontent= `<div class='mnt-folder-content'></div>`
 		//const uniqClass = `mnt-usergroup-` + groupset[i]
 		const uniqClass = `mnt-usergroup-` + modName
-		const subfolder = `<div id='` + id 
-			+ `' class='mnt-folder mnt-dropzone ` + uniqClass + ` mnt-subfolder' draggable = 'true'>` 
+		const subfolder = `<div id=` + id 
+			+ ` class='mnt-folder mnt-dropzone ` + uniqClass + ` mnt-subfolder' draggable = 'true'>` 
 			+ subheader + subcontent + `</div>`
 		groups[i] = subfolder
+		console.log(subfolder)
 	}
 	for(var i=0;i<dataset.length;i++){
 		const id = `id='mnt-` + header.innerHTML + `-data-` + i + `'`
