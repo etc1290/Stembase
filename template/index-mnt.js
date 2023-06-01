@@ -319,6 +319,10 @@ const mntfunc = (target)=>{
 				// Monitored group update
 				const dropzoneid = event.currentTarget.id
 				const dropzone = event.currentTarget
+				if(dropzoneid == dropid){
+					mntspan(content)
+					return
+				}
 				if(header.innerHTML!=='Groups'){
 					const existArr = await window.mnt.update([header.innerHTML],[dropdata.innerHTML])
 					for(var i=0;i<existArr.length;i++){
@@ -328,7 +332,6 @@ const mntfunc = (target)=>{
 							dropdata.parentNode.insertBefore(dropclone,dropdata.nextSibling)					
 						}
 						if(!isExist){
-							console.log('1:' + dropzone.id + '  2:' + event.target.id)
 							const isFolderOnly = folder.classList.contains('folder-only')						
 							if(isFolderOnly){
 								const isFolder = dropdata.classList.contains('mnt-folder')
@@ -410,8 +413,11 @@ const mntmenufunc = async()=>{
 		}
 	})
 		// Remove(Delete this record):	Delete all tags and meta and remove monitored status of this member
-	document.getElementById('mnt-removemenu-delete').addEventListener('mousedown',()=>{
+	document.getElementById('mnt-removemenu-delete').addEventListener('mousedown',async()=>{
 		console.log('delete function')
+		const selected = uxSelect('mnt')
+		const updateArr = await window.mnt.remove(selected['Folder'],selected['Data'])
+		
 	})
 		// Remove(Remove from group):	Remove member from this monitored group
 	document.getElementById('mnt-removemenu-remove').addEventListener('mousedown',async()=>{
@@ -461,7 +467,6 @@ const mntmenufunc = async()=>{
 				}
 			}
 			mntmenuAddition('create','movemenu')
-			console.log(1)
 		}
 	})
 		// Rename:						Rename this group
@@ -469,6 +474,20 @@ const mntmenufunc = async()=>{
 		const group = document.querySelector('.mnt-selected')
 		oldname = group.innerHTML
 		group.contentEditable = 'true'
+		/*
+		if(document.body.createTextRange){
+			console.log(1)
+			const range = document.body.createTextRange()
+			range.moveToElementText(group)
+			range.select()
+		}else if(window.getSelection){
+			console.log(2)
+			const range = document.createRange()
+			range.selectNodeContents(group)
+			const sel = window.getSelection()
+			sel.removeAllRanges()
+			sel.addRange(range)
+		}*/		
 	})
 }
 
@@ -549,7 +568,6 @@ const mntgroup = async(parent,child)=>{
 			const modName = mntreplace(grouplist[i][0])
 			const header = `<p class='mnt-folder-header'>` + grouplist[i] + `</p>`
 			const content= `<div class='mnt-folder-content'></div>`
-			//const uniqClass = `mnt-usergroup-` + grouplist[i]
 			const uniqClass = `mnt-usergroup-` + modName
 			const folder = `<div id='mnt-user-` + grouplist[i]
 				+ `' class='mnt-folder mnt-dropzone ` + uniqClass + ` mnt-subfolder' draggable='true'>` 

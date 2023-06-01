@@ -3,7 +3,13 @@
 
 
 
-
+---
+	## 2023.06.01		version 0.7.1.2
+	-- Bug fix
+	-- Clear wasted codes
+	# Fixed
+	1. Fix the bug that monitored group can be added to itself
+		-- finished
 ---
 	## 2023.05.31		version 0.7.1.1
 	-- Rewrite function

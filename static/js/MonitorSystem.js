@@ -171,7 +171,6 @@ ipcMain.handle('mnt-delete',(event,dataset)=>{
 		promiseArr[i] = new Promise((resolve)=>{
 			mdb.all(cmd,dataset[i],async(err,res)=>{
 				const id = unpack(res)
-				//mdb.all(cmda,id,()=>{})
 				mdb.all(cmdb,id,async(err,res)=>{
 					const parent = unpack(res,true)		
 					const isFinished = await promiseChain(parent,id)
@@ -184,32 +183,9 @@ ipcMain.handle('mnt-delete',(event,dataset)=>{
 							})
 						})
 					}
-					/*
-					for(let j=0;j<parent.length;j++){
-						const pid = parent[j]
-						mdb.all(cmdc,pid,(err,res)=>{
-							const child = unpack(res,true)
-							const position = child.indexOf(id+'')
-							const dump = child.splice(position,1)
-							mdb.all(cmdd,[child,pid],(err,res)=>{
-								console.log(j)
-							})
-						})
-					}*/
 				})	
 				
 			})
-			
-			/*mdbs.all(cmd,[dataset[i]],(err,res)=>{
-				if(res){
-					idlist[0] = 'mnt-shortcut'
-				}
-				mdb.all(cmdc,[dataset[i]],()=>{
-					fs.unlink(mdbStorage + '\\' + dataset[i] + '.db',(err)=>{
-						resolve(idlist)
-					})					
-				})
-			})*/
 		})
 	}
 	
