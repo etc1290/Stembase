@@ -206,7 +206,7 @@ const mntrename = ()=>{
 					const e = oldclass[i]
 					e.classList.remove(oldmodName)
 					e.classList.add(newmodName)
-					e.innerHTML = newname
+					e.children[0].innerHTML = newname
 				}
 				
 			}

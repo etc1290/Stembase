@@ -16,6 +16,8 @@
 		-- finished
 	4. Fix the naming error when monitored groups writing
 		-- finished
+	5. Fix the missing contents of monitored groups after renaming
+		-- finished
 ---
 	## 2023.05.31		version 0.7.1.1
 	-- Rewrite function
