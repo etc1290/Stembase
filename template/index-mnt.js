@@ -192,7 +192,9 @@ const mntrename = ()=>{
 		}
 		const isBanned = censorCheck(newname)
 		if(isBanned){
-			const mnterror = await window.mnt.error('mntrename')
+			const mnterror = await window.mnt.error('mntrename-censor')
+		}else if(!newname.trim().length){
+			const mnterror = await window.mnt.error('mntrename-empty')
 		}else{
 			const isReady = await window.mnt.rename(oldname,newname)
 			if(isReady){
@@ -257,7 +259,7 @@ const mntgroupwrite = async(target,isLoaded=true) =>{
 			+ ` class='mnt-folder mnt-dropzone ` + uniqClass + ` mnt-subfolder' draggable = 'true'>` 
 			+ subheader + subcontent + `</div>`
 		groups[i] = subfolder
-		console.log(subfolder)
+		//console.log(subfolder)
 	}
 	for(var i=0;i<dataset.length;i++){
 		const id = `id='mnt-` + header.innerHTML + `-data-` + i + `'`
@@ -485,20 +487,6 @@ const mntmenufunc = async()=>{
 		const group = document.querySelector('.mnt-selected')
 		oldname = group.innerHTML
 		group.contentEditable = 'true'
-		/*
-		if(document.body.createTextRange){
-			console.log(1)
-			const range = document.body.createTextRange()
-			range.moveToElementText(group)
-			range.select()
-		}else if(window.getSelection){
-			console.log(2)
-			const range = document.createRange()
-			range.selectNodeContents(group)
-			const sel = window.getSelection()
-			sel.removeAllRanges()
-			sel.addRange(range)
-		}*/		
 	})
 }
 

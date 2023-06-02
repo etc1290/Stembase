@@ -362,7 +362,8 @@ ipcMain.handle('mnt-update',(event,folderset,nameset)=>{
 // Exception handler
 ipcMain.handle('mnt-error',(event,err)=>{
 	const warn = []
-	warn['mntrename'] = `Groups name cannot contain` + '`!`@$%^&*+\\=[]{};' + `:"|,<>/?~`
+	warn['mntrename-censor']	= `Groups name cannot contain` + '`!`@$%^&*+\\=[]{};' + `:"|,<>/?~`
+	warn['mntrename-empty']		= `Groups name cannot make by white space only`
 	dialog.showErrorBox('ERROR',warn[err])
 })
 

@@ -4,6 +4,12 @@
 
 
 ---
+	## 2023.06.02		version 0.7.1.3
+	-- Bug fix
+	# Fixed
+	1. Add white space check to mntrename
+		-- finished
+---
 	## 2023.06.01		version 0.7.1.2
 	-- Bug fix
 	-- Clear wasted codes
