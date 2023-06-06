@@ -253,13 +253,11 @@ const mntgroupwrite = async(target,isLoaded=true) =>{
 		const id = `'mnt-` + header.innerHTML + `-group-` + i + `'`
 		const subheader = `<p class='mnt-folder-header mnt-data'>` + groupset[i] + `</p>`
 		const subcontent= `<div class='mnt-folder-content'></div>`
-		//const uniqClass = `mnt-usergroup-` + groupset[i]
 		const uniqClass = `mnt-usergroup-` + modName
 		const subfolder = `<div id=` + id 
 			+ ` class='mnt-folder mnt-dropzone ` + uniqClass + ` mnt-subfolder' draggable = 'true'>` 
 			+ subheader + subcontent + `</div>`
 		groups[i] = subfolder
-		//console.log(subfolder)
 	}
 	for(var i=0;i<dataset.length;i++){
 		const id = `id='mnt-` + header.innerHTML + `-data-` + i + `'`
@@ -433,8 +431,7 @@ const mntmenufunc = async()=>{
 		
 	})
 		// Remove(Remove from group):	Remove member from this monitored group
-	document.getElementById('mnt-removemenu-remove').addEventListener('mousedown',async()=>{
-		
+	document.getElementById('mnt-removemenu-remove').addEventListener('mousedown',async()=>{		
 		const selected = uxSelect('mnt')
 		const isRemove = await window.mnt.remove(selected['Folder'],selected['Data'])
 		if(isRemove){
@@ -605,13 +602,18 @@ const mntshortcut = () =>{
 	mntgroupwrite(mntshortcut,false)
 	return true
 }
+
 // Side:		Initial page structure
-const mntbuild = ()=>{
-	const mainStatus = mntmain()
-	const groupStatus = mntgroup()
-	const shortcutStatus = mntshortcut()
-	if(mainStatus && shortcutStatus && groupStatus){
-		return true
+const mntRender = async()=>{
+	const isCreated = await window.mnt.build()
+	if(isCreated){
+		const mainStatus = mntmain()
+		const groupStatus = mntgroup()
+		const shortcutStatus = mntshortcut()
+		if(mainStatus && shortcutStatus && groupStatus){
+		console.log(1)
+			return true
+		}
 	}
 }
 //Initailizer
@@ -627,7 +629,7 @@ const mntApplier = (target)=>{
 }
 const mntInit = ()=>{
 	mntdragSetup()
-	const isReady = mntbuild()
+	const isReady = mntRender()
 	if(isReady){
 		mntfold()
 		mntrename()

@@ -92,9 +92,6 @@ ipcMain.handle('mnt-load',async(event,name)=>{
 	for(var i=0;i<groupArr.length;i++){
 		groupArr[i] = groupArr[i][0]
 	}
-	
-	//console.log(name)
-	//console.log(await groupArr)
 	const cmdc = `select name from Members`
 	const mdbs = mdbLoader(name)
 	const dataArr = new Promise((resolve)=>{
@@ -107,7 +104,6 @@ ipcMain.handle('mnt-load',async(event,name)=>{
 			mdbs.close()
 		})
 	})
-	//console.log(groupArr)
 	const output = [groupArr,await dataArr]
 	return output
 	
@@ -135,7 +131,6 @@ ipcMain.handle('mnt-remove',(event,folderset,dataset)=>{
 // Delete monitored groups
 ipcMain.handle('mnt-delete',(event,dataset)=>{
 	const mdb = mdbLoader('Groups')
-	//const mdbs= mdbLoader('Shortcut') 
 	const cmd  = `select id from Members where name = ?`
 	const cmda = `delete from Members where id =?`
 	const cmdb = `select parent from Members where id =?`
@@ -218,23 +213,6 @@ ipcMain.handle('mnt-create',(event)=>{
 })
 // Load monitored groups
 ipcMain.handle('mnt-group',(event,parent,child)=>{
-	/*
-	const output = new Promise((resolve)=>{
-		const filelist = fs.readdirSync(mdbStorage)
-		const grouplist = filelist.filter((e)=>{return e.endsWith('.db')})
-		const idlist = []
-		
-		for(let i=0;i<grouplist.length;i++){
-			const s = grouplist[i]
-			const groupid = s.substring(0,s.lastIndexOf('.'))
-			if(groupid!=='All' && groupid!=='Shortcut'){
-				idlist[idlist.length] = groupid
-			}			
-		}
-		resolve(idlist)
-	})
-	return output
-	*/
 	const isGroups = parent == 'Groups'
 	const output = new Promise((resolve)=>{
 		const mdb = mdbLoader('Groups')
@@ -365,6 +343,38 @@ ipcMain.handle('mnt-error',(event,err)=>{
 	warn['mntrename-censor']	= `Groups name cannot contain` + '`!`@$%^&*+\\=[]{};' + `:"|,<>/?~`
 	warn['mntrename-empty']		= `Groups name cannot make by white space only`
 	dialog.showErrorBox('ERROR',warn[err])
+})
+
+// Building database
+ipcMain.handle('mnt-build',async(event)=>{
+	const promiseArr = []
+	promiseArr[0] = new Promise((resolve)=>{
+		const mdb = mdbLoader('Groups')
+		const cmd = `create table "Members" (
+			"id"	integer not null unique,
+			"name"	text not null unique,
+			"parent"text,
+			"child"	text,
+			primary key("id" autoincrement)
+			)`
+		mdb.run(cmd,(err,res)=>{
+			resolve(true)
+		})
+	})
+	promiseArr[1] = new Promise((resolve)=>{
+		const mdb = mdbLoader('Shortcut')
+		const cmd = `create table 'Members'(
+			"id" 	integer not null unique,
+			"name" 	text not null,
+			primary key("id" autoincrement),
+			unique(name))`
+		mdb.run(cmd,(err,res)=>{
+			resolve(true)
+		})
+	})
+	const output = Promise.all(promiseArr)
+	console.log(await output)
+	return output
 })
 
 // Setting Support

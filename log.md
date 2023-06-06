@@ -4,6 +4,14 @@
 
 
 ---
+	## 2023.06.06		version 0.7.1.4
+	-- Clear wasted codes
+	-- Function implementation 
+	# Added
+	1. Add mnt-build function to handle basic database creation
+		-- finished
+	
+---
 	## 2023.06.02		version 0.7.1.3
 	-- Bug fix
 	# Fixed
