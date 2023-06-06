@@ -244,8 +244,8 @@ const mntgroupwrite = async(target,isLoaded=true) =>{
 	const header = target.children[0]
 	const updateDiv = target.children[1]
 	const [groupset,dataset] = await window.mnt.load(header.innerHTML)
-	//console.log(groupset)
-	//console.log(dataset)
+	console.log(groupset)
+	console.log(dataset)
 	const mntdata = []
 	const groups = []
 	for(var i=0;i<groupset.length;i++){
@@ -270,7 +270,8 @@ const mntgroupwrite = async(target,isLoaded=true) =>{
 // Side:	Load data in monitored groups 
 const mntgroupload = ()=>{
 	document.body.addEventListener('click',async(event)=>{
-		if(mntcheck(event,'mnt-folder-header')){
+		const isAll = event.target.innerHTML == 'All'
+		if(mntcheck(event,'mnt-folder-header')&&!isAll){
 			const group = event.target.closest('.mnt-folder')
 			if(group.classList.contains('mnt-folder')){
 				const content = group.children[1]
@@ -583,7 +584,7 @@ const mntmain = async()=>{
 	const mntdata = []
 	const updateDiv = document.getElementById('mnt-main-display')
 	let mntset = await window.mnt.main()
-	if(mntset == undefined){
+	if(!mntset){
 		mntset = 0
 	}
 	for(var i=0;i<mntset.length;i++){

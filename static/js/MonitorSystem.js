@@ -42,11 +42,14 @@ ipcMain.handle('mnt-main', (event) =>{
 		const cmd = `select name from Monitor`
 		db.all(cmd,(err,res)=>{
 			if(err){
-				resolve(0)
+				resolve()
 			}else{
-				//const data = res.map(i=>Object.values(i)[0])
-				const data = unpack(res)
-				resolve(data)
+				if(res[0]){
+					const data = unpack(res)
+					resolve(data)
+				}else{
+					resolve()
+				}
 			}		
 		})
 	})
@@ -54,7 +57,7 @@ ipcMain.handle('mnt-main', (event) =>{
 })
 // Load monitored group data
 ipcMain.handle('mnt-load',async(event,name)=>{
-
+	console.log(1)
 	const promiseArr = []
 	const mdb = mdbLoader('Groups')
 	const cmda = `select child from Members where name = ?`
@@ -373,7 +376,6 @@ ipcMain.handle('mnt-build',async(event)=>{
 		})
 	})
 	const output = Promise.all(promiseArr)
-	console.log(await output)
 	return output
 })
 
