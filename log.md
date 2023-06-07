@@ -18,6 +18,8 @@
 		-- finished
 	2. Fix the bug that mntload return value always lost one element
 		-- finished
+	3. Fix the bug that mntgroupload fire when renaming
+		-- finished
 ---
 	## 2023.06.06		version 0.7.1.4
 	-- Clear wasted codes

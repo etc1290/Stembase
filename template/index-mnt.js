@@ -301,7 +301,9 @@ const mntgroupwrite = async(target,isLoaded=true) =>{
 const mntgroupload = ()=>{
 	document.body.addEventListener('click',async(event)=>{
 		const isAll = event.target.innerHTML == 'All'
-		if(mntcheck(event,'mnt-folder-header')&&!isAll){
+		const isEditable = mntcheck(event,'mnt-editing')
+		const operator = isAll + isEditable
+		if(mntcheck(event,'mnt-folder-header')&&!operator){
 			const group = event.target.closest('.mnt-folder')
 			if(group.classList.contains('mnt-folder')){
 				const content = group.children[1]
