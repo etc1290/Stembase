@@ -4,6 +4,12 @@
 
 
 ---
+	## 2023.06.07		version 0.7.1.5
+	-- Bug fix
+	# Fixed
+	1. Fix the bug that Add tag trigger mnt centored detection
+		-- finished
+---
 	## 2023.06.06		version 0.7.1.4
 	-- Clear wasted codes
 	-- Function implementation 

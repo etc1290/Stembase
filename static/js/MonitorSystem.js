@@ -57,7 +57,6 @@ ipcMain.handle('mnt-main', (event) =>{
 })
 // Load monitored group data
 ipcMain.handle('mnt-load',async(event,name)=>{
-	console.log(1)
 	const promiseArr = []
 	const mdb = mdbLoader('Groups')
 	const cmda = `select child from Members where name = ?`
@@ -67,10 +66,9 @@ ipcMain.handle('mnt-load',async(event,name)=>{
 			mdb.all(cmda,name,(err,res)=>{
 				const raw = unpack(res)
 				if(raw[0]){
-					const rawArr = raw[0].split(',')					
+					const rawArr = raw[0].split(',')
 					resolve(rawArr)		
-				}else{
-					
+				}else{				
 					resolve(unpack(res))
 				}
 			})
@@ -92,13 +90,16 @@ ipcMain.handle('mnt-load',async(event,name)=>{
 	}
 	
 	const groupArr = await Promise.all(promiseArr)
-	for(var i=0;i<groupArr.length;i++){
-		groupArr[i] = groupArr[i][0]
+	for(var j=0;j<groupArr.length;j++){
+		groupArr[j] = groupArr[j][0]
 	}
+	
 	const cmdc = `select name from Members`
 	const mdbs = mdbLoader(name)
 	const dataArr = new Promise((resolve)=>{
 		mdbs.all(cmdc,(err,res)=>{
+			//console.log(res)
+			
 			if(res[0]){
 				resolve(unpack(res))
 			}else{
@@ -107,7 +108,9 @@ ipcMain.handle('mnt-load',async(event,name)=>{
 			mdbs.close()
 		})
 	})
+	
 	const output = [groupArr,await dataArr]
+	console.log(output)
 	return output
 	
 })

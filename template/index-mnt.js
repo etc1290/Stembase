@@ -225,18 +225,28 @@ const mntrename = ()=>{
 		}
 	})
 	document.addEventListener('keydown',(event)=>{
-		const isEditable = event.target.contentEditable == 'true'	
-		event.target.classList.add('mnt-editing')
-		if(isEditable){
-			newname = event.target.innerHTML
-			const isMonitored= mntcheck(event,'mnt-folder-header')
-			if(isMonitored){
-				if(event.which==13){
-					event.preventDefault()
-					mainfunc()
+		let funcArea
+		try{
+			funcArea = event.target.closest('.function-section')
+		}catch(err){
+			funcArea = false
+		}
+		const isMNT = funcArea.id =='mnt'
+		if(isMNT){
+			const isEditable = event.target.contentEditable == 'true'	
+			event.target.classList.add('mnt-editing')
+			if(isEditable){
+				newname = event.target.innerHTML
+				const isMonitored= mntcheck(event,'mnt-folder-header')
+				if(isMonitored){
+					if(event.which==13){
+						event.preventDefault()
+						mainfunc()
+					}
 				}
 			}
-		}
+		}		
+		
 	})
 }
 // Side:	Monitored group loader
@@ -244,8 +254,8 @@ const mntgroupwrite = async(target,isLoaded=true) =>{
 	const header = target.children[0]
 	const updateDiv = target.children[1]
 	const [groupset,dataset] = await window.mnt.load(header.innerHTML)
-	console.log(groupset)
-	console.log(dataset)
+	//console.log(groupset)
+	//console.log(dataset)
 	const mntdata = []
 	const groups = []
 	for(var i=0;i<groupset.length;i++){
@@ -557,7 +567,11 @@ const mntmenuAddition = (cmda='all',cmdb)=>{
 const mntgroup = async(parent,child)=>{
 	const mainfunc = async()=>{
 		const updateDiv = document.getElementById('mnt-group-display')
-		const [,grouplist] = await window.mnt.load('Groups')
+		const [el,grouplist] = await window.mnt.load('Groups')
+		/*const apple = await window.mnt.load('Groups')
+		console.log(apple)
+		const grouplist = apple[1]
+		console.log(grouplist)*/
 		const id = grouplist.indexOf('Groups')
 		grouplist.splice(id,1)
 		const mntdata = []
@@ -612,7 +626,6 @@ const mntRender = async()=>{
 		const groupStatus = mntgroup()
 		const shortcutStatus = mntshortcut()
 		if(mainStatus && shortcutStatus && groupStatus){
-		console.log(1)
 			return true
 		}
 	}
