@@ -98,8 +98,6 @@ ipcMain.handle('mnt-load',async(event,name)=>{
 	const mdbs = mdbLoader(name)
 	const dataArr = new Promise((resolve)=>{
 		mdbs.all(cmdc,(err,res)=>{
-			//console.log(res)
-			
 			if(res[0]){
 				resolve(unpack(res))
 			}else{
@@ -110,7 +108,6 @@ ipcMain.handle('mnt-load',async(event,name)=>{
 	})
 	
 	const output = [groupArr,await dataArr]
-	console.log(output)
 	return output
 	
 })
@@ -348,6 +345,7 @@ ipcMain.handle('mnt-error',(event,err)=>{
 	const warn = []
 	warn['mntrename-censor']	= `Groups name cannot contain` + '`!`@$%^&*+\\=[]{};' + `:"|,<>/?~`
 	warn['mntrename-empty']		= `Groups name cannot make by white space only`
+	warn['mntrename-prefix']	= `Groups name cannot start with white space`
 	dialog.showErrorBox('ERROR',warn[err])
 })
 

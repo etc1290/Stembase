@@ -5,7 +5,14 @@
 
 ---
 	## 2023.06.07		version 0.7.1.5
+	-- Rewrite function
 	-- Bug fix
+	# Added
+	1. Add a check to censorCheck function to prevent group name starts with white space
+		-- finished
+	# Changed
+	1. Rewrite censorCheck function for better readability and maintainance
+		-- finished
 	# Fixed
 	1. Fix the bug that Add tag trigger mnt centored detection
 		-- finished

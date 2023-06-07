@@ -187,14 +187,34 @@ const mntrename = ()=>{
 	const mainfunc = async()=>{
 		// Check if contains reserved or illegal characters
 		const censorCheck = (name)=>{
-			const restriction = /[`9!@$%^&*+\=\[\]{};':"\\|,<>\/?~]/
-			return restriction.test(name)
+			//const restriction = /[`!@$%^&*+\=\[\]{};':"\\|,<>\/?~]/
+			//return restriction.test(name)
+			const censorArr = [
+				'`',`'`,'@','!','$',
+				'%','^','&','*','\\',
+				'+','=','[',']','{',
+				'}','/','"',';'
+				]
+			let isIllegal = false
+			for(let i=0;i<censorArr.length;i++){
+				isIllegal = name.indexOf(censorArr[i])
+				if(isIllegal+1){
+					return true
+				}
+			}
+			return false
 		}
 		const isBanned = censorCheck(newname)
-		if(isBanned){
+		if(newname.startsWith('&nbsp')){
+			const mnterror = await window.mnt.error('mntrename-prefix')
+		}else if(newname[0]==' '){
+			if(!newname.trim().length){
+				const mnterror = await window.mnt.error('mntrename-empty')
+			}else{
+				const mnterror = await window.mnt.error('mntrename-prefix')
+			}
+		}else if(isBanned){
 			const mnterror = await window.mnt.error('mntrename-censor')
-		}else if(!newname.trim().length){
-			const mnterror = await window.mnt.error('mntrename-empty')
 		}else{
 			const isReady = await window.mnt.rename(oldname,newname)
 			if(isReady){
