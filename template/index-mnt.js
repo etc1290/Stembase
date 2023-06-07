@@ -567,13 +567,7 @@ const mntmenuAddition = (cmda='all',cmdb)=>{
 const mntgroup = async(parent,child)=>{
 	const mainfunc = async()=>{
 		const updateDiv = document.getElementById('mnt-group-display')
-		const [el,grouplist] = await window.mnt.load('Groups')
-		/*const apple = await window.mnt.load('Groups')
-		console.log(apple)
-		const grouplist = apple[1]
-		console.log(grouplist)*/
-		const id = grouplist.indexOf('Groups')
-		grouplist.splice(id,1)
+		const [,grouplist] = await window.mnt.load('Groups')
 		const mntdata = []
 		for(var i=0;i<grouplist.length;i++){
 			const modName = mntreplace(grouplist[i])

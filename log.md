@@ -9,6 +9,8 @@
 	# Fixed
 	1. Fix the bug that Add tag trigger mnt centored detection
 		-- finished
+	2. Fix the bug that mntload return value always lost one element
+		-- finished
 ---
 	## 2023.06.06		version 0.7.1.4
 	-- Clear wasted codes
