@@ -456,13 +456,30 @@ const mntmenufunc = async()=>{
 	})
 		// Remove(Delete this record):	Delete all tags and meta and remove monitored status of this member
 	document.getElementById('mnt-removemenu-delete').addEventListener('mousedown',async()=>{
-		//console.log('delete function')
-		const selected = uxSelect('mnt')
-		const updateArr = await window.mnt.deleteM(selected['Folder'],selected['Data'])
-		console.log(updateArr)
-		for(var i=0;i<updateArr.length;i++){
-			mntgroupwrite(updateArr[i])
+		const unique = (arr)=>{
+			const hash = {}
+			const uniqArr = []
+			let n = 0
+			for(var i=0;i<arr.length;i++){
+				const el = arr[i]
+				if(!hash[el]){
+					hash[el] = 1
+					uniqArr[n++] = el
+				}
+			}
+			return uniqArr
 		}
+		const selected = uxSelect('mnt')
+		const isFinished = await window.mnt.deleteM(selected['Folder'],selected['Data'])
+		if(isFinished){
+			const updateArr = unique(selected['Node'])
+			for(var i=0;i<updateArr.length;i++){
+				mntgroupwrite(document.getElementById(updateArr[i]))
+			}	
+			mntmain()
+		}
+		
+		
 	})
 		// Remove(Remove from group):	Remove member from this monitored group
 	document.getElementById('mnt-removemenu-remove').addEventListener('mousedown',async()=>{		

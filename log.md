@@ -7,8 +7,14 @@
 ---
 	## 2023.06.08		version 0.7.2.0
 	-- Function implementation
+	-- Bug fix
 	# Added
 	1. Add monitored data delete function
+		-- finished
+	2. Add unique function to handle array duplicate elements
+		-- finished
+	# Fixed
+	1. Fix the bug that monitor section not updated with delete function
 		-- finished
 ---
 	## 2023.06.07		version 0.7.1.5
