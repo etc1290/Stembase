@@ -9,7 +9,9 @@ const metaParser = (path)=>{return new sqlite3.Database(path + '\\Stemmeta.db',(
 // Main: Add tags
 
 ipcMain.handle('tag-main', (event,name,tag,path) =>{
-	const filename = path + '\\' + name
+
+	//const filename = path + '\\' + name
+	const filename = path + name
 	const sqlmeta = metaParser(path)
 	let output = ''
 	db.run(`insert or ignore into File(name,file) values(?,?)`,[filename,name],()=>{

@@ -274,8 +274,6 @@ const mntgroupwrite = async(target,isLoaded=true) =>{
 	const header = target.children[0]
 	const updateDiv = target.children[1]
 	const [groupset,dataset] = await window.mnt.load(header.innerHTML)
-	//console.log(groupset)
-	//console.log(dataset)
 	const mntdata = []
 	const groups = []
 	for(var i=0;i<groupset.length;i++){
@@ -458,10 +456,13 @@ const mntmenufunc = async()=>{
 	})
 		// Remove(Delete this record):	Delete all tags and meta and remove monitored status of this member
 	document.getElementById('mnt-removemenu-delete').addEventListener('mousedown',async()=>{
-		console.log('delete function')
+		//console.log('delete function')
 		const selected = uxSelect('mnt')
-		const updateArr = await window.mnt.remove(selected['Folder'],selected['Data'])
-		
+		const updateArr = await window.mnt.deleteM(selected['Folder'],selected['Data'])
+		console.log(updateArr)
+		for(var i=0;i<updateArr.length;i++){
+			mntgroupwrite(updateArr[i])
+		}
 	})
 		// Remove(Remove from group):	Remove member from this monitored group
 	document.getElementById('mnt-removemenu-remove').addEventListener('mousedown',async()=>{		
@@ -469,6 +470,7 @@ const mntmenufunc = async()=>{
 		const isRemove = await window.mnt.remove(selected['Folder'],selected['Data'])
 		if(isRemove){
 			for(var i=0;i<selected['Node'].length;i++){
+				
 				mntgroupwrite(document.getElementById(selected['Node'][i]),false)
 			}
 		}

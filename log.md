@@ -3,6 +3,13 @@
 
 
 
+
+---
+	## 2023.06.08		version 0.7.2.0
+	-- Function implementation
+	# Added
+	1. Add monitored data delete function
+		-- finished
 ---
 	## 2023.06.07		version 0.7.1.5
 	-- Rewrite function

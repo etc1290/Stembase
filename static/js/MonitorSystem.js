@@ -7,8 +7,13 @@ const db = new sqlite3.Database(Stemdb + '.db')
 const mdbStorage = env('StemMGDir')
 
 // Monitored database loader
-const mdbLoader = (folder) =>{
-	return new sqlite3.Database(mdbStorage + '//' + folder + '.db')
+const mdbLoader = (folder,isMeta=false) =>{
+	if(isMeta){
+		return new sqlite3.Database(folder + 'Stemmeta.db')
+	}else{
+		return new sqlite3.Database(mdbStorage + '//' + folder + '.db')
+	}
+	
 }	
 // Unpack db result
 const unpack = (res,isArr=false)=>{
@@ -173,9 +178,7 @@ ipcMain.handle('mnt-delete',(event,dataset)=>{
 					const parent = unpack(res,true)		
 					const isFinished = await promiseChain(parent,id)
 					if(isFinished){
-						console.log(1)
 						mdb.all(cmda,id,()=>{
-							console.log(2)
 							fs.unlink(mdbStorage + '\\' + name + '.db',(err)=>{
 								resolve(idlist)
 							})
@@ -187,6 +190,56 @@ ipcMain.handle('mnt-delete',(event,dataset)=>{
 		})
 	}
 	
+	const output = Promise.all(promiseArr)
+	return output
+})
+// Delete monitored members
+ipcMain.handle('mnt-delete-member',(event,folderset,dataset)=>{
+	const cmd = `delete from Members where name = ?`
+	const cmda= `delete from Monitor where name = ?`
+	//const cmdb= `delete from Ref where nameref = ?`
+	const cmdb = `select name from Meta`
+	const cmdc= `delete from File where name = ?`
+	const cmdd= `delete from Ref where nameref = ?`
+	const promiseArr = []
+	
+	const dbDelete = (path,dataArr)=>{
+		const delArr = []
+		for(var i=0;i<dataArr.length;i++){
+			const data = path + dataArr[i]
+			delArr[i] = new Promise((resolve)=>{
+				db.all(cmdc,data,(err)=>{
+					db.all(cmdd,data,(err)=>{
+						resolve(true)
+					})
+				})
+			})
+		}
+		const delpromise = Promise.all(delArr)
+		return delpromise
+	}
+	for(var i=0;i<folderset.length;i++){
+		promiseArr[i] = new Promise((resolve)=>{
+			const data = dataset[i]
+			const folder = folderset[i]
+			const mdb = mdbLoader(folder)
+			mdb.all(cmd,data,(err)=>{
+				mdb.close()
+			})
+			db.all(cmda,data,(err)=>{
+				const meta = mdbLoader(data,true)
+				meta.all(cmdb,async(err,res)=>{
+					meta.close()
+					const isFinished = await dbDelete(data,unpack(res))
+					if(isFinished){
+						fs.unlink(data + 'Stemmeta.db',(err)=>{
+							resolve(true)
+						})
+					}
+				})
+			})
+		})		
+	}
 	const output = Promise.all(promiseArr)
 	return output
 })
