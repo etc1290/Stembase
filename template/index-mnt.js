@@ -86,9 +86,11 @@ const mntcheck = (event,classname,isCurrent=false)=>{
 }
 // Side:	Reserved characters replacer
 const mntreplace = (name)=>{
+	
 	const c = '@'
 	const isArr = name.constructor == Array
 	if(isArr){
+		console.log(name)
 		for(var i=0;i<name.length;i++){
 			name[i] = name[i].replace(/ /g,c)
 		}
@@ -275,12 +277,14 @@ const mntgroupwrite = async(target,isLoaded=true) =>{
 	if(!isArr){
 		target=[target]
 	}
-	console.log(target)
 	for(var a=0;a<target.length;a++){
 		const header = target[a].children[0]
-		console.log(header)
 		const updateDiv = target[a].children[1]
-		const [groupset,dataset] = await window.mnt.load(header.innerHTML)
+		let [groupset,[idset,dataset]] = await window.mnt.load(header.innerHTML)
+		if(!idset){
+			idset = []
+			dataset=[]
+		}
 		const mntdata = []
 		const groups = []
 		for(var i=0;i<groupset.length;i++){
@@ -295,8 +299,10 @@ const mntgroupwrite = async(target,isLoaded=true) =>{
 			groups[i] = subfolder
 		}
 		for(var i=0;i<dataset.length;i++){
+			console.log(data)
 			const id = `id='mnt-` + header.innerHTML + `-data-` + i + `'`
-			mntdata[i] = `<p ` + id+ ` class='mnt-data' draggable='true'>` + dataset[i] + `</p>`
+			const uniqClass = 'mnt-data-' + idset[i]
+			mntdata[i] = `<p ` + id+ ` class='mnt-data ` + uniqClass +`' draggable='true'>` + dataset[i] + `</p>`
 		}
 		groups.push.apply(groups,mntdata)
 		updateDiv.innerHTML = groups.join('')
@@ -626,7 +632,7 @@ const mntmenuAddition = (cmda='all',cmdb)=>{
 const mntgroup = async(parent,child)=>{
 	const mainfunc = async()=>{
 		const updateDiv = document.getElementById('mnt-group-display')
-		const [,grouplist] = await window.mnt.load('Groups')
+		const [,[idlist,grouplist]] = await window.mnt.load('Groups')
 		const mntdata = []
 		for(var i=0;i<grouplist.length;i++){
 			const modName = mntreplace(grouplist[i])

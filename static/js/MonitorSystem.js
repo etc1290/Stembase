@@ -110,7 +110,7 @@ ipcMain.handle('mnt-load',async(event,name)=>{
 		groupArr[j] = groupArr[j][0]
 	}
 	
-	const cmdc = `select name from Members`
+	const cmdc = `select id,name from Members`
 	const mdbs = mdbLoader(name)
 	const dataArr = new Promise((resolve)=>{
 		mdbs.all(cmdc,(err,res)=>{

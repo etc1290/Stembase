@@ -8,12 +8,16 @@
 ---
 	## 2023.06.09		version 0.7.2.1
 	-- Rewrite function
+	-- Bug fix
 	# Changed
 	1. Rewrite mntgroupwrite function to give better support of array for further multiple selection function
 		-- finished
 	2. Enhance mnt-main to return id and name
 		-- finished
 	3. Rewrite unpack function to support multiple layers of res
+		-- finished
+	# Fixed
+	1. Fix the bug that mntgroup misbehavior
 		-- finished
 	# Processing
 	1. Import unique class for all moitored data
