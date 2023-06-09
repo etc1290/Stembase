@@ -520,9 +520,9 @@ const mntmenufunc = async()=>{
 	})*/
 		const selected = uxSelect('mnt')
 		const isRemove = await window.mnt.remove(selected['Folder'],selected['Data'])
+		
 		if(isRemove){
 			for(var i=0;i<selected['Node'];i++){
-				console.log(selected['Node'][i])
 				mntgroupwrite(selected['Node'][i])
 			}
 		}
@@ -650,13 +650,14 @@ const mntgroup = async(parent,child)=>{
 const mntmain = async()=>{
 	const mntdata = []
 	const updateDiv = document.getElementById('mnt-main-display')
-	let mntset = await window.mnt.main()
+	let [idset,mntset] = await window.mnt.main()
 	if(!mntset){
 		mntset = 0
 	}
 	for(var i=0;i<mntset.length;i++){
+		const uniqClass = 'mnt-data-' + idset[i]
 		const id = `id='mnt-main-data-` + i + `'`
-		mntdata[i] = `<p ` + id+ ` class='mnt-data' draggable='true'>` + mntset[i] + `</p>`
+		mntdata[i] = `<p ` + id+ ` class='mnt-data ` + uniqClass +`' draggable='true'>` + mntset[i] + `</p>`
 	}
 	updateDiv.innerHTML = mntdata.join('')
 	mntspan(updateDiv)

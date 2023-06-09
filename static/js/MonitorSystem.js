@@ -17,7 +17,18 @@ const mdbLoader = (folder,isMeta=false) =>{
 }	
 // Unpack db result
 const unpack = (res,isArr=false)=>{
-	let gift = res.map(i=>Object.values(i)[0]).filter(Boolean)
+	let keyLen = 0 
+	if(res[0]){
+		keyLen = Object.keys(res[0]).length
+	}
+	let gift = []
+	if(keyLen-1){
+		for(var a=0;a<keyLen;a++){
+			gift[a] = res.map(i=>Object.values(i)[a]).filter(Boolean)
+		}
+	}else{
+		gift = res.map(i=>Object.values(i)[0]).filter(Boolean)
+	}	
 	if(isArr){
 		try{
 			gift = gift[0].split(',')
@@ -44,14 +55,14 @@ const idPicker = (arr) =>{
 // Load all data
 ipcMain.handle('mnt-main', (event) =>{
 	const output = new Promise((resolve)=>{
-		const cmd = `select name from Monitor`
+		const cmd = `select id,name from Monitor`
 		db.all(cmd,(err,res)=>{
 			if(err){
 				resolve()
 			}else{
 				if(res[0]){
 					const data = unpack(res)
-					resolve(data)
+					resolve(data)				
 				}else{
 					resolve()
 				}
@@ -135,6 +146,10 @@ ipcMain.handle('mnt-remove',(event,folderset,dataset)=>{
 		}
 	})
 	return output
+})
+// Remove monitored members fromm all groups
+ipcMain.handle('mnt-ungroup',(event,folderset,dataset)=>{
+	
 })
 // Delete monitored groups
 ipcMain.handle('mnt-delete',(event,dataset)=>{
