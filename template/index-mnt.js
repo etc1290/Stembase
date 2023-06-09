@@ -271,29 +271,38 @@ const mntrename = ()=>{
 }
 // Side:	Monitored group loader
 const mntgroupwrite = async(target,isLoaded=true) =>{
-	const header = target.children[0]
-	const updateDiv = target.children[1]
-	const [groupset,dataset] = await window.mnt.load(header.innerHTML)
-	const mntdata = []
-	const groups = []
-	for(var i=0;i<groupset.length;i++){
-		const modName = mntreplace(groupset[i])
-		const id = `'mnt-` + header.innerHTML + `-group-` + i + `'`
-		const subheader = `<p class='mnt-folder-header mnt-data'>` + groupset[i] + `</p>`
-		const subcontent= `<div class='mnt-folder-content'></div>`
-		const uniqClass = `mnt-usergroup-` + modName
-		const subfolder = `<div id=` + id 
-			+ ` class='mnt-folder mnt-dropzone ` + uniqClass + ` mnt-subfolder' draggable = 'true'>` 
-			+ subheader + subcontent + `</div>`
-		groups[i] = subfolder
+	const isArr = target.constructor == Array
+	if(!isArr){
+		target=[target]
 	}
-	for(var i=0;i<dataset.length;i++){
-		const id = `id='mnt-` + header.innerHTML + `-data-` + i + `'`
-		mntdata[i] = `<p ` + id+ ` class='mnt-data' draggable='true'>` + dataset[i] + `</p>`
+	console.log(target)
+	for(var a=0;a<target.length;a++){
+		const header = target[a].children[0]
+		console.log(header)
+		const updateDiv = target[a].children[1]
+		const [groupset,dataset] = await window.mnt.load(header.innerHTML)
+		const mntdata = []
+		const groups = []
+		for(var i=0;i<groupset.length;i++){
+			const modName = mntreplace(groupset[i])
+			const id = `'mnt-` + header.innerHTML + `-group-` + i + `'`
+			const subheader = `<p class='mnt-folder-header mnt-data'>` + groupset[i] + `</p>`
+			const subcontent= `<div class='mnt-folder-content'></div>`
+			const uniqClass = `mnt-usergroup-` + modName
+			const subfolder = `<div id=` + id 
+				+ ` class='mnt-folder mnt-dropzone ` + uniqClass + ` mnt-subfolder' draggable = 'true'>` 
+				+ subheader + subcontent + `</div>`
+			groups[i] = subfolder
+		}
+		for(var i=0;i<dataset.length;i++){
+			const id = `id='mnt-` + header.innerHTML + `-data-` + i + `'`
+			mntdata[i] = `<p ` + id+ ` class='mnt-data' draggable='true'>` + dataset[i] + `</p>`
+		}
+		groups.push.apply(groups,mntdata)
+		updateDiv.innerHTML = groups.join('')
+		mntspan(updateDiv)
 	}
-	groups.push.apply(groups,mntdata)
-	updateDiv.innerHTML = groups.join('')
-	mntspan(updateDiv)
+
 }
 // Side:	Load data in monitored groups 
 const mntgroupload = ()=>{
@@ -399,7 +408,7 @@ const mntdragfunc = ()=>{
 		
 		const contentList = []
 		const folder = event.target.closest('.mnt-folder')
-		console.log('enter:' + folder.id)
+		//console.log('enter:' + folder.id)
 		const content = folder.children[1]
 		let node = content
 		while(!node.classList.contains('function-section')){
@@ -415,7 +424,7 @@ const mntdragfunc = ()=>{
 		mntcancel(event)
 		const contentList = []
 		const folder = event.target.closest('.mnt-folder')
-		console.log('leave:' + folder.id)
+		//console.log('leave:' + folder.id)
 		const content = folder.children[1]
 		let node = content
 		while(!node.classList.contains('function-section')){
@@ -486,14 +495,14 @@ const mntmenufunc = async()=>{
 		const selected = uxSelect('mnt')
 		const isRemove = await window.mnt.remove(selected['Folder'],selected['Data'])
 		if(isRemove){
-			for(var i=0;i<selected['Node'].length;i++){
-				
+			for(var i=0;i<selected['Node'].length;i++){			
 				mntgroupwrite(document.getElementById(selected['Node'][i]),false)
 			}
 		}
 	})
 		// Remove(Remove grouping):		Remove member from all monitored groups
 	document.getElementById('mnt-removemenu-ungroup').addEventListener('mousedown',async()=>{
+		/*
 		const dataset = document.querySelectorAll('.mnt-selected')
 		const data = []
 		for(let i=0;i<dataset.length;i++){
@@ -508,7 +517,16 @@ const mntmenufunc = async()=>{
 				mntgroupwrite(group,false)
 			}
 		}
-	})
+	})*/
+		const selected = uxSelect('mnt')
+		const isRemove = await window.mnt.remove(selected['Folder'],selected['Data'])
+		if(isRemove){
+			for(var i=0;i<selected['Node'];i++){
+				console.log(selected['Node'][i])
+				mntgroupwrite(selected['Node'][i])
+			}
+		}
+	})	
 	// Header
 		// Remove:						Delete this group
 	document.getElementById('mnt-cm-groupdelete').addEventListener('mousedown',async()=>{

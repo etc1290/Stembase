@@ -4,6 +4,13 @@
 
 
 
+
+---
+	## 2023.06.09		version 0.7.2.1
+	-- rewrite function
+	# Changed
+	1. Rewrite mntgroupwrite function to give better support of array for further multiple selection function
+		-- finished
 ---
 	## 2023.06.08		version 0.7.2.0
 	-- Function implementation
