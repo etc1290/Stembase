@@ -576,7 +576,7 @@ const mntmenuAddition = (cmda='all',cmdb)=>{
 	}
 	mode['create'] = (cmdb)=>{
 		mode['movemenu'] = async()=>{
-			const [,groups] = await window.mnt.load('Groups')
+			const [,[,groups]] = await window.mnt.load('Groups')
 			const optionArr = []
 			for(var i=0;i<groups.length;i++){
 				const id = `'mnt-movemenu-` + groups[i] + `'`
@@ -632,7 +632,7 @@ const mntmenuAddition = (cmda='all',cmdb)=>{
 const mntgroup = async(parent,child)=>{
 	const mainfunc = async()=>{
 		const updateDiv = document.getElementById('mnt-group-display')
-		const [,[idlist,grouplist]] = await window.mnt.load('Groups')
+		const [,[,grouplist]] = await window.mnt.load('Groups')
 		const mntdata = []
 		for(var i=0;i<grouplist.length;i++){
 			const modName = mntreplace(grouplist[i])

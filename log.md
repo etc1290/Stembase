@@ -19,6 +19,8 @@
 	# Fixed
 	1. Fix the bug that mntgroup misbehavior
 		-- finished
+	2. Fix the bug that mntmenuAddition catch error
+		-- finished
 	# Processing
 	1. Import unique class for all moitored data
 	2. Lighten other mnt function by adapting new unpack mechanism
