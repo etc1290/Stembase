@@ -383,11 +383,11 @@ const mntfunc = (target)=>{
 					const existArr = await window.mnt.update([header.innerHTML],[dropdata.innerHTML])
 					for(var i=0;i<existArr.length;i++){
 						const isExist = existArr[i]
-						if(!isClone && !isExist){									
+						if(!isClone && isExist){									
 							const dropclone = dropdata.cloneNode(true)
 							dropdata.parentNode.insertBefore(dropclone,dropdata.nextSibling)					
 						}
-						if(!isExist){
+						if(isExist){
 							const isFolderOnly = folder.classList.contains('folder-only')						
 							if(isFolderOnly){
 								const isFolder = dropdata.classList.contains('mnt-folder')

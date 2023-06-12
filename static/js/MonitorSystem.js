@@ -362,8 +362,6 @@ ipcMain.handle('mnt-update',(event,folderset,nameset)=>{
 					const cmdb = `select child from Members where name = ?`
 					mdbg.all(cmdb,folder,(err,res)=>{
 						const children = unpack(res)
-						console.log(id)
-						console.log(children)
 						const isExist  = children.indexOf(id+'')
 						if(isExist+1){
 							resolve(true)
@@ -376,7 +374,6 @@ ipcMain.handle('mnt-update',(event,folderset,nameset)=>{
 									const cmde =`select parent from Members where id = ?`
 									mdbg.all(cmde,id,(err,res)=>{
 										const parents = unpack(res)
-										//console.log(parents)
 										mdbg.all(cmda,folder,(err,res)=>{		
 											const parents = unpack(res)
 											const cmdf = `update Members set parent = ? where id = ?`
@@ -393,17 +390,35 @@ ipcMain.handle('mnt-update',(event,folderset,nameset)=>{
 				}else{
 					const mdb = mdbLoader(folder)
 					const cmd = `insert or ignore into Members(name) values(?)`
-					mdb.all(cmd,name,(err,res)=>{
-						if(err){						
-							resolve(true)
-						}else{
-							resolve(false)
-						}
+					mdb.all(cmd,name,()=>{
 						mdb.close()
+						if(folder){
+							const cmda = `select parent from Monitor where name = ?`
+							db.all(cmda,name,(err,res)=>{
+								const groupArr = unpack(res,true)
+								const isExist = groupArr.indexOf(name)
+								if(isExist + 1){
+									resolve(false)
+								}else{
+									groupArr.push(folder)
+									const cmdb = `update Monitor set parent = ? where name = ?`
+									db.all(cmdb,[groupArr + '',name],(err,res)=>{
+										resolve(true)
+									})
+								}
+							})
+						}else{
+							if(err){
+								resolve(false)
+							}else{
+								resolve(true)
+							}
+						}					
 					})
 				}
 			})
 		})
+		
 	}
 	const output = Promise.all(promiseArr)
 	return output

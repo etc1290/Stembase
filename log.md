@@ -7,7 +7,16 @@
 
 ---
 	## 2023.06.12		version 0.7.2.2
+	-- Rewrite function
+	-- Database enhancement
 	-- Bug fix
+	# Changed
+	1. Add parent column in Monitor of Stemdb
+		-- finished
+	2. Rewrite mnt-update to record parent group when updating monitored data
+		-- finished
+	3. Rewrite mntfunction to adapt the reverse returned value of mnt-update function
+		-- finished
 	# Fixed
 	1. Fixing the undefined error in mntgroupwrite
 		-- finished
