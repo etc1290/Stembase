@@ -64,7 +64,7 @@ ipcMain.handle('mnt-main', (event) =>{
 					const data = unpack(res)
 					resolve(data)				
 				}else{
-					resolve()
+					resolve([[],[]])
 				}
 			}		
 		})

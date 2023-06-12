@@ -30,6 +30,7 @@ const uxSelect = (funcSection)=>{
 	const output = selMode[funcSection]()
 	return output
 }
+
 // Contextmenu Creator
 const uxContextMenuCreate = ()=>{
 	// Positioner

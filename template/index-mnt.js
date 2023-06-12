@@ -299,7 +299,6 @@ const mntgroupwrite = async(target,isLoaded=true) =>{
 			groups[i] = subfolder
 		}
 		for(var i=0;i<dataset.length;i++){
-			console.log(data)
 			const id = `id='mnt-` + header.innerHTML + `-data-` + i + `'`
 			const uniqClass = 'mnt-data-' + idset[i]
 			mntdata[i] = `<p ` + id+ ` class='mnt-data ` + uniqClass +`' draggable='true'>` + dataset[i] + `</p>`
@@ -525,7 +524,7 @@ const mntmenufunc = async()=>{
 		}
 	})*/
 		const selected = uxSelect('mnt')
-		const isRemove = await window.mnt.remove(selected['Folder'],selected['Data'])
+		const isRemove = await window.mnt.remove(selected['Folder'],selected['Data'],true)
 		
 		if(isRemove){
 			for(var i=0;i<selected['Node'];i++){

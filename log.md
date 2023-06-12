@@ -6,6 +6,14 @@
 
 
 ---
+	## 2023.06.12		version 0.7.2.2
+	-- Bug fix
+	# Fixed
+	1. Fixing the undefined error in mntgroupwrite
+		-- finished
+	2. Fix the error appears when no monitored data exist
+		-- finished
+---
 	## 2023.06.09		version 0.7.2.1
 	-- Rewrite function
 	-- Bug fix

@@ -14,14 +14,14 @@ const dbBuild = ()=>{
 	const db = new sqlite3.Database(Stemdb + '.db')
 	db.get('PRAGMA foreign_keys = ON')
 	db.run(`create table "File" (
-		"id"	integer not null unique,
-		"name"	text not null unique,
-		"file"	text not null,
+		"id"		integer not null unique,
+		"name"		text not null unique,
+		"file"		text not null,
 		primary key("id" autoincrement)
 	)`,()=>{})
 	db.run(`create table "Tag" (
-		"id"	integer not null unique,
-		"tag"	text not null unique,
+		"id"		integer not null unique,
+		"tag"		text not null unique,
 		primary key("id" autoincrement)
 	)`,()=>{})
 	db.run(`create table "Ref" (
@@ -34,8 +34,9 @@ const dbBuild = ()=>{
 		unique(nameref,tagref)
 	)`,()=>{})
 	db.run(`create table "Monitor" (
-		"id"	integer not null unique,
-		"name"	text not null unique,
+		"id"		integer not null unique,
+		"parent"	text,
+		"name"		text not null unique,
 		primary key("id" autoincrement)
 	)`,()=>{})
 
