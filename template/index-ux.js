@@ -13,6 +13,7 @@ const uxScroll = (e)=>{
 const uxSelect = (funcSection)=>{
 	const selCode = '.' + funcSection + '-selected'
 	const input = document.querySelectorAll(selCode)
+	console.log(input)
 	const selMode = []
 	selMode['mnt'] = ()=>{
 		const selHeader = []
@@ -31,6 +32,44 @@ const uxSelect = (funcSection)=>{
 	return output
 }
 
+const uxSelectAll = (funcSection)=>{
+	const selCode = '.' + funcSection + '-selected'
+	const target = document.querySelectorAll(selCode)
+	const selMode = []
+	const hash = []
+	let token = 0
+	selMode['mnt'] = ()=>{
+		for(var i=0;i<target.length;i++){		
+			const el = target[i]
+			const classArr = el.classList
+			let uniqClass = classArr[1]
+			const isUniq = uniqClass.substring(0,9) == 'mnt-data-'
+			if(!isUniq){
+				for(var a=0;a<classArr.length;a++){
+					if(a==1){
+						continue
+					}
+					const cls = classArr[a]
+					if(cls.substring(0,9) == 'mnt-data-'){
+						uniqClass = cls
+						break
+					}
+				}
+			}
+			const isExist = hash.indexOf(uniqClass)
+			if(!isExist+1){
+				hash[token++] = uniqClass
+				const selNode = document.querySelectorAll('.' + uniqClass)
+				for(var a=0;a<selNode.length;a++){
+					selNode[a].classList.add(funcSection + '-selected')
+				}
+			}
+		}
+	}
+	selMode[funcSection]()
+	const output = uxSelect(funcSection)
+	return output
+}
 // Contextmenu Creator
 const uxContextMenuCreate = ()=>{
 	// Positioner

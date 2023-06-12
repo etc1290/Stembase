@@ -131,14 +131,30 @@ ipcMain.handle('mnt-load',async(event,name)=>{
 ipcMain.handle('mnt-remove',(event,folderset,dataset)=>{
 	const output = new Promise((resolve)=>{
 		const cmd = `delete from Members where name = ?`
-		const cmda = `select parent from Members where name = ?`
+		//const cmda = `select parent from Members where name = ?`
+		const cmda = `select parent from Monitor where name = ?`
+		const cmdb = `update Monitor set parent = ? where name = ?`
 		for(let i=0;i<dataset.length;i++){
 			const mdb = mdbLoader(folderset[i])
-			mdb.run(cmd,dataset[i],(err)=>{
+			const data = dataset[i]
+			const folder=folderset[i]
+			mdb.run(cmd,data,(err)=>{
 				if(err){
 					resolve(false)
 				}else{
-					resolve(true)
+					db.all(cmda,data,(err,res)=>{
+						const groupArr = unpack(res,true)
+						const index = groupArr.indexOf(folder)
+						if(index+1){
+							groupArr.splice(index,1)
+							db.all(cmdb,[groupArr + '',data],()=>{
+								resolve(true)
+							})
+						}else{
+							resolve(true)
+						}
+						
+					})
 				}
 				mdb.close()
 			})

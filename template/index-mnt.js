@@ -523,14 +523,16 @@ const mntmenufunc = async()=>{
 			}
 		}
 	})*/
-		const selected = uxSelect('mnt')
+		const selected = uxSelectAll('mnt')
+		console.log(selected)
+		/*
 		const isRemove = await window.mnt.remove(selected['Folder'],selected['Data'],true)
 		
 		if(isRemove){
 			for(var i=0;i<selected['Node'];i++){
 				mntgroupwrite(selected['Node'][i])
 			}
-		}
+		}*/
 	})	
 	// Header
 		// Remove:						Delete this group

@@ -6,10 +6,14 @@
 
 
 ---
-	## 2023.06.12		version 0.7.2.2
+	## 2023.06.12		version 0.7.3
+	-- Function implementation
 	-- Rewrite function
 	-- Database enhancement
 	-- Bug fix
+	# Added
+	1. Add uxSelectAll function to handle identical option selection
+		-- finished
 	# Changed
 	1. Add parent column in Monitor of Stemdb
 		-- finished
