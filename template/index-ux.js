@@ -1,3 +1,8 @@
+
+
+
+
+// Custom scroll unfinished
 const uxScroll = (e)=>{
 	const targetDiv = document.getElementById(e)
 	const offset = 200
@@ -9,6 +14,7 @@ const uxScroll = (e)=>{
 		behavior: 'smooth'
 	})
 }
+
 // Multiple Selector
 const uxSelect = (funcSection)=>{
 	const selCode = '.' + funcSection + '-selected'

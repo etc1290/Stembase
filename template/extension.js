@@ -1,5 +1,7 @@
 
-const unique = (arr)=>{
+
+//Duplicate elements remover
+const extUniq = (arr) =>{
 	const hash = {}
 	const uniqArr = []
 	let n = 0
@@ -12,5 +14,3 @@ const unique = (arr)=>{
 	}
 	return uniqArr
 }
-
-module.exports = unique
