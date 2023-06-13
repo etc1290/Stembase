@@ -72,7 +72,7 @@ const mntdragSetup = function() {
   })()
   window.mntdrag = mntdrag
 }
-
+	
 // Side:	Target class checker
 const mntcheck = (event,classname,isCurrent=false)=>{
 	if(!event){
@@ -472,28 +472,10 @@ const mntmenufunc = async()=>{
 	})
 		// Remove(Delete this record):	Delete all tags and meta and remove monitored status of this member
 	document.getElementById('mnt-removemenu-delete').addEventListener('mousedown',async()=>{
-		/*
-		const unique = (arr)=>{
-			const hash = {}
-			const uniqArr = []
-			let n = 0
-			for(var i=0;i<arr.length;i++){
-				const el = arr[i]
-				if(!hash[el]){
-					hash[el] = 1
-					uniqArr[n++] = el
-				}
-			}
-			return uniqArr
-		}*/
 		const selected = uxSelect('mnt')
 		const isFinished = await window.mnt.deleteM(selected['Folder'],selected['Data'])
 		if(isFinished){
-			//const updateArr = unique(selected['Node'])
-			const updateArr = extUniq(selected['Node'])
-			for(var i=0;i<updateArr.length;i++){
-				mntgroupwrite(document.getElementById(updateArr[i]))
-			}	
+			mntgroupwrite()
 			mntmain()
 		}
 		
@@ -504,35 +486,16 @@ const mntmenufunc = async()=>{
 		const selected = uxSelect('mnt')
 		const isRemove = await window.mnt.remove(selected['Folder'],selected['Data'])
 		if(isRemove){
-			for(var i=0;i<selected['Node'].length;i++){			
-				mntgroupwrite(document.getElementById(selected['Node'][i]),false)
-			}
+			console.log(selected['Node'])
+			mntgroupwrite(selected['Node'])
 		}
 	})
 		// Remove(Remove grouping):		Remove member from all monitored groups
 	document.getElementById('mnt-removemenu-ungroup').addEventListener('mousedown',async()=>{
-		/*
-		const dataset = document.querySelectorAll('.mnt-selected')
-		const data = []
-		for(let i=0;i<dataset.length;i++){
-			if(!dataset[i].classList.contains('.mnt-mainfolder')){
-				data[i] = dataset[i].innerHTML
-			}
-		}
-		const group = dataset[0].parentNode.parentNode
-		if(data[0]){
-			const isRemove = await window.mnt.remove(group.innerHTML,data)
-			if(isRemove){
-				mntgroupwrite(group,false)
-			}
-		}
-	})*/
 		const selected = uxSelectAll('mnt')		
 		const isRemove = await window.mnt.remove(selected['Folder'],selected['Data'])
 		if(isRemove){
-			for(var i=0;i<selected['Node'];i++){
-				mntgroupwrite(selected['Node'][i])
-			}
+			mntgroupwrite(selected['Node'])
 		}
 	})	
 	// Header

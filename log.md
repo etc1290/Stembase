@@ -6,11 +6,16 @@
 ---
 	## 2023.06.13		version 0.7.4
 	-- Function implementation
+	-- Rewrite function
+	-- Remove wasted code
 	-- Bug fix
 	# Added
 	1. Add extension.js to handle all general functions which can be use in any function section
 		-- finished
 	2. Add extUniq function to handle duplicate elementsin array
+		-- finished
+	# Changed
+	1. Rewrite uxSelect function let Node return real nodes instead of id
 		-- finished
 	# Fixed
 	1. Fix the bug that mnt-load return non-mainDB id

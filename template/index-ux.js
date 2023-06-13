@@ -19,7 +19,6 @@ const uxScroll = (e)=>{
 const uxSelect = (funcSection)=>{
 	const selCode = '.' + funcSection + '-selected'
 	const input = document.querySelectorAll(selCode)
-	console.log(input)
 	const selMode = []
 	selMode['mnt'] = ()=>{
 		const selHeader = []
@@ -28,7 +27,7 @@ const uxSelect = (funcSection)=>{
 		for(let i=0;i<input.length;i++){
 			const folder = input[i].parentNode.closest('.mnt-folder')
 			selHeader[i] = input[i].innerHTML
-			selNode[i]	 = folder.id
+			selNode[i]	 = document.getElementById(folder.id)
 			selFolder[i] = folder.children[0].innerHTML		
 		}
 		const selArr = {'Folder':selFolder,'Data':selHeader,'Node':selNode}
