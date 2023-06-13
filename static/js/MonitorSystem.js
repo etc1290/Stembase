@@ -78,7 +78,7 @@ ipcMain.handle('mnt-load',async(event,name)=>{
 	const cmda = `select child from Members where name = ?`
 
 	const promiseChain = ()=>{
-		const output = new Promise((resolve)=>{
+		const outcome = new Promise((resolve)=>{
 			mdb.all(cmda,name,(err,res)=>{
 				const raw = unpack(res)
 				if(raw[0]){
@@ -89,7 +89,7 @@ ipcMain.handle('mnt-load',async(event,name)=>{
 				}
 			})
 		})
-		return output		
+		return outcome	
 	}
 	const idArr = await promiseChain()
 	const cmdb = `select name from Members where id = ?`
@@ -110,20 +110,55 @@ ipcMain.handle('mnt-load',async(event,name)=>{
 		groupArr[j] = groupArr[j][0]
 	}
 	
-	const cmdc = `select id,name from Members`
+	//const cmdc = `select id,name from Members`
+	const cmdc = `select name from Members`
 	const mdbs = mdbLoader(name)
+	/*
 	const dataArr = new Promise((resolve)=>{
 		mdbs.all(cmdc,(err,res)=>{
 			if(res[0]){
-				resolve(unpack(res))
+				const dataset = unpack(res)
+				
+				const idChain = []
+				for(let i=0;i<dataset.length;i++){
+					idChain[i] = new Promise(())
+				}
+				const idset = Promise.all(idChain)
+				//resolve(unpack(res))
 			}else{
-				resolve([])
+				resolve([[],[]])
 			}
 			mdbs.close()
 		})
-	})
-	
-	const output = [groupArr,await dataArr]
+	})*/
+	const dataChain = ()=>{
+		const outcome = new Promise((resolve)=>{
+			mdbs.all(cmdc,(err,res)=>{
+				if(res[0]){
+					resolve(unpack(res))
+				}else{
+					resolve([])
+				}
+				mdbs.close()
+			})
+		})
+		return outcome
+	}
+	const dataset = await dataChain()
+	const idChain = []
+	const cmdd = `select id from Monitor where name = ?`
+	for(let i=0;i<dataset.length;i++){
+		idChain[i] = new Promise((resolve)=>{
+			db.all(cmdd,dataset[i],(err,res)=>{
+				resolve(unpack(res))
+			})
+		})
+	}
+	const idset = Promise.all(idChain)
+	console.log(idset)
+	const dataArr = [await idset,dataset]
+	//const output = [groupArr,await dataArr]
+	const output = [groupArr,dataArr]
 	return output
 	
 })

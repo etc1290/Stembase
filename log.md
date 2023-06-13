@@ -6,6 +6,12 @@
 
 
 ---
+	## 2023.06.13		version 0.7.3.1
+	-- Bug fix
+	# Fixed
+	1. Fix the bug that mnt-load return non-mainDB id
+		-- finished
+---
 	## 2023.06.12		version 0.7.3
 	-- Function implementation
 	-- Rewrite function
