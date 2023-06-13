@@ -20,6 +20,8 @@
 	# Fixed
 	1. Fix the bug that mnt-load return non-mainDB id
 		-- finished
+	2. Fix extUniq recognize all DOM elements as same item error
+		-- finished
 ---
 	## 2023.06.12		version 0.7.3
 	-- Function implementation

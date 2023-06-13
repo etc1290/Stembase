@@ -109,28 +109,9 @@ ipcMain.handle('mnt-load',async(event,name)=>{
 	for(var j=0;j<groupArr.length;j++){
 		groupArr[j] = groupArr[j][0]
 	}
-	
-	//const cmdc = `select id,name from Members`
+
 	const cmdc = `select name from Members`
 	const mdbs = mdbLoader(name)
-	/*
-	const dataArr = new Promise((resolve)=>{
-		mdbs.all(cmdc,(err,res)=>{
-			if(res[0]){
-				const dataset = unpack(res)
-				
-				const idChain = []
-				for(let i=0;i<dataset.length;i++){
-					idChain[i] = new Promise(())
-				}
-				const idset = Promise.all(idChain)
-				//resolve(unpack(res))
-			}else{
-				resolve([[],[]])
-			}
-			mdbs.close()
-		})
-	})*/
 	const dataChain = ()=>{
 		const outcome = new Promise((resolve)=>{
 			mdbs.all(cmdc,(err,res)=>{
@@ -155,9 +136,7 @@ ipcMain.handle('mnt-load',async(event,name)=>{
 		})
 	}
 	const idset = Promise.all(idChain)
-	console.log(idset)
 	const dataArr = [await idset,dataset]
-	//const output = [groupArr,await dataArr]
 	const output = [groupArr,dataArr]
 	return output
 	
@@ -166,7 +145,6 @@ ipcMain.handle('mnt-load',async(event,name)=>{
 ipcMain.handle('mnt-remove',(event,folderset,dataset)=>{
 	const output = new Promise((resolve)=>{
 		const cmd = `delete from Members where name = ?`
-		//const cmda = `select parent from Members where name = ?`
 		const cmda = `select parent from Monitor where name = ?`
 		const cmdb = `update Monitor set parent = ? where name = ?`
 		for(let i=0;i<dataset.length;i++){

@@ -274,12 +274,18 @@ const mntrename = ()=>{
 // Side:	Monitored group loader
 const mntgroupwrite = async(target,isLoaded=true) =>{
 	const isArr = target.constructor == Array
+	console.log('before:' + target)
 	if(!isArr){
 		target=[target]
 	}else{
 		target = extUniq(target)
 	}
 	for(var a=0;a<target.length;a++){
+		const isAll = target[a].id == 'mnt-main'
+		if(isAll){
+			mntmain()
+			continue
+		}
 		const header = target[a].children[0]
 		const updateDiv = target[a].children[1]
 		let [groupset,[idset,dataset]] = await window.mnt.load(header.innerHTML)
@@ -397,7 +403,6 @@ const mntfunc = (target)=>{
 									mntgroupwrite(dropzone)
 								}
 							}else{
-								console.log(dropzoneid)
 								mntgroupwrite(dropzone)
 							}				
 						}
@@ -472,21 +477,19 @@ const mntmenufunc = async()=>{
 	})
 		// Remove(Delete this record):	Delete all tags and meta and remove monitored status of this member
 	document.getElementById('mnt-removemenu-delete').addEventListener('mousedown',async()=>{
-		const selected = uxSelect('mnt')
+		const selected = uxSelectAll('mnt')
 		const isFinished = await window.mnt.deleteM(selected['Folder'],selected['Data'])
 		if(isFinished){
-			mntgroupwrite()
-			mntmain()
-		}
-		
-		
+			console.log(selected['Node'])
+			mntgroupwrite(selected['Node'])
+			//mntmain()
+		}	
 	})
 		// Remove(Remove from group):	Remove member from this monitored group
 	document.getElementById('mnt-removemenu-remove').addEventListener('mousedown',async()=>{		
 		const selected = uxSelect('mnt')
 		const isRemove = await window.mnt.remove(selected['Folder'],selected['Data'])
 		if(isRemove){
-			console.log(selected['Node'])
 			mntgroupwrite(selected['Node'])
 		}
 	})
