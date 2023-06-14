@@ -503,13 +503,15 @@ const mntmenufunc = async()=>{
 	})
 		// Remove(Remove grouping):		Remove member from all monitored groups
 	document.getElementById('mnt-removemenu-ungroup').addEventListener('mousedown',async()=>{
-		const selected = uxSelectAll('mnt')		
+		const selected = uxSelectAll('mnt')	
+		const groupArr = await window.mnt.get(selected['Data'])
+		console.log(groupArr)
+		/*
 		const isRemove = await window.mnt.remove(selected['Folder'],selected['Data'])
 		
 		if(isRemove){
-			console.log(selected['Node'])
 			mntgroupwrite(selected['Node'],false)
-		}
+		}*/
 	})	
 	// Header
 		// Remove:						Delete this group
