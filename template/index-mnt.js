@@ -272,9 +272,8 @@ const mntrename = ()=>{
 	})
 }
 // Side:	Monitored group loader
-const mntgroupwrite = async(target,isLoaded=true) =>{
+const mntgroupwrite = async(target,isMainExec=true) =>{
 	const isArr = target.constructor == Array
-	console.log('before:' + target)
 	if(!isArr){
 		target=[target]
 	}else{
@@ -282,10 +281,20 @@ const mntgroupwrite = async(target,isLoaded=true) =>{
 	}
 	for(var a=0;a<target.length;a++){
 		const isAll = target[a].id == 'mnt-main'
+		if(isMainExec){		
+			if(isAll){
+				mntmain()
+				continue
+			}
+		}else if(isAll){
+			continue
+		}
+		/*
+		const isAll = target[a].id == 'mnt-main'
 		if(isAll){
 			mntmain()
 			continue
-		}
+		}*/
 		const header = target[a].children[0]
 		const updateDiv = target[a].children[1]
 		let [groupset,[idset,dataset]] = await window.mnt.load(header.innerHTML)
@@ -480,7 +489,6 @@ const mntmenufunc = async()=>{
 		const selected = uxSelectAll('mnt')
 		const isFinished = await window.mnt.deleteM(selected['Folder'],selected['Data'])
 		if(isFinished){
-			console.log(selected['Node'])
 			mntgroupwrite(selected['Node'])
 			//mntmain()
 		}	
@@ -497,8 +505,10 @@ const mntmenufunc = async()=>{
 	document.getElementById('mnt-removemenu-ungroup').addEventListener('mousedown',async()=>{
 		const selected = uxSelectAll('mnt')		
 		const isRemove = await window.mnt.remove(selected['Folder'],selected['Data'])
+		
 		if(isRemove){
-			mntgroupwrite(selected['Node'])
+			console.log(selected['Node'])
+			mntgroupwrite(selected['Node'],false)
 		}
 	})	
 	// Header

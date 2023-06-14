@@ -4,6 +4,19 @@
 
 
 ---
+	## 2023.06.14		version 0.7.5
+	-- Function impldementation
+	-- Rewrite function
+	# Added
+	1. ungroup function is fully implemented
+		-- finished
+	# Changed
+	1. Rewiring mntmain to mntgroupwrite and use isMainExec to adjust the behavior of All
+		-- finished
+	# Bugged
+	1. Monitored data is duplicate in All after drop
+	2. When move to an already expanded group, it did not update instantly
+---
 	## 2023.06.13		version 0.7.4
 	-- Function implementation
 	-- Rewrite function
