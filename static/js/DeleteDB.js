@@ -1,6 +1,7 @@
 const {ipcMain,app,dialog} = require('electron')
 const sqlite3 = require('sqlite3').verbose()
-const env = require('./env.js')
+//const env = require('./env.js')
+const {env} = require('./addon.js')
 const Stemdb= env('StemdbDir')
 const db = new sqlite3.Database(Stemdb + '.db')
 const { exec } = require('node:child_process');

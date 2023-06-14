@@ -1,5 +1,6 @@
 const {ipcMain,BrowserWindow} = require('electron')
-const env = require('./env.js')
+//const env = require('./env.js')
+const {env} = require('./addon.js')
 const check = require('./check.js')
 const path = require('path')
 const {JsonDB,Config} = require('node-json-db')

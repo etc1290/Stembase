@@ -16,6 +16,8 @@
 	# Changed
 	1. Rewiring mntmain to mntgroupwrite and use isMainExec to adjust the behavior of All
 		-- finished
+	2. Import addon.js into all backend scripts
+		-- finished
 	# Bugged
 	1. Monitored data is duplicate in All after drop
 	2. When move to an already expanded group, it did not update instantly
