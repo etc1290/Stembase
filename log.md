@@ -13,7 +13,7 @@
 		-- finished
 	2. Add addon.js to wrap all custom scripts as a centralize package
 		-- finished
-	3. Add arrUniq function into addon.js handle array flattening work
+	3. Add arrUniq function into addon.js handle array duplicate removing work
 		-- finished
 	# Changed
 	1. Rewiring mntmain to mntgroupwrite and use isMainExec to adjust the behavior of All
