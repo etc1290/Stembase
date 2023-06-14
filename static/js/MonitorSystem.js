@@ -1,7 +1,7 @@
 const {ipcMain,dialog} = require('electron')
 const fs = require('fs')
 //const env = require('./env.js')
-const {env} = require('./addon.js')
+const {env,arrUniq} = require('./addon.js')
 const sqlite3 = require('sqlite3').verbose()
 const Stemdb = env('StemdbDir')
 const db = new sqlite3.Database(Stemdb + '.db')
@@ -144,11 +144,14 @@ ipcMain.handle('mnt-load',async(event,name)=>{
 })
 // Get belonged monitored groups data
 ipcMain.handle('mnt-get',async(event,dataset)=>{
-	console.log(dataset)
+	
 	const isArr = dataset.constructor == Array
 	if(!isArr){
 		dataset = [dataset]
+	}else{
+		dataset = arrUniq(dataset)
 	}
+	console.log(dataset)
 	const cmd = `select parent from Monitor where name = ?`
 	const promiseChain = []
 	for(var i=0;i<dataset.length;i++){

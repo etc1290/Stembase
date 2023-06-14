@@ -32,7 +32,22 @@ const env = (v) =>{
 	var envarray = JSON.parse(envdata)
 	return envarray[v]
 }
-
+//Duplicate elements remover
+const arrUniq = (arr) =>{
+	const hash = {}
+	const uniqArr = []
+	let n = 0
+	const h = arr[0]
+	for(var i=0;i<arr.length;i++){
+		const el = arr[i]
+		let key = arr[i]		
+		if(!hash[key]){
+			hash[key] = 1
+			uniqArr[n++] = el
+		}
+	}
+	return uniqArr
+}
 
 
 
@@ -40,6 +55,7 @@ module.exports = {
 	bytes,
 	check,
 	time,
-	env
+	env,
+	arrUniq
 	
 }

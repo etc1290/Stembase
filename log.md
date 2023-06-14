@@ -5,13 +5,15 @@
 
 ---
 	## 2023.06.14		version 0.7.5
-	-- Function impldementation
+	-- Function implementation
 	-- Rewrite function
 	-- Clear wasted codes
 	# Added
 	1. ungroup function is fully implemented
 		-- finished
 	2. Add addon.js to wrap all custom scripts as a centralize package
+		-- finished
+	3. Add arrUniq function into addon.js handle array flattening work
 		-- finished
 	# Changed
 	1. Rewiring mntmain to mntgroupwrite and use isMainExec to adjust the behavior of All
