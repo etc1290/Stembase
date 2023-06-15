@@ -7,7 +7,7 @@
 	-- Bug fix
 	-- Remove wasted codes 
 	# Fixed
-	1. Fix the bug that Lab.js import error
+	1. Fix the bug that Lab.js and Setting.js import error
 		-- finished
 ---
 	## 2023.06.14		version 0.7.5
