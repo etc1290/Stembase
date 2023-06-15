@@ -4,8 +4,12 @@
 
 ---
 	## 2023.06.15		version 0.7.5.1
+	-- Rewrite function
 	-- Bug fix
 	-- Remove wasted codes 
+	# Changed
+	1. Rewrite ungroup function to improve performance
+		-- finished
 	# Fixed
 	1. Fix the bug that Lab.js and Setting.js import error
 		-- finished

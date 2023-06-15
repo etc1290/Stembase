@@ -511,14 +511,16 @@ const mntmenufunc = async()=>{
 		for(let i=0;i<groupArr.length;i++){
 			const group = mntreplace(groupArr[i])
 			const folder = document.getElementsByClassName('mnt-usergroup-' + group)[0]
-			console.log(folder.children)
 			const content = folder.children[1]
 			const isExpand = content.innerHTML
 			if(isExpand){
 				updateArr[n++] = folder
 			}
 		}
-		console.log(updateArr)
+		const isRemove = await window.mnt.remove(selected['Folder'],selected['Data'])
+		if(isRemove){
+			mntgroupwrite(updateArr)
+		}
 	})	
 	// Header
 		// Remove:						Delete this group
