@@ -151,7 +151,6 @@ ipcMain.handle('mnt-get',async(event,dataset)=>{
 	}else{
 		dataset = arrUniq(dataset)
 	}
-	console.log(dataset)
 	const cmd = `select parent from Monitor where name = ?`
 	const promiseChain = []
 	for(var i=0;i<dataset.length;i++){
@@ -172,7 +171,9 @@ ipcMain.handle('mnt-get',async(event,dataset)=>{
 			})
 		})
 	}
-	const output = Promise.all(promiseChain)
+	const totalArr = await Promise.all(promiseChain)
+	const flatArr = totalArr.flat()
+	const output = arrUniq(flatArr)
 	return output
 })
 // Remove monitored members
