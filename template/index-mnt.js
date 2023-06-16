@@ -364,7 +364,15 @@ const mntfunc = (target)=>{
 		// Drag
 		
 		el.addEventListener('dragstart',(event)=>{
-			event.dataTransfer.setData('text/plain',event.target.id)
+			//event.dataTransfer.setData('text/plain',event.target.id)
+			const isHeader = event.target.classList.contains('mnt-folder-header')
+			if(isHeader){
+				const folder = event.target.parentNode.classList.contains('mnt-folder')
+				folder.classList.add('mnt-selected-drag')
+			}else{
+				event.target.classList.add('mnt-selected-drag')
+			}
+			
 		})
 		el.addEventListener('dragend',(event)=>{
 			event.target.style.background = ''
@@ -382,7 +390,54 @@ const mntfunc = (target)=>{
 				mntcancel(event)
 			})
 			el.addEventListener('drop',async(event)=>{
-				mntcancel(event)			
+				mntcancel(event)					
+				
+				const dropFolder = event.target.closest('.mnt-folder')
+				const dropHeader = dropFolder.children[0].innerHTML
+				const dropContent= dropFolder.children[1]
+				const dragArr = document.querySelectorAll('.mnt-selected-drag')
+				const checkArr = []
+				const groupArr = []
+				const nameArr = []
+				const failArr = []
+				let n = 0
+				// Drop conditions check
+				for(var i=0;i<dragArr.length;i++){
+					const data = dragArr[i]
+					let header
+					const isGroup = data.classList.contains('mnt-subfolder')
+					data.classList.remove('mnt-selected-drag')
+					if(isGroup){
+						header = data.children[0].innerHTML
+					}else{
+						header = data.innerHTML
+					}
+					const group  = data.parentNode.closest('.mnt-folder')
+					const isDropable= dropFolder.classList.contains('fixed-content')
+					if(!isDropable){
+						const isFolderOnly = group.classList.contains('folder-only')
+						if(isFolderOnly){							
+							if(!isGroup){
+								console.log('No monitored data in this area')
+								continue
+							}
+						}
+						checkArr[n] = data
+						nameArr[n]  = header
+						groupArr[n++]=group.children[0].innerHTML
+					}
+					else{
+						console.log('No drop in this area')
+					}
+				}
+				// Drop function
+				const isAdd = await window.mnt.update([dropHeader],nameArr)
+				if(isAdd){			
+					console.log(groupArr)				
+					//const isRemove = await window.mnt.remove(groupArr,)
+				}
+				
+				/*
 				const dropid = event.dataTransfer.getData('text/plain')
 				const dropdata = document.getElementById(dropid)
 				const isClone = dropdata.parentNode.parentNode.classList.contains('mnt-dropzone')
@@ -418,6 +473,7 @@ const mntfunc = (target)=>{
 						mntspan(content)
 					}					
 				}
+				*/
 			})
 		}
 	}	

@@ -3,6 +3,15 @@
 
 
 ---
+	## 2023.06.16		version 0.7.5.2
+	-- Rewrite function
+	# Changed
+	1. Rewrite dragging mechanism
+		-- finished
+	# Bugged
+	1. Move to Shortcut is missing
+	2. Movemenu not trigger group updating
+---
 	## 2023.06.15		version 0.7.5.1
 	-- Rewrite function
 	-- Bug fix
@@ -29,7 +38,7 @@
 	1. Rewiring mntmain to mntgroupwrite and use isMainExec to adjust the behavior of All
 		-- finished
 	2. Import addon.js into all backend scripts
-		-- finished
+  		-- finished
 	# Bugged
 	1. Monitored data is duplicate in All after drop
 	2. When move to an already expanded group, it did not update instantly
