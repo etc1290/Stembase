@@ -53,6 +53,8 @@ const idPicker = (arr) =>{
 	}
 	return counter
 }
+// 
+
 // Load all data
 ipcMain.handle('mnt-main', (event) =>{
 	const output = new Promise((resolve)=>{
@@ -98,7 +100,7 @@ ipcMain.handle('mnt-load',async(event,name)=>{
 		promiseArr[i] = new Promise((resolve)=>{
 			mdb.all(cmdb,Number(idArr[i]),(err,res)=>{
 				if(res){
-					resolve(unpack(res))
+					resolve([idArr[i],unpack(res)[0]])
 				}else{
 					resolve([])
 				}
@@ -107,9 +109,12 @@ ipcMain.handle('mnt-load',async(event,name)=>{
 	}
 	
 	const groupArr = await Promise.all(promiseArr)
+	/*
 	for(var j=0;j<groupArr.length;j++){
+		
 		groupArr[j] = groupArr[j][0]
-	}
+		
+	}*/
 
 	const cmdc = `select name from Members`
 	const mdbs = mdbLoader(name)
@@ -128,14 +133,30 @@ ipcMain.handle('mnt-load',async(event,name)=>{
 	}
 	const dataset = await dataChain()
 	const idChain = []
-	const cmdd = `select id from Monitor where name = ?`
-	for(let i=0;i<dataset.length;i++){
-		idChain[i] = new Promise((resolve)=>{
-			db.all(cmdd,dataset[i],(err,res)=>{
-				resolve(unpack(res))
-			})
+	const isGroups = name =='Groups'
+	if(isGroups){
+		const cmdd = `select id from Members where name = ?`
+		for(let i=0;i<dataset.length;i++){
+			console.log(dataset[i])
+			idChain[i] = new Promise((resolve)=>{
+				mdbs.all(cmdd,dataset[i],(err,res)=>{
+					
+					console.log(res)
+					resolve(unpack(res))
+				})
 		})
 	}
+	}else{
+		const cmdd = `select id from Monitor where name = ?`
+		for(let i=0;i<dataset.length;i++){
+			idChain[i] = new Promise((resolve)=>{
+				db.all(cmdd,dataset[i],(err,res)=>{
+					resolve(unpack(res))
+				})
+			})
+		}
+	}
+	
 	const idset = Promise.all(idChain)
 	const dataArr = [await idset,dataset]
 	const output = [groupArr,dataArr]
@@ -158,7 +179,6 @@ ipcMain.handle('mnt-get',async(event,dataset)=>{
 		promiseChain[i] = new Promise((resolve)=>{
 			db.all(cmd,data,(err,res)=>{
 				if(err){
-					console.log(err)
 					resolve([])
 				}else{
 					const arr = unpack(res,true)
@@ -177,38 +197,66 @@ ipcMain.handle('mnt-get',async(event,dataset)=>{
 	return output
 })
 // Remove monitored members
-ipcMain.handle('mnt-remove',(event,folderset,dataset)=>{
+ipcMain.handle('mnt-remove',async(event,folderset,dataset,isGroup = false)=>{
 	const promiseChain = []
-	for(let i=0;i<dataset.length;i++){
-		const cmd = `delete from Members where name = ?`
-		const cmda = `select parent from Monitor where name = ?`
-		const cmdb = `update Monitor set parent = ? where name = ?`
-		promiseChain[i] = new Promise((resolve)=>{
-			const mdb = mdbLoader(folderset[i])
-			const data = dataset[i]
-			const folder=folderset[i]
-			mdb.run(cmd,data,(err)=>{
-				if(err){
-					resolve(false)
-				}else{
-					db.all(cmda,data,(err,res)=>{
-						const groupArr = unpack(res,true)
-						const index = groupArr.indexOf(folder)
-						if(index+1){
-							groupArr.splice(index,1)
-							db.all(cmdb,[groupArr + '',data],()=>{
-								resolve(true)
+	const cmd  = `delete from Members where name = ?`
+	const cmda = `select parent from Monitor where name = ?`
+	const cmdb = `update Monitor set parent = ? where name = ?`
+	const cmdga= `select id from Members where name = ?`
+	const cmdgb= `select child from Members where id = ?` 
+	const cmdgc= `update Members set child = ? where id = ?`
+	const cmdgd= `select parent from Members where id = ?`
+	if(isGroup){
+		const mdb = mdbLoader('Groups')
+		for(let i=0;i<dataset.length;i++){
+			promiseChain[i] = new Promise((resolve)=>{
+				/*
+				mdb.all(cmdga,folderset[i],(err,res)=>{
+					const parentid = unpack(res)
+					mdb.all(cmdga,dataset[i],(err,res)=>{
+						const childid = unpack(res)
+						mdb.all(cmdgb,parentid,(err,res)=>{
+							const childArr = unpack(res,true)
+							const childPos = childArr.indexOf(childid)
+							childArr.splice(childPos,1)
+							mdb.all(cmdgc,[childArr,parentid],(err,res)=>{
+								mdb.all(cmdgd,childid)
 							})
-						}else{
-							resolve(true)
-						}
-						
+						})
 					})
-				}
-				mdb.close()
+					
+				})*/
 			})
-		})
+		}
+	}else{
+		for(let i=0;i<dataset.length;i++){	
+			promiseChain[i] = new Promise((resolve)=>{
+				const mdb = mdbLoader(folderset[i])
+				const data = dataset[i]
+				const folder=folderset[i]
+				mdb.run(cmd,data,(err)=>{
+					if(err){
+						resolve(false)
+					}else{
+						db.all(cmda,data,(err,res)=>{
+							const groupArr = unpack(res,true)
+							const index = groupArr.indexOf(folder)
+							if(index+1){
+								groupArr.splice(index,1)
+								db.all(cmdb,[groupArr + '',data],()=>{
+									resolve(true)
+								})
+							}else{
+								resolve(true)
+							}							
+						})
+					}
+					mdb.close()
+				})
+			})
+		}		
 	}
+
 	const output = Promise.all(promiseChain)
 	return output
 })

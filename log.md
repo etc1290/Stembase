@@ -3,6 +3,12 @@
 
 
 ---
+	## 2023.06.19		version 0.7.5.3
+	-- Rewrite function
+	# Changed
+	1. Rewrite mnt-load function to return group id
+		-- processing
+---
 	## 2023.06.16		version 0.7.5.2
 	-- Rewrite function
 	# Changed

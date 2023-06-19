@@ -72,7 +72,7 @@ const mntdragSetup = function() {
   })()
   window.mntdrag = mntdrag
 }
-	
+
 // Side:	Target class checker
 const mntcheck = (event,classname,isCurrent=false)=>{
 	if(!event){
@@ -305,9 +305,10 @@ const mntgroupwrite = async(target,isMainExec=true) =>{
 		const mntdata = []
 		const groups = []
 		for(var i=0;i<groupset.length;i++){
-			const modName = mntreplace(groupset[i])
+			//const modName = mntreplace(groupset[i][1])
+			const modName = groupset[i][0]
 			const id = `'mnt-` + header.innerHTML + `-group-` + i + `'`
-			const subheader = `<p class='mnt-folder-header mnt-data'>` + groupset[i] + `</p>`
+			const subheader = `<p class='mnt-folder-header mnt-data'>` + groupset[i][1] + `</p>`
 			const subcontent= `<div class='mnt-folder-content'></div>`
 			const uniqClass = `mnt-usergroup-` + modName
 			const subfolder = `<div id=` + id 
@@ -397,10 +398,15 @@ const mntfunc = (target)=>{
 				const dropContent= dropFolder.children[1]
 				const dragArr = document.querySelectorAll('.mnt-selected-drag')
 				const checkArr = []
+				const parentArr = []
+				const dataArr = []
+				const dataParentArr = []
 				const groupArr = []
-				const nameArr = []
+				const groupParentArr = []
 				const failArr = []
 				let n = 0
+				let g = 0
+				let d = 0
 				// Drop conditions check
 				for(var i=0;i<dragArr.length;i++){
 					const data = dragArr[i]
@@ -413,6 +419,7 @@ const mntfunc = (target)=>{
 						header = data.innerHTML
 					}
 					const group  = data.parentNode.closest('.mnt-folder')
+					const groupName = group.children[0].innerHTML
 					const isDropable= dropFolder.classList.contains('fixed-content')
 					if(!isDropable){
 						const isFolderOnly = group.classList.contains('folder-only')
@@ -423,19 +430,27 @@ const mntfunc = (target)=>{
 							}
 						}
 						checkArr[n] = data
-						nameArr[n]  = header
-						groupArr[n++]=group.children[0].innerHTML
+						if(isGroup){
+							groupArr[g] = header
+							groupParentArr[g++] = groupName
+						}else{
+							dataArr[d] = header
+							dataParentArr[d++] = groupName
+						}
+						parentArr[n++]= groupName
 					}
 					else{
 						console.log('No drop in this area')
 					}
 				}
-				// Drop function
+				// Append and remove function
 				const isAdd = await window.mnt.update([dropHeader],nameArr)
-				if(isAdd){			
-					console.log(groupArr)				
-					//const isRemove = await window.mnt.remove(groupArr,)
+				if(isAdd){						
+					const isRemoveGroup = await window.mnt.remove(groupParentArr,groupArr,true)
+				//	const isRemove = await window.mnt.remove(dataParentArr,dataArr)
 				}
+				// Update function
+				
 				
 				/*
 				const dropid = event.dataTransfer.getData('text/plain')
@@ -621,12 +636,13 @@ const mntmenuAddition = (cmda='all',cmdb)=>{
 	}
 	mode['create'] = (cmdb)=>{
 		mode['movemenu'] = async()=>{
-			const [,[,groups]] = await window.mnt.load('Groups')
+			const [,[idlist,groups]] = await window.mnt.load('Groups')
 			const optionArr = []
 			for(var i=0;i<groups.length;i++){
 				const id = `'mnt-movemenu-` + groups[i] + `'`
 				const text = 'to ' + groups[i]
-				const modName = mntreplace(groups[i])
+				//const modName = mntreplace(groups[i][1])
+				const modName = idlist[i]
 				const option = `<p id=` + id + `class='mnt-dropmenu-option mnt-movemenu-addition'>` + text + `</p>`
 				optionArr[i] = option
 			}
@@ -679,8 +695,11 @@ const mntgroup = async(parent,child)=>{
 		const updateDiv = document.getElementById('mnt-group-display')
 		const [,[,grouplist]] = await window.mnt.load('Groups')
 		const mntdata = []
+		console.log(grouplist)
 		for(var i=0;i<grouplist.length;i++){
-			const modName = mntreplace(grouplist[i])
+			//const modName = mntreplace(grouplist[i][1])
+			const modName = idlist[i]
+			console.log(idlist)
 			const header = `<p class='mnt-folder-header'>` + grouplist[i] + `</p>`
 			const content= `<div class='mnt-folder-content'></div>`
 			const uniqClass = `mnt-usergroup-` + modName
