@@ -8,6 +8,8 @@
 	# Changed
 	1. Rewrite unique group class name mechanism
 		-- finished
+	2. Rewrite mntrename function to cancel the unique name handle
+		-- finished
 ---
 	## 2023.06.19		version 0.7.5.3
 	-- Rewrite function
