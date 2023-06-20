@@ -72,7 +72,35 @@ const mntdragSetup = function() {
   })()
   window.mntdrag = mntdrag
 }
-
+// Side:	Monitored unique class picker
+const mntclass = (el) =>{
+	console.log(el.id)
+	const arr = el.classList
+	const isData = arr.contains('mnt-data')
+	let checkClass = 'mnt-usergroup-'
+	let n = 14
+	if(isData){
+		checkClass = 'mnt-data-'
+		n = 9
+	}
+	let uniqClass = arr[1]
+	const isUniq = uniqClass.substring(0,n) == checkClass
+	if(!isUniq){
+		for(var i=0;i<arr.length;i++){
+			if(i==1){
+				continue
+			}
+			const cls = arr[i]
+			if(cls.substring(0,n) == checkClass){
+				uniqClass = cls
+				break
+			}
+		}
+	}
+	console.log(uniqClass)
+	const id = uniqClass.substring(n)
+	return [id,uniqClass]	
+}
 // Side:	Target class checker
 const mntcheck = (event,classname,isCurrent=false)=>{
 	if(!event){
@@ -401,6 +429,8 @@ const mntfunc = (target)=>{
 				const dataParentArr = []
 				const groupArr = []
 				const groupParentArr = []
+				const groupNodeArr = []
+				const groupChildArr= []
 				const failArr = []
 				let n = 0
 				let g = 0
@@ -430,7 +460,11 @@ const mntfunc = (target)=>{
 						checkArr[n] = data
 						if(isGroup){
 							groupArr[g] = header
-							groupParentArr[g++] = groupName
+							groupParentArr[g] = groupName
+							groupChildArr[g++]= data
+							mntclass(dropFolder)
+							mntclass(data)
+							
 						}else{
 							dataArr[d] = header
 							dataParentArr[d++] = groupName
@@ -442,11 +476,12 @@ const mntfunc = (target)=>{
 					}
 				}
 				// Append and remove function
-				const isAdd = await window.mnt.update([dropHeader],nameArr)
-				if(isAdd){						
+				const nameArr = groupArr.concat(dataArr)
+				//const isAdd = await window.mnt.update([dropHeader],nameArr)
+				/*if(isAdd){						
 					const isRemoveGroup = await window.mnt.remove(groupParentArr,groupArr,true)
-				//	const isRemove = await window.mnt.remove(dataParentArr,dataArr)
-				}
+					const isRemove = await window.mnt.remove(dataParentArr,dataArr)
+				}*/
 				// Update function
 				
 				

@@ -46,7 +46,9 @@ const uxSelectAll = (funcSection)=>{
 	selMode['mnt'] = ()=>{
 		for(var i=0;i<target.length;i++){		
 			const el = target[i]
-			const classArr = el.classList
+			const [,uniqClass] = mntclass(el)
+			//const classArr = el.classList
+			/*
 			let uniqClass = classArr[1]
 			const isUniq = uniqClass.substring(0,9) == 'mnt-data-'
 			if(!isUniq){
@@ -60,7 +62,7 @@ const uxSelectAll = (funcSection)=>{
 						break
 					}
 				}
-			}
+			}*/
 			const isExist = hash.indexOf(uniqClass)
 			if(!isExist+1){
 				hash[token++] = uniqClass

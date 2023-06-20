@@ -1,15 +1,23 @@
 # Stembase
  File tagging system
 
-
+@@@ Bug and future planning
+	1. Removemenu not show up
+	2. Custom drag and drop function
+	3. Rewrite mntupdate to id-based function
 ---
-	## 2023.06.20		version 0.7.5.4
+	## 2023.06.20		version 0.7.6
+	-- Function implementation
 	-- Rewrite function
+	# Added
+	1. Add mntclass function to parse unique class id and class name
+		-- finished
 	# Changed
 	1. Rewrite unique group class name mechanism
 		-- finished
 	2. Rewrite mntrename function to cancel the unique name handle
 		-- finished
+	
 ---
 	## 2023.06.19		version 0.7.5.3
 	-- Rewrite function
