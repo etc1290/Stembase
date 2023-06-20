@@ -109,13 +109,6 @@ ipcMain.handle('mnt-load',async(event,name)=>{
 	}
 	
 	const groupArr = await Promise.all(promiseArr)
-	/*
-	for(var j=0;j<groupArr.length;j++){
-		
-		groupArr[j] = groupArr[j][0]
-		
-	}*/
-
 	const cmdc = `select name from Members`
 	const mdbs = mdbLoader(name)
 	const dataChain = ()=>{
@@ -135,13 +128,11 @@ ipcMain.handle('mnt-load',async(event,name)=>{
 	const idChain = []
 	const isGroups = name =='Groups'
 	if(isGroups){
+		const mdbg = mdbLoader('Groups')
 		const cmdd = `select id from Members where name = ?`
 		for(let i=0;i<dataset.length;i++){
-			console.log(dataset[i])
 			idChain[i] = new Promise((resolve)=>{
-				mdbs.all(cmdd,dataset[i],(err,res)=>{
-					
-					console.log(res)
+				mdbg.all(cmdd,dataset[i],(err,res)=>{
 					resolve(unpack(res))
 				})
 		})

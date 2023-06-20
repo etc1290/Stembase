@@ -3,6 +3,12 @@
 
 
 ---
+	## 2023.06.20		version 0.7.5.4
+	-- Rewrite function
+	# Changed
+	1. Rewrite unique group class name mechanism
+		-- finished
+---
 	## 2023.06.19		version 0.7.5.3
 	-- Rewrite function
 	# Changed

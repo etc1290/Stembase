@@ -228,8 +228,6 @@ const mntrename = ()=>{
 				const oldclass = document.getElementsByClassName(mntreplace(oldmodName))
 				for(var i=0;i<oldclass.length;i++){
 					const e = oldclass[i]
-					e.classList.remove(oldmodName)
-					e.classList.add(newmodName)
 					e.children[0].innerHTML = newname
 				}
 				
@@ -693,9 +691,11 @@ const mntmenuAddition = (cmda='all',cmdb)=>{
 const mntgroup = async(parent,child)=>{
 	const mainfunc = async()=>{
 		const updateDiv = document.getElementById('mnt-group-display')
-		const [,[,grouplist]] = await window.mnt.load('Groups')
+		const [,[idlist,grouplist]] = await window.mnt.load('Groups')
 		const mntdata = []
-		console.log(grouplist)
+		const pos = grouplist.indexOf('Shortcut')
+		grouplist.splice(pos,1)
+		idlist.splice(pos,1)
 		for(var i=0;i<grouplist.length;i++){
 			//const modName = mntreplace(grouplist[i][1])
 			const modName = idlist[i]
