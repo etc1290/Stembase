@@ -2,9 +2,17 @@
  File tagging system
 
 @@@ Bug and future planning
-	1. Removemenu not show up
+	1. Fix Removemenu not show up
 	2. Custom drag and drop function
 	3. Rewrite mntupdate to id-based function
+	4. Collapse groups only when leave parent groups or second members
+	5. Show error when drag into the same source groups
+---
+	## 2023.06.21		version 0.7.6.1
+	-- Rewrite function
+	# Changed
+	1. Rewrite uxSelect present more data(monitored groups and data id and entire class) to use
+		-- finished
 ---
 	## 2023.06.20		version 0.7.6
 	-- Function implementation

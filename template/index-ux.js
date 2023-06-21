@@ -20,17 +20,27 @@ const uxSelect = (funcSection)=>{
 	const selCode = '.' + funcSection + '-selected'
 	const input = document.querySelectorAll(selCode)
 	const selMode = []
-	selMode['mnt'] = ()=>{
-		const selHeader = []
+	selMode['mnt'] = ()=>{		
 		const selFolder = []
+		const selHeader = []
 		const selNode   = []
+		const selGroup  = []
+		const selGroupCls=[]
 		for(let i=0;i<input.length;i++){
 			const folder = input[i].parentNode.closest('.mnt-folder')
+			//console.log(folder)
+			//console.log(input[i])
+			const group  = mntclass(folder)
+			selFolder[i] = folder.children[0].innerHTML	
 			selHeader[i] = input[i].innerHTML
 			selNode[i]	 = document.getElementById(folder.id)
-			selFolder[i] = folder.children[0].innerHTML		
+			selGroup[i]	 = group[0]
+			selGroupCls[i]=group[1]
 		}
-		const selArr = {'Folder':selFolder,'Data':selHeader,'Node':selNode}
+		const selArr = {
+			'Folder':selFolder,'Data':selHeader,'Node':selNode,
+			'Folderid':selGroup,'Folderclass':selGroupCls
+		}
 		return selArr
 	}
 	const output = selMode[funcSection]()

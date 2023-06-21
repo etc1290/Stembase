@@ -74,7 +74,6 @@ const mntdragSetup = function() {
 }
 // Side:	Monitored unique class picker
 const mntclass = (el) =>{
-	console.log(el.id)
 	const arr = el.classList
 	const isData = arr.contains('mnt-data')
 	let checkClass = 'mnt-usergroup-'
@@ -97,7 +96,6 @@ const mntclass = (el) =>{
 			}
 		}
 	}
-	console.log(uniqClass)
 	const id = uniqClass.substring(n)
 	return [id,uniqClass]	
 }
@@ -696,10 +694,24 @@ const mntmenuAddition = (cmda='all',cmdb)=>{
 				if(mntcheck(event,'mnt-movemenu-addition')){
 					const id = event.target.id
 					const name = id.substring(13)
+					let target = document.getElementById('mnt-user-' + name)
+					if(!target){
+						target = document.getElementById('mnt-group-' + name)
+					}
+					const targetid = mntclass(target)[0]
 					const selected = uxSelect('mnt')
-					const groupArr = [...selected['Data']].fill(name)
-					const isFinished = await window.mnt.update(groupArr,selected['Data'])	
-					let nodelist = []
+					const parentArr = [...selected['Dataid']].fill(targetid)
+					//const groupArr = [...selected['Data']].fill(selected['Folderid'])
+					//const isFinished = await window.mnt.update(parentArr,selected['Dataid'])	
+					const dataArr = []
+					for(var i =0;i<selected['FolderClass'].length;i++){
+						const cls = selected['FolderClass'][i]
+						dataArr[i] = document.querySelectorAll(cls)
+					}
+					console.log(dataArr.flat())
+					//mntgroupwrite(dataArr.flat())
+					//let nodelist = []
+					/*
 					if(name == 'Shortcut'){
 						nodelist = [document.getElementById('mnt-shortcut')]
 					}else{
@@ -709,7 +721,8 @@ const mntmenuAddition = (cmda='all',cmdb)=>{
 					for(var i;i<nodelist.length;i++){
 						console.log(nodelist[i])
 						mntgroupwrite(nodelist[i])
-					}					
+					}*/
+						
 				}
 			})
 		}
@@ -734,7 +747,6 @@ const mntgroup = async(parent,child)=>{
 		for(var i=0;i<grouplist.length;i++){
 			//const modName = mntreplace(grouplist[i][1])
 			const modName = idlist[i]
-			console.log(idlist)
 			const header = `<p class='mnt-folder-header'>` + grouplist[i] + `</p>`
 			const content= `<div class='mnt-folder-content'></div>`
 			const uniqClass = `mnt-usergroup-` + modName

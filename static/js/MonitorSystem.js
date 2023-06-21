@@ -448,13 +448,49 @@ ipcMain.handle('mnt-rename', (event,oldname,newname)=>{
 	return output
 })
 // Update monitored group members
-ipcMain.handle('mnt-update',(event,folderset,nameset)=>{
+ipcMain.handle('mnt-update',(event,folderset,dataset,isGroup=false)=>{
 	const promiseArr = []
-	const cmda = `select id from Members where name = ?`
+	const cmdga = `select parent from Member where id = ?`
+	const cmdgb = `update Members set parent = ? where id = ?`
+	const cmdgc = `select child from Members where is = ?`
+	const cmdgd = `update Members set child = ? where id = ?`
+	for(var i=0;i<folderset.length;i++){
+		const folder = folderset[i]
+		const data = dataset[i]
+		promiseArr[i] = new Promise((resolve)=>{
+			if(isGroup){
+				const mdb = mdbLoader('Groups')		
+				mdb.all(cmdga,data,(err,res)=>{
+					const parentArr = unpack(res,true)
+					const isExist = parentArr.indexOf(folder)
+					if(!isExist+1){
+						resolve(false)
+					}else{
+						parentArr.push(folder)
+						mdb.all(cmdgb,[parentArr,data],()=>{
+							mdb.all(cmdgc,folder,(err,res)=>{
+								const childArr = unpack(res,true)
+								childArr.push(data)
+								mdb.all(cmdgd,[childArr,folder],()=>{
+									resolve(true)
+								})
+							})
+						})
+					}
+				})
+			}else{
+				
+			}	
+		})
+		
+	}
+	/*const cmda = `select id from Members where name = ?`
 	for(var i=0;i<folderset.length;i++){
 		const folder = folderset[i]
 		const name	 = nameset[i]
 		const mdbg= mdbLoader('Groups')
+		
+		
 		promiseArr[i] = new Promise((resolve)=>{
 			mdbg.all(cmda,name,(err,res)=>{
 				if(res[0]){
@@ -519,7 +555,7 @@ ipcMain.handle('mnt-update',(event,folderset,nameset)=>{
 			})
 		})
 		
-	}
+	}*/
 	const output = Promise.all(promiseArr)
 	return output
 })
