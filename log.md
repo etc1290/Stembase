@@ -9,7 +9,11 @@
 	5. Show error when drag into the same source groups
 ---
 	## 2023.06.21		version 0.7.6.1
+	-- Function implementation
 	-- Rewrite function
+	# Added
+	1. Add mntsort function to sort monitored groups and data in array 
+		-- finished
 	# Changed
 	1. Rewrite uxSelect present more data(monitored groups and data id and entire class) to use
 		-- finished

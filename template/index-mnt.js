@@ -99,6 +99,24 @@ const mntclass = (el) =>{
 	const id = uniqClass.substring(n)
 	return [id,uniqClass]	
 }
+// Side:	Data and groups selector
+const mntsort = (arr)=>{
+	const groupArr = []
+	const dataArr = []
+	let g = 0
+	let d = 0
+	for(var i=0;i<arr['Data'].length;i++){
+		const el = arr[Data][i]
+		const isData = el.contains('mnt-data')
+		if(isData){
+			dataArr[d++] = el
+		}else{
+			groupArr[g++]= arr['Folderid']
+		}
+	}
+	return [groupArr,dataArr]
+}
+
 // Side:	Target class checker
 const mntcheck = (event,classname,isCurrent=false)=>{
 	if(!event){
@@ -700,15 +718,10 @@ const mntmenuAddition = (cmda='all',cmdb)=>{
 					}
 					const targetid = mntclass(target)[0]
 					const selected = uxSelect('mnt')
-					const parentArr = [...selected['Dataid']].fill(targetid)
+					const parentArr = [...selected['Data']].fill(targetid)
 					//const groupArr = [...selected['Data']].fill(selected['Folderid'])
 					//const isFinished = await window.mnt.update(parentArr,selected['Dataid'])	
-					const dataArr = []
-					for(var i =0;i<selected['FolderClass'].length;i++){
-						const cls = selected['FolderClass'][i]
-						dataArr[i] = document.querySelectorAll(cls)
-					}
-					console.log(dataArr.flat())
+					[groupArr,dataArr]=mntsort(selected)
 					//mntgroupwrite(dataArr.flat())
 					//let nodelist = []
 					/*
