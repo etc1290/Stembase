@@ -25,7 +25,7 @@ const uxSelect = (funcSection)=>{
 		const selHeader = []
 		const selNode   = []
 		const selGroup  = []
-		const selGroupCls=[]
+		const selGroupCls=[]	 
 		for(let i=0;i<input.length;i++){
 			const folder = input[i].parentNode.closest('.mnt-folder')
 			//console.log(folder)
@@ -39,7 +39,8 @@ const uxSelect = (funcSection)=>{
 		}
 		const selArr = {
 			'Folder':selFolder,'Data':selHeader,'Node':selNode,
-			'Folderid':selGroup,'Folderclass':selGroupCls
+			'Folderid':selGroup,'Folderclass':selGroupCls,
+			'Raw':input
 		}
 		return selArr
 	}

@@ -53,7 +53,6 @@ const idPicker = (arr) =>{
 	}
 	return counter
 }
-// 
 
 // Load all data
 ipcMain.handle('mnt-main', (event) =>{
@@ -450,10 +449,15 @@ ipcMain.handle('mnt-rename', (event,oldname,newname)=>{
 // Update monitored group members
 ipcMain.handle('mnt-update',(event,folderset,dataset,isGroup=false)=>{
 	const promiseArr = []
-	const cmdga = `select parent from Member where id = ?`
+	const cmdga = `select parent from Members where id = ?`
 	const cmdgb = `update Members set parent = ? where id = ?`
 	const cmdgc = `select child from Members where is = ?`
 	const cmdgd = `update Members set child = ? where id = ?`
+	console.log(folderset)
+	console.log(dataset)
+	const cmda	= `insert into Members(name) values(?)`
+	const cmdb	= `select parent from Monitor where name = ?`
+	const cmdc	= `update Monitor set parent = ? where name = ?`
 	for(var i=0;i<folderset.length;i++){
 		const folder = folderset[i]
 		const data = dataset[i]
@@ -462,6 +466,7 @@ ipcMain.handle('mnt-update',(event,folderset,dataset,isGroup=false)=>{
 				const mdb = mdbLoader('Groups')		
 				mdb.all(cmdga,data,(err,res)=>{
 					const parentArr = unpack(res,true)
+					console.log(parentArr)
 					const isExist = parentArr.indexOf(folder)
 					if(!isExist+1){
 						resolve(false)
@@ -479,7 +484,20 @@ ipcMain.handle('mnt-update',(event,folderset,dataset,isGroup=false)=>{
 					}
 				})
 			}else{
-				
+				const mdb = mdbLoader(folder)
+				mdb.all(cmda,data,(err,res)=>{
+					if(err){
+						resolve(false)
+					}else{
+						db.all(cmdb,data,(err,res)=>{
+							const parentArr = unpack(res,true)
+							parentArr.push(folder)
+							db.all(cmdc,[parentArr,data],()=>{
+								resolve(true)
+							})
+						})
+					}
+				})
 			}	
 		})
 		

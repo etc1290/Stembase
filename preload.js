@@ -49,7 +49,7 @@ contextBridge.exposeInMainWorld('mnt', {
 	create:		()			=> ipcRenderer.invoke('mnt-create'),
 	group:		(i,j)		=> ipcRenderer.invoke('mnt-group',i,j),
 	rename:		(i,j)		=> ipcRenderer.invoke('mnt-rename',i,j),
-	update:		(i,j)		=> ipcRenderer.invoke('mnt-update',i,j),
+	update:		(i,j,b)		=> ipcRenderer.invoke('mnt-update',i,j,b),
 	error:		(i)			=> ipcRenderer.invoke('mnt-error',i),
 	build:		()			=> ipcRenderer.invoke('mnt-build')
 

@@ -101,13 +101,14 @@ const mntclass = (el) =>{
 }
 // Side:	Data and groups selector
 const mntsort = (arr)=>{
+	console.log(arr)
 	const groupArr = []
 	const dataArr = []
 	let g = 0
 	let d = 0
-	for(var i=0;i<arr['Data'].length;i++){
-		const el = arr[Data][i]
-		const isData = el.contains('mnt-data')
+	for(var i=0;i<arr['Raw'].length;i++){
+		const el = arr['Raw'][i]
+		const isData = el.classList.contains('mnt-data')
 		if(isData){
 			dataArr[d++] = el
 		}else{
@@ -713,15 +714,35 @@ const mntmenuAddition = (cmda='all',cmdb)=>{
 					const id = event.target.id
 					const name = id.substring(13)
 					let target = document.getElementById('mnt-user-' + name)
+					if(name == 'Shortcut'){
+						target = document.getElementById('mnt-shortcut')
+					}
 					if(!target){
 						target = document.getElementById('mnt-group-' + name)
 					}
 					const targetid = mntclass(target)[0]
 					const selected = uxSelect('mnt')
-					const parentArr = [...selected['Data']].fill(targetid)
+					//const parentArr = [...selected['Data']].fill(targetid)
 					//const groupArr = [...selected['Data']].fill(selected['Folderid'])
 					//const isFinished = await window.mnt.update(parentArr,selected['Dataid'])	
-					[groupArr,dataArr]=mntsort(selected)
+					const [groupArr,dataArr] = mntsort(selected)
+					if(groupArr[0]){
+						console.log(groupArr)
+						const parentArr = [...groupArr].fill(targetid)
+						const isFinished = await window.mnt.update(parentArr,groupArr,true)
+						if(isFinished){							
+							mntgroupwrite(target)
+						}
+					}
+					if(dataArr[0]){
+						console.log(dataArr)
+						const parentArr = [...dataArr].fill(targetid)
+						const isFinished = await window.mnt.update(parentArr,selected['Data'])
+						if(isFinished){
+							mntgroupwrite(target)
+						}
+					}
+					
 					//mntgroupwrite(dataArr.flat())
 					//let nodelist = []
 					/*

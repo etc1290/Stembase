@@ -17,6 +17,11 @@
 	# Changed
 	1. Rewrite uxSelect present more data(monitored groups and data id and entire class) to use
 		-- finished
+	2. Rewrite mnt-update function to id-based
+		2-1 Monitored data
+			-- finished
+		2-2 Monitored groups
+			-- processing
 ---
 	## 2023.06.20		version 0.7.6
 	-- Function implementation
