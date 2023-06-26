@@ -722,7 +722,8 @@ const mntmenuAddition = (cmda='all',cmdb)=>{
 					}
 					let targetid = mntclass(target)[0]
 					if(targetid == 'Shortcut'){
-						targetid = await window.mnt.query(['id','Members','name','Shortcut'])
+						const queryset = await window.mnt.query(['id','Members','name','Shortcut'])
+						targetid = queryset[0] + ''
 					}
 					const selected = uxSelect('mnt')
 					//const parentArr = [...selected['Data']].fill(targetid)
@@ -730,7 +731,7 @@ const mntmenuAddition = (cmda='all',cmdb)=>{
 					//const isFinished = await window.mnt.update(parentArr,selected['Dataid'])	
 					const [groupArr,dataArr] = mntsort(selected)
 					if(groupArr[0]){
-						console.log(groupArr)
+						console.log(targetid)
 						const parentArr = [...groupArr].fill(targetid)
 						
 						const isFinished = await window.mnt.update(parentArr,groupArr,true)
@@ -739,7 +740,7 @@ const mntmenuAddition = (cmda='all',cmdb)=>{
 						}
 					}
 					if(dataArr[0]){
-						console.log(dataArr)
+						//console.log(dataArr)
 						const parentArr = [...dataArr].fill(name)
 						const isFinished = await window.mnt.update(parentArr,selected['Data'])
 						if(isFinished){

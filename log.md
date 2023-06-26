@@ -11,12 +11,17 @@
 ---
 	## 2023.06.26		version 0.7.7
 	-- Function implementation
+	-- Rewrite function
+	-- Bug fixed
 	
 	# Added
 	1. Add mntquery function to handle basic information look-up
 		-- finished
 	# Changed
 	1. Rewrite mnt-update function to id-based and support groups
+		-- finished
+	# Fixed
+	1. Fix the bug that Monitored groups can be repeatedly joined
 		-- finished
 	
 ---

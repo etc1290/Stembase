@@ -469,8 +469,6 @@ ipcMain.handle('mnt-update',(event,folderset,dataset,isGroup=false)=>{
 	const cmdgb = `update Members set parent = ? where id = ?`
 	const cmdgc = `select child from Members where id = ?`
 	const cmdgd = `update Members set child = ? where id = ?`
-	//console.log(folderset)
-	//console.log(dataset)
 	const cmda	= `insert into Members(name) values(?)`
 	const cmdb	= `select parent from Monitor where name = ?`
 	const cmdc	= `update Monitor set parent = ? where name = ?`
@@ -487,7 +485,7 @@ ipcMain.handle('mnt-update',(event,folderset,dataset,isGroup=false)=>{
 						resolve(false)
 					}else{
 						parentArr.push(folder)
-						console.log(parentArr)
+						//console.log(parentArr)
 						mdb.all(cmdgb,[parentArr,data],()=>{
 							mdb.all(cmdgc,folder,(err,res)=>{
 								const childArr = unpack(res,true)
