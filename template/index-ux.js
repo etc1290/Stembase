@@ -211,6 +211,7 @@ const uxContextMenuCreate = ()=>{
 				}
 			}
 			const hide = (e,isAggreg=false)=>{
+				e = document.getElementById(e)
 				if(isAggreg){
 					e = e.children				
 					for(var i=0;i<e.length;i++){
@@ -221,6 +222,7 @@ const uxContextMenuCreate = ()=>{
 				}
 			}
 			const unhide = (e,isAggreg=false)=>{
+				e = document.getElementById(e)
 				if(isAggreg){
 					e = e.children				
 					for(var i=0;i<e.length;i++){
@@ -234,23 +236,36 @@ const uxContextMenuCreate = ()=>{
 			// Hide table
 			hideRule['mnt'] = ()=>{
 				mainRule['function-section'] = ()=>{
+					/*
 					hide(document.getElementById('mnt-cm-remove'))
 					hide(document.getElementById('mnt-cm-move'))
 					hide(document.getElementById('mnt-headercm'))
+					*/
+					hide('mnt-cm-remove')
+					hide('mnt-cm-move')
+					hide('mnt-headercm')
 				}
 				mainRule['mnt-folder-header'] = ()=>{
-					hide(document.getElementById('mnt-datacm'),true)			
+					//hide(document.getElementById('mnt-datacm'),true)	
+					hide('mnt-datacm',true)
 					const subRule = []
 					subRule['mnt-mainfolder'] = ()=>{
+						/*
 						hide(document.getElementById('mnt-cm-groupdelete'))
-						hide(document.getElementById('mnt-cm-grouprename'))
+						hide(document.getElementById('mnt-cm-grouprename'))*/
+						hide('mnt-cm-groupdelete')
+						hide('mnt-cm-grouprename')
 					}
 					subRule['mnt-subfolder'] = ()=>{
+						/*
 						unhide(document.getElementById('mnt-cm-new'))
 						unhide(document.getElementById('mnt-cm-move'))
-						
+						*/
+						unhide('mnt-cm-new')
+						unhide('mnt-cm-move')
 						const name = event.target.innerHTML
-						hide(document.getElementById('mnt-movemenu-' + name))
+						hide('mnt-movemenu-' + name)
+						//hide(document.getElementById('mnt-movemenu-' + name))
 					}
 					const group = event.target.closest('.mnt-folder')
 					const groupClass = group.className.split(' ')
@@ -261,10 +276,12 @@ const uxContextMenuCreate = ()=>{
 					}
 				}
 				mainRule['mnt-data'] = ()=>{
-					hide(document.getElementById('mnt-headercm'))
+					//hide(document.getElementById('mnt-headercm'))
+					hide('mnt-headercm')
 					const subRule = []
 					subRule['mnt-main'] = ()=>{
-						hide(document.getElementById('mnt-cm-remove'))						
+						hide('mnt-cm-remove')
+						//hide(document.getElementById('mnt-cm-remove'))						
 					}
 					try{
 						const group = event.target.closest('.mnt-folder')

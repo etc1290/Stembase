@@ -5,6 +5,7 @@
 	1. Fix Removemenu not show up
 	2. Custom drag and drop function
 	3. Rewrite mntupdate to id-based function
+		-- finished
 	4. Collapse groups only when leave parent groups or second members
 	5. Show error when drag into the same source groups
 	
@@ -13,12 +14,15 @@
 	-- Function implementation
 	-- Rewrite function
 	-- Bug fixed
+	-- Clear wasted codes
 	
 	# Added
 	1. Add mntquery function to handle basic information look-up
 		-- finished
 	# Changed
 	1. Rewrite mnt-update function to id-based and support groups
+		-- finished
+	2. Rewrite hide and unhide function for better readability
 		-- finished
 	# Fixed
 	1. Fix the bug that Monitored groups can be repeatedly joined
