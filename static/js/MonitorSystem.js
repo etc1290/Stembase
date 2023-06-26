@@ -153,6 +153,22 @@ ipcMain.handle('mnt-load',async(event,name)=>{
 	return output
 	
 })
+// Simple query
+ipcMain.handle('mnt-query',async(event,cmdArr,name='Groups',isArr=false)=>{
+	let pos = ''
+	if(cmdArr[2]){
+		pos = ` where ` + cmdArr[2] + ` = ?` 
+	}
+	const cmd = `select ` + cmdArr[0] + ` from ` + cmdArr[1] + pos
+	const output = new Promise((resolve)=>{
+		const mdb = mdbLoader(name)
+		mdb.all(cmd,cmdArr[3],(err,res)=>{
+			const outcome = unpack(res,isArr)
+			resolve(outcome)
+		})
+	})
+	return output
+})
 // Get belonged monitored groups data
 ipcMain.handle('mnt-get',async(event,dataset)=>{
 	
@@ -451,10 +467,10 @@ ipcMain.handle('mnt-update',(event,folderset,dataset,isGroup=false)=>{
 	const promiseArr = []
 	const cmdga = `select parent from Members where id = ?`
 	const cmdgb = `update Members set parent = ? where id = ?`
-	const cmdgc = `select child from Members where is = ?`
+	const cmdgc = `select child from Members where id = ?`
 	const cmdgd = `update Members set child = ? where id = ?`
-	console.log(folderset)
-	console.log(dataset)
+	//console.log(folderset)
+	//console.log(dataset)
 	const cmda	= `insert into Members(name) values(?)`
 	const cmdb	= `select parent from Monitor where name = ?`
 	const cmdc	= `update Monitor set parent = ? where name = ?`
@@ -466,12 +482,12 @@ ipcMain.handle('mnt-update',(event,folderset,dataset,isGroup=false)=>{
 				const mdb = mdbLoader('Groups')		
 				mdb.all(cmdga,data,(err,res)=>{
 					const parentArr = unpack(res,true)
-					console.log(parentArr)
 					const isExist = parentArr.indexOf(folder)
-					if(!isExist+1){
+					if(isExist+1){
 						resolve(false)
 					}else{
 						parentArr.push(folder)
+						console.log(parentArr)
 						mdb.all(cmdgb,[parentArr,data],()=>{
 							mdb.all(cmdgc,folder,(err,res)=>{
 								const childArr = unpack(res,true)

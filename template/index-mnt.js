@@ -112,7 +112,7 @@ const mntsort = (arr)=>{
 		if(isData){
 			dataArr[d++] = el
 		}else{
-			groupArr[g++]= arr['Folderid']
+			groupArr[g++]= arr['Folderid'][i]
 		}
 	}
 	return [groupArr,dataArr]
@@ -720,7 +720,10 @@ const mntmenuAddition = (cmda='all',cmdb)=>{
 					if(!target){
 						target = document.getElementById('mnt-group-' + name)
 					}
-					const targetid = mntclass(target)[0]
+					let targetid = mntclass(target)[0]
+					if(targetid == 'Shortcut'){
+						targetid = await window.mnt.query(['id','Members','name','Shortcut'])
+					}
 					const selected = uxSelect('mnt')
 					//const parentArr = [...selected['Data']].fill(targetid)
 					//const groupArr = [...selected['Data']].fill(selected['Folderid'])
@@ -729,6 +732,7 @@ const mntmenuAddition = (cmda='all',cmdb)=>{
 					if(groupArr[0]){
 						console.log(groupArr)
 						const parentArr = [...groupArr].fill(targetid)
+						
 						const isFinished = await window.mnt.update(parentArr,groupArr,true)
 						if(isFinished){							
 							mntgroupwrite(target)
@@ -736,7 +740,7 @@ const mntmenuAddition = (cmda='all',cmdb)=>{
 					}
 					if(dataArr[0]){
 						console.log(dataArr)
-						const parentArr = [...dataArr].fill(targetid)
+						const parentArr = [...dataArr].fill(name)
 						const isFinished = await window.mnt.update(parentArr,selected['Data'])
 						if(isFinished){
 							mntgroupwrite(target)

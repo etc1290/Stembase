@@ -7,6 +7,18 @@
 	3. Rewrite mntupdate to id-based function
 	4. Collapse groups only when leave parent groups or second members
 	5. Show error when drag into the same source groups
+	
+---
+	## 2023.06.26		version 0.7.7
+	-- Function implementation
+	
+	# Added
+	1. Add mntquery function to handle basic information look-up
+		-- finished
+	# Changed
+	1. Rewrite mnt-update function to id-based and support groups
+		-- finished
+	
 ---
 	## 2023.06.21		version 0.7.6.1
 	-- Function implementation
