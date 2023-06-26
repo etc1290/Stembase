@@ -226,7 +226,6 @@ const uxContextMenuCreate = ()=>{
 				if(isAggreg){
 					e = e.children				
 					for(var i=0;i<e.length;i++){
-						//hideOpt.push(e[i])
 						const pos = hideOpt.indexOf(e[i])
 						if(pos + 1){
 							hideOpt.splice(pos,1)
@@ -252,11 +251,13 @@ const uxContextMenuCreate = ()=>{
 					hide('mnt-datacm',true)
 					const subRule = []
 					subRule['mnt-mainfolder'] = ()=>{
+						console.log(1)
 						unhide('mnt-cm-new')
 						hide('mnt-cm-groupdelete')
 						hide('mnt-cm-grouprename')
 					}
 					subRule['mnt-subfolder'] = ()=>{
+						console.log(2)
 						unhide('mnt-cm-new')
 						unhide('mnt-cm-move')
 						unhide('mnt-headercm',true)

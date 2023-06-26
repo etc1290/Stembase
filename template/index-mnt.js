@@ -351,7 +351,7 @@ const mntgroupwrite = async(target,isMainExec=true) =>{
 			//const modName = mntreplace(groupset[i][1])
 			const modName = groupset[i][0]
 			const id = `'mnt-` + header.innerHTML + `-group-` + i + `'`
-			const subheader = `<p class='mnt-folder-header mnt-data'>` + groupset[i][1] + `</p>`
+			const subheader = `<p class='mnt-folder-header'>` + groupset[i][1] + `</p>`
 			const subcontent= `<div class='mnt-folder-content'></div>`
 			const uniqClass = `mnt-usergroup-` + modName
 			const subfolder = `<div id=` + id 
