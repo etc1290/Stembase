@@ -10,7 +10,6 @@
 	4. Collapse groups only when leave parent groups or second members
 	5. Show error when drag into the same source groups
 	6. Prevent right-click the contextmenu firing
-	7. Prevent data from moving to current parent groups
 	
 ---
 	## 2023.06.26		version 0.7.7
@@ -26,6 +25,8 @@
 	1. Rewrite mnt-update function to id-based and support groups
 		-- finished
 	2. Rewrite hide and unhide function for better readability
+		-- finished
+	3. Hide "Move to {ParentName}" option when target is currently in its parents group
 		-- finished
 	# Fixed
 	1. Fix the bug that Monitored groups can be repeatedly joined

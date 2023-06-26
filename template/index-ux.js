@@ -212,14 +212,16 @@ const uxContextMenuCreate = ()=>{
 			}
 			const hide = (e,isAggreg=false)=>{
 				e = document.getElementById(e)
-				if(isAggreg){
-					e = e.children				
-					for(var i=0;i<e.length;i++){
-						hideOpt.push(e[i])
+				if(e){
+					if(isAggreg){
+						e = e.children				
+						for(var i=0;i<e.length;i++){
+							hideOpt.push(e[i])
+						}
+					}else{
+						hideOpt.push(e)
 					}
-				}else{
-					hideOpt.push(e)
-				}
+				}				
 			}
 			const unhide = (e,isAggreg=false)=>{
 				e = document.getElementById(e)
@@ -251,18 +253,19 @@ const uxContextMenuCreate = ()=>{
 					hide('mnt-datacm',true)
 					const subRule = []
 					subRule['mnt-mainfolder'] = ()=>{
-						console.log(1)
 						unhide('mnt-cm-new')
 						hide('mnt-cm-groupdelete')
 						hide('mnt-cm-grouprename')
 					}
 					subRule['mnt-subfolder'] = ()=>{
-						console.log(2)
 						unhide('mnt-cm-new')
 						unhide('mnt-cm-move')
 						unhide('mnt-headercm',true)
 						const name = event.target.innerHTML
 						hide('mnt-movemenu-' + name)
+						const parent = event.target.parentNode.parentNode.parentNode
+						const parentName = parent.children[0].innerHTML
+						hide('mnt-movemenu-' + parentName)
 						hide('mnt-removemenu-delete')
 						
 					}
