@@ -8,6 +8,8 @@
 		-- finished
 	4. Collapse groups only when leave parent groups or second members
 	5. Show error when drag into the same source groups
+	6. Prevent right-click the contextmenu firing
+	
 	
 ---
 	## 2023.06.26		version 0.7.7
@@ -26,6 +28,8 @@
 		-- finished
 	# Fixed
 	1. Fix the bug that Monitored groups can be repeatedly joined
+		-- finished
+	2. Rewrite unhide function to solve some accidently hiding or unhiding action
 		-- finished
 	
 ---

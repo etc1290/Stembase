@@ -226,46 +226,44 @@ const uxContextMenuCreate = ()=>{
 				if(isAggreg){
 					e = e.children				
 					for(var i=0;i<e.length;i++){
-						hideOpt.push(e[i])
+						//hideOpt.push(e[i])
+						const pos = hideOpt.indexOf(e[i])
+						if(pos + 1){
+							hideOpt.splice(pos,1)
+						}
 					}
 				}else{
-					hideOpt.splice(hideOpt.indexOf(e),1)
+					const pos = hideOpt.indexOf(e)
+					if(pos + 1){
+						hideOpt.splice(hideOpt.indexOf(e),1)
+					}
+					
 				}
 				
 			}
 			// Hide table
 			hideRule['mnt'] = ()=>{
 				mainRule['function-section'] = ()=>{
-					/*
-					hide(document.getElementById('mnt-cm-remove'))
-					hide(document.getElementById('mnt-cm-move'))
-					hide(document.getElementById('mnt-headercm'))
-					*/
 					hide('mnt-cm-remove')
 					hide('mnt-cm-move')
 					hide('mnt-headercm')
 				}
 				mainRule['mnt-folder-header'] = ()=>{
-					//hide(document.getElementById('mnt-datacm'),true)	
 					hide('mnt-datacm',true)
 					const subRule = []
 					subRule['mnt-mainfolder'] = ()=>{
-						/*
-						hide(document.getElementById('mnt-cm-groupdelete'))
-						hide(document.getElementById('mnt-cm-grouprename'))*/
+						unhide('mnt-cm-new')
 						hide('mnt-cm-groupdelete')
 						hide('mnt-cm-grouprename')
 					}
 					subRule['mnt-subfolder'] = ()=>{
-						/*
-						unhide(document.getElementById('mnt-cm-new'))
-						unhide(document.getElementById('mnt-cm-move'))
-						*/
 						unhide('mnt-cm-new')
 						unhide('mnt-cm-move')
+						unhide('mnt-headercm',true)
 						const name = event.target.innerHTML
 						hide('mnt-movemenu-' + name)
-						//hide(document.getElementById('mnt-movemenu-' + name))
+						hide('mnt-removemenu-delete')
+						
 					}
 					const group = event.target.closest('.mnt-folder')
 					const groupClass = group.className.split(' ')
@@ -276,12 +274,10 @@ const uxContextMenuCreate = ()=>{
 					}
 				}
 				mainRule['mnt-data'] = ()=>{
-					//hide(document.getElementById('mnt-headercm'))
 					hide('mnt-headercm')
 					const subRule = []
 					subRule['mnt-main'] = ()=>{
-						hide('mnt-cm-remove')
-						//hide(document.getElementById('mnt-cm-remove'))						
+						hide('mnt-cm-remove')						
 					}
 					try{
 						const group = event.target.closest('.mnt-folder')
@@ -300,7 +296,6 @@ const uxContextMenuCreate = ()=>{
 			try{
 				hideRule[funcSection.id]()
 			}catch(err){}
-			//console.log(hideOpt)
 			mnthide(hideOpt)
 		}
 		uxContextMenuOptRule()		
@@ -324,7 +319,7 @@ const uxContextMenuRemove = ()=>{
 		}
 		for(var i=0;i<vsbSubMenu.length;i++){
 				vsbSubMenu[i].classList.remove('visible')
-			}
+		}
 	}
 	const body = document.body
 	body.addEventListener('contextmenu',(event)=>{
