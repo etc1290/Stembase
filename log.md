@@ -10,6 +10,7 @@
 	4. Collapse groups only when leave parent groups or second members
 	5. Show error when drag into the same source groups
 	6. Prevent right-click the contextmenu firing
+	7. Merge mnt-get function into mnt-query
 	
 ---
 	## 2023.06.26		version 0.7.7
