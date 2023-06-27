@@ -2,15 +2,23 @@
  File tagging system
 
 @@@ Bug and future planning
-	1. Fix Removemenu not show up
+	2.	Custom drag and drop function
+	4. 	Collapse groups only when leave parent groups or second members
+	5. 	Show error when drag into the same source groups
+	6. 	Prevent right-click the contextmenu firing
+	7. 	Merge mnt-get function into mnt-query
+	8. 	Rewrite or remove uxselect function in index-tag
+	9. 	If data is already exist in monitored group remove that from movemenu
+	10.	Display no valid groups when no viable bgroups can be added
+	
+	
+---
+	## 2023.06.27		version 0.7.7.1
+	-- Clear wasted codes
+	-- Rewrite function
+	# Changed
+	1. Add removemenu to monitored groups 
 		-- finished
-	2. Custom drag and drop function
-	3. Rewrite mntupdate to id-based function
-		-- finished
-	4. Collapse groups only when leave parent groups or second members
-	5. Show error when drag into the same source groups
-	6. Prevent right-click the contextmenu firing
-	7. Merge mnt-get function into mnt-query
 	
 ---
 	## 2023.06.26		version 0.7.7

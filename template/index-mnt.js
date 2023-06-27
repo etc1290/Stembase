@@ -439,6 +439,10 @@ const mntfunc = (target)=>{
 				const dropFolder = event.target.closest('.mnt-folder')
 				const dropHeader = dropFolder.children[0].innerHTML
 				const dropContent= dropFolder.children[1]
+				let dropid = mntclass(dropFolder)[0]
+				if(dropid == 'Shortcut'){
+					dropid = await window.mnt.query(['id','Members','name',dropHeader])
+				}
 				const dragArr = document.querySelectorAll('.mnt-selected-drag')
 				const checkArr = []
 				const parentArr = []
@@ -479,8 +483,9 @@ const mntfunc = (target)=>{
 							groupArr[g] = header
 							groupParentArr[g] = groupName
 							groupChildArr[g++]= data
-							mntclass(dropFolder)
-							mntclass(data)
+							
+							//mntclass(dropFolder)
+							//mntclass(data)
 							
 						}else{
 							dataArr[d] = header
@@ -494,6 +499,8 @@ const mntfunc = (target)=>{
 				}
 				// Append and remove function
 				const nameArr = groupArr.concat(dataArr)
+				const tempDataArr = [...nameArr].fill(dropid)
+				const isAdd = await window.mnt.update(tempDataArr,nameArr)
 				//const isAdd = await window.mnt.update([dropHeader],nameArr)
 				/*if(isAdd){						
 					const isRemoveGroup = await window.mnt.remove(groupParentArr,groupArr,true)

@@ -58,22 +58,6 @@ const uxSelectAll = (funcSection)=>{
 		for(var i=0;i<target.length;i++){		
 			const el = target[i]
 			const [,uniqClass] = mntclass(el)
-			//const classArr = el.classList
-			/*
-			let uniqClass = classArr[1]
-			const isUniq = uniqClass.substring(0,9) == 'mnt-data-'
-			if(!isUniq){
-				for(var a=0;a<classArr.length;a++){
-					if(a==1){
-						continue
-					}
-					const cls = classArr[a]
-					if(cls.substring(0,9) == 'mnt-data-'){
-						uniqClass = cls
-						break
-					}
-				}
-			}*/
 			const isExist = hash.indexOf(uniqClass)
 			if(!isExist+1){
 				hash[token++] = uniqClass
@@ -260,6 +244,7 @@ const uxContextMenuCreate = ()=>{
 					subRule['mnt-subfolder'] = ()=>{
 						unhide('mnt-cm-new')
 						unhide('mnt-cm-move')
+						unhide('mnt-cm-remove')
 						unhide('mnt-headercm',true)
 						const name = event.target.innerHTML
 						hide('mnt-movemenu-' + name)
