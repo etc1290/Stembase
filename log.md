@@ -16,8 +16,11 @@
 	## 2023.06.27		version 0.7.7.1
 	-- Clear wasted codes
 	-- Rewrite function
+	-- Remove dependency
 	# Changed
 	1. Add removemenu to monitored groups 
+		-- finished
+	2. Remove some unused module dependency
 		-- finished
 	
 ---
