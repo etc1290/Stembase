@@ -11,6 +11,7 @@
 	9. 	If data is already exist in monitored group remove that from movemenu
 	10.	Display no valid groups when no viable bgroups can be added
 	11.	Remake mnt-remove function by id-based
+		-- processing
 	12. Monitored groups in Shortcut's highlight effect is missing
 	13. Give main group Shortcut dynamic id rather than call mnt-query
 		-- finished
@@ -23,6 +24,8 @@
 	20. Add Groups dbLoader as global
 		-- finished
 	21. Modify all MonitorSystem function to use gdb feature
+	22. Rewrit mnt-removemenu-remove function
+		-- processing
 
 ---
 	## 2023.06.28		version 0.7.7.2
@@ -36,6 +39,10 @@
 		-- finished
 	4. Add a gdb to support massively used Groups mdbLoader
 		-- finished
+	5. Rewrite mnt-remove function
+		5-1 Groups part
+		5-2 Data parts
+			-- finished
 ---
 	## 2023.06.27		version 0.7.7.1
 	-- Clear wasted codes

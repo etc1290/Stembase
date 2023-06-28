@@ -215,7 +215,9 @@ ipcMain.handle('mnt-remove',async(event,folderset,dataset,isGroup = false)=>{
 	const cmdgc= `update Members set child = ? where id = ?`
 	const cmdgd= `select parent from Members where id = ?`*/
 	const cmda = `select name from Members where id = ?`
-	console.log(isGroup)
+	const cmdb = `delete from Members where name = ?`
+	const cmdc = `select parent from Monitor where name = ?`
+	const cmdd = `update Monitor set parent = ? where name = ?`
 	if(isGroup){
 		const mdb = mdbLoader('Groups')
 		for(let i=0;i<dataset.length;i++){
@@ -246,8 +248,20 @@ ipcMain.handle('mnt-remove',async(event,folderset,dataset,isGroup = false)=>{
 				const folder = folderset[i]
 				const data = dataset[i]
 				gdb.all(cmda,folder,(err,res)=>{
-					const dbName = unpack(res)
-					console.log(dbName)
+					const groupName = unpack(res)
+					const mdb = mdbLoader(groupName)
+					mdb.all(cmdb,data,()=>{
+						db.all(cmdc,data,(err,res)=>{
+							const parentArr = unpack(res,true)
+							const pos = parentArr.indexOf(groupName[0])
+							if(pos + 1){
+								parentArr.splice(pos,1)								
+							}
+							db.all(cmdd,[parentArr,data],(err,res)=>{
+								resolve(true)
+							})
+						})
+					})
 				})
 			})
 		}
