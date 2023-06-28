@@ -6,7 +6,7 @@ const sqlite3 = require('sqlite3').verbose()
 const Stemdb = env('StemdbDir')
 const db = new sqlite3.Database(Stemdb + '.db')
 const mdbStorage = env('StemMGDir')
-
+const gdb= new sqlite3.Database(mdbStorage + '//' + 'Groups.db')
 // Monitored database loader
 const mdbLoader = (folder,isMeta=false) =>{
 	if(isMeta){
@@ -205,14 +205,17 @@ ipcMain.handle('mnt-get',async(event,dataset)=>{
 // Remove monitored members
 ipcMain.handle('mnt-remove',async(event,folderset,dataset,isGroup = false)=>{
 	const promiseChain = []
+	/*
 	const cmd  = `delete from Members where name = ?`
 	const cmda = `select parent from Monitor where name = ?`
-	const cmdb = `update Monitor set parent = ? where name = ?`
+	const cmdb = `update Monitor set parent = ? where name = ?`*/
 	/*
 	const cmdga= `select id from Members where name = ?`
 	const cmdgb= `select child from Members where id = ?` 
 	const cmdgc= `update Members set child = ? where id = ?`
 	const cmdgd= `select parent from Members where id = ?`*/
+	const cmda = `select name from Members where id = ?`
+	console.log(isGroup)
 	if(isGroup){
 		const mdb = mdbLoader('Groups')
 		for(let i=0;i<dataset.length;i++){
@@ -238,6 +241,17 @@ ipcMain.handle('mnt-remove',async(event,folderset,dataset,isGroup = false)=>{
 			})
 		}
 	}else{
+		for(var i=0;i<dataset.length;i++){
+			promiseChain[i] = new Promise((resolve)=>{
+				const folder = folderset[i]
+				const data = dataset[i]
+				gdb.all(cmda,folder,(err,res)=>{
+					const dbName = unpack(res)
+					console.log(dbName)
+				})
+			})
+		}
+		/*
 		for(let i=0;i<dataset.length;i++){	
 			promiseChain[i] = new Promise((resolve)=>{
 				const mdb = mdbLoader(folderset[i])
@@ -263,7 +277,7 @@ ipcMain.handle('mnt-remove',async(event,folderset,dataset,isGroup = false)=>{
 					mdb.close()
 				})
 			})
-		}		
+		}*/		
 	}
 
 	const output = Promise.all(promiseChain)

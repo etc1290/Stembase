@@ -111,11 +111,6 @@ const mntsort = (arr)=>{
 		const el = arr['Raw'][i]
 		const p = arr['Parent'][i]
 		let pid = mntclass(p)[0]
-		/*
-		if(pid == 'Shortcut'){
-			pid = (await window.mnt.query(['id','Members','name','Shortcut']))[0]+''
-			//console.log(pid)
-		}*/
 		const isData = el.classList.contains('mnt-data')
 		if(isData){
 			dataParent[d] = pid
@@ -634,19 +629,25 @@ const mntmenufunc = async()=>{
 		// Remove(Remove from group):	Remove member from this monitored group
 	document.getElementById('mnt-removemenu-remove').addEventListener('mousedown',async()=>{		
 		const selected = uxSelect('mnt')
-		const [groupArr,dataArr,groupParent,dataParent] = mntsort(selected)
+		const [groupArr,dataRawArr,groupParent,dataParent] = mntsort(selected)
 		let isRemoveGroup = false
 		let isRemove = false
-		if(dataArr.length){
-			
+		const dataArr = []
+		for(var i =0;i<dataRawArr.length;i++){
+			dataArr[i] = dataRawArr[i].innerHTML
 		}
-		/*
+		if(dataArr.length){
+			console.log(dataArr)
+			console.log(dataParent)
+			isRemove = await window.mnt.remove(dataParent,dataArr)
+		}
 		if(groupArr.length){
-			const tempArr = [...groupArr].fill(dropid)
-			isRemoveGroup = await window.mnt.remove()
-		}else{
-			
-		}*/
+			console.log(groupArr)
+			console.log(groupParent)
+			isRemoveGroup = await window.mnt.remove(groupParent,groupArr,true)
+		}
+		console.log(isRemove)
+		console.log(isRemoveGroup)
 		/*
 		const isRemove = await window.mnt.remove(selected['Folder'],selected['Data'])
 		if(isRemove){

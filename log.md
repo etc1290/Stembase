@@ -19,6 +19,10 @@
 	16. Tag System remake
 	17. File System remake
 	18. After dropping auto direct to the new-appended monitored data
+	19. Remove from this group should be hidden from Groups Movemenu
+	20. Add Groups dbLoader as global
+		-- finished
+	21. Modify all MonitorSystem function to use gdb feature
 
 ---
 	## 2023.06.28		version 0.7.7.2
@@ -29,6 +33,8 @@
 	2. Rewrite mntsort to return monitored groups and monitored data's parent info
 		-- finished
 	3. Rewrite mntshortcut to dynamic add Shortcut mnt-user-group-id instead of given it a fixed id
+		-- finished
+	4. Add a gdb to support massively used Groups mdbLoader
 		-- finished
 ---
 	## 2023.06.27		version 0.7.7.1
