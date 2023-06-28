@@ -208,14 +208,17 @@ ipcMain.handle('mnt-remove',async(event,folderset,dataset,isGroup = false)=>{
 	const cmd  = `delete from Members where name = ?`
 	const cmda = `select parent from Monitor where name = ?`
 	const cmdb = `update Monitor set parent = ? where name = ?`
+	/*
 	const cmdga= `select id from Members where name = ?`
 	const cmdgb= `select child from Members where id = ?` 
 	const cmdgc= `update Members set child = ? where id = ?`
-	const cmdgd= `select parent from Members where id = ?`
+	const cmdgd= `select parent from Members where id = ?`*/
 	if(isGroup){
 		const mdb = mdbLoader('Groups')
 		for(let i=0;i<dataset.length;i++){
 			promiseChain[i] = new Promise((resolve)=>{
+				console.log(11)
+				resolve(true)
 				/*
 				mdb.all(cmdga,folderset[i],(err,res)=>{
 					const parentid = unpack(res)

@@ -101,21 +101,25 @@ const mntclass = (el) =>{
 }
 // Side:	Data and groups selector
 const mntsort = (arr)=>{
-	console.log(arr)
 	const groupArr = []
 	const dataArr = []
+	const groupParent = []
+	const dataParent = []
 	let g = 0
 	let d = 0
 	for(var i=0;i<arr['Raw'].length;i++){
 		const el = arr['Raw'][i]
+		const p = arr['Parent'][i]
 		const isData = el.classList.contains('mnt-data')
 		if(isData){
+			dataParent[d] = p
 			dataArr[d++] = el
 		}else{
+			groupParent[g] = p
 			groupArr[g++]= arr['Folderid'][i]
 		}
 	}
-	return [groupArr,dataArr]
+	return [groupArr,dataArr,groupParent,dataParent]
 }
 
 // Side:	Target class checker
@@ -624,10 +628,25 @@ const mntmenufunc = async()=>{
 		// Remove(Remove from group):	Remove member from this monitored group
 	document.getElementById('mnt-removemenu-remove').addEventListener('mousedown',async()=>{		
 		const selected = uxSelect('mnt')
+		const [groupArr,dataArr,groupParent,dataParent] = mntsort(selected)
+		console.log(groupArr)
+		console.log(dataArr)
+		console.log(groupParent)
+		console.log(dataParent)
+		let isRemoveGroup = false
+		let isRemove = false
+		/*
+		if(groupArr.length){
+			const tempArr = [...groupArr].fill(dropid)
+			isRemoveGroup = await window.mnt.remove()
+		}else{
+			
+		}*/
+		/*
 		const isRemove = await window.mnt.remove(selected['Folder'],selected['Data'])
 		if(isRemove){
 			mntgroupwrite(selected['Node'])
-		}
+		}*/
 	})
 		// Remove(Remove grouping):		Remove member from all monitored groups
 	document.getElementById('mnt-removemenu-ungroup').addEventListener('mousedown',async()=>{

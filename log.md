@@ -10,8 +10,17 @@
 	8. 	Rewrite or remove uxselect function in index-tag
 	9. 	If data is already exist in monitored group remove that from movemenu
 	10.	Display no valid groups when no viable bgroups can be added
-	
-	
+	11.	Remake mnt-remove function by id-based
+	12. Monitored groups in Shortcut's highlight effect is missing
+
+---
+	## 2023.06.28		version 0.7.7.2
+	-- Rewrite function
+	# Changed
+	1. Rewrite uxSelect to store parent monitored groups data
+		-- finished
+	2. Rewrite mntsort to return monitored groups and monitored data's parent info
+		-- finished
 ---
 	## 2023.06.27		version 0.7.7.1
 	-- Clear wasted codes

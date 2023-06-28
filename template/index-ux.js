@@ -26,28 +26,34 @@ const uxSelect = (funcSection)=>{
 		const selNode   = []
 		const selGroup  = []
 		const selGroupCls=[]	 
+		const selParent	= []
 		for(let i=0;i<input.length;i++){
 			const folder = input[i].parentNode.closest('.mnt-folder')
-			//console.log(folder)
-			//console.log(input[i])
+			const isGroup = input[i].classList.contains('mnt-folder-header')
 			const group  = mntclass(folder)
 			selFolder[i] = folder.children[0].innerHTML	
 			selHeader[i] = input[i].innerHTML
 			selNode[i]	 = document.getElementById(folder.id)
 			selGroup[i]	 = group[0]
 			selGroupCls[i]=group[1]
+			if(isGroup){
+				selParent[i] = folder.parentNode.closest('.mnt-folder')
+			}else{
+				selParent[i] = folder
+			}
+			
 		}
 		const selArr = {
 			'Folder':selFolder,'Data':selHeader,'Node':selNode,
 			'Folderid':selGroup,'Folderclass':selGroupCls,
-			'Raw':input
+			'Raw':input,'Parent':selParent
 		}
 		return selArr
 	}
 	const output = selMode[funcSection]()
 	return output
 }
-
+// Select everything identical to the target
 const uxSelectAll = (funcSection)=>{
 	const selCode = '.' + funcSection + '-selected'
 	const target = document.querySelectorAll(selCode)
