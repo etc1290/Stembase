@@ -21,6 +21,7 @@
 	17. File System remake
 	18. After dropping auto direct to the new-appended monitored data
 	19. Remove from this group should be hidden from Groups Movemenu
+		-- finished
 	20. Add Groups dbLoader as global
 		-- finished
 	21. Modify all MonitorSystem function to use gdb feature

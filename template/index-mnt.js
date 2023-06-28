@@ -636,18 +636,33 @@ const mntmenufunc = async()=>{
 		for(var i =0;i<dataRawArr.length;i++){
 			dataArr[i] = dataRawArr[i].innerHTML
 		}
+		
+		
 		if(dataArr.length){
 			console.log(dataArr)
 			console.log(dataParent)
 			isRemove = await window.mnt.remove(dataParent,dataArr)
+		}else{
+			isRemove = true
 		}
 		if(groupArr.length){
 			console.log(groupArr)
 			console.log(groupParent)
 			isRemoveGroup = await window.mnt.remove(groupParent,groupArr,true)
+		}else{
+			isRemoveGroup = true
 		}
 		console.log(isRemove)
 		console.log(isRemoveGroup)
+		if(isRemove && isRemoveGroup){
+			
+		}
+		const rawArr = groupParent.concat(dataParent)
+		const updateArr = []
+		for(var i=0;i<rawArr.length;i++){
+			updateArr[i] = document.querySelector('.mnt-usergroup-' + rawArr[i])
+		}
+		
 		/*
 		const isRemove = await window.mnt.remove(selected['Folder'],selected['Data'])
 		if(isRemove){
