@@ -12,6 +12,13 @@
 	10.	Display no valid groups when no viable bgroups can be added
 	11.	Remake mnt-remove function by id-based
 	12. Monitored groups in Shortcut's highlight effect is missing
+	13. Give main group Shortcut dynamic id rather than call mnt-query
+		-- finished
+	14. Auto detect if Shortcut is configured in the Groups db to prevent corrupted 
+	15. Adjust all Shortcut-id related function to fit the new mechanism
+	16. Tag System remake
+	17. File System remake
+	18. After dropping auto direct to the new-appended monitored data
 
 ---
 	## 2023.06.28		version 0.7.7.2
@@ -20,6 +27,8 @@
 	1. Rewrite uxSelect to store parent monitored groups data
 		-- finished
 	2. Rewrite mntsort to return monitored groups and monitored data's parent info
+		-- finished
+	3. Rewrite mntshortcut to dynamic add Shortcut mnt-user-group-id instead of given it a fixed id
 		-- finished
 ---
 	## 2023.06.27		version 0.7.7.1

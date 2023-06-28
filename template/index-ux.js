@@ -38,10 +38,10 @@ const uxSelect = (funcSection)=>{
 			selGroupCls[i]=group[1]
 			if(isGroup){
 				selParent[i] = folder.parentNode.closest('.mnt-folder')
+				
 			}else{
 				selParent[i] = folder
 			}
-			
 		}
 		const selArr = {
 			'Folder':selFolder,'Data':selHeader,'Node':selNode,

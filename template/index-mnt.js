@@ -110,12 +110,18 @@ const mntsort = (arr)=>{
 	for(var i=0;i<arr['Raw'].length;i++){
 		const el = arr['Raw'][i]
 		const p = arr['Parent'][i]
+		let pid = mntclass(p)[0]
+		/*
+		if(pid == 'Shortcut'){
+			pid = (await window.mnt.query(['id','Members','name','Shortcut']))[0]+''
+			//console.log(pid)
+		}*/
 		const isData = el.classList.contains('mnt-data')
 		if(isData){
-			dataParent[d] = p
+			dataParent[d] = pid
 			dataArr[d++] = el
 		}else{
-			groupParent[g] = p
+			groupParent[g] = pid
 			groupArr[g++]= arr['Folderid'][i]
 		}
 	}
@@ -629,12 +635,11 @@ const mntmenufunc = async()=>{
 	document.getElementById('mnt-removemenu-remove').addEventListener('mousedown',async()=>{		
 		const selected = uxSelect('mnt')
 		const [groupArr,dataArr,groupParent,dataParent] = mntsort(selected)
-		console.log(groupArr)
-		console.log(dataArr)
-		console.log(groupParent)
-		console.log(dataParent)
 		let isRemoveGroup = false
 		let isRemove = false
+		if(dataArr.length){
+			
+		}
 		/*
 		if(groupArr.length){
 			const tempArr = [...groupArr].fill(dropid)
@@ -847,10 +852,13 @@ const mntmain = async()=>{
 }
 
 // Side:		Load Shortcut data
-const mntshortcut = () =>{
+const mntshortcut = async() =>{
 	const mntdata = []
-	const mntshortcut = document.getElementById('mnt-shortcut')
-	mntgroupwrite(mntshortcut,false)
+	const shortcut = document.getElementById('mnt-shortcut')
+	const id = (await window.mnt.query(['id','Members','name','Shortcut']))[0]
+	const uniqClass = 'mnt-usergroup-' + id
+	shortcut.classList.add(uniqClass)
+	mntgroupwrite(shortcut,false)
 	return true
 }
 
