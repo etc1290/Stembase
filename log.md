@@ -23,7 +23,7 @@
 	22. Rewrit mnt-removemenu-remove function
 		-- finished
 	23. mnt-group function should be removed
-		-- processing
+		-- finished
 
 ---
 	## 2023.06.29		version 0.7.7.3
@@ -36,6 +36,8 @@
 	2. Rewrite mnt-removemenu-remove function to id-based function
 		-- finished
 	3. Apply gdb to all Groups loader
+		-- finished
+	4. Remove mnt-group function
 		-- finished
 ---
 	## 2023.06.28		version 0.7.7.2
