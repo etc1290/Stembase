@@ -636,34 +636,24 @@ const mntmenufunc = async()=>{
 		for(var i =0;i<dataRawArr.length;i++){
 			dataArr[i] = dataRawArr[i].innerHTML
 		}
-		
-		
 		if(dataArr.length){
-			isRemove = await window.mnt.remove(dataParent,dataArr)
+			isRemove = (await window.mnt.remove(dataParent,dataArr))[0]
 		}else{
 			isRemove = true
 		}
 		if(groupArr.length){
-			isRemoveGroup = await window.mnt.remove(groupParent,groupArr,true)
+			isRemoveGroup = (await window.mnt.remove(groupParent,groupArr,true))[0]
 		}else{
 			isRemoveGroup = true
 		}
-		console.log(isRemove)
-		console.log(isRemoveGroup)
 		if(isRemove && isRemoveGroup){
-			
+			const rawArr = groupParent.concat(dataParent)
+			const updateArr = []
+			for(var i=0;i<rawArr.length;i++){
+				updateArr[i] = document.querySelector('.mnt-usergroup-' + rawArr[i])
+			}
+			mntgroupwrite(updateArr)
 		}
-		const rawArr = groupParent.concat(dataParent)
-		const updateArr = []
-		for(var i=0;i<rawArr.length;i++){
-			updateArr[i] = document.querySelector('.mnt-usergroup-' + rawArr[i])
-		}
-		
-		/*
-		const isRemove = await window.mnt.remove(selected['Folder'],selected['Data'])
-		if(isRemove){
-			mntgroupwrite(selected['Node'])
-		}*/
 	})
 		// Remove(Remove grouping):		Remove member from all monitored groups
 	document.getElementById('mnt-removemenu-ungroup').addEventListener('mousedown',async()=>{

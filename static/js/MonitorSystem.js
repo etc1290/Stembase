@@ -205,12 +205,6 @@ ipcMain.handle('mnt-get',async(event,dataset)=>{
 // Remove monitored members
 ipcMain.handle('mnt-remove',async(event,folderset,dataset,isGroup = false)=>{
 	const promiseChain = []
-
-	/*
-	const cmdga= `select id from Members where name = ?`
-	const cmdgb= `select child from Members where id = ?` 
-	const cmdgc= `update Members set child = ? where id = ?`
-	const cmdgd= `select parent from Members where id = ?`*/
 	const cmdga =`select parent from Members where id = ?`
 	const cmdgb =`update Members set parent = ? where id = ?`
 	const cmdgc =`select child from Members where id = ?`
@@ -221,7 +215,7 @@ ipcMain.handle('mnt-remove',async(event,folderset,dataset,isGroup = false)=>{
 	const cmdc = `select parent from Monitor where name = ?`
 	const cmdd = `update Monitor set parent = ? where name = ?`
 	if(isGroup){
-		const mdb = mdbLoader('Groups')
+		// Groups
 		for(let i=0;i<dataset.length;i++){
 			const folder = folderset[i]
 			const data = dataset[i]
@@ -238,7 +232,6 @@ ipcMain.handle('mnt-remove',async(event,folderset,dataset,isGroup = false)=>{
 								if(pos + 1){
 									childArr.splice(pos,1)
 									gdb.all(cmdgd,[childArr+'',folder],(err)=>{
-										console.log(err)
 										resolve(true)
 									})
 								}
@@ -246,25 +239,10 @@ ipcMain.handle('mnt-remove',async(event,folderset,dataset,isGroup = false)=>{
 						})
 					}
 				})
-				/*
-				mdb.all(cmdga,folderset[i],(err,res)=>{
-					const parentid = unpack(res)
-					mdb.all(cmdga,dataset[i],(err,res)=>{
-						const childid = unpack(res)
-						mdb.all(cmdgb,parentid,(err,res)=>{
-							const childArr = unpack(res,true)
-							const childPos = childArr.indexOf(childid)
-							childArr.splice(childPos,1)
-							mdb.all(cmdgc,[childArr,parentid],(err,res)=>{
-								mdb.all(cmdgd,childid)
-							})
-						})
-					})
-					
-				})*/
 			})
 		}
 	}else{
+		// Data
 		for(var i=0;i<dataset.length;i++){
 			promiseChain[i] = new Promise((resolve)=>{
 				const folder = folderset[i]
@@ -511,7 +489,6 @@ ipcMain.handle('mnt-update',(event,folderset,dataset,isGroup=false)=>{
 						resolve(false)
 					}else{
 						parentArr.push(folder)
-						//console.log(parentArr)
 						mdb.all(cmdgb,[parentArr,data],()=>{
 							mdb.all(cmdgc,folder,(err,res)=>{
 								const childArr = unpack(res,true)

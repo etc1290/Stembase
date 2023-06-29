@@ -20,7 +20,7 @@
 	18. After dropping auto direct to the new-appended monitored data
 	21. Modify all MonitorSystem function to use gdb feature
 	22. Rewrit mnt-removemenu-remove function
-		-- processing
+		-- finished
 
 ---
 	## 2023.06.29		version 0.7.7.3
@@ -30,6 +30,8 @@
 	1. Rewrite mnt-remove function
 		1-1 Groups parts
 			-- finished
+	2. Rewrite mnt-removemenu-remove function to id-based function
+		-- finished
 ---
 	## 2023.06.28		version 0.7.7.2
 	-- Rewrite function
