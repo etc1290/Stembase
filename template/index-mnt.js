@@ -639,15 +639,11 @@ const mntmenufunc = async()=>{
 		
 		
 		if(dataArr.length){
-			console.log(dataArr)
-			console.log(dataParent)
 			isRemove = await window.mnt.remove(dataParent,dataArr)
 		}else{
 			isRemove = true
 		}
 		if(groupArr.length){
-			console.log(groupArr)
-			console.log(groupParent)
 			isRemoveGroup = await window.mnt.remove(groupParent,groupArr,true)
 		}else{
 			isRemoveGroup = true

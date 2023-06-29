@@ -13,21 +13,23 @@
 	11.	Remake mnt-remove function by id-based
 		-- processing
 	12. Monitored groups in Shortcut's highlight effect is missing
-	13. Give main group Shortcut dynamic id rather than call mnt-query
-		-- finished
 	14. Auto detect if Shortcut is configured in the Groups db to prevent corrupted 
 	15. Adjust all Shortcut-id related function to fit the new mechanism
 	16. Tag System remake
 	17. File System remake
 	18. After dropping auto direct to the new-appended monitored data
-	19. Remove from this group should be hidden from Groups Movemenu
-		-- finished
-	20. Add Groups dbLoader as global
-		-- finished
 	21. Modify all MonitorSystem function to use gdb feature
 	22. Rewrit mnt-removemenu-remove function
 		-- processing
 
+---
+	## 2023.06.29		version 0.7.7.3
+	-- Remove watsted codes
+	-- Rewrite function
+	# Changed
+	1. Rewrite mnt-remove function
+		1-1 Groups parts
+			-- finished
 ---
 	## 2023.06.28		version 0.7.7.2
 	-- Rewrite function

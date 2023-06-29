@@ -205,15 +205,17 @@ ipcMain.handle('mnt-get',async(event,dataset)=>{
 // Remove monitored members
 ipcMain.handle('mnt-remove',async(event,folderset,dataset,isGroup = false)=>{
 	const promiseChain = []
-	/*
-	const cmd  = `delete from Members where name = ?`
-	const cmda = `select parent from Monitor where name = ?`
-	const cmdb = `update Monitor set parent = ? where name = ?`*/
+
 	/*
 	const cmdga= `select id from Members where name = ?`
 	const cmdgb= `select child from Members where id = ?` 
 	const cmdgc= `update Members set child = ? where id = ?`
 	const cmdgd= `select parent from Members where id = ?`*/
+	const cmdga =`select parent from Members where id = ?`
+	const cmdgb =`update Members set parent = ? where id = ?`
+	const cmdgc =`select child from Members where id = ?`
+	const cmdgd =`update Members set child = ? where id = ?`
+	
 	const cmda = `select name from Members where id = ?`
 	const cmdb = `delete from Members where name = ?`
 	const cmdc = `select parent from Monitor where name = ?`
@@ -221,9 +223,29 @@ ipcMain.handle('mnt-remove',async(event,folderset,dataset,isGroup = false)=>{
 	if(isGroup){
 		const mdb = mdbLoader('Groups')
 		for(let i=0;i<dataset.length;i++){
+			const folder = folderset[i]
+			const data = dataset[i]
 			promiseChain[i] = new Promise((resolve)=>{
-				console.log(11)
-				resolve(true)
+				gdb.all(cmdga,data,(err,res)=>{				
+					const parentArr = unpack(res,true)
+					let pos = parentArr.indexOf(folder)
+					if(pos + 1){
+						parentArr.splice(pos,1)
+						gdb.all(cmdgb,[parentArr+'',data],(err,res)=>{
+							gdb.all(cmdgc,folder,(err,res)=>{
+								const childArr = unpack(res,true)
+								pos = childArr.indexOf(data)
+								if(pos + 1){
+									childArr.splice(pos,1)
+									gdb.all(cmdgd,[childArr+'',folder],(err)=>{
+										console.log(err)
+										resolve(true)
+									})
+								}
+							})
+						})
+					}
+				})
 				/*
 				mdb.all(cmdga,folderset[i],(err,res)=>{
 					const parentid = unpack(res)
@@ -265,33 +287,6 @@ ipcMain.handle('mnt-remove',async(event,folderset,dataset,isGroup = false)=>{
 				})
 			})
 		}
-		/*
-		for(let i=0;i<dataset.length;i++){	
-			promiseChain[i] = new Promise((resolve)=>{
-				const mdb = mdbLoader(folderset[i])
-				const data = dataset[i]
-				const folder=folderset[i]
-				mdb.run(cmd,data,(err)=>{
-					if(err){
-						resolve(false)
-					}else{
-						db.all(cmda,data,(err,res)=>{
-							const groupArr = unpack(res,true)
-							const index = groupArr.indexOf(folder)
-							if(index+1){
-								groupArr.splice(index,1)
-								db.all(cmdb,[groupArr + '',data],()=>{
-									resolve(true)
-								})
-							}else{
-								resolve(true)
-							}							
-						})
-					}
-					mdb.close()
-				})
-			})
-		}*/		
 	}
 
 	const output = Promise.all(promiseChain)
