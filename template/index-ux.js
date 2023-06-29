@@ -16,8 +16,11 @@ const uxScroll = (e)=>{
 }
 
 // Multiple Selector
-const uxSelect = (funcSection)=>{
-	const selCode = '.' + funcSection + '-selected'
+const uxSelect = (funcSection,exCode=false)=>{
+	let selCode = '.' + funcSection + '-selected'
+	if(exCode){
+		selCode = selCode + '-' + exCode
+	}
 	const input = document.querySelectorAll(selCode)
 	const selMode = []
 	selMode['mnt'] = ()=>{		

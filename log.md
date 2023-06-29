@@ -3,6 +3,7 @@
 
 @@@ Bug and future planning
 	2.	Custom drag and drop function
+		-- processing
 	4. 	Collapse groups only when leave parent groups or second members
 	5. 	Show error when drag into the same source groups
 	6. 	Prevent right-click the contextmenu firing
@@ -11,7 +12,7 @@
 	9. 	If data is already exist in monitored group remove that from movemenu
 	10.	Display no valid groups when no viable bgroups can be added
 	11.	Remake mnt-remove function by id-based
-		-- processing
+		-- finished
 	12. Monitored groups in Shortcut's highlight effect is missing
 	14. Auto detect if Shortcut is configured in the Groups db to prevent corrupted 
 	15. Adjust all Shortcut-id related function to fit the new mechanism
@@ -38,6 +39,8 @@
 	3. Apply gdb to all Groups loader
 		-- finished
 	4. Remove mnt-group function
+		-- finished
+	5. Expand uxSelect function
 		-- finished
 ---
 	## 2023.06.28		version 0.7.7.2
