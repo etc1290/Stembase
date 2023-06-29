@@ -48,7 +48,7 @@ contextBridge.exposeInMainWorld('mnt', {
 	delete:		(i)			=> ipcRenderer.invoke('mnt-delete',i),
 	deleteM:	(i,j)		=> ipcRenderer.invoke('mnt-delete-member',i,j),
 	create:		()			=> ipcRenderer.invoke('mnt-create'),
-	group:		(i,j)		=> ipcRenderer.invoke('mnt-group',i,j),
+	//group:		(i,j)		=> ipcRenderer.invoke('mnt-group',i,j),
 	rename:		(i,j)		=> ipcRenderer.invoke('mnt-rename',i,j),
 	update:		(i,j,b)		=> ipcRenderer.invoke('mnt-update',i,j,b),
 	error:		(i)			=> ipcRenderer.invoke('mnt-error',i),

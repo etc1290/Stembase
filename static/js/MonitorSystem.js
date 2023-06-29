@@ -76,12 +76,12 @@ ipcMain.handle('mnt-main', (event) =>{
 // Load monitored group data
 ipcMain.handle('mnt-load',async(event,name)=>{
 	const promiseArr = []
-	const mdb = mdbLoader('Groups')
+	//const mdb = mdbLoader('Groups')
 	const cmda = `select child from Members where name = ?`
 
 	const promiseChain = ()=>{
 		const outcome = new Promise((resolve)=>{
-			mdb.all(cmda,name,(err,res)=>{
+			gdb.all(cmda,name,(err,res)=>{
 				const raw = unpack(res)
 				if(raw[0]){
 					const rawArr = raw[0].split(',')
@@ -97,7 +97,7 @@ ipcMain.handle('mnt-load',async(event,name)=>{
 	const cmdb = `select name from Members where id = ?`
 	for(let i=0;i<idArr.length;i++){
 		promiseArr[i] = new Promise((resolve)=>{
-			mdb.all(cmdb,Number(idArr[i]),(err,res)=>{
+			gdb.all(cmdb,Number(idArr[i]),(err,res)=>{
 				if(res){
 					resolve([idArr[i],unpack(res)[0]])
 				}else{
@@ -127,11 +127,11 @@ ipcMain.handle('mnt-load',async(event,name)=>{
 	const idChain = []
 	const isGroups = name =='Groups'
 	if(isGroups){
-		const mdbg = mdbLoader('Groups')
+		//const mdbg = mdbLoader('Groups')
 		const cmdd = `select id from Members where name = ?`
 		for(let i=0;i<dataset.length;i++){
 			idChain[i] = new Promise((resolve)=>{
-				mdbg.all(cmdd,dataset[i],(err,res)=>{
+				gdb.all(cmdd,dataset[i],(err,res)=>{
 					resolve(unpack(res))
 				})
 		})
@@ -272,7 +272,7 @@ ipcMain.handle('mnt-remove',async(event,folderset,dataset,isGroup = false)=>{
 })
 // Delete monitored groups
 ipcMain.handle('mnt-delete',(event,dataset)=>{
-	const mdb = mdbLoader('Groups')
+	//const mdb = mdbLoader('Groups')
 	const cmd  = `select id from Members where name = ?`
 	const cmda = `delete from Members where id =?`
 	const cmdb = `select parent from Members where id =?`
@@ -287,12 +287,12 @@ ipcMain.handle('mnt-delete',(event,dataset)=>{
 		for(let j=0;j<parent.length;j++){
 			chainArr[j] = new Promise((resolve)=>{
 				const pid = parent[j]
-				mdb.all(cmdc,pid,(err,res)=>{
+				gdb.all(cmdc,pid,(err,res)=>{
 					const child = unpack(res,true)
 					const position = child.indexOf(id+'')
 					const dump = child.splice(position,1)
-					mdb.all(cmdd,[child,pid],(err,res)=>{
-						mdb.all(cmde,pid,(err,res)=>{
+					gdb.all(cmdd,[child,pid],(err,res)=>{
+						gdb.all(cmde,pid,(err,res)=>{
 							idlist.push(unpack(res)[0])
 							resolve(true)
 						})
@@ -306,13 +306,13 @@ ipcMain.handle('mnt-delete',(event,dataset)=>{
 	for(let i=0;i<dataset.length;i++){
 		const name = dataset[i]
 		promiseArr[i] = new Promise((resolve)=>{
-			mdb.all(cmd,dataset[i],async(err,res)=>{
+			gdb.all(cmd,dataset[i],async(err,res)=>{
 				const id = unpack(res)
-				mdb.all(cmdb,id,async(err,res)=>{
+				gdb.all(cmdb,id,async(err,res)=>{
 					const parent = unpack(res,true)		
 					const isFinished = await promiseChain(parent,id)
 					if(isFinished){
-						mdb.all(cmda,id,()=>{
+						gdb.all(cmda,id,()=>{
 							fs.unlink(mdbStorage + '\\' + name + '.db',(err)=>{
 								resolve(idlist)
 							})
@@ -392,9 +392,9 @@ ipcMain.handle('mnt-create',(event)=>{
 			unique(name))`
 		newdb.run(cmd,()=>{
 			newdb.close()
-			const mdb = mdbLoader('Groups')
+			//const mdb = mdbLoader('Groups')
 			const cmda = `insert into Members(name) values(?)`
-			mdb.all(cmda,newname,()=>{
+			gdb.all(cmda,newname,()=>{
 				resolve(newname)
 			})			
 		})		
@@ -402,12 +402,13 @@ ipcMain.handle('mnt-create',(event)=>{
 	return output
 })
 // Load monitored groups
+/*
 ipcMain.handle('mnt-group',(event,parent,child)=>{
 	const isGroups = parent == 'Groups'
 	const output = new Promise((resolve)=>{
-		const mdb = mdbLoader('Groups')
+		//const mdb = mdbLoader('Groups')
 		if(isGroups){
-			const mdb = mdbLoader('Groups')
+			//const mdb = mdbLoader('Groups')
 			const cmda = `create table "Members" (
 				"id"	integer not null unique,
 				"name"	text not null unique,
@@ -416,14 +417,14 @@ ipcMain.handle('mnt-group',(event,parent,child)=>{
 				primary key("id" autoincrement)
 				)`
 			const cmdb = `insert into Members(name) values(?)`
-			mdb.run(cmda,()=>{
-				mdb.all(cmdb,[child],()=>{
+			gdb.run(cmda,()=>{
+				gdb.all(cmdb,[child],()=>{
 					resolve(true)
 				})
 			})
 		}else{
 			const cmda = `select child from Members where name = ?`
-			mdb.all(cmda,[parent],(err,data)=>{
+			gdb.all(cmda,[parent],(err,data)=>{
 				if(err){
 					resolve(false)
 				}else{
@@ -442,7 +443,7 @@ ipcMain.handle('mnt-group',(event,parent,child)=>{
 		}
 	})
 	return output
-})
+})*/
 
 // Rename monitored group
 ipcMain.handle('mnt-rename', (event,oldname,newname)=>{
@@ -454,10 +455,10 @@ ipcMain.handle('mnt-rename', (event,oldname,newname)=>{
 			const id = idPicker(grouplist)
 			newname = newname + '#' + id
 		}
-		const mdb = mdbLoader('Groups')
+		//const mdb = mdbLoader('Groups')
 		const cmd = `update Members set name = ? where name =?`
-		mdb.all(cmd,[newname,oldname],(err)=>{
-			mdb.close()
+		gdb.all(cmd,[newname,oldname],(err)=>{
+			//mdb.close()
 			resolve(true)
 		})
 		fs.rename(mdbStorage + '//' + oldname + '.db',mdbStorage + '//' + newname + '.db',(err)=>{
@@ -481,19 +482,19 @@ ipcMain.handle('mnt-update',(event,folderset,dataset,isGroup=false)=>{
 		const data = dataset[i]
 		promiseArr[i] = new Promise((resolve)=>{
 			if(isGroup){
-				const mdb = mdbLoader('Groups')		
-				mdb.all(cmdga,data,(err,res)=>{
+				//const mdb = mdbLoader('Groups')		
+				gdb.all(cmdga,data,(err,res)=>{
 					const parentArr = unpack(res,true)
 					const isExist = parentArr.indexOf(folder)
 					if(isExist+1){
 						resolve(false)
 					}else{
 						parentArr.push(folder)
-						mdb.all(cmdgb,[parentArr,data],()=>{
-							mdb.all(cmdgc,folder,(err,res)=>{
+						gdb.all(cmdgb,[parentArr,data],()=>{
+							gdb.all(cmdgc,folder,(err,res)=>{
 								const childArr = unpack(res,true)
 								childArr.push(data)
-								mdb.all(cmdgd,[childArr,folder],()=>{
+								gdb.all(cmdgd,[childArr,folder],()=>{
 									resolve(true)
 								})
 							})
@@ -535,7 +536,7 @@ ipcMain.handle('mnt-error',(event,err)=>{
 ipcMain.handle('mnt-build',async(event)=>{
 	const promiseArr = []
 	promiseArr[0] = new Promise((resolve)=>{
-		const mdb = mdbLoader('Groups')
+		//const mdb = mdbLoader('Groups')
 		const cmd = `create table "Members" (
 			"id"	integer not null unique,
 			"name"	text not null unique,
@@ -543,7 +544,7 @@ ipcMain.handle('mnt-build',async(event)=>{
 			"child"	text,
 			primary key("id" autoincrement)
 			)`
-		mdb.run(cmd,(err,res)=>{
+		gdb.run(cmd,(err,res)=>{
 			resolve(true)
 		})
 	})
@@ -566,7 +567,7 @@ ipcMain.handle('mnt-build',async(event)=>{
 // Restore the missing records in Groups 
 ipcMain.handle('mnt-groupscan',(event)=>{
 	const promiseArr = []
-	const mdb = mdbLoader('Groups')
+	//const mdb = mdbLoader('Groups')
 	const cmd = `select name from Members`
 	const cmda = `insert or ignore into Members(name) values(?)`
 	const filelist = fs.readdirSync(mdbStorage)
@@ -575,9 +576,9 @@ ipcMain.handle('mnt-groupscan',(event)=>{
 	grouplist.splice(grouplist.indexOf('Shortcut'),1)
 	for(let i=0;i<grouplist.length;i++){
 		promiseArr[i] =new Promise((resolve)=>{
-			mdb.all(cmd,[],()=>{	
+			gdb.all(cmd,[],()=>{	
 				name = grouplist[i].slice(0,-3)
-				mdb.all(cmda,name,(err,res)=>{
+				gdb.all(cmda,name,(err,res)=>{
 					resolve(true)
 				})
 			})
