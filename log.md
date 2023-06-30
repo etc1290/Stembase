@@ -33,10 +33,11 @@
 	1. Fix mnt-selected-drag class position
 		-- finished
 	# Changed
-	1. Rewrite dtag and drop function
-		1-1 Groups
-			-- processing
-		1-2 Data
+	1. Rewrite drag and drop function
+		1-1 Update
+			-- finished
+		1-2 Remove
+		1-3 Render
 ---
 	## 2023.06.29		version 0.7.7.3
 	-- Remove watsted codes

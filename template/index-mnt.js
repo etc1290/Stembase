@@ -486,8 +486,8 @@ const mntfunc = (target)=>{
 				
 				const dropFolder = event.target.closest('.mnt-folder')
 				const dropid = mntclass(dropFolder)[0]
+				const dropName = dropFolder.children[0].innerHTML
 				const selected = uxSelect('mnt','drag')
-				console.log(selected)
 				const [groupArr,dataArr,groupParent,dataParent] = mntsort(selected)
 				const has = (cls)=>{
 					return dropFolder.classList.contains(cls)
@@ -518,41 +518,33 @@ const mntfunc = (target)=>{
 				const dupGroupArr = []
 				let d = 0
 				let g = 0
-				console.log(groupArr)
-				console.log(groupParent)
-				//console.log(dataArr)
+				console.log(dataArr)
 				if(groupArr.length){
-					console.log('group')
 					const tempArr = [...groupArr].fill(dropid)
-					//const groupidArr = mntclass(groupArr)[0]
-					const groupidArr = groupArr
-					console.log(tempArr)
-					console.log(groupidArr)
-					const reportArr = await window.mnt.update(tempArr,groupidArr,true)
+					const reportArr = await window.mnt.update(tempArr,groupArr,true)
 					const pos = reportArr.indexOf(false)
 					if(pos + 1){
 						for(let i=pos;i<reportArr.length;i++){
 							const e = reportArr[i]
 							if(e===false){
-								dupArr[d++] = groupidArr[i]
+								dupArr[d++] = groupArr[i]
 								
 							}
 						}
 					}					
 				}
 				if(dataArr.length){
-					console.log('data')
-					const tempArr = [...dataArr].fill(dropid)
-					const datanameArr = mntclass(dataArr)[0]
-					console.log(tempArr)
-					console.log(datanameArr)
-					const reportArr = await window.mnt.update(tempArr,datanameArr)
+					const tempArr = [...dataArr].fill(dropName)
+					for(var i=0;i<dataArr.length;i++){
+						dataArr[i] = dataArr[i].innerHTML
+					}
+					const reportArr = await window.mnt.update(tempArr,dataArr)
 					const pos = reportArr.indexOf(false)
 					if(pos + 1){
 						for(let i=pos;i<reportArr.length;i++){
 							const e = reportArr[i]
 							if(e==false){
-								dupGroupArr[g++] = datanameArr[i]
+								dupGroupArr[g++] = dataArr[i]
 							}
 						}
 					}
