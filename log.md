@@ -10,22 +10,33 @@
 	7. 	Merge mnt-get function into mnt-query
 	8. 	Rewrite or remove uxselect function in index-tag
 	9. 	If data is already exist in monitored group remove that from movemenu
-	10.	Display no valid groups when no viable bgroups can be added
-	11.	Remake mnt-remove function by id-based
-		-- finished
-	12. Monitored groups in Shortcut's highlight effect is missing
+	10.	Display no valid groups when no viable groups can be added
+	12. Non-main groups in Shortcut's highlight effect is missing
 	14. Auto detect if Shortcut is configured in the Groups db to prevent corrupted 
 	15. Adjust all Shortcut-id related function to fit the new mechanism
 	16. Tag System remake
 	17. File System remake
 	18. After dropping auto direct to the new-appended monitored data
-	21. Modify all MonitorSystem function to use gdb feature
-		-- finished
-	22. Rewrit mnt-removemenu-remove function
-		-- finished
-	23. mnt-group function should be removed
-		-- finished
+	24. user customized monitored rules
+	25. Add multi-selection function
+	26. Apply Ctrl, Shift and so on keyboard input function
+	27. Remake the upper toolbar
+	28. Duplicate data writing will show warning message
+	29. Add a small warning area on bottom-left corner
 
+---
+	## 2023.06.30		version 0.7.7.4
+	-- Remove wasted codes
+	-- Rewrite function
+	-- Bug fix
+	# Fixed
+	1. Fix mnt-selected-drag class position
+		-- finished
+	# Changed
+	1. Rewrite dtag and drop function
+		1-1 Groups
+			-- processing
+		1-2 Data
 ---
 	## 2023.06.29		version 0.7.7.3
 	-- Remove watsted codes

@@ -275,7 +275,6 @@ const uxContextMenuCreate = ()=>{
 					const isGroup = event.target.classList.contains('mnt-folder-header')
 					if(isGroup){
 						const parentGroup = group.parentNode.closest('.mnt-folder')
-						console.log(parentGroup)
 						const isUnderGroups = parentGroup.id == 'mnt-group'
 						if(isUnderGroups){
 							hide('mnt-removemenu-remove')

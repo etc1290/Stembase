@@ -418,6 +418,8 @@ ipcMain.handle('mnt-rename', (event,oldname,newname)=>{
 })
 // Update monitored group members
 ipcMain.handle('mnt-update',(event,folderset,dataset,isGroup=false)=>{
+	console.log(folderset)
+	console.log(dataset)
 	const promiseArr = []
 	const cmdga = `select parent from Members where id = ?`
 	const cmdgb = `update Members set parent = ? where id = ?`
@@ -426,7 +428,7 @@ ipcMain.handle('mnt-update',(event,folderset,dataset,isGroup=false)=>{
 	const cmda	= `insert into Members(name) values(?)`
 	const cmdb	= `select parent from Monitor where name = ?`
 	const cmdc	= `update Monitor set parent = ? where name = ?`
-	for(var i=0;i<folderset.length;i++){
+	for(let i=0;i<folderset.length;i++){
 		const folder = folderset[i]
 		const data = dataset[i]
 		promiseArr[i] = new Promise((resolve)=>{

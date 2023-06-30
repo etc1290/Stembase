@@ -74,6 +74,46 @@ const mntdragSetup = function() {
 }
 // Side:	Monitored unique class picker
 const mntclass = (el) =>{
+	const idArr = []
+	const clsArr = []
+	const isElement = el instanceof Element
+	if(isElement){
+		el = [el]
+	}
+	for(var i=0;i<el.length;i++){
+		const arr = el[i].classList
+		const isData = arr.contains('mnt-data')
+		let checkClass = 'mnt-usergroup-'
+		let n = 14
+		if(isData){
+			checkClass = 'mnt-data-'
+			n = 9
+		}
+		let uniqClass = arr[1]
+		const isUniq = uniqClass.substring(0,n) == checkClass
+		if(!isUniq){
+			for(var j=0;j<arr.length;j++){
+				if(j==1){
+					continue
+				}
+				const cls = arr[j]
+				if(cls.substring(0,n) == checkClass){
+					uniqClass = cls
+					break
+				}
+			}
+		}
+		const id = uniqClass.substring(n)
+		idArr[i] = id
+		clsArr[i]= uniqClass
+	}
+	if(idArr.length==1){
+		return [idArr[0],clsArr[0]]
+	}else{
+		return [idArr,clsArr]
+	}
+	
+	/*
 	const arr = el.classList
 	const isData = arr.contains('mnt-data')
 	let checkClass = 'mnt-usergroup-'
@@ -97,7 +137,8 @@ const mntclass = (el) =>{
 		}
 	}
 	const id = uniqClass.substring(n)
-	return [id,uniqClass]	
+	return [id,uniqClass]	*/
+	
 }
 // Side:	Data and groups selector
 const mntsort = (arr)=>{
@@ -118,6 +159,8 @@ const mntsort = (arr)=>{
 		}else{
 			groupParent[g] = pid
 			groupArr[g++]= arr['Folderid'][i]
+			console.log(pid)
+			console.log(arr['Folderid'])
 		}
 	}
 	return [groupArr,dataArr,groupParent,dataParent]
@@ -337,12 +380,6 @@ const mntgroupwrite = async(target,isMainExec=true) =>{
 		}else if(isAll){
 			continue
 		}
-		/*
-		const isAll = target[a].id == 'mnt-main'
-		if(isAll){
-			mntmain()
-			continue
-		}*/
 		const header = target[a].children[0]
 		const updateDiv = target[a].children[1]
 		let [groupset,[idset,dataset]] = await window.mnt.load(header.innerHTML)
@@ -353,7 +390,6 @@ const mntgroupwrite = async(target,isMainExec=true) =>{
 		const mntdata = []
 		const groups = []
 		for(var i=0;i<groupset.length;i++){
-			//const modName = mntreplace(groupset[i][1])
 			const modName = groupset[i][0]
 			const id = `'mnt-` + header.innerHTML + `-group-` + i + `'`
 			const subheader = `<p class='mnt-folder-header'>` + groupset[i][1] + `</p>`
@@ -414,14 +450,21 @@ const mntfunc = (target)=>{
 		
 		el.addEventListener('dragstart',(event)=>{
 			//event.dataTransfer.setData('text/plain',event.target.id)
+			/*
 			const isHeader = event.target.classList.contains('mnt-folder-header')
 			if(isHeader){
 				const folder = event.target.parentNode.classList.contains('mnt-folder')
 				folder.classList.add('mnt-selected-drag')
 			}else{
 				event.target.classList.add('mnt-selected-drag')
+			}*/
+			const e = event.target
+			const isFolder = e.classList.contains('mnt-folder')
+			if(isFolder){
+				e.children[0].classList.add('mnt-selected-drag')
+			}else{
+				e.classList.add('mnt-selected-drag')
 			}
-			
 		})
 		el.addEventListener('dragend',(event)=>{
 			event.target.style.background = ''
@@ -442,15 +485,89 @@ const mntfunc = (target)=>{
 				mntcancel(event)					
 				
 				const dropFolder = event.target.closest('.mnt-folder')
-				const dropHeader = dropFolder.children[0].innerHTML
-				const dropContent= dropFolder.children[1]
-				let dropid = mntclass(dropFolder)[0]
-				if(dropid == 'Shortcut'){
-					dropid = await window.mnt.query(['id','Members','name',dropHeader])
-				}
-				//const dragArr = document.querySelectorAll('.mnt-selected-drag')
+				const dropid = mntclass(dropFolder)[0]
 				const selected = uxSelect('mnt','drag')
 				console.log(selected)
+				const [groupArr,dataArr,groupParent,dataParent] = mntsort(selected)
+				const has = (cls)=>{
+					return dropFolder.classList.contains(cls)
+				}
+				//Rule Setting
+				const isFixed = has('fixed-content')				
+				if(isFixed){
+					dataArr.length = 0
+					dataParent.length = 0
+					groupArr.length = 0
+					groupParent.length = 0
+				}
+				const isFolderOnly = has('folder-only')
+				if(isFolderOnly){
+					dataArr.length = 0
+					dataParent.length = 0
+				}
+				const isDataOnly = has('data-only')
+				if(isDataOnly){
+					groupArr.length = 0
+					groupParent.length = 0
+				}
+				
+				//Main Function
+				let isUpdate = true
+				let isUpdateGroup = true
+				const dupArr = []
+				const dupGroupArr = []
+				let d = 0
+				let g = 0
+				console.log(groupArr)
+				console.log(groupParent)
+				//console.log(dataArr)
+				if(groupArr.length){
+					console.log('group')
+					const tempArr = [...groupArr].fill(dropid)
+					//const groupidArr = mntclass(groupArr)[0]
+					const groupidArr = groupArr
+					console.log(tempArr)
+					console.log(groupidArr)
+					const reportArr = await window.mnt.update(tempArr,groupidArr,true)
+					const pos = reportArr.indexOf(false)
+					if(pos + 1){
+						for(let i=pos;i<reportArr.length;i++){
+							const e = reportArr[i]
+							if(e===false){
+								dupArr[d++] = groupidArr[i]
+								
+							}
+						}
+					}					
+				}
+				if(dataArr.length){
+					console.log('data')
+					const tempArr = [...dataArr].fill(dropid)
+					const datanameArr = mntclass(dataArr)[0]
+					console.log(tempArr)
+					console.log(datanameArr)
+					const reportArr = await window.mnt.update(tempArr,datanameArr)
+					const pos = reportArr.indexOf(false)
+					if(pos + 1){
+						for(let i=pos;i<reportArr.length;i++){
+							const e = reportArr[i]
+							if(e==false){
+								dupGroupArr[g++] = datanameArr[i]
+							}
+						}
+					}
+				}
+				// 
+				if(isUpdate && isUpdateGroup){
+				}
+				let isRemove = true
+				let isRemoveGroup = true
+				
+				//Render and Aftermath
+				const dragArr = document.querySelectorAll('.mnt-selected-drag')
+				for(var i=0;i<dragArr.length;i++){
+					dragArr[i].classList.remove('mnt-selected-drag')
+				}
 			})
 		}
 	}	
@@ -658,13 +775,9 @@ const mntmenuAddition = (cmda='all',cmdb)=>{
 						const queryset = await window.mnt.query(['id','Members','name','Shortcut'])
 						targetid = queryset[0] + ''
 					}
-					const selected = uxSelect('mnt')
-					//const parentArr = [...selected['Data']].fill(targetid)
-					//const groupArr = [...selected['Data']].fill(selected['Folderid'])
-					//const isFinished = await window.mnt.update(parentArr,selected['Dataid'])	
+					const selected = uxSelect('mnt')	
 					const [groupArr,dataArr] = mntsort(selected)
 					if(groupArr[0]){
-						console.log(targetid)
 						const parentArr = [...groupArr].fill(targetid)
 						
 						const isFinished = await window.mnt.update(parentArr,groupArr,true)
