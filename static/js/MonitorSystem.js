@@ -329,7 +329,6 @@ ipcMain.handle('mnt-delete',(event,dataset)=>{
 ipcMain.handle('mnt-delete-member',(event,folderset,dataset)=>{
 	const cmd = `delete from Members where name = ?`
 	const cmda= `delete from Monitor where name = ?`
-	//const cmdb= `delete from Ref where nameref = ?`
 	const cmdb = `select name from Meta`
 	const cmdc= `delete from File where name = ?`
 	const cmdd= `delete from Ref where nameref = ?`

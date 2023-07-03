@@ -35,10 +35,13 @@
 	37. Stemdb Monitor should be rewritten as id-based
 		-- finished
 	38. When drop failed should remove all mnt-selected and mnt-selected-drag too
+		-- finished
+	39. Rewrite mnt-delete related function to adapt id-based function
 	
 ---
 	## 2023.07.03		version 0.7.7.5
 	-- Rewrite function
+	-- Bug fix
 	# Changed
 	1. Rewrite drag and drop function
 		1-1 Update
@@ -48,6 +51,9 @@
 		1-3 Render
 			-- finished
 	2. Rewrite Stemdb and mnt-update as id-based
+		-- finished
+	# Fixed
+	1. Fix the bug that mnt-selected-drag is not removed when drop failed
 		-- finished
 ---
 	## 2023.06.30		version 0.7.7.4

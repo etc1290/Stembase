@@ -449,15 +449,6 @@ const mntfunc = (target)=>{
 		// Drag
 		
 		el.addEventListener('dragstart',(event)=>{
-			//event.dataTransfer.setData('text/plain',event.target.id)
-			/*
-			const isHeader = event.target.classList.contains('mnt-folder-header')
-			if(isHeader){
-				const folder = event.target.parentNode.classList.contains('mnt-folder')
-				folder.classList.add('mnt-selected-drag')
-			}else{
-				event.target.classList.add('mnt-selected-drag')
-			}*/
 			const e = event.target
 			const isFolder = e.classList.contains('mnt-folder')
 			if(isFolder){
@@ -467,7 +458,12 @@ const mntfunc = (target)=>{
 			}
 		})
 		el.addEventListener('dragend',(event)=>{
+			console.log('end')
 			event.target.style.background = ''
+			const dragArr = document.querySelectorAll('.mnt-selected-drag')
+			for(var i=0;i<dragArr.length;i++){
+				dragArr[i].classList.remove('mnt-selected-drag')
+			}
 			mntcancel(event)
 		})
 		// Style
@@ -549,9 +545,10 @@ const mntfunc = (target)=>{
 				
 				//Render and Aftermath
 				const dragArr = document.querySelectorAll('.mnt-selected-drag')
+				/*
 				for(var i=0;i<dragArr.length;i++){
 					dragArr[i].classList.remove('mnt-selected-drag')
-				}
+				}*/
 				for(var i=0;i<dupGroupArr;i++){
 					const e = dupGroupArr[i]
 					const pos = groupArr.indexOf(e)
