@@ -159,8 +159,8 @@ const mntsort = (arr)=>{
 		}else{
 			groupParent[g] = pid
 			groupArr[g++]= arr['Folderid'][i]
-			console.log(pid)
-			console.log(arr['Folderid'])
+			//console.log(pid)
+			//console.log(arr['Folderid'])
 		}
 	}
 	return [groupArr,dataArr,groupParent,dataParent]
@@ -688,6 +688,22 @@ const mntmenufunc = async()=>{
 	})
 		// Remove(Remove grouping):		Remove member from all monitored groups
 	document.getElementById('mnt-removemenu-ungroup').addEventListener('mousedown',async()=>{
+		const selected = uxSelect('mnt')
+		const [groupArr,dataArr,] = mntsort(selected)
+		console.log(groupArr)
+		console.log(dataArr)
+		const groupParentRaw = []
+		const dataParentRaw = []
+		for(var i=0;i<groupArr.length;i++){
+			const e = groupArr[i]
+			groupParentRaw[i] = await window.mnt.query(['parent','Members','id',e],'Groups',true)
+		}
+		console.log(groupParentRaw)
+		for(var i=0;i<dataArr.length;i++){
+			const e = dataArr[i]
+			dataParentRaw[i] = await window.mnt.query()
+		}
+		/*
 		const selected = uxSelectAll('mnt')	
 		const groupArr = await window.mnt.get(selected['Data'])
 		//console.log(groupArr)
@@ -705,7 +721,7 @@ const mntmenufunc = async()=>{
 		const isRemove = await window.mnt.remove(selected['Folder'],selected['Data'])
 		if(isRemove){
 			mntgroupwrite(updateArr)
-		}
+		}*/
 	})	
 	// Header
 		// Remove:						Delete this group

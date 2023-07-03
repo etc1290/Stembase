@@ -24,9 +24,17 @@
 	28. Duplicate data writing will show warning message
 	29. Add a small warning area on bottom-left corner
 	30. Ungroup function is broken
+		-- processing
 	31. Remove function not trigger mntgroupwrite when target is data
+		-- finished
 	32. Remove function not refresh all groups
 	33. Drag and Drop function not immediately render all groups
+	34. Add warning before Delete function fire
+	35. Add redo function
+	36. Give unique hash class for every element
+	37. Stemdb Monitor should be rewritten as id-based
+		-- finished
+	38. When drop failed should remove all mnt-selected and mnt-selected-drag too
 	
 ---
 	## 2023.07.03		version 0.7.7.5
@@ -39,6 +47,8 @@
 			-- processing
 		1-3 Render
 			-- finished
+	2. Rewrite Stemdb and mnt-update as id-based
+		-- finished
 ---
 	## 2023.06.30		version 0.7.7.4
 	-- Remove wasted codes

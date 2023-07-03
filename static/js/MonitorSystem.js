@@ -240,6 +240,8 @@ ipcMain.handle('mnt-remove',async(event,folderset,dataset,isGroup = false)=>{
 		}
 	}else{
 		// Data
+		console.log(folderset)
+		console.log(dataset)
 		for(var i=0;i<dataset.length;i++){
 			promiseChain[i] = new Promise((resolve)=>{
 				const folder = folderset[i]
@@ -426,8 +428,9 @@ ipcMain.handle('mnt-update',(event,folderset,dataset,isGroup=false)=>{
 	const cmdgc = `select child from Members where id = ?`
 	const cmdgd = `update Members set child = ? where id = ?`
 	const cmda	= `insert into Members(name) values(?)`
-	const cmdb	= `select parent from Monitor where name = ?`
-	const cmdc	= `update Monitor set parent = ? where name = ?`
+	const cmdb 	= `select id from Members where name = ?`
+	const cmdc	= `select parent from Monitor where name = ?`
+	const cmdd	= `update Monitor set parent = ? where name = ?`
 	for(let i=0;i<folderset.length;i++){
 		const folder = folderset[i]
 		const data = dataset[i]
@@ -457,13 +460,28 @@ ipcMain.handle('mnt-update',(event,folderset,dataset,isGroup=false)=>{
 					if(err){
 						resolve(false)
 					}else{
-						db.all(cmdb,data,(err,res)=>{
+						gdb.all(cmdb,folder,(err,res)=>{
+							const id = unpack(res)
+							db.all(cmdc,data,(err,res)=>{
+								const parentArr = unpack(res,true)
+								const isExist = parentArr.indexOf(id)
+								if(isExist + 1){
+									resolve(false)
+								}else{
+									parentArr.push(id)
+									db.all(cmdd,[parentArr,data],()=>{
+										resolve(true)
+									})
+								}
+							})
+						})/*
+						db.all(cmdc,data,(err,res)=>{
 							const parentArr = unpack(res,true)
 							parentArr.push(folder)
-							db.all(cmdc,[parentArr,data],()=>{
+							db.all(cmdd,[parentArr,data],()=>{
 								resolve(true)
 							})
-						})
+						})*/
 					}
 				})
 			}	
