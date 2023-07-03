@@ -23,7 +23,22 @@
 	27. Remake the upper toolbar
 	28. Duplicate data writing will show warning message
 	29. Add a small warning area on bottom-left corner
-
+	30. Ungroup function is broken
+	31. Remove function not trigger mntgroupwrite when target is data
+	32. Remove function not refresh all groups
+	33. Drag and Drop function not immediately render all groups
+	
+---
+	## 2023.07.03		version 0.7.7.5
+	-- Rewrite function
+	# Changed
+	1. Rewrite drag and drop function
+		1-1 Update
+			-- finished
+		1-2 Remove
+			-- processing
+		1-3 Render
+			-- finished
 ---
 	## 2023.06.30		version 0.7.7.4
 	-- Remove wasted codes

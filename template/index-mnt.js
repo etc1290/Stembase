@@ -512,14 +512,11 @@ const mntfunc = (target)=>{
 				}
 				
 				//Main Function
-				let isUpdate = true
-				let isUpdateGroup = true
 				const dupArr = []
 				const dupGroupArr = []
 				let d = 0
 				let g = 0
-				console.log(dataArr)
-				if(groupArr.length){
+				if(groupArr.length){					
 					const tempArr = [...groupArr].fill(dropid)
 					const reportArr = await window.mnt.update(tempArr,groupArr,true)
 					const pos = reportArr.indexOf(false)
@@ -527,11 +524,11 @@ const mntfunc = (target)=>{
 						for(let i=pos;i<reportArr.length;i++){
 							const e = reportArr[i]
 							if(e===false){
-								dupArr[d++] = groupArr[i]
-								
+								dupArr[d++] = groupArr[i]								
 							}
 						}
-					}					
+					}	
+					
 				}
 				if(dataArr.length){
 					const tempArr = [...dataArr].fill(dropName)
@@ -548,18 +545,43 @@ const mntfunc = (target)=>{
 							}
 						}
 					}
-				}
-				// 
-				if(isUpdate && isUpdateGroup){
-				}
-				let isRemove = true
-				let isRemoveGroup = true
+				} 
 				
 				//Render and Aftermath
 				const dragArr = document.querySelectorAll('.mnt-selected-drag')
 				for(var i=0;i<dragArr.length;i++){
 					dragArr[i].classList.remove('mnt-selected-drag')
 				}
+				for(var i=0;i<dupGroupArr;i++){
+					const e = dupGroupArr[i]
+					const pos = groupArr.indexOf(e)
+					groupParent.splice(pos,1)
+					
+				}
+				for(var i=0;i<dupArr;i++){
+					const e = dupArr[i]
+					const pos = dataArr.indexOf(e)
+					dataParent.splice(pos,1)
+				}
+				const parentArr = groupParent.concat(dataParent)
+				const filterParent = extUniq(parentArr)
+				let updateArr = []
+				for(var i=0;i<filterParent.length;i++){
+					const e = filterParent[i]
+					let arr = 0
+					
+					if(e){
+						if(e=='none'){
+							continue
+						}
+						arr = document.querySelectorAll('.mnt-usergroup-' + e)
+					}else{
+						continue
+					}
+					updateArr = updateArr.concat([...arr])
+				}
+				updateArr.push(dropFolder)
+				mntgroupwrite(updateArr)
 			})
 		}
 	}	
