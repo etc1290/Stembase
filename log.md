@@ -11,6 +11,7 @@
 	8. 	Rewrite or remove uxselect function in index-tag
 	9. 	If data is already exist in monitored group remove that from movemenu
 	10.	Display no valid groups when no viable groups can be added
+		-- finished
 	12. Non-main groups in Shortcut's highlight effect is missing
 	14. Auto detect if Shortcut is configured in the Groups db to prevent corrupted 
 	15. Adjust all Shortcut-id related function to fit the new mechanism
@@ -41,6 +42,8 @@
 	-- Bug fix
 	# Added
 	1. Add error message in movemenu when data exist in every monitored groups
+		-- finished
+	2. Add error message when there is no monitored group
 		-- finished
 	# Fixed
 	1. Fix the bug that when Groups is empty display Shortcut

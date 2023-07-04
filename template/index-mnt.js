@@ -806,9 +806,9 @@ const mntmenuAddition = (cmda='all',cmdb)=>{
 						const movemenu = document.getElementById('mnt-cm-movemenu')
 						const mntcount = movemenu.childElementCount
 						console.log(mntcount)
-						console.log(movement.children)
-						const isGroups = mntcount - 1
-						if(isGroups){
+						console.log(movemenu.children)
+						const isExist = mntcount - 1
+						if(isExist){
 							const mnterror = await window.mnt.error('mntmove-occupied')
 						}else{
 							const mnterror = await window.mnt.error('mntmove-exiled')
