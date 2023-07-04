@@ -34,6 +34,7 @@
 	39. Rewrite mnt-delete related function to adapt id-based function
 	40. Add ellipsis effect at all monitored name
 	41. Prevent Stemdb Monitor data duplicate
+		-- finished
 	42. Shorcut would appear when Groups have no monitored groups
 		-- finished
 ---
@@ -47,6 +48,8 @@
 		-- finished
 	# Fixed
 	1. Fix the bug that when Groups is empty display Shortcut
+		-- finished
+	2. Rewrite mnt-remove to id-based to prevent parent duplicate
 		-- finished
 ---
 	## 2023.07.03		version 0.7.7.5

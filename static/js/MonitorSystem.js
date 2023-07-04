@@ -252,7 +252,8 @@ ipcMain.handle('mnt-remove',async(event,folderset,dataset,isGroup = false)=>{
 					mdb.all(cmdb,data,()=>{
 						db.all(cmdc,data,(err,res)=>{
 							const parentArr = unpack(res,true)
-							const pos = parentArr.indexOf(groupName[0])
+							//const pos = parentArr.indexOf(groupName[0])
+							const pos = parentArr.indexOf(folder)
 							if(pos + 1){
 								parentArr.splice(pos,1)								
 							}
