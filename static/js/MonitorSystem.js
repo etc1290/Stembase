@@ -497,7 +497,7 @@ ipcMain.handle('mnt-error',(event,err)=>{
 	warn['mntrename-empty']		= `Groups name cannot make by white space only`
 	warn['mntrename-prefix']	= `Groups name cannot start with white space`
 	warn['mntmove-occupied']	= `Data exist in all monitored groups`
-	
+	warn['mntmove-exiled']		== `There is no monitored group`
 	dialog.showErrorBox('ERROR',warn[err])
 })
 

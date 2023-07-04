@@ -32,12 +32,18 @@
 	36. Give unique hash class for every element
 	39. Rewrite mnt-delete related function to adapt id-based function
 	40. Add ellipsis effect at all monitored name
-
+	41. Prevent Stemdb Monitor data duplicate
+	42. Shorcut would appear when Groups have no monitored groups
+		-- finished
 ---
 	## 2023.07.04		version 0.7.7.6
 	-- Function enhancement
+	-- Bug fix
 	# Added
 	1. Add error message in movemenu when data exist in every monitored groups
+		-- finished
+	# Fixed
+	1. Fix the bug that when Groups is empty display Shortcut
 		-- finished
 ---
 	## 2023.07.03		version 0.7.7.5

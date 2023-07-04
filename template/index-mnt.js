@@ -390,7 +390,9 @@ const mntgroupwrite = async(target,isMainExec=true) =>{
 		const mntdata = []
 		const groups = []
 		for(var i=0;i<groupset.length;i++){
+			
 			const modName = groupset[i][0]
+			
 			const id = `'mnt-` + header.innerHTML + `-group-` + i + `'`
 			const subheader = `<p class='mnt-folder-header'>` + groupset[i][1] + `</p>`
 			const subcontent= `<div class='mnt-folder-content'></div>`
@@ -400,7 +402,9 @@ const mntgroupwrite = async(target,isMainExec=true) =>{
 				+ subheader + subcontent + `</div>`
 			groups[i] = subfolder
 		}
+		console.log(dataset)
 		for(var i=0;i<dataset.length;i++){
+			
 			const id = `id='mnt-` + header.innerHTML + `-data-` + i + `'`
 			const uniqClass = 'mnt-data-' + idset[i]
 			mntdata[i] = `<p ` + id+ ` class='mnt-data ` + uniqClass +`' draggable='true'>` + dataset[i] + `</p>`
@@ -414,11 +418,15 @@ const mntgroupwrite = async(target,isMainExec=true) =>{
 // Side:	Load data in monitored groups 
 const mntgroupload = ()=>{
 	document.body.addEventListener('click',async(event)=>{
-		const isAll = event.target.innerHTML == 'All'
 		const isEditable = mntcheck(event,'mnt-editing')
-		const operator = isAll + isEditable
+		const group = event.target.closest('.mnt-folder')
+		let isMain = false
+		if(group){
+			isMain = group.classList.contains('mnt-mainfolder')
+		}
+		const operator = isEditable + isMain
 		if(mntcheck(event,'mnt-folder-header')&&!operator){
-			const group = event.target.closest('.mnt-folder')
+			
 			if(group.classList.contains('mnt-folder')){
 				const content = group.children[1]
 				if(!content.innerHTML){
@@ -797,6 +805,8 @@ const mntmenuAddition = (cmda='all',cmdb)=>{
 					if(name == '@invalid'){
 						const movemenu = document.getElementById('mnt-cm-movemenu')
 						const mntcount = movemenu.childElementCount
+						console.log(mntcount)
+						console.log(movement.children)
 						const isGroups = mntcount - 1
 						if(isGroups){
 							const mnterror = await window.mnt.error('mntmove-occupied')
@@ -869,8 +879,10 @@ const mntgroup = async(parent,child)=>{
 		const [,[idlist,grouplist]] = await window.mnt.load('Groups')
 		const mntdata = []
 		const pos = grouplist.indexOf('Shortcut')
-		grouplist.splice(pos,1)
-		idlist.splice(pos,1)
+		if(pos+1){
+			grouplist.splice(pos,1)
+			idlist.splice(pos,1)
+		}	
 		for(var i=0;i<grouplist.length;i++){
 			//const modName = mntreplace(grouplist[i][1])
 			const modName = idlist[i]
