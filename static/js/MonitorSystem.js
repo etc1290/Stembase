@@ -496,6 +496,8 @@ ipcMain.handle('mnt-error',(event,err)=>{
 	warn['mntrename-censor']	= `Groups name cannot contain` + '`!`@$%^&*+\\=[]{};' + `:"|,<>/?~`
 	warn['mntrename-empty']		= `Groups name cannot make by white space only`
 	warn['mntrename-prefix']	= `Groups name cannot start with white space`
+	warn['mntmove-occupied']	= `Data exist in all monitored groups`
+	
 	dialog.showErrorBox('ERROR',warn[err])
 })
 

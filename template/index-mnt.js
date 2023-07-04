@@ -698,7 +698,7 @@ const mntmenufunc = async()=>{
 		console.log(groupParentRaw)
 		for(var i=0;i<dataArr.length;i++){
 			const e = dataArr[i]
-			dataParentRaw[i] = await window.mnt.query()
+			dataParentRaw[i] = await window.mnt.query([])
 		}
 		/*
 		const selected = uxSelectAll('mnt')	
@@ -773,6 +773,8 @@ const mntmenuAddition = (cmda='all',cmdb)=>{
 				const option = `<p id=` + id + `class='mnt-dropmenu-option mnt-movemenu-addition'>` + text + `</p>`
 				optionArr[i] = option
 			}
+			const invalidOpt = `<p id=` + 'mnt-movemenu-@invalid' + ` class='mnt-dropmenu-option mnt-movemenu-addition'>No valid groups</p>`
+			optionArr.push(invalidOpt)
 			const addition = optionArr.join('')
 			const updateDiv = document.getElementById('mnt-cm-movemenu')
 			updateDiv.innerHTML = addition
@@ -790,7 +792,20 @@ const mntmenuAddition = (cmda='all',cmdb)=>{
 				if(mntcheck(event,'mnt-movemenu-addition')){
 					const id = event.target.id
 					const name = id.substring(13)
+					
 					let target = document.getElementById('mnt-user-' + name)
+					if(name == '@invalid'){
+						const movemenu = document.getElementById('mnt-cm-movemenu')
+						const mntcount = movemenu.childElementCount
+						const isGroups = mntcount - 1
+						if(isGroups){
+							const mnterror = await window.mnt.error('mntmove-occupied')
+						}else{
+							const mnterror = await window.mnt.error('mntmove-exiled')
+						}
+						return
+						//const mnterror = await window.mnt.error('mntmove-invalid')
+					}
 					if(name == 'Shortcut'){
 						target = document.getElementById('mnt-shortcut')
 					}
