@@ -33,6 +33,9 @@
 	40. Add ellipsis effect at all monitored name
 	43. Rename function should update all monitored groups
 		-- finished
+	44. Check if the change of rename function would affect Stemdb.db
+		-- finished
+	45. Apply fake chain to every backend function accepted array input
 	
 ---
 	## 2023.07.05		version 0.7.7.7
@@ -42,6 +45,14 @@
 		-- finished
 	2. Fix rename function editable status cannot be removed after over
 		-- finished
+	3. Fix the remove function cannot handle array input 
+		-- finished
+	4. Fix broken ungroup function
+		4-1 group
+			-- finished
+		4-2 data
+			-- processing
+		4-3 render
 ---
 	## 2023.07.04		version 0.7.7.6
 	-- Function enhancement

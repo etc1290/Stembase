@@ -689,21 +689,36 @@ const mntmenufunc = async()=>{
 	})
 		// Remove(Remove grouping):		Remove member from all monitored groups
 	document.getElementById('mnt-removemenu-ungroup').addEventListener('mousedown',async()=>{
+		let isRemove = false
+		let isRemoveGroup = false
 		const selected = uxSelect('mnt')
 		const [groupArr,dataArr,] = mntsort(selected)
 		console.log(groupArr)
 		console.log(dataArr)
 		const groupParentRaw = []
 		const dataParentRaw = []
+		let groupParent = []
 		for(var i=0;i<groupArr.length;i++){
 			const e = groupArr[i]
 			groupParentRaw[i] = await window.mnt.query(['parent','Members','id',e],'Groups',true)
 		}
-		console.log(groupParentRaw)
+		for(var i=0;i<groupParentRaw.length;i++){
+			const folderset = groupParentRaw[i]
+			const data = groupArr[i]                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
+			
+			const dataset = [...folderset].fill(data)
+			isRemoveGroup = await window.mnt.remove(folderset,dataset,true)
+			groupParent = groupParent.concat(folderset)
+		}
+		console.log(groupParent)
 		for(var i=0;i<dataArr.length;i++){
 			const e = dataArr[i]
 			dataParentRaw[i] = await window.mnt.query([])
 		}
+		/*
+		if(isRemoveGroup[0]){
+			mntgroupwrite(groupParent)
+		}*/
 		/*
 		const selected = uxSelectAll('mnt')	
 		const groupArr = await window.mnt.get(selected['Data'])
