@@ -282,8 +282,6 @@ const mntrename = ()=>{
 	const mainfunc = async()=>{
 		// Check if contains reserved or illegal characters
 		const censorCheck = (name)=>{
-			//const restriction = /[`!@$%^&*+\=\[\]{};':"\\|,<>\/?~]/
-			//return restriction.test(name)
 			const censorArr = [
 				'`',`'`,'@','!','$',
 				'%','^','&','*','\\',
@@ -314,27 +312,16 @@ const mntrename = ()=>{
 			const isReady = await window.mnt.rename(oldname,newname)
 			if(isReady){
 				const target = document.querySelector('.mnt-editing')
-				//document.querySelector('.mnt-editing').classList.remove('mnt-editing')
 				target.classList.remove('mnt-editing')
-				//mntgroup()
+				const group = target.parentNode
 				mntmenuAddition('create','movemenu')
-				//const target = document.getElementById('mnt-user-' + oldname)
-				target.contentEditable == 'false'
-				const cls = mntclass(target)[1]
+				target.removeAttribute("contenteditable")
+				const cls = mntclass(group)[1]
 				const updateArr = document.querySelectorAll('.' + cls)
 				for(var i=0;i<updateArr.length;i++){
 					const e = updateArr[i]
 					e.children[0].innerHTML = newname
-				}
-				/*
-				const oldmodName = `mnt-usergroup-` + mntreplace(oldname)
-				const newmodName = `mnt-usergroup-` + mntreplace(newname)
-				const oldclass = document.getElementsByClassName(mntreplace(oldmodName))
-				for(var i=0;i<oldclass.length;i++){
-					const e = oldclass[i]
-					e.children[0].innerHTML = newname
-				}*/
-				
+				}				
 			}
 		}	
 	}

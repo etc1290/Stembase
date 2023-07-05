@@ -41,7 +41,7 @@
 	1. Fix the bug that rename function not apply on all groups
 		-- finished
 	2. Fix rename function editable status cannot be removed after over
-		-- processing
+		-- finished
 ---
 	## 2023.07.04		version 0.7.7.6
 	-- Function enhancement
