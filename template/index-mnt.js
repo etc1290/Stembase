@@ -313,16 +313,27 @@ const mntrename = ()=>{
 		}else{
 			const isReady = await window.mnt.rename(oldname,newname)
 			if(isReady){
-				document.querySelector('.mnt-editing').classList.remove('mnt-editing')
-				mntgroup()
+				const target = document.querySelector('.mnt-editing')
+				//document.querySelector('.mnt-editing').classList.remove('mnt-editing')
+				target.classList.remove('mnt-editing')
+				//mntgroup()
 				mntmenuAddition('create','movemenu')
+				//const target = document.getElementById('mnt-user-' + oldname)
+				target.contentEditable == 'false'
+				const cls = mntclass(target)[1]
+				const updateArr = document.querySelectorAll('.' + cls)
+				for(var i=0;i<updateArr.length;i++){
+					const e = updateArr[i]
+					e.children[0].innerHTML = newname
+				}
+				/*
 				const oldmodName = `mnt-usergroup-` + mntreplace(oldname)
 				const newmodName = `mnt-usergroup-` + mntreplace(newname)
 				const oldclass = document.getElementsByClassName(mntreplace(oldmodName))
 				for(var i=0;i<oldclass.length;i++){
 					const e = oldclass[i]
 					e.children[0].innerHTML = newname
-				}
+				}*/
 				
 			}
 		}	
@@ -402,7 +413,6 @@ const mntgroupwrite = async(target,isMainExec=true) =>{
 				+ subheader + subcontent + `</div>`
 			groups[i] = subfolder
 		}
-		console.log(dataset)
 		for(var i=0;i<dataset.length;i++){
 			
 			const id = `id='mnt-` + header.innerHTML + `-data-` + i + `'`
@@ -466,7 +476,6 @@ const mntfunc = (target)=>{
 			}
 		})
 		el.addEventListener('dragend',(event)=>{
-			console.log('end')
 			event.target.style.background = ''
 			const dragArr = document.querySelectorAll('.mnt-selected-drag')
 			for(var i=0;i<dragArr.length;i++){

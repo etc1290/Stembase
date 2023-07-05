@@ -10,8 +10,6 @@
 	7. 	Merge mnt-get function into mnt-query
 	8. 	Rewrite or remove uxselect function in index-tag
 	9. 	If data is already exist in monitored group remove that from movemenu
-	10.	Display no valid groups when no viable groups can be added
-		-- finished
 	12. Non-main groups in Shortcut's highlight effect is missing
 	14. Auto detect if Shortcut is configured in the Groups db to prevent corrupted 
 	15. Adjust all Shortcut-id related function to fit the new mechanism
@@ -33,10 +31,17 @@
 	36. Give unique hash class for every element
 	39. Rewrite mnt-delete related function to adapt id-based function
 	40. Add ellipsis effect at all monitored name
-	41. Prevent Stemdb Monitor data duplicate
+	43. Rename function should update all monitored groups
 		-- finished
-	42. Shorcut would appear when Groups have no monitored groups
+	
+---
+	## 2023.07.05		version 0.7.7.7
+	-- Bug fix
+	# Fixed
+	1. Fix the bug that rename function not apply on all groups
 		-- finished
+	2. Fix rename function editable status cannot be removed after over
+		-- processing
 ---
 	## 2023.07.04		version 0.7.7.6
 	-- Function enhancement
