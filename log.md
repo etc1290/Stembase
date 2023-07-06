@@ -23,7 +23,7 @@
 	28. Duplicate data writing will show warning message
 	29. Add a small warning area on bottom-left corner
 	30. Ungroup function is broken
-		-- processing
+		-- finished
 	32. Remove function not refresh all groups
 	33. Drag and Drop function not immediately render all groups
 	34. Add warning before Delete function fire
@@ -32,6 +32,7 @@
 	39. Rewrite mnt-delete related function to adapt id-based function
 	40. Add ellipsis effect at all monitored name
 	45. Apply fake chain to every backend function accepted array input
+	
 	
 ---
 	## 2023.07.06		version 0.7.7.8
@@ -43,7 +44,7 @@
 		1-2 data
 			-- finished
 		1-3 render
-			-- processing
+			-- finished
 ---
 	## 2023.07.05		version 0.7.7.7
 	-- Bug fix

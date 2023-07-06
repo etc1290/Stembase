@@ -723,7 +723,13 @@ const mntmenufunc = async()=>{
 				groupParent = groupParent.concat(folderset)
 			}			
 		}
-		
+		const parentArr = extUniq(groupParent)
+		for(var i=0;i<parentArr.length;i++){
+			const e = parentArr[i]
+			parentArr[i] = Array.from(document.querySelectorAll('.mnt-usergroup-' + e))
+		}
+		const updateArr = parentArr.flat(2)
+		mntgroupwrite(updateArr)
 		/*
 		if(isRemoveGroup[0]){
 			mntgroupwrite(groupParent)
