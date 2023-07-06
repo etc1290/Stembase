@@ -31,12 +31,19 @@
 	36. Give unique hash class for every element
 	39. Rewrite mnt-delete related function to adapt id-based function
 	40. Add ellipsis effect at all monitored name
-	43. Rename function should update all monitored groups
-		-- finished
-	44. Check if the change of rename function would affect Stemdb.db
-		-- finished
 	45. Apply fake chain to every backend function accepted array input
 	
+---
+	## 2023.07.06		version 0.7.7.8
+	-- Bug fix
+	# Fixed
+	1. Fix borken ungroup function
+		1-1 group
+			-- finished
+		1-2 data
+			-- finished
+		1-3 render
+			-- processing
 ---
 	## 2023.07.05		version 0.7.7.7
 	-- Bug fix

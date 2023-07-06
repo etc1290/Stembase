@@ -156,9 +156,15 @@ ipcMain.handle('mnt-query',async(event,cmdArr,name='Groups',isArr=false)=>{
 	if(cmdArr[2]){
 		pos = ` where ` + cmdArr[2] + ` = ?` 
 	}
+	let mdb
+	if(name == '@Stemdb'){
+		mdb = db
+	}else{
+		mdb = mdbLoader(name)
+	}
 	const cmd = `select ` + cmdArr[0] + ` from ` + cmdArr[1] + pos
 	const output = new Promise((resolve)=>{
-		const mdb = mdbLoader(name)
+		
 		mdb.all(cmd,cmdArr[3],(err,res)=>{
 			const outcome = unpack(res,isArr)
 			resolve(outcome)
