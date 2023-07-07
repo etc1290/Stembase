@@ -581,7 +581,11 @@ const mntfunc = (target)=>{
 					}
 					updateArr = updateArr.concat([...arr])
 				}
-				updateArr.push(dropFolder)
+				const dropNode = document.querySelectorAll('.mnt-usergroup-' + dropid)
+				const dropArr = Array.from(dropNode)
+				console.log(dropArr)
+				updateArr.push(dropArr)
+				updateArr = updateArr.flat(2)
 				mntgroupwrite(updateArr)
 			})
 		}
@@ -730,29 +734,6 @@ const mntmenufunc = async()=>{
 		}
 		const updateArr = parentArr.flat(2)
 		mntgroupwrite(updateArr)
-		/*
-		if(isRemoveGroup[0]){
-			mntgroupwrite(groupParent)
-		}*/
-		/*
-		const selected = uxSelectAll('mnt')	
-		const groupArr = await window.mnt.get(selected['Data'])
-		//console.log(groupArr)
-		const updateArr = []
-		let n = 0
-		for(let i=0;i<groupArr.length;i++){
-			const group = mntreplace(groupArr[i])
-			const folder = document.getElementsByClassName('mnt-usergroup-' + group)[0]
-			const content = folder.children[1]
-			const isExpand = content.innerHTML
-			if(isExpand){
-				updateArr[n++] = folder
-			}
-		}
-		const isRemove = await window.mnt.remove(selected['Folder'],selected['Data'])
-		if(isRemove){
-			mntgroupwrite(updateArr)
-		}*/
 	})	
 	// Header
 		// Remove:						Delete this group

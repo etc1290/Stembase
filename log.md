@@ -4,7 +4,7 @@
 @@@ Bug and future planning
 	2.	Custom drag and drop function
 		-- processing
-	4. 	Collapse groups only when leave parent groups or second members
+	4. 	Collapse groups only works when leave parent groups or second members
 	5. 	Show error when drag into the same source groups
 	6. 	Prevent right-click the contextmenu firing
 	7. 	Merge mnt-get function into mnt-query
@@ -22,10 +22,9 @@
 	27. Remake the upper toolbar
 	28. Duplicate data writing will show warning message
 	29. Add a small warning area on bottom-left corner
-	30. Ungroup function is broken
-		-- finished
 	32. Remove function not refresh all groups
 	33. Drag and Drop function not immediately render all groups
+		-- finished
 	34. Add warning before Delete function fire
 	35. Add redo function
 	36. Give unique hash class for every element
@@ -35,10 +34,17 @@
 	
 	
 ---
+	## 2023.07.07		version 0.7.7.9
+	-- Bug fix
+	# Fixed
+	1. Fix drag and drop function not refresh all groups behavior
+		-- finished
+	
+---
 	## 2023.07.06		version 0.7.7.8
 	-- Bug fix
 	# Fixed
-	1. Fix borken ungroup function
+	1. Fix broken ungroup function
 		1-1 group
 			-- finished
 		1-2 data
