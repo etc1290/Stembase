@@ -684,10 +684,12 @@ const mntmenufunc = async()=>{
 		}
 		if(isRemove && isRemoveGroup){
 			const rawArr = groupParent.concat(dataParent)
-			const updateArr = []
+			const nodeArr = []
 			for(var i=0;i<rawArr.length;i++){
-				updateArr[i] = document.querySelector('.mnt-usergroup-' + rawArr[i])
+				const nodeList = document.querySelectorAll('.mnt-usergroup-' + rawArr[i])
+				nodeArr[i] = Array.from(nodeList)
 			}
+			const updateArr = nodeArr.flat(2)
 			mntgroupwrite(updateArr)
 		}
 	})

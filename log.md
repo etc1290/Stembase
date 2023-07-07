@@ -23,6 +23,7 @@
 	28. Duplicate data writing will show warning message
 	29. Add a small warning area on bottom-left corner
 	32. Remove function not refresh all groups
+		-- finished
 	33. Drag and Drop function not immediately render all groups
 		-- finished
 	34. Add warning before Delete function fire
@@ -38,6 +39,8 @@
 	-- Bug fix
 	# Fixed
 	1. Fix drag and drop function not refresh all groups behavior
+		-- finished
+	2. Fix the bug that mnt-removemenu-remove not refresh all groups
 		-- finished
 	
 ---
