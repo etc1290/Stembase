@@ -518,6 +518,8 @@ const mntfunc = (target)=>{
 				let d = 0
 				let g = 0
 				// Update
+				let isUpdate = false
+				let isUpdateGroup = false
 				if(groupArr.length){					
 					const tempArr = [...groupArr].fill(dropid)
 					const reportArr = await window.mnt.update(tempArr,groupArr,true)
@@ -530,9 +532,13 @@ const mntfunc = (target)=>{
 							}
 						}
 					}	
-					
+					if(reportArr){
+						isUpdate = true
+					}
+				}else{
+					isUpdate = true
 				}
-				if(dataArr.length){
+				if(isUpdate&&dataArr.length){
 					const tempArr = [...dataArr].fill(dropName)
 					for(var i=0;i<dataArr.length;i++){
 						dataArr[i] = dataArr[i].innerHTML
@@ -547,23 +553,57 @@ const mntfunc = (target)=>{
 							}
 						}
 					}
+					if(reportArr){
+						isUpdateGroup = true
+					}
+				}else{
+					isUpdateGroup = true
 				} 
 				
 				// Remove
-				if(groupArr.length){
-					console.log(groupParent)
-					console.log(groupArr)
+				let isRemove = false
+				let isRemoveGroup = false
+				if(isUpdate&&isUpdateGroup){
+					if(groupArr.length){
+						console.log(groupParent)
+						console.log(groupArr)
+						for(var i=0;i<groupParent.length;i++){
+							const pos = groupParent.indexOf('')
+							if(pos + 1){
+								groupParent.splice(pos,1)
+								groupArr.splice(pos,1)
+							}else{
+								break
+							}
+						}
+						const reportArr = await window.mnt.remove(groupParent,groupArr,true)
+						if(reportArr){
+							isRemoveGroup = true
+						}	
+					}else{
+						isRemoveGroup = true
+					}
+					if(isRemoveGroup&&dataArr.length){
+						for(var i=0;i<dataParent.length;i++){
+							const pos = dataParent.indexOf('')
+							if(pos + 1){
+								dataParent.splice(pos,1)
+								dataArr.splice(pos,1)
+							}else{
+								break
+							}
+						}
+						const reportArr = await window.mnt.remove(dataParent,dataArr)
+						if(reportArr){
+							isRemove = true
+						}
+					}else{
+						isRemove = true
+					}
 				}
-				if(dataArr.length){
-					console.log(dataParent)
-					console.log(dataArr)
-				}
+				
 				//Render and Aftermath
 				const dragArr = document.querySelectorAll('.mnt-selected-drag')
-				/*
-				for(var i=0;i<dragArr.length;i++){
-					dragArr[i].classList.remove('mnt-selected-drag')
-				}*/
 				for(var i=0;i<dupGroupArr;i++){
 					const e = dupGroupArr[i]
 					const pos = groupArr.indexOf(e)
@@ -596,7 +636,9 @@ const mntfunc = (target)=>{
 				const dropArr = Array.from(dropNode)
 				updateArr.push(dropArr)
 				updateArr = updateArr.flat(2)
-				mntgroupwrite(updateArr)
+				if(isRemove&&isRemoveGroup){
+					mntgroupwrite(updateArr)
+				}			
 			})
 		}
 	}	

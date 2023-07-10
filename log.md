@@ -3,7 +3,7 @@
 
 @@@ Roadmap
 	2.	Custom drag and drop function
-		-- processing
+		-- finished
 	4. 	Collapse groups only works when leave parent groups or second members
 	5. 	Show error when drag into the same source groups
 	6. 	Prevent right-click the contextmenu firing
@@ -30,12 +30,16 @@
 	40. Add ellipsis effect at all monitored name
 	45. Apply fake chain to every backend function accepted array input
 	46. Check if the group is loaded 
-		-- processing
+		-- postponed
 	
 
 ---
 	## 2023.07.10		version 0.7.8
 	-- Bug fix
+	-- Rewrite function
+	# Changed
+	1. Rewrite drag and drop function
+		-- finished
 	# Fixed
 	1. Add reserved character to main-folder to prevent usergroup name identification
 		-- finished
