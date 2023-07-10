@@ -2,10 +2,9 @@
  File tagging system
 
 @@@ Roadmap
-	2.	Custom drag and drop function
-		-- finished
 	4. 	Collapse groups only works when leave parent groups or second members
 	5. 	Show error when drag into the same source groups
+		-- processing
 	6. 	Prevent right-click the contextmenu firing
 	7. 	Merge mnt-get function into mnt-query
 	8. 	Rewrite or remove uxselect function in index-tag
@@ -24,16 +23,17 @@
 	29. Add a small warning area on bottom-left corner
 	34. Add warning before Delete function fire
 	35. Add redo function
-	36. Give unique hash class for every element
-		-- no longer needed
 	39. Rewrite mnt-delete related function to adapt id-based function
 	40. Add ellipsis effect at all monitored name
 	45. Apply fake chain to every backend function accepted array input
 	46. Check if the group is loaded 
-		-- postponed
-	
+	47. Prevet first launch error
 
----
+--- Monitor-Function-Optimization: start
+	## 2023.07.10		version 0.7.8.1
+	-- Create new branch
+	
+--- Monitor-Funcction :	end
 	## 2023.07.10		version 0.7.8
 	-- Bug fix
 	-- Rewrite function
