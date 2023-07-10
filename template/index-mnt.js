@@ -369,6 +369,8 @@ const mntgroupwrite = async(target,isMainExec=true) =>{
 		target = extUniq(target)
 	}
 	for(var a=0;a<target.length;a++){
+		const header = target[a].children[0]
+		const updateDiv = target[a].children[1]
 		const isAll = target[a].id == 'mnt-main'
 		if(isMainExec){		
 			if(isAll){
@@ -378,8 +380,7 @@ const mntgroupwrite = async(target,isMainExec=true) =>{
 		}else if(isAll){
 			continue
 		}
-		const header = target[a].children[0]
-		const updateDiv = target[a].children[1]
+		
 		let [groupset,[idset,dataset]] = await window.mnt.load(header.innerHTML)
 		if(!idset){
 			idset = []
@@ -516,6 +517,7 @@ const mntfunc = (target)=>{
 				const dupGroupArr = []
 				let d = 0
 				let g = 0
+				// Update
 				if(groupArr.length){					
 					const tempArr = [...groupArr].fill(dropid)
 					const reportArr = await window.mnt.update(tempArr,groupArr,true)
@@ -547,6 +549,15 @@ const mntfunc = (target)=>{
 					}
 				} 
 				
+				// Remove
+				if(groupArr.length){
+					console.log(groupParent)
+					console.log(groupArr)
+				}
+				if(dataArr.length){
+					console.log(dataParent)
+					console.log(dataArr)
+				}
 				//Render and Aftermath
 				const dragArr = document.querySelectorAll('.mnt-selected-drag')
 				/*
@@ -572,7 +583,7 @@ const mntfunc = (target)=>{
 					let arr = 0
 					
 					if(e){
-						if(e=='none'){
+						if(e=='@All'){
 							continue
 						}
 						arr = document.querySelectorAll('.mnt-usergroup-' + e)
@@ -583,7 +594,6 @@ const mntfunc = (target)=>{
 				}
 				const dropNode = document.querySelectorAll('.mnt-usergroup-' + dropid)
 				const dropArr = Array.from(dropNode)
-				console.log(dropArr)
 				updateArr.push(dropArr)
 				updateArr = updateArr.flat(2)
 				mntgroupwrite(updateArr)

@@ -1,7 +1,7 @@
 # Stembase
  File tagging system
 
-@@@ Bug and future planning
+@@@ Roadmap
 	2.	Custom drag and drop function
 		-- processing
 	4. 	Collapse groups only works when leave parent groups or second members
@@ -22,18 +22,23 @@
 	27. Remake the upper toolbar
 	28. Duplicate data writing will show warning message
 	29. Add a small warning area on bottom-left corner
-	32. Remove function not refresh all groups
-		-- finished
-	33. Drag and Drop function not immediately render all groups
-		-- finished
 	34. Add warning before Delete function fire
 	35. Add redo function
 	36. Give unique hash class for every element
+		-- no longer needed
 	39. Rewrite mnt-delete related function to adapt id-based function
 	40. Add ellipsis effect at all monitored name
 	45. Apply fake chain to every backend function accepted array input
+	46. Check if the group is loaded 
+		-- processing
 	
-	
+
+---
+	## 2023.07.10		version 0.7.8
+	-- Bug fix
+	# Fixed
+	1. Add reserved character to main-folder to prevent usergroup name identification
+		-- finished
 ---
 	## 2023.07.07		version 0.7.7.9
 	-- Bug fix
