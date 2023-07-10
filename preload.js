@@ -40,7 +40,19 @@ contextBridge.exposeInMainWorld('tag', {
 
 // MonitorSystem
 contextBridge.exposeInMainWorld('mnt', {
-	main:		()			=> ipcRenderer.invoke('mnt-main')
+	main:		()			=> ipcRenderer.invoke('mnt-main'),
+	load:		(i)			=> ipcRenderer.invoke('mnt-load',i),
+	query:		(i,j,b)		=> ipcRenderer.invoke('mnt-query',i,j,b),
+	get:		(i)			=> ipcRenderer.invoke('mnt-get',i),
+	remove:		(i,j,b)		=> ipcRenderer.invoke('mnt-remove',i,j,b),
+	delete:		(i)			=> ipcRenderer.invoke('mnt-delete',i),
+	deleteM:	(i,j)		=> ipcRenderer.invoke('mnt-delete-member',i,j),
+	create:		()			=> ipcRenderer.invoke('mnt-create'),
+	rename:		(i,j)		=> ipcRenderer.invoke('mnt-rename',i,j),
+	update:		(i,j,b)		=> ipcRenderer.invoke('mnt-update',i,j,b),
+	error:		(i)			=> ipcRenderer.invoke('mnt-error',i),
+	build:		()			=> ipcRenderer.invoke('mnt-build')
+
 })
 
 

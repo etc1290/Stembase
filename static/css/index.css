@@ -2,9 +2,10 @@
 #fs-path{
 	height:			5vh;
 	display:		flex;
+	align-items:	flex-end;
 }
 #main-function{
-	height:			70vh;
+	height:			90vh;
 	width:			100%;
 	display:		flex;
 }
@@ -17,44 +18,85 @@
 	position:		fixed;
 	z-index:		9999;
 	width:			150px;
-	background:		rgb(201,219,228);
 	border-radius:	5px;
-	display:		none;
+	background:		rgb(228,237,241);
+	visibility:		hidden;
 }
 #mnt-cm.visible{
+	visibility:		visible;
+}
+#mnt-group-display{
+	max-height:		100vh;
+}
+.mnt-cm-option{
+	padding:		8px 10px;	
+	cursor:			pointer;	
+}
+.mnt-cm-option:hover{
+	background:		rgb(180,205,217);
+}
+.mnt-cm-submenu{
+	background:		rgb(238,245,247);
+	padding:		8px 10px;
+	cursor:			pointer;	
+}
+.mnt-cm-submenu:hover{
+	background:		rgb(180,205,217);
+}
+.mnt-cm-dropmenu{
+	background:		rgb(119,164,187);
+	color:			rgb(248,250,252);
+	width:			150px;
+	display:		none;
+	z-index:		9999;
+	cursor:			pointer;
+	position:		absolute;
+}
+.mnt-cm-dropmenu.visible{
 	display:		block;
 }
-#mnt-cm-option{
-	padding:		8px 10px;
-	cursor:			pointer;
-	border-radius:	inherit;
+.mnt-dropmenu-option{
+	white-space:	nowrap;
+	min-height:		31px;
+	width:			150px;
+	display:		block;
+	font-size:		12px;
 }
-#mnt-cm-option:hover{
-	background:		rgb(181,199,208);
+.mnt-dropmenu-option:hover{
+	background:		rgb(146,182,200);
+}
+
+.mnt-dropmenu-option.hide{
+	display:		none;
 }
 .mnt-folder{
 	border-bottom:	5px solid rgb(255,238,214);
+	
 }
 .mnt-folder-header{
 	border-bottom:	5px solid rgb(255,238,214);
+	height:			26px;
+}
+.mnt-folder-header.mnt-selected{
+	background:		rgb(124,255,192);
 }
 .mnt-folder-content{
 	white-space:	nowrap;
 	overflow-x:		auto;
-	overflow-y:		hidden;
+	overflow-y:		scroll;
 	height:			0px;
-	width:			auto;
-	max-height:		20vh;
-	transition:		0.5s;
+	max-height:		20vh;	
+	transition:		0.5s ease;
 }
 .mnt-data{
 	width:			100%;
+	height:			21px;
 }
 .mnt-data:hover{
 	background:		rgb(154,255,222);
 }
 #fs{
-	width:			50%;
+	width:			60%;
 	border-top:		5px solid rgb(255,238,214);
 }
 #fs-info{
@@ -71,7 +113,7 @@
 	height:			3vh;
 }
 #fs-main{
-	height:			90%;
+	height:			96%;
 	overflow-x:		auto;
 	overflow-y:		hidden;
 	display:		flex;
@@ -126,6 +168,8 @@
 #tag{
 	height:			100%;
 	width:			30%;
+	/* resize:			horizontal; */
+    overflow:		auto;
 	text-align:		center;
 	vertical-align: top;
 }
@@ -155,6 +199,7 @@
 }
 #buttonbar{
 	border-top:		5px solid rgb(255,238,214);
+	display: 		flex;
 }
 #tag-match-div{
 	height:			0vh;
@@ -165,9 +210,12 @@
 #tag-match-result:hover{
 	background:		rgb(231,238,238);
 }
-#tag-search-output{
 
-}
+/* TODO */
+/* #tag-search-output{
+
+} */
+
 /* Alice Blue */
 #tag-search-result:hover{
 	background:		rgb(223,239,247);
@@ -187,4 +235,8 @@
 .filelabel-info{
 	overflow:		hidden;
 	white-space:	nowrap;
+}
+
+.hide{
+	display:		none;
 }

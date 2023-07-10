@@ -67,6 +67,13 @@ const stTest = () =>{
 	
 }
 
+	//Side: Scan monitored groups
+const stmntGroupscan = ()=>{
+	document.getElementById('mnt-groupscan').addEventListener('click',async()=>{
+		const isFinished = await window.mnt.groupscan()
+		console.log(isFinished)
+	})
+}
 	// Testfunc
 const testfunc = async () =>{
 	const apple = await window.cw.codelab()
@@ -78,5 +85,6 @@ const init = async ()=>{
 	stReset()
 	stRecord()
 	stTest()
+	stmntGroupscan()
 }
 init()

@@ -1,7 +1,9 @@
 {
     "TemplateDir": "./template/",
     "StaticDir": "./static/",
+	"StemdbStorage":"./data",
 	"StemdbDir":"./data/Stemdb",
+	"StemMGDir":"./data/MonitoredGroups",
     "StartDir": "./",
     "Debugmode": 1,
     "Width": 1280,

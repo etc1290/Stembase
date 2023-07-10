@@ -1,7 +1,886 @@
 # Stembase
  File tagging system
 
+@@@ Roadmap
+	2.	Custom drag and drop function
+		-- finished
+	4. 	Collapse groups only works when leave parent groups or second members
+	5. 	Show error when drag into the same source groups
+	6. 	Prevent right-click the contextmenu firing
+	7. 	Merge mnt-get function into mnt-query
+	8. 	Rewrite or remove uxselect function in index-tag
+	9. 	If data is already exist in monitored group remove that from movemenu
+	12. Non-main groups in Shortcut's highlight effect is missing
+	14. Auto detect if Shortcut is configured in the Groups db to prevent corrupted 
+	15. Adjust all Shortcut-id related function to fit the new mechanism
+	16. Tag System remake
+	17. File System remake
+	18. After dropping auto direct to the new-appended monitored data
+	24. user customized monitored rules
+	25. Add multi-selection function
+	26. Apply Ctrl, Shift and so on keyboard input function
+	27. Remake the upper toolbar
+	28. Duplicate data writing will show warning message
+	29. Add a small warning area on bottom-left corner
+	34. Add warning before Delete function fire
+	35. Add redo function
+	36. Give unique hash class for every element
+		-- no longer needed
+	39. Rewrite mnt-delete related function to adapt id-based function
+	40. Add ellipsis effect at all monitored name
+	45. Apply fake chain to every backend function accepted array input
+	46. Check if the group is loaded 
+		-- postponed
+	
 
+---
+	## 2023.07.10		version 0.7.8
+	-- Bug fix
+	-- Rewrite function
+	# Changed
+	1. Rewrite drag and drop function
+		-- finished
+	# Fixed
+	1. Add reserved character to main-folder to prevent usergroup name identification
+		-- finished
+---
+	## 2023.07.07		version 0.7.7.9
+	-- Bug fix
+	# Fixed
+	1. Fix drag and drop function not refresh all groups behavior
+		-- finished
+	2. Fix the bug that mnt-removemenu-remove not refresh all groups
+		-- finished
+	
+---
+	## 2023.07.06		version 0.7.7.8
+	-- Bug fix
+	# Fixed
+	1. Fix broken ungroup function
+		1-1 group
+			-- finished
+		1-2 data
+			-- finished
+		1-3 render
+			-- finished
+---
+	## 2023.07.05		version 0.7.7.7
+	-- Bug fix
+	# Fixed
+	1. Fix the bug that rename function not apply on all groups
+		-- finished
+	2. Fix rename function editable status cannot be removed after over
+		-- finished
+	3. Fix the remove function cannot handle array input 
+		-- finished
+	4. Fix broken ungroup function
+		4-1 group
+			-- finished
+		4-2 data
+			-- processing
+		4-3 render
+---
+	## 2023.07.04		version 0.7.7.6
+	-- Function enhancement
+	-- Bug fix
+	# Added
+	1. Add error message in movemenu when data exist in every monitored groups
+		-- finished
+	2. Add error message when there is no monitored group
+		-- finished
+	# Fixed
+	1. Fix the bug that when Groups is empty display Shortcut
+		-- finished
+	2. Rewrite mnt-remove to id-based to prevent parent duplicate
+		-- finished
+---
+	## 2023.07.03		version 0.7.7.5
+	-- Rewrite function
+	-- Bug fix
+	# Changed
+	1. Rewrite drag and drop function
+		1-1 Update
+			-- finished
+		1-2 Remove
+			-- processing
+		1-3 Render
+			-- finished
+	2. Rewrite Stemdb and mnt-update as id-based
+		-- finished
+	# Fixed
+	1. Fix the bug that mnt-selected-drag is not removed when drop failed
+		-- finished
+---
+	## 2023.06.30		version 0.7.7.4
+	-- Remove wasted codes
+	-- Rewrite function
+	-- Bug fix
+	# Fixed
+	1. Fix mnt-selected-drag class position
+		-- finished
+	# Changed
+	1. Rewrite drag and drop function
+		1-1 Update
+			-- finished
+		1-2 Remove
+		1-3 Render
+---
+	## 2023.06.29		version 0.7.7.3
+	-- Remove watsted codes
+	-- Rewrite function
+	# Changed
+	1. Rewrite mnt-remove function
+		1-1 Groups parts
+			-- finished
+	2. Rewrite mnt-removemenu-remove function to id-based function
+		-- finished
+	3. Apply gdb to all Groups loader
+		-- finished
+	4. Remove mnt-group function
+		-- finished
+	5. Expand uxSelect function
+		-- finished
+---
+	## 2023.06.28		version 0.7.7.2
+	-- Rewrite function
+	# Changed
+	1. Rewrite uxSelect to store parent monitored groups data
+		-- finished
+	2. Rewrite mntsort to return monitored groups and monitored data's parent info
+		-- finished
+	3. Rewrite mntshortcut to dynamic add Shortcut mnt-user-group-id instead of given it a fixed id
+		-- finished
+	4. Add a gdb to support massively used Groups mdbLoader
+		-- finished
+	5. Rewrite mnt-remove function
+		5-1 Groups part
+		5-2 Data parts
+			-- finished
+---
+	## 2023.06.27		version 0.7.7.1
+	-- Clear wasted codes
+	-- Rewrite function
+	-- Remove dependency
+	# Changed
+	1. Add removemenu to monitored groups 
+		-- finished
+	2. Remove some unused module dependency
+		-- finished
+	
+---
+	## 2023.06.26		version 0.7.7
+	-- Function implementation
+	-- Rewrite function
+	-- Bug fixed
+	-- Clear wasted codes
+	
+	# Added
+	1. Add mntquery function to handle basic information look-up
+		-- finished
+	# Changed
+	1. Rewrite mnt-update function to id-based and support groups
+		-- finished
+	2. Rewrite hide and unhide function for better readability
+		-- finished
+	3. Hide "Move to {ParentName}" option when target is currently in its parents group
+		-- finished
+	# Fixed
+	1. Fix the bug that Monitored groups can be repeatedly joined
+		-- finished
+	2. Rewrite unhide function to solve some accidently hiding or unhiding action
+		-- finished
+	3. Fix the bug that Shorcut block some dropmenu options from showing up
+		-- finished
+	
+---
+	## 2023.06.21		version 0.7.6.1
+	-- Function implementation
+	-- Rewrite function
+	# Added
+	1. Add mntsort function to sort monitored groups and data in array 
+		-- finished
+	# Changed
+	1. Rewrite uxSelect present more data(monitored groups and data id and entire class) to use
+		-- finished
+	2. Rewrite mnt-update function to id-based
+		2-1 Monitored data
+			-- finished
+		2-2 Monitored groups
+			-- processing
+---
+	## 2023.06.20		version 0.7.6
+	-- Function implementation
+	-- Rewrite function
+	# Added
+	1. Add mntclass function to parse unique class id and class name
+		-- finished
+	# Changed
+	1. Rewrite unique group class name mechanism
+		-- finished
+	2. Rewrite mntrename function to cancel the unique name handle
+		-- finished
+	
+---
+	## 2023.06.19		version 0.7.5.3
+	-- Rewrite function
+	# Changed
+	1. Rewrite mnt-load function to return group id
+		-- processing
+---
+	## 2023.06.16		version 0.7.5.2
+	-- Rewrite function
+	# Changed
+	1. Rewrite dragging mechanism
+		-- finished
+	# Bugged
+	1. Move to Shortcut is missing
+	2. Movemenu not trigger group updating
+---
+	## 2023.06.15		version 0.7.5.1
+	-- Rewrite function
+	-- Bug fix
+	-- Remove wasted codes 
+	# Changed
+	1. Rewrite ungroup function to improve performance
+		-- finished
+	# Fixed
+	1. Fix the bug that Lab.js and Setting.js import error
+		-- finished
+---
+	## 2023.06.14		version 0.7.5
+	-- Function implementation
+	-- Rewrite function
+	-- Clear wasted codes
+	# Added
+	1. ungroup function is fully implemented
+		-- finished
+	2. Add addon.js to wrap all custom scripts as a centralize package
+		-- finished
+	3. Add arrUniq function into addon.js handle array duplicate removing work
+		-- finished
+	# Changed
+	1. Rewiring mntmain to mntgroupwrite and use isMainExec to adjust the behavior of All
+		-- finished
+	2. Import addon.js into all backend scripts
+  		-- finished
+	# Bugged
+	1. Monitored data is duplicate in All after drop
+	2. When move to an already expanded group, it did not update instantly
+---
+	## 2023.06.13		version 0.7.4
+	-- Function implementation
+	-- Rewrite function
+	-- Remove wasted code
+	-- Bug fix
+	# Added
+	1. Add extension.js to handle all general functions which can be use in any function section
+		-- finished
+	2. Add extUniq function to handle duplicate elementsin array
+		-- finished
+	# Changed
+	1. Rewrite uxSelect function let Node return real nodes instead of id
+		-- finished
+	# Fixed
+	1. Fix the bug that mnt-load return non-mainDB id
+		-- finished
+	2. Fix extUniq recognize all DOM elements as same item error
+		-- finished
+---
+	## 2023.06.12		version 0.7.3
+	-- Function implementation
+	-- Rewrite function
+	-- Database enhancement
+	-- Bug fix
+	# Added
+	1. Add uxSelectAll function to handle identical option selection
+		-- finished
+	# Changed
+	1. Add parent column in Monitor of Stemdb
+		-- finished
+	2. Rewrite mnt-update to record parent group when updating monitored data
+		-- finished
+	3. Rewrite mntfunction to adapt the reverse returned value of mnt-update function
+		-- finished
+	# Fixed
+	1. Fixing the undefined error in mntgroupwrite
+		-- finished
+	2. Fix the error appears when no monitored data exist
+		-- finished
+---
+	## 2023.06.09		version 0.7.2.1
+	-- Rewrite function
+	-- Bug fix
+	# Changed
+	1. Rewrite mntgroupwrite function to give better support of array for further multiple selection function
+		-- finished
+	2. Enhance mnt-main to return id and name
+		-- finished
+	3. Rewrite unpack function to support multiple layers of res
+		-- finished
+	# Fixed
+	1. Fix the bug that mntgroup misbehavior
+		-- finished
+	2. Fix the bug that mntmenuAddition catch error
+		-- finished
+	# Processing
+	1. Import unique class for all moitored data
+	2. Lighten other mnt function by adapting new unpack mechanism
+
+---
+	## 2023.06.08		version 0.7.2.0
+	-- Function implementation
+	-- Bug fix
+	# Added
+	1. Add monitored data delete function
+		-- finished
+	2. Add unique function to handle array duplicate elements
+		-- finished
+	# Fixed
+	1. Fix the bug that monitor section not updated with delete function
+		-- finished
+---
+	## 2023.06.07		version 0.7.1.5
+	-- Rewrite function
+	-- Bug fix
+	# Added
+	1. Add a check to censorCheck function to prevent group name starts with white space
+		-- finished
+	# Changed
+	1. Rewrite censorCheck function for better readability and maintainance
+		-- finished
+	# Fixed
+	1. Fix the bug that Add tag trigger mnt centored detection
+		-- finished
+	2. Fix the bug that mntload return value always lost one element
+		-- finished
+	3. Fix the bug that mntgroupload fire when renaming
+		-- finished
+---
+	## 2023.06.06		version 0.7.1.4
+	-- Clear wasted codes
+	-- Function implementation 
+	-- Bug fix
+	# Added
+	1. Add mnt-build function to handle basic database creation
+		-- finished
+	# Fixed
+	1. Fix the bug that warn when no monitored data
+		-- finished
+---
+	## 2023.06.02		version 0.7.1.3
+	-- Bug fix
+	# Fixed
+	1. Add white space check to mntrename
+		-- finished
+---
+	## 2023.06.01		version 0.7.1.2
+	-- Bug fix
+	-- Clear wasted codes
+	# Fixed
+	1. Fix the bug that monitored groups can be added to itself
+		-- finished
+	2. Fix the bug that monitored groups naming error
+		-- finished
+	3. Fix the bug that movemenu not update with rename function
+		-- finished
+	4. Fix the naming error when monitored groups writing
+		-- finished
+	5. Fix the missing contents of monitored groups after renaming
+		-- finished
+---
+	## 2023.05.31		version 0.7.1.1
+	-- Rewrite function
+	-- Clear wasted codes
+	-- Bug fix
+	# Changed
+	1. Rewrite mntmenuAddition in dynamic function 
+		-- finished
+	2. Append groupdelete and groupcreate function recreate movemenu after execution
+		-- finished
+	# Fixed
+	1. Sometimes group delete cannot delete the physical db
+		-- finished
+	2. Monitored groups and data can be duplicate when adding
+		-- finished
+	3. Fix the bug that when drop in subgroups would duplicate rendering
+		-- finished
+		
+---
+	## 2023.05.30		version 0.7.1
+	-- Function implementation
+	-- Bug fix
+	-- Clear wasted codes
+	-- Style change
+	# Added
+	1. Add mntreplace to centralize unique classname
+		-- finished
+	2. Hide movemenu dropdown option sharing with the same group name
+		-- finished
+	# Changed
+	1. Change the font-size of dropmenu options
+		-- finished
+	# Fixed
+	1. Fix the bug that when deleted groups have no parents or children would not work
+		-- finished
+	2. Fix the bug that replace reserved characters function sometimes not worl well 
+		-- finished
+---
+	## 2023.05.29		version 0.7.0
+	-- Function implementation
+	# Added
+	1. Finish monitored group delete function
+		-- finished
+	# Fixed
+	1. Fix the bug that physic db not deleted after run the function
+		-- finished
+---
+	## 2023.05.26		version 0.6.9.1
+	-- Clear wasted codes
+	-- Bug fix
+	# Fixed
+	1. Fix the bug that created monitored groups are not configured in Groups
+		-- finished
+	2. Fix the bug that multiple level of array appears in promiseChain
+		-- finished
+---
+	## 2023.05.25		version 0.6.9
+	-- Bug fix
+	-- Rewrite function
+	-- Function implementation
+	# Added
+	1. Add exception handler(mnterror)
+		-- finished
+	# Changed
+	1. Add unique class for each monitored group
+		-- finished
+	2. Add reserved or illegal character examine in mntrename
+		-- finished
+	3. Replace white space with reserved charcter to prevent class forked
+		-- finished
+	# Fixed
+	1. Fix the error in mntgroupload when call at non-header
+		-- finished
+	2. Fix the bug that hide table have null value
+		-- finished
+---
+	## 2023.05.24		version 0.6.8
+	-- Bug fix
+	-- Function demo build
+	-- Function implementation
+	# Added
+	1. Build a demo function mntgroupload for testing monitored groups loading
+		-- finished		
+	2. Add a function mntmenuMovementCreate to auto add option to movemenu
+		-- finished
+	# Fixed
+	1. Fix the bug that when parents over two, return value will be undefined
+		-- finished
+	2. Fix the bug that when children is zero causing error
+		-- finished
+---
+	## 2023.05.23		version 0.6.7
+	-- Function implementation
+	-- Rewrite function
+	-- Adjust contextmenu display setting
+	-- Bug fix
+	# Added
+	1. Add an unpack function to handle query data from sqlite
+		-- finished
+	# Changed
+	1. Rewrite mnt-update to make support group add
+		-- finished
+	2. Unhide move menu from groups
+		-- finished
+	3. Rewrite mnt-load function in multiple promise method
+		-- finished
+	# Fixed
+	1. Fix the bug that Shortcut is counted as a monitored group and load into Groups
+		-- finished
+---	
+	## 2023.05.22		version 0.6.6
+	-- Function implementation
+	-- Rewrite function
+	-- Bug fix
+	# Added
+	1. Add monitored groups missing scan function
+		-- finished
+	2. Add more functions at mnt-delete
+		-- finished
+	3. Add 'Add to Shortcut' function
+		-- finished
+	# Changed
+	1. Rewrite mnt-update in multiple promise method
+		-- finished
+	2. Rewrite mntfunc function to adapt multiple promise feature
+		-- finished
+	# Fixed
+	1. Fix the bug that table of monitored group is missing
+		-- finished
+---
+	## 2023.05.19		version 0.6.5.1
+	-- Bug fix
+	-- Style changed
+	-- Rewrite function
+	# Changed
+	1. Add border to header 
+		-- finished
+	2. Rewrite mnt-update function in group-based method
+		-- finished
+	# Fixed
+	1. Fix the bug that group height would stack by dragging
+		-- finished
+	2. Fix the bug that drop event never fire
+		-- finished
+	3. Fix the bug that group cannot update properly
+		-- finished
+---
+	## 2023.05.18		version 0.6.5
+	-- Rewrite function
+	-- Bug fix
+	# Changed
+	1. Rewrite mntload function to fit new Groups-based database structure
+		-- finished
+	2. Rewrite rename function in new group-based method
+		-- finished
+	# Fixed
+	1. Fix the bug that Group append empty item
+		-- finished
+	2. Fix the bug that duplicate file would miss in rename function
+		-- finished
+---
+	## 2023.05.17		version 0.6.4.1
+	-- Rebuild database
+	# Added
+	1. Add parent and child into Groups.db and remove subgroup
+		-- finished
+---
+	## 2023.05.16		version 0.6.4
+	-- Rewrite function
+	-- Bug fix
+	-- Finction implementation
+	-- Clear wasted codes
+	# Added
+	1. Auto Configure and update Groups after creating a new one
+		-- finished
+	2. Create group function now support in other groups
+		-- finished
+	3. Add uxSelect function to deal with select-related actions
+		-- finished
+	4. Add group delete function
+		-- finished
+	# Changed 
+	1. Change mntgroup into db-based style
+		-- finished
+	2. Rewrite remove function in contextmenu and mntgroupwrite to fit new uxSelect mechanism
+		-- finished
+	# Fixed
+	1. Fix when you create outside all groups it would crash
+		-- finished
+	2. Fix the bug that Groups cannot update after creating new group
+		-- finished
+	3. Fix the bug that some groups cannot update after group create function
+		-- finished
+---
+	## 2023.05.15		version 0.6.3.1
+	-- Update function
+	-- Rewrite function
+	-- Code re-arrangement
+	# Added
+	1. Add unhide function to handle exception case
+		-- finished
+	2. Create new group support created in a group
+		-- processing
+	3. Remove groups from all groups
+		-- processing
+	# Changed
+	1. Add grouprename and groupremove function into hide list
+		-- finished
+	2. Make hide function for massive codes reduction
+		-- finished
+	3. Unhide new function in Groups
+		-- finished
+---
+	## 2023.05.12		version 0.6.3
+	-- Function implementation
+	-- Bug fix
+	-- Clear wasted codes
+	-- Style change
+	# Added
+	1. Add group rename function
+		1.1 Rename when click
+		-- finished
+	2. Add idPicker to handle all duplicate naming problem
+		-- finished
+	# Changed
+	1. Apply idPicker at group create function
+		-- finished
+	2. Make Groups in monitored section is scrollable and increase max height
+		-- finished
+	# Fixed
+	1. Solve the bug that cannot select folder
+		-- finished
+	2. Fix the bug that selected header not highlighted
+		-- finished
+	3. Fix the bug that click inside the editable block would parse data
+		-- finished
+	4. Fix when group rename is duplicate would overwrite the older same name db
+		-- finished
+	5. Reload group after new group created
+		-- finished
+---
+	## 2023.05.11		version 0.6.2
+	-- Rewire function
+	-- Function implementation
+	-- Clear wasted codes
+	-- Build infrastructure
+	# Added
+	1. Add mntdragfunc to implement new mntdrag event listener
+		-- finished
+	2. Add more option to contextmenu
+		-- finished
+	# Changed 
+	1. Rewire the original crappy drag and drop to new event listener mntdrag
+		-- finished
+---
+	## 2023.05.10		version 0.6.1
+	-- Rewrite function
+	# Changed
+	1. Rewrite mntfold to react the case of subgroup
+		-- finished
+	2. Rewrite mntfold in a deep way for further developing
+		-- finished
+---
+	## 2023.05.09		version 0.6.0.1
+	-- Function implementation
+	-- Rewrite function
+	-- Remove wasted codes
+	# Added
+	1. Apply basic function at subgroup
+		-- finished
+	# Changed
+	1. Rewrite mntfold in a delegation way
+		-- finished
+		
+---
+	## 2023.05.08		version 0.6.0
+	-- Implement function
+	# Added
+	1. Add create group function
+		-- finished
+	2. Add custom group loading function
+		-- finished
+---
+	## 2023.05.05		version 0.5.9
+	-- Rewrite function
+	-- Implement function
+	-- Remove wasted code
+	-- Bug fix
+	-- Style Change
+	-- Remove dependency
+	# Added
+	1. Implement custom class reader for more flexible class-based function executer
+		-- finished
+	2. Apply hiding controll in contextmenu function
+		-- finished
+	# Changed
+	1. Rewrite event to customevent to handle complicated data 
+		-- finished
+	2. Add more details in mnt for more complete condition
+		-- finished
+	3. Remove fs-info because it is no longer need
+		-- finished
+	4. Arrange fs-path to the bottom by flexbox
+		-- finished
+	5. Remove the dependency of glob module
+		-- finished
+	# Fixed
+	1. Fix the bug that all submenu functions of contextmenu are passive
+		-- finished
+	# Bugged
+	1. Fix the bug that drag data cause duplicate expand
+		-- finished
+---
+	## 2023.05.04		version 0.5.8.1
+	-- Rewrite function
+	# Changed
+	1. Rewrite the behavior of uxContextMenuRemove in custom event to fix prority bug
+		-- finished
+---
+	## 2023.05.03		version 0.5.8
+	-- Rewrite function
+	-- Function implementation
+	-- Clear wasted codes
+	# Added
+	1. Add customized option hide function(contextmenu) globally
+		-- finished
+	2. Add global context menu target select function with exception handler
+		-- finished
+	3. Add contextmenu create rxception handler
+		-- finished
+	4. Add contextmenu hide setting applier
+		-- finished
+	# Changed
+	1. Rewrite contextmenu removal mechanism
+		-- finished
+	2. Rewrite contextmenu function in delegation way and transfer into index-ux
+		-- finished
+	3. Merge contextmenu related function
+		-- finished
+---
+	## 2023.05.02		version 0.5.7.1
+	-- Bug Fix
+	-- Remove some wasted codes
+	# Fixed
+	1. Fix that remove function not refresh
+		-- finished
+	2. Fix data can be duplicated in monitored group
+		-- finished
+	3. Fix collapse height auto adjustment bug in some function 
+		3.1 mntremove
+		3.2 drop
+		3.3 mntmain
+		-- finished
+---
+	## 2023.04.28		version 0.5.7
+	-- Function implementation
+	-- Function rewiring
+	-- Style change
+	-- Clear wasted codes
+	# Added
+	1. Updating monitored group database when dragging in 
+		-- finished
+	2. Auto load monitored data when app ready
+		-- finished
+	3. Basic structure of contextmenu function
+		-- finished
+	4. Add contextmenu selected function
+		-- finished
+	# Changed
+	1. Merging highlight monitored group function into mntstyle
+		-- finished
+	2. Build mntbuild to control the processing of mnt building
+		-- finished
+	3. Add submenu hover effect
+		-- finished
+	4. Rebuild mntcheck to handle all class type check 
+		-- finished
+	5. Rebuild mntselected to handle all selected related worked
+		-- finished
+---
+	## 2023.04.28		version 0.5.6.2
+	-- Bug fix
+	# Fixed
+	1. Fix the incorrect check in mntfunc jump function
+		-- finished
+	2. Fix the incorrect behavior of expanding function
+		-- finished
+---
+	## 2023.04.27		version 0.5.6.1
+	-- Bug fix
+	# Fixed
+	1. Auto detect essential folders existence
+		-- finished
+	2. Fix the error in mntmain when no data 
+		-- finished
+	3. Fix the unable to open database bug	
+		-- finished
+---
+	## 2023.04.26		version 0.5.6
+	-- Bug fix
+	-- Clear wasted codes
+	# Fixed
+	1. Submenu now can correctly positioning
+		-- finished
+	2. Fix the bug that when contextmenu is too low, submenu sink into page bottom
+		-- finished
+	3. Fix the submenu is existed after contextmenu is off.
+		-- finished
+---
+	## 2023.04.25		version 0.5.5.3
+	-- Bug fix
+	# Fixed
+	1. Fix the false position value
+		-- finished
+	2. Fix the contextmenu overflow out of page
+		-- finished
+	3. Fix the submenu status is inherit to next contextmenu
+		-- finished
+	4. Fix position is not worked at first click
+		-- finished
+---
+	## 2023.04.25		version 0.5.5.2
+	-- Submenu function
+	# Added
+	1. Add multiple layers to contextMenu
+		-- finished
+	# Bugged
+	1. Submenu position is incorrect
+	
+---
+	## 2023.04.24		version 0.5.5.1
+	-- Rewrite function
+	-- Improve contextMenu positioning accuracy
+	-- Style change
+	# Changed
+	1. Rewrite function in delegation way
+		1.1 mntmenu
+		-- finished
+	2. Improve positioning accuracy of contextMenu in mnt
+		-- finished
+---
+	## 2023.04.20		version 0.5.5
+	-- Bug fix
+	-- Rewrite function
+	# Fixed
+	1. Fix the bug that mntfunc run before mntmain over
+		-- finished
+	2. Fix the bug that drop cannot trigger highlight remove
+		-- finished
+	# Changed
+	1. Rewrite function in delegation way
+		1.1 mntfunc data function
+		1.2 mntfunc folder function
+		1.3 mntstyle
+		1.4 mntfold
+		-- finished
+---
+	## 2023.04.19		version 0.5.4.1
+	-- Funcction iplementation
+	-- Bug fix
+	-- Code rewrite
+	-- Remove wasted codes
+	# Fixed
+	1. Fix smooth effect missing bug
+		-- finished
+	2. Fix monitored data highlight effect last permanently
+		-- finished
+	# Added
+	1. Add expand check in dragging function to prevent collapsing
+		-- finished
+	# Changed
+	1. Rewrite some codes from flexible to fixed due to css poor behaviour
+		-- finished
+---
+	## 2023.04.18		version 0.5.4
+	-- Function re-import
+	# Added
+	1. Fix the dragenter and dragleave bug and re-import resize function
+		-- finished
+	2. Add smooth expansion and collapsing animation to monitored groups
+		-- finished
+		
+---
+	## 2023.04.17		version 0.5.3.3
+	-- Bug fix
+	-- Style change
+	# Fixed
+	1. Fix the bug that monitored path is highlighted after dropping
+		-- finished
+	2. Fix the bug that all objects in a monitored groups are merged
+		-- finished
+	# Changed
+	1. When hovering, the header of monitored groups would be highlighted
+		-- finished
 ---
 	## 2023.04.14		version 0.5.3.2
 	-- Bug fix

@@ -1,6 +1,3 @@
-// Testing function
-const information = document.getElementById('info')
-information.innerText = `This app is using Chrome (v${versions.chrome()}), Node.js (v${versions.node()}), and Electron (v${versions.electron()})`
 
 // Global in FileSystem
 let floorNum = 'fs-floor-0'
@@ -168,10 +165,10 @@ const fsfunc = async (v=false,isDrive=false) => {
 	const fsdataset = []	
 	for(var i=0;i<file.length;i++){
 		if(size[i]){
-			const fsbtn = `<div class='fs-data-label' id='datalabel` + i +`'><button class='fs-data'>` + file[i] + `</button>`
+			const fsbtn = `<div class='fs-data-label' id='datalabel${i}'><button class='fs-data hint--bottom hint--medium' aria-label="${file[i]}">${file[i]}</button>`
 			const fssize = `<p class='fs-data-size'>`+ size[i] + `</p>`
 			const fsmtime = `<p class='fs-data-mtime'>`+ mtime[i] +`</p></div>`
-			const fsdata = fsbtn + fssize + fsmtime + `<br>`
+			const fsdata = fsbtn + fssize + fsmtime
 			fsdataset[i] = fsdata
 		}	
 	}
