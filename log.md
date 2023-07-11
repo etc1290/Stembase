@@ -41,7 +41,8 @@
 	# Changed
 	1. Display error when appended item is existed in target group
 		-- finished
-	
+	2. Data duplicate warning message is complete
+		-- finished
 	
 --- Monitor-Function-Optimization: start
 	## 2023.07.10		version 0.7.8.1

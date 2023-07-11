@@ -506,9 +506,38 @@ ipcMain.handle('mnt-error',(event,err,arr=false)=>{
 	warn['mntrename-prefix']	= `Groups name cannot start with white space`
 	warn['mntmove-occupied']	= `Data exist in all monitored groups`
 	warn['mntmove-exiled']		= `There is no any monitored group`
-	warn['mntdrag-data']		= `The following monitored data cannot be added to monitored groups:` + arr + `Due to they are already existed`
-	warn['mntdrag-group']		= `The following monitored group cannot be added to monitored groups:` + arr + `Due to they are already existed`
-	dialog.showErrorBox('ERROR',warn[err])
+	warn['mntdrag-data']		= ()=>{		
+		const prefix = `The following monitored data cannot be added to monitored groups:\n\n`
+		const suffix = `\nDue to they are already existed`
+		for(var i=0;i<arr.length;i++){
+			arr[i] = arr[i] + '\n'
+		}
+		const content = arr.join(',')
+		const output = prefix + content + suffix
+		return output
+	}
+	warn['mntdrag-group']		= ()=>{
+		const prefix = `The following monitored group cannot be added to monitored groups:\n\n`
+		const suffix = `\nDue to they are already existed`
+		
+		const cmd = `select name from Members where id = ?`
+		const promiseChanin = []
+		for(var i=0;i<arr.length;i++){
+			const e = arr[i]
+			promiseChain[i] = new Promise((resolve)=>{
+				gdb.all(cmd,e,(err,res)=>{
+					const name = unpack(res)
+					resolve(name)
+				})
+			})
+		}
+		const outcome = Promise.all(promiseChain)
+	}
+	let message = warn[err]
+	if(message instanceof Function){
+		message = warn[err]()
+	}
+	dialog.showErrorBox('ERROR',message)
 })
 
 // Building database
