@@ -27,8 +27,22 @@
 	40. Add ellipsis effect at all monitored name
 	45. Apply fake chain to every backend function accepted array input
 	46. Check if the group is loaded 
-	47. Prevet first launch error
+	47. Prevent initialization error
+		-- next branch
+	48. Shorcut is missing after initialization
+		-- next branch
+	49. Movemenu should trigger mnterror either
+		-- next
+	
 
+---
+	## 2023.07.11		version 0.7.8.1
+	-- Enahmce function
+	# Changed
+	1. Display error when appended item is existed in target group
+		-- finished
+	
+	
 --- Monitor-Function-Optimization: start
 	## 2023.07.10		version 0.7.8.1
 	-- Create new branch

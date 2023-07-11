@@ -499,13 +499,15 @@ ipcMain.handle('mnt-update',(event,folderset,dataset,isGroup=false)=>{
 	return output
 })
 // Exception handler
-ipcMain.handle('mnt-error',(event,err)=>{
+ipcMain.handle('mnt-error',(event,err,arr=false)=>{
 	const warn = []
 	warn['mntrename-censor']	= `Groups name cannot contain` + '`!`@$%^&*+\\=[]{};' + `:"|,<>/?~`
 	warn['mntrename-empty']		= `Groups name cannot make by white space only`
 	warn['mntrename-prefix']	= `Groups name cannot start with white space`
 	warn['mntmove-occupied']	= `Data exist in all monitored groups`
 	warn['mntmove-exiled']		= `There is no any monitored group`
+	warn['mntdrag-data']		= `The following monitored data cannot be added to monitored groups:` + arr + `Due to they are already existed`
+	warn['mntdrag-group']		= `The following monitored group cannot be added to monitored groups:` + arr + `Due to they are already existed`
 	dialog.showErrorBox('ERROR',warn[err])
 })
 

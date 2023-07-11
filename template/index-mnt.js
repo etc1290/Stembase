@@ -528,7 +528,7 @@ const mntfunc = (target)=>{
 						for(let i=pos;i<reportArr.length;i++){
 							const e = reportArr[i]
 							if(e===false){
-								dupArr[d++] = groupArr[i]								
+								dupGroupArr[d++] = groupArr[i]								
 							}
 						}
 					}	
@@ -549,7 +549,7 @@ const mntfunc = (target)=>{
 						for(let i=pos;i<reportArr.length;i++){
 							const e = reportArr[i]
 							if(e==false){
-								dupGroupArr[g++] = dataArr[i]
+								dupArr[g++] = dataArr[i]
 							}
 						}
 					}
@@ -559,7 +559,6 @@ const mntfunc = (target)=>{
 				}else{
 					isUpdateGroup = true
 				} 
-				
 				// Remove
 				let isRemove = false
 				let isRemoveGroup = false
@@ -638,7 +637,18 @@ const mntfunc = (target)=>{
 				updateArr = updateArr.flat(2)
 				if(isRemove&&isRemoveGroup){
 					mntgroupwrite(updateArr)
-				}			
+				}
+				// Exception Handle
+				if(dupArr.length){
+					console.log(1)
+					console.log(dupArr)
+					const mnterror = await window.mnt.error('mntdrag-data',dupArr)
+				}
+				if(dupGroupArr.length){
+					console.log(2)
+					console.log(dupGroupArr)
+					const mnterror = await window.mnt.error('mntdrag-group',dupGroupArr)
+				}
 			})
 		}
 	}	
