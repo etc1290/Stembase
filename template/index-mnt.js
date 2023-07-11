@@ -640,8 +640,6 @@ const mntfunc = (target)=>{
 				}
 				// Exception Handle
 				if(dupArr.length){
-					console.log(1)
-					console.log(dupArr)
 					const mnterror = await window.mnt.error('mntdrag-data',dupArr)
 				}
 				if(dupGroupArr.length){

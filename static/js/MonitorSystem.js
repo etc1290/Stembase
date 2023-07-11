@@ -499,7 +499,7 @@ ipcMain.handle('mnt-update',(event,folderset,dataset,isGroup=false)=>{
 	return output
 })
 // Exception handler
-ipcMain.handle('mnt-error',(event,err,arr=false)=>{
+ipcMain.handle('mnt-error',async(event,err,arr=false)=>{
 	const warn = []
 	warn['mntrename-censor']	= `Groups name cannot contain` + '`!`@$%^&*+\\=[]{};' + `:"|,<>/?~`
 	warn['mntrename-empty']		= `Groups name cannot make by white space only`
@@ -516,26 +516,36 @@ ipcMain.handle('mnt-error',(event,err,arr=false)=>{
 		const output = prefix + content + suffix
 		return output
 	}
-	warn['mntdrag-group']		= ()=>{
+	warn['mntdrag-group']		= async()=>{
 		const prefix = `The following monitored group cannot be added to monitored groups:\n\n`
-		const suffix = `\nDue to they are already existed`
-		
+		const suffix = `\nDue to they are already existed`		
 		const cmd = `select name from Members where id = ?`
-		const promiseChanin = []
+		const promiseChain = []
 		for(var i=0;i<arr.length;i++){
 			const e = arr[i]
 			promiseChain[i] = new Promise((resolve)=>{
 				gdb.all(cmd,e,(err,res)=>{
+					console.log(res)
 					const name = unpack(res)
 					resolve(name)
 				})
 			})
 		}
-		const outcome = Promise.all(promiseChain)
+		const nameArr = await Promise.all(promiseChain)
+		for(var i=0;i<nameArr.length;i++){
+			nameArr[i] = nameArr[i] + '\n'
+		}
+		const content = nameArr.join(',')
+		const output = prefix + content + suffix
+		return output
 	}
 	let message = warn[err]
-	if(message instanceof Function){
+	const isFunc = message.constructor.name == 'Function'
+	const isAsync= message.constructor.name == 'AsyncFunction'
+	if(isFunc){
 		message = warn[err]()
+	}else if(isAsync){
+		message = await warn[err]()
 	}
 	dialog.showErrorBox('ERROR',message)
 })
