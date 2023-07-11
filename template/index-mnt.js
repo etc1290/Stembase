@@ -489,7 +489,7 @@ const mntfunc = (target)=>{
 				const dropid = mntclass(dropFolder)[0]
 				const dropName = dropFolder.children[0].innerHTML
 				const selected = uxSelect('mnt','drag')
-				const [groupArr,dataArr,groupParent,dataParent] = mntsort(selected)
+				let [groupArr,dataArr,groupParent,dataParent] = mntsort(selected)
 				const has = (cls)=>{
 					return dropFolder.classList.contains(cls)
 				}
@@ -512,6 +512,23 @@ const mntfunc = (target)=>{
 					groupParent.length = 0
 				}
 				
+				//Source detection
+				let grouphash = []
+				let datahash = []
+				if(groupParent.length){
+					[groupParent,groupArr,grouphash] = extRemove(groupParent,dropid,groupArr)
+				}
+				if(dataParent.length){
+					[dataParent,dataArr,datahash] = extRemove(dataParent,dropid,dataArr)
+				}					
+				if(grouphash.length + datahash.length){
+					if(groupArr.length + dataArr.length){
+						const mnterror = await window.mnt.error('mntdrag-source-multi')
+					}else{
+						const mnterror = await window.mnt.error('mntdrag-source')
+						return
+					}
+				} 
 				//Main Function
 				const dupArr = []
 				const dupGroupArr = []

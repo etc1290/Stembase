@@ -4,7 +4,7 @@
 @@@ Roadmap
 	4. 	Collapse groups only works when leave parent groups or second members
 	5. 	Show error when drag into the same source groups
-		-- processing
+		-- finished
 	6. 	Prevent right-click the contextmenu firing
 	7. 	Merge mnt-get function into mnt-query
 	8. 	Rewrite or remove uxselect function in index-tag
@@ -33,17 +33,20 @@
 		-- next branch
 	49. Movemenu should trigger mnterror either
 		-- next
+	50. Prevent creating null db when update(or drop?)
 	
 
 ---
 	## 2023.07.11		version 0.7.8.1
-	-- Enahmce function
+	-- Function enhancement
 	# Changed
 	1. Display error when appended item is existed in target group
 		-- finished
 	2. Data duplicate warning message is complete
 		-- finished
 	3. Group duplicate warning message is complete
+		-- finished
+	4. Add warning when source and destination is the same
 		-- finished
 	
 --- Monitor-Function-Optimization: start

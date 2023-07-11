@@ -539,6 +539,8 @@ ipcMain.handle('mnt-error',async(event,err,arr=false)=>{
 		const output = prefix + content + suffix
 		return output
 	}
+	warn['mntdrag-source']		= `The monitored group names of source and destination cannot be the same.\nDrop task cancelled.`
+	warn['mntdrag-source-multi']= `The monitored group names of source and destination cannot be the same.\nOne or some may not be added.`
 	let message = warn[err]
 	const isFunc = message.constructor.name == 'Function'
 	const isAsync= message.constructor.name == 'AsyncFunction'
