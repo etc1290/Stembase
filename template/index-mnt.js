@@ -581,17 +581,7 @@ const mntfunc = (target)=>{
 				let isRemoveGroup = false
 				if(isUpdate&&isUpdateGroup){
 					if(groupArr.length){
-						console.log(groupParent)
-						console.log(groupArr)
-						for(var i=0;i<groupParent.length;i++){
-							const pos = groupParent.indexOf('')
-							if(pos + 1){
-								groupParent.splice(pos,1)
-								groupArr.splice(pos,1)
-							}else{
-								break
-							}
-						}
+						[groupParent,groupArr] = extRemove(groupParent,'',groupArr)
 						const reportArr = await window.mnt.remove(groupParent,groupArr,true)
 						if(reportArr){
 							isRemoveGroup = true
@@ -600,15 +590,7 @@ const mntfunc = (target)=>{
 						isRemoveGroup = true
 					}
 					if(isRemoveGroup&&dataArr.length){
-						for(var i=0;i<dataParent.length;i++){
-							const pos = dataParent.indexOf('')
-							if(pos + 1){
-								dataParent.splice(pos,1)
-								dataArr.splice(pos,1)
-							}else{
-								break
-							}
-						}
+						[dataParent,dataArr] = extRemove(dataParent,'',dataArr)
 						const reportArr = await window.mnt.remove(dataParent,dataArr)
 						if(reportArr){
 							isRemove = true
@@ -660,8 +642,6 @@ const mntfunc = (target)=>{
 					const mnterror = await window.mnt.error('mntdrag-data',dupArr)
 				}
 				if(dupGroupArr.length){
-					console.log(2)
-					console.log(dupGroupArr)
 					const mnterror = await window.mnt.error('mntdrag-group',dupGroupArr)
 				}
 			})
