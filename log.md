@@ -3,8 +3,6 @@
 
 @@@ Roadmap
 	4. 	Collapse groups only works when leave parent groups or second members
-	5. 	Show error when drag into the same source groups
-		-- processing
 	6. 	Prevent right-click the contextmenu firing
 	7. 	Merge mnt-get function into mnt-query
 	8. 	Rewrite or remove uxselect function in index-tag
@@ -27,8 +25,32 @@
 	40. Add ellipsis effect at all monitored name
 	45. Apply fake chain to every backend function accepted array input
 	46. Check if the group is loaded 
-	47. Prevet first launch error
+	47. Prevent initialization error
+		-- next branch
+	48. Shorcut is missing after initialization
+		-- next branch
+	49. Movemenu should trigger mnterror either
+		-- next branch
+	50. Prevent creating null db when update(or drop?)
+	51. Highlight new added or modified data
+	52. Apply new extRemove mechanism
 
+---
+	## 2023.07.12		version 0.7.8.2 - MFO-mntdrag-error
+	-- Clear wasted codes
+---
+	## 2023.07.11		version 0.7.8.1 - MFO-mntdrag-error
+	-- Function enhancement
+	# Changed
+	1. Display error when appended item is existed in target group
+		-- finished
+	2. Data duplicate warning message is complete
+		-- finished
+	3. Group duplicate warning message is complete
+		-- finished
+	4. Add warning when source and destination is the same
+		-- finished
+	
 --- Monitor-Function-Optimization: start
 	## 2023.07.10		version 0.7.8.1
 	-- Create new branch

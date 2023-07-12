@@ -489,7 +489,7 @@ const mntfunc = (target)=>{
 				const dropid = mntclass(dropFolder)[0]
 				const dropName = dropFolder.children[0].innerHTML
 				const selected = uxSelect('mnt','drag')
-				const [groupArr,dataArr,groupParent,dataParent] = mntsort(selected)
+				let [groupArr,dataArr,groupParent,dataParent] = mntsort(selected)
 				const has = (cls)=>{
 					return dropFolder.classList.contains(cls)
 				}
@@ -512,6 +512,23 @@ const mntfunc = (target)=>{
 					groupParent.length = 0
 				}
 				
+				//Source detection
+				let grouphash = []
+				let datahash = []
+				if(groupParent.length){
+					[groupParent,groupArr,grouphash] = extRemove(groupParent,dropid,groupArr)
+				}
+				if(dataParent.length){
+					[dataParent,dataArr,datahash] = extRemove(dataParent,dropid,dataArr)
+				}					
+				if(grouphash.length + datahash.length){
+					if(groupArr.length + dataArr.length){
+						const mnterror = await window.mnt.error('mntdrag-source-multi')
+					}else{
+						const mnterror = await window.mnt.error('mntdrag-source')
+						return
+					}
+				} 
 				//Main Function
 				const dupArr = []
 				const dupGroupArr = []
@@ -528,7 +545,7 @@ const mntfunc = (target)=>{
 						for(let i=pos;i<reportArr.length;i++){
 							const e = reportArr[i]
 							if(e===false){
-								dupArr[d++] = groupArr[i]								
+								dupGroupArr[d++] = groupArr[i]								
 							}
 						}
 					}	
@@ -549,7 +566,7 @@ const mntfunc = (target)=>{
 						for(let i=pos;i<reportArr.length;i++){
 							const e = reportArr[i]
 							if(e==false){
-								dupGroupArr[g++] = dataArr[i]
+								dupArr[g++] = dataArr[i]
 							}
 						}
 					}
@@ -559,23 +576,12 @@ const mntfunc = (target)=>{
 				}else{
 					isUpdateGroup = true
 				} 
-				
 				// Remove
 				let isRemove = false
 				let isRemoveGroup = false
 				if(isUpdate&&isUpdateGroup){
 					if(groupArr.length){
-						console.log(groupParent)
-						console.log(groupArr)
-						for(var i=0;i<groupParent.length;i++){
-							const pos = groupParent.indexOf('')
-							if(pos + 1){
-								groupParent.splice(pos,1)
-								groupArr.splice(pos,1)
-							}else{
-								break
-							}
-						}
+						[groupParent,groupArr] = extRemove(groupParent,'',groupArr)
 						const reportArr = await window.mnt.remove(groupParent,groupArr,true)
 						if(reportArr){
 							isRemoveGroup = true
@@ -584,15 +590,7 @@ const mntfunc = (target)=>{
 						isRemoveGroup = true
 					}
 					if(isRemoveGroup&&dataArr.length){
-						for(var i=0;i<dataParent.length;i++){
-							const pos = dataParent.indexOf('')
-							if(pos + 1){
-								dataParent.splice(pos,1)
-								dataArr.splice(pos,1)
-							}else{
-								break
-							}
-						}
+						[dataParent,dataArr] = extRemove(dataParent,'',dataArr)
 						const reportArr = await window.mnt.remove(dataParent,dataArr)
 						if(reportArr){
 							isRemove = true
@@ -638,7 +636,14 @@ const mntfunc = (target)=>{
 				updateArr = updateArr.flat(2)
 				if(isRemove&&isRemoveGroup){
 					mntgroupwrite(updateArr)
-				}			
+				}
+				// Exception Handle
+				if(dupArr.length){
+					const mnterror = await window.mnt.error('mntdrag-data',dupArr)
+				}
+				if(dupGroupArr.length){
+					const mnterror = await window.mnt.error('mntdrag-group',dupGroupArr)
+				}
 			})
 		}
 	}	

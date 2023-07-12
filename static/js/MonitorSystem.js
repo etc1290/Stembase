@@ -499,14 +499,57 @@ ipcMain.handle('mnt-update',(event,folderset,dataset,isGroup=false)=>{
 	return output
 })
 // Exception handler
-ipcMain.handle('mnt-error',(event,err)=>{
+ipcMain.handle('mnt-error',async(event,err,arr=false)=>{
 	const warn = []
 	warn['mntrename-censor']	= `Groups name cannot contain` + '`!`@$%^&*+\\=[]{};' + `:"|,<>/?~`
 	warn['mntrename-empty']		= `Groups name cannot make by white space only`
 	warn['mntrename-prefix']	= `Groups name cannot start with white space`
 	warn['mntmove-occupied']	= `Data exist in all monitored groups`
 	warn['mntmove-exiled']		= `There is no any monitored group`
-	dialog.showErrorBox('ERROR',warn[err])
+	warn['mntdrag-data']		= ()=>{		
+		const prefix = `The following monitored data cannot be added to monitored groups:\n\n`
+		const suffix = `\nDue to they are already existed`
+		for(var i=0;i<arr.length;i++){
+			arr[i] = arr[i] + '\n'
+		}
+		const content = arr.join(',')
+		const output = prefix + content + suffix
+		return output
+	}
+	warn['mntdrag-group']		= async()=>{
+		const prefix = `The following monitored group cannot be added to monitored groups:\n\n`
+		const suffix = `\nDue to they are already existed`		
+		const cmd = `select name from Members where id = ?`
+		const promiseChain = []
+		for(var i=0;i<arr.length;i++){
+			const e = arr[i]
+			promiseChain[i] = new Promise((resolve)=>{
+				gdb.all(cmd,e,(err,res)=>{
+					console.log(res)
+					const name = unpack(res)
+					resolve(name)
+				})
+			})
+		}
+		const nameArr = await Promise.all(promiseChain)
+		for(var i=0;i<nameArr.length;i++){
+			nameArr[i] = nameArr[i] + '\n'
+		}
+		const content = nameArr.join(',')
+		const output = prefix + content + suffix
+		return output
+	}
+	warn['mntdrag-source']		= `The monitored group names of source and destination cannot be the same.\nDrop task cancelled.`
+	warn['mntdrag-source-multi']= `The monitored group names of source and destination cannot be the same.\nOne or some may not be added.`
+	let message = warn[err]
+	const isFunc = message.constructor.name == 'Function'
+	const isAsync= message.constructor.name == 'AsyncFunction'
+	if(isFunc){
+		message = warn[err]()
+	}else if(isAsync){
+		message = await warn[err]()
+	}
+	dialog.showErrorBox('ERROR',message)
 })
 
 // Building database
