@@ -871,8 +871,6 @@ const mntmenuAddition = (cmda='all',cmdb)=>{
 					if(name == '@invalid'){
 						const movemenu = document.getElementById('mnt-cm-movemenu')
 						const mntcount = movemenu.childElementCount
-						console.log(mntcount)
-						console.log(movemenu.children)
 						const isExist = mntcount - 1
 						if(isExist){
 							const mnterror = await window.mnt.error('mntmove-occupied')
@@ -880,7 +878,6 @@ const mntmenuAddition = (cmda='all',cmdb)=>{
 							const mnterror = await window.mnt.error('mntmove-exiled')
 						}
 						return
-						//const mnterror = await window.mnt.error('mntmove-invalid')
 					}
 					if(name == 'Shortcut'){
 						target = document.getElementById('mnt-shortcut')
@@ -898,17 +895,51 @@ const mntmenuAddition = (cmda='all',cmdb)=>{
 					if(groupArr[0]){
 						const parentArr = [...groupArr].fill(targetid)
 						
-						const isFinished = await window.mnt.update(parentArr,groupArr,true)
+						/*const isFinished = await window.mnt.update(parentArr,groupArr,true)
 						if(isFinished){							
+							mntgroupwrite(target)
+						}*/
+						const reportArr = await window.mnt.update(parentArr,groupArr,true)
+						if(reportArr){
+							let pos = reportArr.indexOf(false)
+							if(pos + 1){
+								const dupGroupArr = []
+								let n = 0
+								for(var i=pos;i<reportArr.length;i++){
+									const e = reportArr[i]
+									if(!e){
+										dupGroupArr[n++] = groupArr[i]
+									}
+								}
+								const mnterror = await window.mnt.error('mntdrag-group',dupGroupArr)
+							}
 							mntgroupwrite(target)
 						}
 					}
 					if(dataArr[0]){
-						//console.log(dataArr)
 						const parentArr = [...dataArr].fill(name)
+						/*
 						const isFinished = await window.mnt.update(parentArr,selected['Data'])
 						if(isFinished){
 							mntgroupwrite(target)
+						}*/
+						//console.log(1)
+						const reportArr = await window.mnt.update(parentArr,selected['Data'])
+						if(reportArr){
+							const pos = reportArr.indexOf(false)
+							//console.log(2)
+							if(pos + 1){
+								//console.log(3)
+								const dupArr = []
+								let n = 0
+								for(var i=pos;i<reportArr.length;i++){
+									const e = reportArr[i]
+									if(!e){
+										dupArr[n++] = selected['Data'][i]
+									}
+								}
+								const mnterror = await window.mnt.error('mntdrag-data',dupArr)
+							}
 						}
 					}
 					

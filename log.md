@@ -30,16 +30,23 @@
 	48. Shorcut is missing after initialization
 		-- next branch
 	49. Movemenu should trigger mnterror either
-		-- next branch
+		-- finished
 	50. Prevent creating null db when update(or drop?)
 	51. Highlight new added or modified data
 	52. Apply new extRemove mechanism
 
 ---
+	## 2023.07.12		version 0.7.8.2	- MFO-mntmovemenu-error
+	-- Function enhancement
+	# Changed
+	1. Add warning message when add duplicae data or groups
+		-- finished
+	
+---
 	## 2023.07.12		version 0.7.8.2 - MFO-mntdrag-error
 	-- Clear wasted codes
 ---
-	## 2023.07.11		version 0.7.8.1 - MFO-mntdrag-error
+	## 2023.07.11		version 0.7.8.1	- MFO-mntdrag-error
 	-- Function enhancement
 	# Changed
 	1. Display error when appended item is existed in target group
