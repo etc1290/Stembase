@@ -7,6 +7,7 @@
 	7. 	Merge mnt-get function into mnt-query
 	8. 	Rewrite or remove uxselect function in index-tag
 	9. 	If data is already exist in monitored group remove that from movemenu
+		-- next branch
 	12. Non-main groups in Shortcut's highlight effect is missing
 	14. Auto detect if Shortcut is configured in the Groups db to prevent corrupted 
 	15. Adjust all Shortcut-id related function to fit the new mechanism
@@ -26,15 +27,16 @@
 	45. Apply fake chain to every backend function accepted array input
 	46. Check if the group is loaded 
 	47. Prevent initialization error
-		-- next branch
+		-- processing
 	48. Shorcut is missing after initialization
-		-- next branch
-	49. Movemenu should trigger mnterror either
-		-- finished
+		-- processing
 	50. Prevent creating null db when update(or drop?)
 	51. Highlight new added or modified data
 	52. Apply new extRemove mechanism
 
+---
+	## 2023.07.13		version 0.7.8.2 - MFO-mntbuild-bugfix
+	-- Remove wasted codes
 ---
 	## 2023.07.12		version 0.7.8.2	- MFO-mntmovemenu-error
 	-- Function enhancement

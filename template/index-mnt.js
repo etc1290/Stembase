@@ -894,11 +894,6 @@ const mntmenuAddition = (cmda='all',cmdb)=>{
 					const [groupArr,dataArr] = mntsort(selected)
 					if(groupArr[0]){
 						const parentArr = [...groupArr].fill(targetid)
-						
-						/*const isFinished = await window.mnt.update(parentArr,groupArr,true)
-						if(isFinished){							
-							mntgroupwrite(target)
-						}*/
 						const reportArr = await window.mnt.update(parentArr,groupArr,true)
 						if(reportArr){
 							let pos = reportArr.indexOf(false)
@@ -918,18 +913,10 @@ const mntmenuAddition = (cmda='all',cmdb)=>{
 					}
 					if(dataArr[0]){
 						const parentArr = [...dataArr].fill(name)
-						/*
-						const isFinished = await window.mnt.update(parentArr,selected['Data'])
-						if(isFinished){
-							mntgroupwrite(target)
-						}*/
-						//console.log(1)
 						const reportArr = await window.mnt.update(parentArr,selected['Data'])
 						if(reportArr){
 							const pos = reportArr.indexOf(false)
-							//console.log(2)
 							if(pos + 1){
-								//console.log(3)
 								const dupArr = []
 								let n = 0
 								for(var i=pos;i<reportArr.length;i++){
@@ -942,20 +929,6 @@ const mntmenuAddition = (cmda='all',cmdb)=>{
 							}
 						}
 					}
-					
-					//mntgroupwrite(dataArr.flat())
-					//let nodelist = []
-					/*
-					if(name == 'Shortcut'){
-						nodelist = [document.getElementById('mnt-shortcut')]
-					}else{
-						const modName = mntreplace(name)
-						nodelist = [...document.getElementsByClassName(modName)]
-					}
-					for(var i;i<nodelist.length;i++){
-						console.log(nodelist[i])
-						mntgroupwrite(nodelist[i])
-					}*/
 						
 				}
 			})
@@ -981,7 +954,6 @@ const mntgroup = async(parent,child)=>{
 			idlist.splice(pos,1)
 		}	
 		for(var i=0;i<grouplist.length;i++){
-			//const modName = mntreplace(grouplist[i][1])
 			const modName = idlist[i]
 			const header = `<p class='mnt-folder-header'>` + grouplist[i] + `</p>`
 			const content= `<div class='mnt-folder-content'></div>`
