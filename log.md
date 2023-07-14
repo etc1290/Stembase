@@ -29,11 +29,18 @@
 	47. Prevent initialization error
 		-- processing
 	48. Shorcut is missing after initialization
-		-- processing
+		-- finished
 	50. Prevent creating null db when update(or drop?)
 	51. Highlight new added or modified data
 	52. Apply new extRemove mechanism
 
+---
+	## 2023.07.14		version 0.7.8.3 - MFO-mntbuild-bugfix
+	-- Bug fix
+	# Fixed
+	1. Add Shortcut data after db is created
+		-- finishded
+	
 ---
 	## 2023.07.13		version 0.7.8.2 - MFO-mntbuild-bugfix
 	-- Remove wasted codes

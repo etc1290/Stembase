@@ -574,8 +574,12 @@ ipcMain.handle('mnt-build',async(event)=>{
 			"name" 	text not null,
 			primary key("id" autoincrement),
 			unique(name))`
+		const cmda= `insert into Members(name) values(?)`
 		mdb.run(cmd,(err,res)=>{
-			resolve(true)
+			gdb.all(cmda,'Shortcut',(err,res)=>{
+				resolve(true)
+			})
+			
 		})
 	})
 	const output = Promise.all(promiseArr)
