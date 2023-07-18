@@ -218,15 +218,11 @@ ipcMain.handle('mnt-remove',async(event,folderset,dataset,isGroup = false)=>{
 	const cmdb = `delete from Members where name = ?`
 	const cmdc = `select parent from Monitor where name = ?`
 	const cmdd = `update Monitor set parent = ? where name = ?`
-	
 	if(isGroup){
 		// Groups
-		for(let i=0;i<dataset.length;i++){
-			
+		for(let i=0;i<dataset.length;i++){			
 			const folder = folderset[i]
 			const data = dataset[i]
-			console.log(folder)
-			console.log(data)
 			const folderRemove =()=>{ 
 				const outcome = new Promise((resolve)=>{
 					gdb.all(cmdga,data,(err,res)=>{				
@@ -262,19 +258,23 @@ ipcMain.handle('mnt-remove',async(event,folderset,dataset,isGroup = false)=>{
 					const data = dataset[i]
 					gdb.all(cmda,folder,(err,res)=>{
 						const groupName = unpack(res)
-						const mdb = mdbLoader(groupName)
-						mdb.all(cmdb,data,()=>{
-							db.all(cmdc,data,(err,res)=>{
-								const parentArr = unpack(res,true)
-								const pos = parentArr.indexOf(folder)
-								if(pos + 1){
-									parentArr.splice(pos,1)								
-								}
-								db.all(cmdd,[parentArr,data],(err,res)=>{
-									resolve(true)
+						if(groupName.length){
+							const mdb = mdbLoader(groupName)
+							mdb.all(cmdb,data,()=>{
+								db.all(cmdc,data,(err,res)=>{
+									const parentArr = unpack(res,true)
+									const pos = parentArr.indexOf(folder)
+									if(pos + 1){
+										parentArr.splice(pos,1)								
+									}
+									db.all(cmdd,[parentArr,data],(err,res)=>{
+										resolve(true)
+									})
 								})
 							})
-						})
+						}else{
+							resolve(false)
+						}						
 					})
 				})
 				return outcome
@@ -469,6 +469,7 @@ ipcMain.handle('mnt-update',(event,folderset,dataset,isGroup=false)=>{
 					}
 				})
 			}else{
+				console.log(folderset)
 				const mdb = mdbLoader(folder)
 				mdb.all(cmda,data,(err,res)=>{
 					if(err){

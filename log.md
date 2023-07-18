@@ -28,12 +28,20 @@
 	46. Check if the group is loaded 
 	47. Prevent initialization error
 		-- processing
-	48. Shorcut is missing after initialization
+	50. Prevent creating null db when dropping
 		-- finished
-	50. Prevent creating null db when update(or drop?)
 	51. Highlight new added or modified data
 	52. Apply new extRemove mechanism
+	53. Remove the All db produce after delete function
+		-- next
+		
 
+---
+	## 2023.07.18		version 0.7.8.4 - MFO-mntbuild-bugfix
+	-- Bug fix
+	# Fixed
+	1. Prevent further action when data duplication  to sgtop null db from creating
+		-- finished
 ---
 	## 2023.07.14		version 0.7.8.3 - MFO-mntbuild-bugfix
 	-- Bug fix

@@ -523,8 +523,10 @@ const mntfunc = (target)=>{
 				}					
 				if(grouphash.length + datahash.length){
 					if(groupArr.length + dataArr.length){
+						console.log(526)
 						const mnterror = await window.mnt.error('mntdrag-source-multi')
 					}else{
+						console.log(529)
 						const mnterror = await window.mnt.error('mntdrag-source')
 						return
 					}
@@ -539,6 +541,7 @@ const mntfunc = (target)=>{
 				let isUpdateGroup = false
 				if(groupArr.length){					
 					const tempArr = [...groupArr].fill(dropid)
+					console.log(544)
 					const reportArr = await window.mnt.update(tempArr,groupArr,true)
 					const pos = reportArr.indexOf(false)
 					if(pos + 1){
@@ -582,6 +585,7 @@ const mntfunc = (target)=>{
 				if(isUpdate&&isUpdateGroup){
 					if(groupArr.length){
 						[groupParent,groupArr] = extRemove(groupParent,'',groupArr)
+						console.log(589)
 						const reportArr = await window.mnt.remove(groupParent,groupArr,true)
 						if(reportArr){
 							isRemoveGroup = true
@@ -591,6 +595,9 @@ const mntfunc = (target)=>{
 					}
 					if(isRemoveGroup&&dataArr.length){
 						[dataParent,dataArr] = extRemove(dataParent,'',dataArr)
+						console.log(599)
+						console.log(dataParent)
+						console.log(dataArr)
 						const reportArr = await window.mnt.remove(dataParent,dataArr)
 						if(reportArr){
 							isRemove = true
@@ -639,6 +646,7 @@ const mntfunc = (target)=>{
 				}
 				// Exception Handle
 				if(dupArr.length){
+
 					const mnterror = await window.mnt.error('mntdrag-data',dupArr)
 				}
 				if(dupGroupArr.length){
@@ -655,7 +663,6 @@ const mntdragfunc = ()=>{
 		
 		const contentList = []
 		const folder = event.target.closest('.mnt-folder')
-		//console.log('enter:' + folder.id)
 		const content = folder.children[1]
 		let node = content
 		while(!node.classList.contains('function-section')){
@@ -913,6 +920,8 @@ const mntmenuAddition = (cmda='all',cmdb)=>{
 					}
 					if(dataArr[0]){
 						const parentArr = [...dataArr].fill(name)
+						console.log(parentArr)
+						console.log(selected['Data'])
 						const reportArr = await window.mnt.update(parentArr,selected['Data'])
 						if(reportArr){
 							const pos = reportArr.indexOf(false)
