@@ -32,15 +32,18 @@
 		-- finished
 	51. Highlight new added or modified data
 	52. Apply new extRemove mechanism
-	53. Remove the All db produce after delete function
-		-- next
+	53. Remove the All db produce after mnt-removemenu-delete function
+		-- finished
 		
 
 ---
 	## 2023.07.18		version 0.7.8.4 - MFO-mntbuild-bugfix
 	-- Bug fix
+	-- Remove wasted codes
 	# Fixed
-	1. Prevent further action when data duplication  to sgtop null db from creating
+	1. Prevent further action when data duplication  to stop null db from creating
+		-- finished
+	2. Fix the bug that when data deletion may accidentally create null All.db
 		-- finished
 ---
 	## 2023.07.14		version 0.7.8.3 - MFO-mntbuild-bugfix

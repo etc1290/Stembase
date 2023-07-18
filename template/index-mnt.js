@@ -112,33 +112,6 @@ const mntclass = (el) =>{
 	}else{
 		return [idArr,clsArr]
 	}
-	
-	/*
-	const arr = el.classList
-	const isData = arr.contains('mnt-data')
-	let checkClass = 'mnt-usergroup-'
-	let n = 14
-	if(isData){
-		checkClass = 'mnt-data-'
-		n = 9
-	}
-	let uniqClass = arr[1]
-	const isUniq = uniqClass.substring(0,n) == checkClass
-	if(!isUniq){
-		for(var i=0;i<arr.length;i++){
-			if(i==1){
-				continue
-			}
-			const cls = arr[i]
-			if(cls.substring(0,n) == checkClass){
-				uniqClass = cls
-				break
-			}
-		}
-	}
-	const id = uniqClass.substring(n)
-	return [id,uniqClass]	*/
-	
 }
 // Side:	Data and groups selector
 const mntsort = (arr)=>{
@@ -595,9 +568,6 @@ const mntfunc = (target)=>{
 					}
 					if(isRemoveGroup&&dataArr.length){
 						[dataParent,dataArr] = extRemove(dataParent,'',dataArr)
-						console.log(599)
-						console.log(dataParent)
-						console.log(dataArr)
 						const reportArr = await window.mnt.remove(dataParent,dataArr)
 						if(reportArr){
 							isRemove = true
@@ -695,7 +665,7 @@ const mntdragfunc = ()=>{
 // Side:	Contextmenu function
 const mntmenufunc = async()=>{
 	// Data
-		// New:							Create new monitored group
+		// New:							Create new monitored group.                                                        
 	document.getElementById('mnt-cm-new').addEventListener('mousedown',async()=>{
 		let group = 0
 		try{
@@ -720,10 +690,17 @@ const mntmenufunc = async()=>{
 		// Remove(Delete this record):	Delete all tags and meta and remove monitored status of this member
 	document.getElementById('mnt-removemenu-delete').addEventListener('mousedown',async()=>{
 		const selected = uxSelectAll('mnt')
+		const pos = selected['Folder'].indexOf('All')
+		if(pos + 1){
+			for(var i=pos;i<selected['Folder'].length;i++){
+				const node = selected['Node'][i]
+				const isMain = node.id == 'mnt-main'
+				selected['Folder'][i] =  '@All'
+			}
+		}
 		const isFinished = await window.mnt.deleteM(selected['Folder'],selected['Data'])
 		if(isFinished){
 			mntgroupwrite(selected['Node'])
-			//mntmain()
 		}	
 	})
 		// Remove(Remove from group):	Remove member from this monitored group
