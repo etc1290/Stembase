@@ -218,15 +218,11 @@ ipcMain.handle('mnt-remove',async(event,folderset,dataset,isGroup = false)=>{
 	const cmdb = `delete from Members where name = ?`
 	const cmdc = `select parent from Monitor where name = ?`
 	const cmdd = `update Monitor set parent = ? where name = ?`
-	
 	if(isGroup){
 		// Groups
-		for(let i=0;i<dataset.length;i++){
-			
+		for(let i=0;i<dataset.length;i++){			
 			const folder = folderset[i]
 			const data = dataset[i]
-			console.log(folder)
-			console.log(data)
 			const folderRemove =()=>{ 
 				const outcome = new Promise((resolve)=>{
 					gdb.all(cmdga,data,(err,res)=>{				
@@ -262,19 +258,23 @@ ipcMain.handle('mnt-remove',async(event,folderset,dataset,isGroup = false)=>{
 					const data = dataset[i]
 					gdb.all(cmda,folder,(err,res)=>{
 						const groupName = unpack(res)
-						const mdb = mdbLoader(groupName)
-						mdb.all(cmdb,data,()=>{
-							db.all(cmdc,data,(err,res)=>{
-								const parentArr = unpack(res,true)
-								const pos = parentArr.indexOf(folder)
-								if(pos + 1){
-									parentArr.splice(pos,1)								
-								}
-								db.all(cmdd,[parentArr,data],(err,res)=>{
-									resolve(true)
+						if(groupName.length){
+							const mdb = mdbLoader(groupName)
+							mdb.all(cmdb,data,()=>{
+								db.all(cmdc,data,(err,res)=>{
+									const parentArr = unpack(res,true)
+									const pos = parentArr.indexOf(folder)
+									if(pos + 1){
+										parentArr.splice(pos,1)								
+									}
+									db.all(cmdd,[parentArr,data],(err,res)=>{
+										resolve(true)
+									})
 								})
 							})
-						})
+						}else{
+							resolve(false)
+						}						
 					})
 				})
 				return outcome
@@ -346,7 +346,7 @@ ipcMain.handle('mnt-delete',(event,dataset)=>{
 ipcMain.handle('mnt-delete-member',(event,folderset,dataset)=>{
 	const cmd = `delete from Members where name = ?`
 	const cmda= `delete from Monitor where name = ?`
-	const cmdb = `select name from Meta`
+	const cmdb= `select name from Meta`
 	const cmdc= `delete from File where name = ?`
 	const cmdd= `delete from Ref where nameref = ?`
 	const promiseArr = []
@@ -370,10 +370,13 @@ ipcMain.handle('mnt-delete-member',(event,folderset,dataset)=>{
 		promiseArr[i] = new Promise((resolve)=>{
 			const data = dataset[i]
 			const folder = folderset[i]
-			const mdb = mdbLoader(folder)
-			mdb.all(cmd,data,(err)=>{
-				mdb.close()
-			})
+			const isAll = folder == '@All'
+			if(!isAll){
+				const mdb = mdbLoader(folder)
+				mdb.all(cmd,data,(err)=>{
+					mdb.close()
+				})
+			}			
 			db.all(cmda,data,(err)=>{
 				const meta = mdbLoader(data,true)
 				meta.all(cmdb,async(err,res)=>{
@@ -525,7 +528,6 @@ ipcMain.handle('mnt-error',async(event,err,arr=false)=>{
 			const e = arr[i]
 			promiseChain[i] = new Promise((resolve)=>{
 				gdb.all(cmd,e,(err,res)=>{
-					console.log(res)
 					const name = unpack(res)
 					resolve(name)
 				})
@@ -574,8 +576,12 @@ ipcMain.handle('mnt-build',async(event)=>{
 			"name" 	text not null,
 			primary key("id" autoincrement),
 			unique(name))`
+		const cmda= `insert into Members(name) values(?)`
 		mdb.run(cmd,(err,res)=>{
-			resolve(true)
+			gdb.all(cmda,'Shortcut',(err,res)=>{
+				resolve(true)
+			})
+			
 		})
 	})
 	const output = Promise.all(promiseArr)

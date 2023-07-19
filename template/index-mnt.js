@@ -112,33 +112,6 @@ const mntclass = (el) =>{
 	}else{
 		return [idArr,clsArr]
 	}
-	
-	/*
-	const arr = el.classList
-	const isData = arr.contains('mnt-data')
-	let checkClass = 'mnt-usergroup-'
-	let n = 14
-	if(isData){
-		checkClass = 'mnt-data-'
-		n = 9
-	}
-	let uniqClass = arr[1]
-	const isUniq = uniqClass.substring(0,n) == checkClass
-	if(!isUniq){
-		for(var i=0;i<arr.length;i++){
-			if(i==1){
-				continue
-			}
-			const cls = arr[i]
-			if(cls.substring(0,n) == checkClass){
-				uniqClass = cls
-				break
-			}
-		}
-	}
-	const id = uniqClass.substring(n)
-	return [id,uniqClass]	*/
-	
 }
 // Side:	Data and groups selector
 const mntsort = (arr)=>{
@@ -523,8 +496,10 @@ const mntfunc = (target)=>{
 				}					
 				if(grouphash.length + datahash.length){
 					if(groupArr.length + dataArr.length){
+						console.log(526)
 						const mnterror = await window.mnt.error('mntdrag-source-multi')
 					}else{
+						console.log(529)
 						const mnterror = await window.mnt.error('mntdrag-source')
 						return
 					}
@@ -539,6 +514,7 @@ const mntfunc = (target)=>{
 				let isUpdateGroup = false
 				if(groupArr.length){					
 					const tempArr = [...groupArr].fill(dropid)
+					console.log(544)
 					const reportArr = await window.mnt.update(tempArr,groupArr,true)
 					const pos = reportArr.indexOf(false)
 					if(pos + 1){
@@ -582,6 +558,7 @@ const mntfunc = (target)=>{
 				if(isUpdate&&isUpdateGroup){
 					if(groupArr.length){
 						[groupParent,groupArr] = extRemove(groupParent,'',groupArr)
+						console.log(589)
 						const reportArr = await window.mnt.remove(groupParent,groupArr,true)
 						if(reportArr){
 							isRemoveGroup = true
@@ -639,6 +616,7 @@ const mntfunc = (target)=>{
 				}
 				// Exception Handle
 				if(dupArr.length){
+
 					const mnterror = await window.mnt.error('mntdrag-data',dupArr)
 				}
 				if(dupGroupArr.length){
@@ -655,7 +633,6 @@ const mntdragfunc = ()=>{
 		
 		const contentList = []
 		const folder = event.target.closest('.mnt-folder')
-		//console.log('enter:' + folder.id)
 		const content = folder.children[1]
 		let node = content
 		while(!node.classList.contains('function-section')){
@@ -688,7 +665,7 @@ const mntdragfunc = ()=>{
 // Side:	Contextmenu function
 const mntmenufunc = async()=>{
 	// Data
-		// New:							Create new monitored group
+		// New:							Create new monitored group.                                                        
 	document.getElementById('mnt-cm-new').addEventListener('mousedown',async()=>{
 		let group = 0
 		try{
@@ -713,10 +690,17 @@ const mntmenufunc = async()=>{
 		// Remove(Delete this record):	Delete all tags and meta and remove monitored status of this member
 	document.getElementById('mnt-removemenu-delete').addEventListener('mousedown',async()=>{
 		const selected = uxSelectAll('mnt')
+		const pos = selected['Folder'].indexOf('All')
+		if(pos + 1){
+			for(var i=pos;i<selected['Folder'].length;i++){
+				const node = selected['Node'][i]
+				const isMain = node.id == 'mnt-main'
+				selected['Folder'][i] =  '@All'
+			}
+		}
 		const isFinished = await window.mnt.deleteM(selected['Folder'],selected['Data'])
 		if(isFinished){
 			mntgroupwrite(selected['Node'])
-			//mntmain()
 		}	
 	})
 		// Remove(Remove from group):	Remove member from this monitored group
@@ -894,11 +878,6 @@ const mntmenuAddition = (cmda='all',cmdb)=>{
 					const [groupArr,dataArr] = mntsort(selected)
 					if(groupArr[0]){
 						const parentArr = [...groupArr].fill(targetid)
-						
-						/*const isFinished = await window.mnt.update(parentArr,groupArr,true)
-						if(isFinished){							
-							mntgroupwrite(target)
-						}*/
 						const reportArr = await window.mnt.update(parentArr,groupArr,true)
 						if(reportArr){
 							let pos = reportArr.indexOf(false)
@@ -918,18 +897,12 @@ const mntmenuAddition = (cmda='all',cmdb)=>{
 					}
 					if(dataArr[0]){
 						const parentArr = [...dataArr].fill(name)
-						/*
-						const isFinished = await window.mnt.update(parentArr,selected['Data'])
-						if(isFinished){
-							mntgroupwrite(target)
-						}*/
-						//console.log(1)
+						console.log(parentArr)
+						console.log(selected['Data'])
 						const reportArr = await window.mnt.update(parentArr,selected['Data'])
 						if(reportArr){
 							const pos = reportArr.indexOf(false)
-							//console.log(2)
 							if(pos + 1){
-								//console.log(3)
 								const dupArr = []
 								let n = 0
 								for(var i=pos;i<reportArr.length;i++){
@@ -942,20 +915,6 @@ const mntmenuAddition = (cmda='all',cmdb)=>{
 							}
 						}
 					}
-					
-					//mntgroupwrite(dataArr.flat())
-					//let nodelist = []
-					/*
-					if(name == 'Shortcut'){
-						nodelist = [document.getElementById('mnt-shortcut')]
-					}else{
-						const modName = mntreplace(name)
-						nodelist = [...document.getElementsByClassName(modName)]
-					}
-					for(var i;i<nodelist.length;i++){
-						console.log(nodelist[i])
-						mntgroupwrite(nodelist[i])
-					}*/
 						
 				}
 			})
@@ -981,7 +940,6 @@ const mntgroup = async(parent,child)=>{
 			idlist.splice(pos,1)
 		}	
 		for(var i=0;i<grouplist.length;i++){
-			//const modName = mntreplace(grouplist[i][1])
 			const modName = idlist[i]
 			const header = `<p class='mnt-folder-header'>` + grouplist[i] + `</p>`
 			const content= `<div class='mnt-folder-content'></div>`
