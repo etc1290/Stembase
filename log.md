@@ -28,14 +28,15 @@
 	46. Check if the group is loaded 
 	47. Prevent initialization error
 		-- processing
-	50. Prevent creating null db when dropping
-		-- finished
 	51. Highlight new added or modified data
 	52. Apply new extRemove mechanism
-	53. Remove the All db produce after mnt-removemenu-delete function
-		-- finished
 		
-
+---
+	## 2023.07.19		version 0.7.8.5 - MFO-mntbuild-restore
+	-- Build test
+	# Changed
+	1. Test if electron can compile executed
+		-- finished
 ---
 	## 2023.07.18		version 0.7.8.4 - MFO-mntbuild-bugfix
 	-- Bug fix
