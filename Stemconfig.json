@@ -8,5 +8,6 @@
     "Debugmode": 1,
     "Width": 1280,
     "Height": 960,
-    "MatchDisplayNum": 5
+    "MatchDisplayNum": 5,
+	"FirstLaunch": true
 }

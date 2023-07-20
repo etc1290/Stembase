@@ -7,7 +7,7 @@
 	7. 	Merge mnt-get function into mnt-query
 	8. 	Rewrite or remove uxselect function in index-tag
 	9. 	If data is already exist in monitored group remove that from movemenu
-		-- next branch
+		-- next next branch
 	12. Non-main groups in Shortcut's highlight effect is missing
 	14. Auto detect if Shortcut is configured in the Groups db to prevent corrupted 
 	15. Adjust all Shortcut-id related function to fit the new mechanism
@@ -27,13 +27,30 @@
 	45. Apply fake chain to every backend function accepted array input
 	46. Check if the group is loaded 
 	47. Prevent initialization error
-		-- processing
+		47.1 missing Shortcut.db
+		47.2 missing Groups.db
+		47.3 missing Stemdb.db
+		47.4 missing Stemconfig.json
+		47.5 missing multiple file
 	51. Highlight new added or modified data
 	52. Apply new extRemove mechanism
-		
+	53. Corrupted database recovery	
+		-- next branch
+	54. Display error message when db repair
+---
+	## 2023.07.20		version 0.7.8.6 - MFO-mntbuild-restore
+	-- Function enhancement
+	# Changed
+	1. Add a check to reduce unnecessary reboot steps
+		-- finished
 ---
 	## 2023.07.19		version 0.7.8.5 - MFO-mntbuild-restore
 	-- Build test
+	-- Bug fix
+	# Fixed
+	1. Fix initialization error
+		
+		
 	# Changed
 	1. Test if electron can compile executed
 		-- finished
