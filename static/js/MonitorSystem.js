@@ -592,7 +592,6 @@ ipcMain.handle('mnt-build',async(event)=>{
 		if(hasShortcut){
 			resolve(true)
 		}else if(prevStatus){
-			console.log(2)
 			const mdb = mdbLoader('Shortcut')
 			const cmd = `create table 'Members'(
 				"id" 	integer not null unique,

@@ -955,7 +955,8 @@ const mntgroup = async(parent,child)=>{
 		mntspan(updateDiv)
 		return true	
 	}
-	mainfunc()	
+	const output = await mainfunc()	
+	return output
 }
 // Main:	Load all monitored data
 const mntmain = async()=>{
@@ -989,16 +990,11 @@ const mntshortcut = async() =>{
 // Side:		Initial page structure
 const mntRender = async()=>{
 	const isCreated = await window.mnt.build()
-	console.log(isCreated)
 	if(isCreated){
 		const mainStatus = await mntmain()
 		const groupStatus = await mntgroup()
 		const shortcutStatus = await mntshortcut()
 		const isReady = mainStatus + shortcutStatus + groupStatus == 3
-		console.log(mainStatua)
-		console.log(groupStatus)
-		console.log(shortcutStatus)
-		//if(mainStatus && shortcutStatus && groupStatus){
 		if(isReady){
 			return true
 		}
@@ -1015,9 +1011,9 @@ const mntApplier = (target)=>{
 		}
 	}	
 }
-const mntInit = ()=>{
+const mntInit = async()=>{
 	mntdragSetup()
-	const isReady = mntRender()
+	const isReady = await mntRender()
 	if(isReady){
 		mntfold()
 		mntrename()

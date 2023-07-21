@@ -28,7 +28,9 @@
 	46. Check if the group is loaded 
 	47. Prevent initialization error
 		47.1 missing Shortcut.db
+			-- finished
 		47.2 missing Groups.db
+			-- finished
 		47.3 missing Stemdb.db
 		47.4 missing Stemconfig.json
 		47.5 missing multiple file
@@ -40,12 +42,16 @@
 ---
 	## 2023.07.21		version 0.7.8.7 - MFO-mntbuild-restore
 	-- Function enhancement
+	-- Bug fix
 	# Changed
 	1. Create data when missing
 		1.1 Groups
 		1.2 Shortcut
 		-- finished
 	2. Add a minor patch to ensure Groups data completness
+		-- finished
+	# Fixed
+	1. Make sure mntInit run after mntbuild over
 		-- finished
 ---
 	## 2023.07.20		version 0.7.8.6 - MFO-mntbuild-restore
