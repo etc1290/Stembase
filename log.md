@@ -43,7 +43,9 @@
 	# Changed
 	1. Create data when missing
 		1.1 Groups
-		1.2 Shortcut - need not check if exist in Groups
+		1.2 Shortcut
+		-- finished
+	2. Add a minor patch to ensure Groups data completness
 		-- finished
 ---
 	## 2023.07.20		version 0.7.8.6 - MFO-mntbuild-restore

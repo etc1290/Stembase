@@ -989,20 +989,17 @@ const mntshortcut = async() =>{
 // Side:		Initial page structure
 const mntRender = async()=>{
 	const isCreated = await window.mnt.build()
-	console.log(1)
 	console.log(isCreated)
 	if(isCreated){
-		console.log(2)
 		const mainStatus = await mntmain()
 		const groupStatus = await mntgroup()
 		const shortcutStatus = await mntshortcut()
 		const isReady = mainStatus + shortcutStatus + groupStatus == 3
-		console.log(mainStatus)
-		console.log(shortcutStatus)
+		console.log(mainStatua)
 		console.log(groupStatus)
+		console.log(shortcutStatus)
 		//if(mainStatus && shortcutStatus && groupStatus){
 		if(isReady){
-			console.log(3)
 			return true
 		}
 	}
@@ -1021,9 +1018,7 @@ const mntApplier = (target)=>{
 const mntInit = ()=>{
 	mntdragSetup()
 	const isReady = mntRender()
-	console.log('start')
 	if(isReady){
-		console.log('end')
 		mntfold()
 		mntrename()
 		const mntfolder = document.querySelectorAll('.mnt-folder')

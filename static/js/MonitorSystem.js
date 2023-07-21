@@ -579,8 +579,11 @@ ipcMain.handle('mnt-build',async(event)=>{
 				"child"	text,
 				primary key("id" autoincrement)
 				)`
+			const cmda= `insert into Members(name) values(?)`
 			gdb.run(cmd,(err,res)=>{
-				resolve(true)
+				gdb.all(cmda,'Shortcut',(err,res)=>{
+					resolve(true)
+				})
 			})
 		}	
 	})
