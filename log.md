@@ -38,6 +38,14 @@
 		-- next branch
 	54. Display error message when db repair
 ---
+	## 2023.07.21		version 0.7.8.7 - MFO-mntbuild-restore
+	-- Function enhancement
+	# Changed
+	1. Create data when missing
+		1.1 Groups
+		1.2 Shortcut - need not check if exist in Groups
+		-- finished
+---
 	## 2023.07.20		version 0.7.8.6 - MFO-mntbuild-restore
 	-- Function enhancement
 	# Changed

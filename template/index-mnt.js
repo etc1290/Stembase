@@ -982,18 +982,27 @@ const mntshortcut = async() =>{
 	const id = (await window.mnt.query(['id','Members','name','Shortcut']))[0]
 	const uniqClass = 'mnt-usergroup-' + id
 	shortcut.classList.add(uniqClass)
-	mntgroupwrite(shortcut,false)
+	mntgroupwrite(shortcut)
 	return true
 }
 
 // Side:		Initial page structure
 const mntRender = async()=>{
 	const isCreated = await window.mnt.build()
+	console.log(1)
+	console.log(isCreated)
 	if(isCreated){
-		const mainStatus = mntmain()
-		const groupStatus = mntgroup()
-		const shortcutStatus = mntshortcut()
-		if(mainStatus && shortcutStatus && groupStatus){
+		console.log(2)
+		const mainStatus = await mntmain()
+		const groupStatus = await mntgroup()
+		const shortcutStatus = await mntshortcut()
+		const isReady = mainStatus + shortcutStatus + groupStatus == 3
+		console.log(mainStatus)
+		console.log(shortcutStatus)
+		console.log(groupStatus)
+		//if(mainStatus && shortcutStatus && groupStatus){
+		if(isReady){
+			console.log(3)
 			return true
 		}
 	}
@@ -1012,7 +1021,9 @@ const mntApplier = (target)=>{
 const mntInit = ()=>{
 	mntdragSetup()
 	const isReady = mntRender()
+	console.log('start')
 	if(isReady){
+		console.log('end')
 		mntfold()
 		mntrename()
 		const mntfolder = document.querySelectorAll('.mnt-folder')

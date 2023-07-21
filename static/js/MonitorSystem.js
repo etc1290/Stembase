@@ -17,6 +17,7 @@ const mdbLoader = (folder,isMeta=false) =>{
 	
 }	
 // Unpack db result
+
 const unpack = (res,isArr=false)=>{
 	let keyLen = 0 
 	if(res[0]){
@@ -562,13 +563,33 @@ ipcMain.handle('mnt-build',async(event)=>{
 	const monitoredPath = fs.readdirSync(convert(mdbStorage))
 	const hasStemdb = dataPath.indexOf('Stemdb.db') + 1
 	const hasShortcut = monitoredPath.indexOf('Shortcut.db') + 1
-	const hasGroups = monitoredPath.indexOf('Groups.db') + 1
+	const isGroups = monitoredPath.indexOf('Groups.db') + 1
+	const {'size':hasGroups} = fs.statSync(convert(mdbStorage) + '//Groups.db')
 	const isFirst = env('FirstLaunch')
 	const promiseArr = []
+	
 	promiseArr[0] = new Promise((resolve)=>{
-		if(hasShortcut){
+		if(hasGroups){
 			resolve(true)
 		}else{
+			const cmd = `create table "Members" (
+				"id"	integer not null unique,
+				"name"	text not null unique,
+				"parent"text,
+				"child"	text,
+				primary key("id" autoincrement)
+				)`
+			gdb.run(cmd,(err,res)=>{
+				resolve(true)
+			})
+		}	
+	})
+	promiseArr[1] = new Promise(async(resolve)=>{
+		const prevStatus = await promiseArr[0]
+		if(hasShortcut){
+			resolve(true)
+		}else if(prevStatus){
+			console.log(2)
 			const mdb = mdbLoader('Shortcut')
 			const cmd = `create table 'Members'(
 				"id" 	integer not null unique,
@@ -583,52 +604,6 @@ ipcMain.handle('mnt-build',async(event)=>{
 			})
 		}
 	})
-	promiseArr[1] = new Promise((resolve)=>{
-		if(hasGroups){
-			resolve(true)
-		}else{
-			const cmd = `create table "Members" (
-				"id"	integer not null unique,
-				"name"	text not null unique,
-				"parent"text,
-				"child"	text,
-				primary key("id" autoincrement)
-				)`
-			gdb.run(cmd,(err,res)=>{
-				resolve(true)
-			})
-		}
-		
-	})
-	/*
-	promiseArr[0] = new Promise((resolve)=>{
-		const cmd = `create table "Members" (
-			"id"	integer not null unique,
-			"name"	text not null unique,
-			"parent"text,
-			"child"	text,
-			primary key("id" autoincrement)
-			)`
-		gdb.run(cmd,(err,res)=>{
-			resolve(true)
-		})
-	})
-	promiseArr[1] = new Promise((resolve)=>{
-		const mdb = mdbLoader('Shortcut')
-		const cmd = `create table 'Members'(
-			"id" 	integer not null unique,
-			"name" 	text not null,
-			primary key("id" autoincrement),
-			unique(name))`
-		const cmda= `insert into Members(name) values(?)`
-		mdb.run(cmd,(err,res)=>{
-			gdb.all(cmda,'Shortcut',(err,res)=>{
-				resolve(true)
-			})
-			
-		})
-	})
-	*/
 	const output = Promise.all(promiseArr)
 	return output
 })
