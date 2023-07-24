@@ -27,18 +27,22 @@
 	45. Apply fake chain to every backend function accepted array input
 	46. Check if the group is loaded 
 	47. Prevent initialization error
-		47.1 missing Shortcut.db
-			-- finished
-		47.2 missing Groups.db
-			-- finished
 		47.3 missing Stemdb.db
+			-- finished
 		47.4 missing Stemconfig.json
+			-- next
 		47.5 missing multiple file
 	51. Highlight new added or modified data
 	52. Apply new extRemove mechanism
 	53. Corrupted database recovery	
 		-- next branch
 	54. Display error message when db repair
+---
+	## 2023.07.24		version 0.7.8.8 - MFO-mntbuild-restore
+	-- Function enhancement
+	# Changed
+	1. Create main db before app ready
+		-- finished
 ---
 	## 2023.07.21		version 0.7.8.7 - MFO-mntbuild-restore
 	-- Function enhancement

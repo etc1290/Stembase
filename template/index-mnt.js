@@ -1003,8 +1003,7 @@ const mntRender = async()=>{
 //Initailizer
 const mntApplier = (target)=>{
 	mntfunc(target)	
-	mntstyle(target)
-	
+	mntstyle(target)	
 	for(var i=0;i<target.length;i++){
 		if(target[i].classList.contains('mnt-dropzone')){
 			new mntdrag(target[i])		
@@ -1022,10 +1021,7 @@ const mntInit = async()=>{
 		mntmenufunc()
 		mntmenuAddition()
 		mntgroupload()
-		mntApplier(mntfolder)
-		
-	}
-	
-	
+		mntApplier(mntfolder)		
+	}	
 }
 mntInit()

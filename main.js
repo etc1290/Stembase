@@ -1,7 +1,6 @@
 const { app, BrowserWindow, ipcMain, dialog, session } = require('electron')
 const path = require('path')
 const fs = require('fs')
-//const env = require('./static/js/env.js')
 const {env} = require('./static/js/addon.js')
 const Stemdb= env('StemdbDir')
 const sqlite3 = require('sqlite3').verbose()
@@ -13,6 +12,53 @@ app.allowRendererProcessReuse = false
 const dbBuild = ()=>{
 	const db = new sqlite3.Database(Stemdb + '.db')
 	db.get('PRAGMA foreign_keys = ON')
+	const cmdFile	= `create table "File" (
+		"id"		integer not null unique,
+		"name"		text not null unique,
+		"file"		text not null,
+		primary key("id" autoincrement)
+	)`
+	const cmdTag	= `create table "Tag" (
+		"id"		integer not null unique,
+		"tag"		text not null unique,
+		primary key("id" autoincrement)
+	)`
+	const cmdRef	= `create table "Ref" (
+		"id"		integer not null unique,
+		"nameref"	text, 
+		"tagref"	text,
+		primary key("id" autoincrement)
+		foreign key('nameref') references File(name) on delete cascade on update cascade,
+		foreign key('tagref') references Tag(tag) on delete cascade on update cascade,
+		unique(nameref,tagref)
+	)`
+	const cmdMnt	= `create table "Monitor" (
+		"id"		integer not null unique,
+		"parent"	text,
+		"name"		text not null unique,
+		primary key("id" autoincrement)
+	)`
+	const output = new Promise((resolve)=>{
+		db.run(cmdFile,(err)=>{
+			console.log(43)
+			console.log(err)
+			db.run(cmdTag,(err)=>{
+				console.log(46)
+				console.log(err)
+				db.run(cmdRef,(err)=>{
+					console.log(49)
+					console.log(err)
+					db.run(cmdMnt,(err)=>{
+						console.log(52)
+						console.log(err)
+						resolve(true)
+					})
+				})
+			})
+		})
+	})
+	return output
+	/*
 	db.run(`create table "File" (
 		"id"		integer not null unique,
 		"name"		text not null unique,
@@ -39,7 +85,7 @@ const dbBuild = ()=>{
 		"name"		text not null unique,
 		primary key("id" autoincrement)
 	)`,()=>{})
-
+*/
 }
 // Check essential folders
 const firstBuild = ()=>{
@@ -56,7 +102,13 @@ const firstBuild = ()=>{
 		
 	}
 }
-
+const scriptImporter = () =>{
+		const scriptDir = env('StaticDir') + 'js/'
+		const filelist = fs.readdirSync(scriptDir)
+		for(var i=0;i<filelist.length;i++){
+			require(scriptDir + filelist[i])
+		}
+	}
 
 
 // WindowsCreator
@@ -95,30 +147,22 @@ exec('NET SESSION', function(err,so,se) {
       console.log(se.length === 0 ? "admin" : "not admin")
     })	*/
 
-const init = () =>{  
+const init = async() =>{  
 	firstBuild()
-	dbBuild()
-	const Taskmanager = () =>{
-		/*
-		const funcScript = glob.sync(env('StaticDir') + '/js/*.js')
-		funcScript.forEach((i) =>{require(i)})*/
-		const scriptDir = env('StaticDir') + 'js/'
-		const filelist = fs.readdirSync(scriptDir)
-		for(var i=0;i<filelist.length;i++){
-			require(scriptDir + filelist[i])
-		}
-	}
-	Taskmanager() 
-	app.whenReady().then(() => {
-		WindowMain()
-		// Prevent from multiple windows create
-		app.on('activate', () => {
-			if (BrowserWindow.getAllWindows().length === 0) {
-				WindowMain()
-			}
+	const isDBReady = await dbBuild()	
+	scriptImporter() 
+	if(isDBReady){
+		app.whenReady().then(() => {
+			WindowMain()
+			// Prevent from multiple windows create
+			app.on('activate', () => {
+				if (BrowserWindow.getAllWindows().length === 0) {
+					WindowMain()
+				}
+			})	
 		})
-		
-	})
+	}
+	
 	
 }
 
