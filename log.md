@@ -30,13 +30,25 @@
 		47.3 missing Stemdb.db
 			-- finished
 		47.4 missing Stemconfig.json
-			-- next
+			-- finished
 		47.5 missing multiple file
+		47.6 missing file path
+		47.7 creating Stemconfig.json before app start
+			-- processing
 	51. Highlight new added or modified data
 	52. Apply new extRemove mechanism
 	53. Corrupted database recovery	
 		-- next branch
 	54. Display error message when db repair
+	55. Rewrite config to js
+		-- no longer need
+
+---
+	## 2023.07.25		version 0.7.8.9 - MFO-mntbuild-restore
+	-- Function enhancemdent
+	# Changed
+	1. Create Stemconfig.json if missing
+		-- finished
 ---
 	## 2023.07.24		version 0.7.8.8 - MFO-mntbuild-restore
 	-- Function enhancement
