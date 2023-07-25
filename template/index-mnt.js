@@ -955,7 +955,8 @@ const mntgroup = async(parent,child)=>{
 		mntspan(updateDiv)
 		return true	
 	}
-	mainfunc()	
+	const output = await mainfunc()	
+	return output
 }
 // Main:	Load all monitored data
 const mntmain = async()=>{
@@ -982,7 +983,7 @@ const mntshortcut = async() =>{
 	const id = (await window.mnt.query(['id','Members','name','Shortcut']))[0]
 	const uniqClass = 'mnt-usergroup-' + id
 	shortcut.classList.add(uniqClass)
-	mntgroupwrite(shortcut,false)
+	mntgroupwrite(shortcut)
 	return true
 }
 
@@ -990,10 +991,11 @@ const mntshortcut = async() =>{
 const mntRender = async()=>{
 	const isCreated = await window.mnt.build()
 	if(isCreated){
-		const mainStatus = mntmain()
-		const groupStatus = mntgroup()
-		const shortcutStatus = mntshortcut()
-		if(mainStatus && shortcutStatus && groupStatus){
+		const mainStatus = await mntmain()
+		const groupStatus = await mntgroup()
+		const shortcutStatus = await mntshortcut()
+		const isReady = mainStatus + shortcutStatus + groupStatus == 3
+		if(isReady){
 			return true
 		}
 	}
@@ -1001,17 +1003,16 @@ const mntRender = async()=>{
 //Initailizer
 const mntApplier = (target)=>{
 	mntfunc(target)	
-	mntstyle(target)
-	
+	mntstyle(target)	
 	for(var i=0;i<target.length;i++){
 		if(target[i].classList.contains('mnt-dropzone')){
 			new mntdrag(target[i])		
 		}
 	}	
 }
-const mntInit = ()=>{
+const mntInit = async()=>{
 	mntdragSetup()
-	const isReady = mntRender()
+	const isReady = await mntRender()
 	if(isReady){
 		mntfold()
 		mntrename()
@@ -1020,10 +1021,7 @@ const mntInit = ()=>{
 		mntmenufunc()
 		mntmenuAddition()
 		mntgroupload()
-		mntApplier(mntfolder)
-		
-	}
-	
-	
+		mntApplier(mntfolder)		
+	}	
 }
 mntInit()

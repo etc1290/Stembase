@@ -7,7 +7,7 @@
 	7. 	Merge mnt-get function into mnt-query
 	8. 	Rewrite or remove uxselect function in index-tag
 	9. 	If data is already exist in monitored group remove that from movemenu
-		-- next branch
+		-- next next branch
 	12. Non-main groups in Shortcut's highlight effect is missing
 	14. Auto detect if Shortcut is configured in the Groups db to prevent corrupted 
 	15. Adjust all Shortcut-id related function to fit the new mechanism
@@ -27,15 +27,65 @@
 	45. Apply fake chain to every backend function accepted array input
 	46. Check if the group is loaded 
 	47. Prevent initialization error
-		-- processing
-	50. Prevent creating null db when dropping
-		-- finished
+		47.3 missing Stemdb.db
+			-- finished
+		47.4 missing Stemconfig.json
+			-- finished
+		47.5 missing multiple file
+		47.6 missing file path
+		47.7 creating Stemconfig.json before app start
+			-- processing
 	51. Highlight new added or modified data
 	52. Apply new extRemove mechanism
-	53. Remove the All db produce after mnt-removemenu-delete function
-		-- finished
-		
+	53. Corrupted database recovery	
+		-- next branch
+	54. Display error message when db repair
+	55. Rewrite config to js
+		-- no longer need
 
+---
+	## 2023.07.25		version 0.7.8.9 - MFO-mntbuild-restore
+	-- Function enhancemdent
+	# Changed
+	1. Create Stemconfig.json if missing
+		-- finished
+---
+	## 2023.07.24		version 0.7.8.8 - MFO-mntbuild-restore
+	-- Function enhancement
+	# Changed
+	1. Create main db before app ready
+		-- finished
+---
+	## 2023.07.21		version 0.7.8.7 - MFO-mntbuild-restore
+	-- Function enhancement
+	-- Bug fix
+	# Changed
+	1. Create data when missing
+		1.1 Groups
+		1.2 Shortcut
+		-- finished
+	2. Add a minor patch to ensure Groups data completness
+		-- finished
+	# Fixed
+	1. Make sure mntInit run after mntbuild over
+		-- finished
+---
+	## 2023.07.20		version 0.7.8.6 - MFO-mntbuild-restore
+	-- Function enhancement
+	# Changed
+	1. Add a check to reduce unnecessary reboot steps
+		-- finished
+---
+	## 2023.07.19		version 0.7.8.5 - MFO-mntbuild-restore
+	-- Build test
+	-- Bug fix
+	# Fixed
+	1. Fix initialization error
+		
+		
+	# Changed
+	1. Test if electron can compile executed
+		-- finished
 ---
 	## 2023.07.18		version 0.7.8.4 - MFO-mntbuild-bugfix
 	-- Bug fix
