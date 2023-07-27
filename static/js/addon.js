@@ -26,35 +26,7 @@ const time = (i) => {
 	return new Date(i).toISOString().slice(0, 10)
 }
 
-// Creating missing config
-const envCreation = ()=>{	
-	const config = 'Stemconfig.json'
-	const content = {
-		"TemplateDir": "./template/",
-		"StaticDir": "./static/",
-		"StemdbStorage":"./data",
-		"StemdbDir":"./data/Stemdb",
-		"StemMGDir":"./data/MonitoredGroups",
-		"StartDir": "./",
-		"Debugmode": 1,
-		"Width": 1280,
-		"Height": 960,
-		"MatchDisplayNum": 5,
-		"FirstLaunch": 1
-	}
-	const json = JSON.stringify(content)
-	const output = new Promise((resolve)=>{
-		const isExist = fs.existsSync('../../' + config)
-		if(isExist){
-			resolve(true)
-		}else{
-			fs.writeFile(config,json,'utf8',()=>{
-				resolve(true)
-			})
-		}		
-	})
-	return output
-}
+
 // Read environment variable 
 const env = (v) =>{
 	const envdata = fs.readFileSync('Stemconfig.json')
@@ -84,7 +56,6 @@ module.exports = {
 	bytes,
 	check,
 	time,
-	envCreation,
 	env,
 	arrUniq
 	
