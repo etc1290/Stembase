@@ -24,21 +24,23 @@
 	35. Add redo function
 	39. Rewrite mnt-delete related function to adapt id-based function
 	40. Add ellipsis effect at all monitored name
-	45. Apply fake chain to every backend function accepted array input
-		-- no longer need
 	46. Check if the group is loaded 
 	51. Highlight new added or modified data
 	52. Apply new extRemove mechanism
 	53. Corrupted database recovery	
 		-- next branch
 	54. Display error message when db repair
-	55. Separate build function to new js
-		-- finished
-	56. Test Stemconfig.json missing repair mechanism
+		-- processing
+---
+	## 2023.08.14		version 0.7.9.1 - MFO-build
+	-- Bug fix
+	# Fixed
+	1. Fix the bug that envCreation always recreate Stemconfig.json even one existed
 		-- finished
 ---
 	## 2023.07.27		version 0.7.9.0 - MFO-build
 	-- Function implementation
+	-- Clear wasted codes
 	# Added
 	1. Add build.js to take all build function that should be done after basic environmental setting
 		-- finished

@@ -3,7 +3,7 @@ const {ipcMain,BrowserWindow} = require('electron')
 const {env,check} = require('./addon.js')
 //const check = require('./check.js')
 const path = require('path')
-const {JsonDB,Config} = require('node-json-db')
+//const {JsonDB,Config} = require('node-json-db')
 const WindowSetting = async () =>{
 	
 	const wins = new BrowserWindow ({
@@ -24,9 +24,9 @@ const WindowSetting = async () =>{
 		console.log(v) 
 	})
 	ipcMain.handle('st-write',(event,i,v) =>{
-		const db = new JsonDB(new Config("StemConfig", true, true, '/'))	
-		const newv = check(v)
-		db.push('/'+i,newv)
+		//const db = new JsonDB(new Config("StemConfig", true, true, '/'))	
+		//const newv = check(v)
+		//db.push('/'+i,newv)
 		
 	})
 	ipcMain.handle('st-read', (event,v) =>{

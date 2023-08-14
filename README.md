@@ -13,9 +13,7 @@ This is a simple tagging system and file management system and present a solutio
 - and more will be added
 
 -----------------
-The first stage of this system is almost complete, after some minor patches will be a official release (or unstable pre-release?).
-However, I have to focus on my other project https://github.com/Paiiimannnoitla/General-Affairs-Server(General Affarirs Server,GAS) for job testing project sake.
-This project is not abandoned, I will be back in 2 weekes.\
+This project will develope wigth my another project https://github.com/Paiiimannnoitla/General-Affairs-Server(General Affarirs Server,GAS). So, the developement might be a bit slow until GAS is finished.\
 -- sincerely, Paiiimannnoitla
 
 

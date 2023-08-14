@@ -1,6 +1,7 @@
 const {env} = require('./static/js/addon.js')
 const fs = require('fs')
 const sqlite3 = require('sqlite3').verbose()
+let missingArr = []
 // Creat Stemconfig
 const envCreation = ()=>{	
 	const config = 'Stemconfig.json'
@@ -19,10 +20,11 @@ const envCreation = ()=>{
 	}
 	const json = JSON.stringify(content)
 	const output = new Promise((resolve)=>{
-		const isExist = fs.existsSync('../../' + config)
-		if(isExist){
+		const isExist = fs.existsSync(config)
+		if(isExist){			
 			resolve(true)
 		}else{
+			missingArr[0] = 'config file'
 			fs.writeFile(config,json,'utf8',()=>{
 				resolve(true)
 			})
