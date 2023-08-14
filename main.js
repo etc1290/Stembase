@@ -1,82 +1,21 @@
 const { app, BrowserWindow, ipcMain, dialog, session } = require('electron')
 const path = require('path')
 const fs = require('fs')
-const {env,envCreation} = require('./static/js/addon.js')
-const sqlite3 = require('sqlite3').verbose()
-// Check essential folders
-const firstBuild = async()=>{
-	const isReady = await envCreation()
-	if(isReady){
-		const dbStorage = env('StemdbStorage')
-		const mdbStorage = env('StemMGDir')
-		if (!fs.existsSync(dbStorage)){
-			fs.mkdir(dbStorage,{recursive:true},()=>{
-				if (!fs.existsSync(mdbStorage)){
-					fs.mkdir(mdbStorage,{recursive:true},()=>{})
-				}
-			})		
-		}
-	}
-	
-}
-firstBuild()
-const Stemdb= env('StemdbDir')
+const {sysBuild} = require('./build.js')
 
-
+const {env} = require('./static/js/addon.js')
+//const sqlite3 = require('sqlite3').verbose()
 process.env['ELECTRON_DISABLE_SECURITY_WARNINGS'] = 'true'
 app.allowRendererProcessReuse = false
 
-// Create a new db
-const dbBuild = ()=>{
-	const db = new sqlite3.Database(Stemdb + '.db')
-	db.get('PRAGMA foreign_keys = ON')
-	const cmdFile	= `create table "File" (
-		"id"		integer not null unique,
-		"name"		text not null unique,
-		"file"		text not null,
-		primary key("id" autoincrement)
-	)`
-	const cmdTag	= `create table "Tag" (
-		"id"		integer not null unique,
-		"tag"		text not null unique,
-		primary key("id" autoincrement)
-	)`
-	const cmdRef	= `create table "Ref" (
-		"id"		integer not null unique,
-		"nameref"	text, 
-		"tagref"	text,
-		primary key("id" autoincrement)
-		foreign key('nameref') references File(name) on delete cascade on update cascade,
-		foreign key('tagref') references Tag(tag) on delete cascade on update cascade,
-		unique(nameref,tagref)
-	)`
-	const cmdMnt	= `create table "Monitor" (
-		"id"		integer not null unique,
-		"parent"	text,
-		"name"		text not null unique,
-		primary key("id" autoincrement)
-	)`
-	const output = new Promise((resolve)=>{
-		db.run(cmdFile,(err)=>{
-			db.run(cmdTag,(err)=>{
-				db.run(cmdRef,(err)=>{
-					db.run(cmdMnt,(err)=>{
-						resolve(true)
-					})
-				})
-			})
-		})
-	})
-	return output
-}
-
+// Scripts import
 const scriptImporter = () =>{
-		const scriptDir = env('StaticDir') + 'js/'
-		const filelist = fs.readdirSync(scriptDir)
-		for(var i=0;i<filelist.length;i++){
-			require(scriptDir + filelist[i])
-		}
+	const scriptDir = env('StaticDir') + 'js/'
+	const filelist = fs.readdirSync(scriptDir)
+	for(var i=0;i<filelist.length;i++){
+		require(scriptDir + filelist[i])
 	}
+}
 
 
 // WindowsCreator
@@ -116,10 +55,10 @@ exec('NET SESSION', function(err,so,se) {
     })	*/
 
 const init = async() =>{  
-	//firstBuild()
-	const isDBReady = await dbBuild()	
+
+	const isBuild = await sysBuild()
 	scriptImporter() 
-	if(isDBReady){
+	if(isBuild){
 		app.whenReady().then(() => {
 			WindowMain()
 			// Prevent from multiple windows create
