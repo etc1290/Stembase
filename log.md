@@ -30,10 +30,15 @@
 	53. Corrupted database recovery	
 		-- next branch
 	54. Display error message when db repair
-		-- processing
+		-- finished
 ---
-	## 2023.08.14		version 0.7.9.1 - MFO-build
+	## 2023.08.14		version 0.8.0.0 - MFO-build
+	-- Function implementation
+	-- Clear wasted codes
 	-- Bug fix
+	# Added
+	1. Add dbError function to tell if data is missing
+		-- finished
 	# Fixed
 	1. Fix the bug that envCreation always recreate Stemconfig.json even one existed
 		-- finished

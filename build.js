@@ -1,6 +1,7 @@
 const {env} = require('./static/js/addon.js')
 const fs = require('fs')
 const sqlite3 = require('sqlite3').verbose()
+const {dialog} = require('electron')
 let missingArr = []
 // Creat Stemconfig
 const envCreation = ()=>{	
@@ -44,6 +45,7 @@ const pathCreation = async()=>{
 		if(hasStemdb){
 			resolve(true)
 		}else{
+			missingArr[1] = 'Stemdb folder'
 			fs.mkdir(dbStorage,{recursive:true},(err)=>{
 				console.log(err)
 				resolve(true)
@@ -54,6 +56,7 @@ const pathCreation = async()=>{
 		if(hasMonitor){
 			resolve(true)
 		}else{
+			missingArr[2] = 'Monitored Groups folder'
 			fs.mkdir(mdbStorage,{recursive:true},(err)=>{
 				console.log(err)
 				resolve(true)
@@ -61,15 +64,7 @@ const pathCreation = async()=>{
 		}
 	})
 	const output = Promise.all(promiseChain)
-	return output
-	/*
-	if (!fs.existsSync(dbStorage)){
-		fs.mkdir(dbStorage,{recursive:true},()=>{
-			if (!fs.existsSync(mdbStorage)){
-				fs.mkdir(mdbStorage,{recursive:true},()=>{})
-			}
-		})	
-	}*/		
+	return output	
 }
 
 // Creat Database
@@ -108,6 +103,9 @@ const dbBuild = ()=>{
 			db.run(cmdTag,(err)=>{
 				db.run(cmdRef,(err)=>{
 					db.run(cmdMnt,(err)=>{
+						if(!err){
+							missingArr[3] = 'Stemdb database'
+						}
 						resolve(true)
 					})
 				})
@@ -116,7 +114,23 @@ const dbBuild = ()=>{
 	})
 	return output
 }
-
+const dbError = ()=>{
+	const errid = missingArr.indexOf(undefined)
+	if(!errid + 1){
+		const errArr = []
+		let n =0
+		for(var i=errid;i<missingArr.length;i++){
+			const e = missingArr[i]
+			if(e){
+				errArr[n] = e
+				n = n + 1				
+			}
+		}
+		const error = errArr.join(',')
+		const message = 'The following data is missing:' + error
+		dialog.showErrorBox('ERROR',message)
+	}
+}
 
 const sysBuild = ()=>{
 	const output = new Promise(async(resolve)=>{
@@ -126,6 +140,7 @@ const sysBuild = ()=>{
 			if(hasFolders){
 				const hasDB = await dbBuild()
 				if(hasDB){
+					dbError()
 					resolve(true)
 				}
 			}
