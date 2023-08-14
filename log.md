@@ -4,6 +4,7 @@
 @@@ Roadmap
 	4. 	Collapse groups only works when leave parent groups or second members
 	6. 	Prevent right-click the contextmenu firing
+		-- processing
 	7. 	Merge mnt-get function into mnt-query
 	8. 	Rewrite or remove uxselect function in index-tag
 	9. 	If data is already exist in monitored group remove that from movemenu
@@ -28,8 +29,10 @@
 	51. Highlight new added or modified data
 	52. Apply new extRemove mechanism
 	53. Corrupted database recovery	
-	54. Display error message when db repair
-		-- finished
+
+---
+	## 2023.08.14		version 0.8.0.0 - MFO-contextmenu
+	-- Initialization
 ---
 	## 2023.08.14		version 0.8.0.0 - MFO-build
 	-- Function implementation
