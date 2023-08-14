@@ -28,7 +28,6 @@
 	51. Highlight new added or modified data
 	52. Apply new extRemove mechanism
 	53. Corrupted database recovery	
-		-- next branch
 	54. Display error message when db repair
 		-- finished
 ---
