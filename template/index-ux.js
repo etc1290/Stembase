@@ -334,6 +334,10 @@ const uxContextMenuRemove = ()=>{
 	body.addEventListener('contextmenu',(event)=>{
 		event.preventDefault()
 		mainfunc(true) 
+		console.log(event.target)
+		if(event.target.id == 'mnt-cm'){
+			event.stopPropagation()
+		}
 		const evt = new CustomEvent('passcheck',{detail:{data:event},bubbles:true})
 		event.target.dispatchEvent(evt)
 		

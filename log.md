@@ -31,6 +31,11 @@
 	53. Corrupted database recovery	
 
 ---
+	## 2023.08.15		version 0.8.0.1 - MFO-contextmenu
+	-- Bug fix
+	1. Fix the bug that data missing warning show up at wrong timing
+		-- finished
+---
 	## 2023.08.14		version 0.8.0.0 - MFO-contextmenu
 	-- Initialization
 ---

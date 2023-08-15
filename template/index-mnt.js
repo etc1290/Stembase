@@ -132,8 +132,6 @@ const mntsort = (arr)=>{
 		}else{
 			groupParent[g] = pid
 			groupArr[g++]= arr['Folderid'][i]
-			//console.log(pid)
-			//console.log(arr['Folderid'])
 		}
 	}
 	return [groupArr,dataArr,groupParent,dataParent]
