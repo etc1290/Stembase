@@ -310,6 +310,13 @@ const uxContextMenuCreate = ()=>{
 		uxContextMenuOptRule()		
 	})	
 }	
+// Right Click function Blocker
+const uxcmCheck = (event)=>{
+	const isContextmenu = event.button == 2
+	if(isContextmenu){
+		return true
+	}
+}
 // Contextmenu Removal and hide
 const uxContextMenuRemove = ()=>{
 	const mainfunc = (isSub=false)=>{
@@ -334,10 +341,6 @@ const uxContextMenuRemove = ()=>{
 	body.addEventListener('contextmenu',(event)=>{
 		event.preventDefault()
 		mainfunc(true) 
-		console.log(event.target)
-		if(event.target.id == 'mnt-cm'){
-			event.stopPropagation()
-		}
 		const evt = new CustomEvent('passcheck',{detail:{data:event},bubbles:true})
 		event.target.dispatchEvent(evt)
 		

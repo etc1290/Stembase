@@ -664,7 +664,11 @@ const mntdragfunc = ()=>{
 const mntmenufunc = async()=>{
 	// Data
 		// New:							Create new monitored group.                                                        
-	document.getElementById('mnt-cm-new').addEventListener('mousedown',async()=>{
+	document.getElementById('mnt-cm-new').addEventListener('mousedown',async(event)=>{
+		const iscm = uxcmCheck(event)
+		if(iscm){
+			return
+		}
 		let group = 0
 		try{
 			group = document.querySelector('.mnt-selected').closest('.mnt-folder')
@@ -686,7 +690,11 @@ const mntmenufunc = async()=>{
 		}
 	})
 		// Remove(Delete this record):	Delete all tags and meta and remove monitored status of this member
-	document.getElementById('mnt-removemenu-delete').addEventListener('mousedown',async()=>{
+	document.getElementById('mnt-removemenu-delete').addEventListener('mousedown',async(event)=>{
+		const iscm = uxcmCheck(event)
+		if(iscm){
+			return
+		}
 		const selected = uxSelectAll('mnt')
 		const pos = selected['Folder'].indexOf('All')
 		if(pos + 1){
@@ -702,7 +710,11 @@ const mntmenufunc = async()=>{
 		}	
 	})
 		// Remove(Remove from group):	Remove member from this monitored group
-	document.getElementById('mnt-removemenu-remove').addEventListener('mousedown',async()=>{		
+	document.getElementById('mnt-removemenu-remove').addEventListener('mousedown',async(event)=>{		
+		const iscm = uxcmCheck(event)
+		if(iscm){
+			return
+		}
 		const selected = uxSelect('mnt')
 		const [groupArr,dataRawArr,groupParent,dataParent] = mntsort(selected)
 		let isRemoveGroup = false
@@ -733,7 +745,11 @@ const mntmenufunc = async()=>{
 		}
 	})
 		// Remove(Remove grouping):		Remove member from all monitored groups
-	document.getElementById('mnt-removemenu-ungroup').addEventListener('mousedown',async()=>{
+	document.getElementById('mnt-removemenu-ungroup').addEventListener('mousedown',async(event)=>{
+		const iscm = uxcmCheck(event)
+		if(iscm){
+			return
+		}
 		let isRemove = false
 		let isRemoveGroup = false
 		const selected = uxSelect('mnt')
@@ -778,7 +794,11 @@ const mntmenufunc = async()=>{
 	})	
 	// Header
 		// Remove:						Delete this group
-	document.getElementById('mnt-cm-groupdelete').addEventListener('mousedown',async()=>{
+	document.getElementById('mnt-cm-groupdelete').addEventListener('mousedown',async(event)=>{
+		const iscm = uxcmCheck(event)
+		if(iscm){
+			return
+		}
 		const selected = uxSelect('mnt')
 		const updateArr = await window.mnt.delete(selected['Data'])
 		if(updateArr[0]){
@@ -800,6 +820,10 @@ const mntmenufunc = async()=>{
 	})
 		// Rename:						Rename this group
 	document.getElementById('mnt-cm-grouprename').addEventListener('mousedown',async(event)=>{
+		const iscm = uxcmCheck(event)
+		if(iscm){
+			return
+		}
 		const group = document.querySelector('.mnt-selected')
 		oldname = group.innerHTML
 		group.contentEditable = 'true'
@@ -824,7 +848,6 @@ const mntmenuAddition = (cmda='all',cmdb)=>{
 			for(var i=0;i<groups.length;i++){
 				const id = `'mnt-movemenu-` + groups[i] + `'`
 				const text = 'to ' + groups[i]
-				//const modName = mntreplace(groups[i][1])
 				const modName = idlist[i]
 				const option = `<p id=` + id + `class='mnt-dropmenu-option mnt-movemenu-addition'>` + text + `</p>`
 				optionArr[i] = option
@@ -895,8 +918,6 @@ const mntmenuAddition = (cmda='all',cmdb)=>{
 					}
 					if(dataArr[0]){
 						const parentArr = [...dataArr].fill(name)
-						console.log(parentArr)
-						console.log(selected['Data'])
 						const reportArr = await window.mnt.update(parentArr,selected['Data'])
 						if(reportArr){
 							const pos = reportArr.indexOf(false)
