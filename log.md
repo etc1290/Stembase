@@ -4,11 +4,11 @@
 @@@ Roadmap
 	4. 	Collapse groups only works when leave parent groups or second members
 	6. 	Prevent right-click the contextmenu firing
-		-- processing
+		-- finished
 	7. 	Merge mnt-get function into mnt-query
 	8. 	Rewrite or remove uxselect function in index-tag
 	9. 	If data is already exist in monitored group remove that from movemenu
-		-- next next branch
+		-- processing
 	12. Non-main groups in Shortcut's highlight effect is missing
 	14. Auto detect if Shortcut is configured in the Groups db to prevent corrupted 
 	15. Adjust all Shortcut-id related function to fit the new mechanism
