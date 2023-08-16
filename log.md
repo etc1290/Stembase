@@ -29,16 +29,24 @@
 	53. Corrupted database recovery	
 	54. Update movemenu option when rename
 		-- finished
-	55. When move to a renamed groups, update the group instantly
-		-- processing
+	55. When move to a renamed group, update the group instantly
+		-- finished
 	56. When remove members from a renamed group, update that group instantly
-		-- processing
+		-- finished
+	57. When dragging to a renamed group, update that group instantly
+		-- finished
 
 ---
-	## 2023.08.16		version 0.8.0.2 - MFO-contextmenu
+	## 2023.08.16		version 0.8.1.0 - MFO-contextmenu
+	-- Function implementation
 	-- Bug fix
+	# Added
+	1. Add mntgroupcheck function to handle system or user groups check
+		-- finished
 	# Fixed
 	1. Fix the bug that movemenu malfunction after rename function due to id not update
+		-- finished
+	2. Fix a serial of bug by apply mntgroupcheck function to mntrename function
 		-- finished
 	
 ---

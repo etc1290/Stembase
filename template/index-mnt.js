@@ -81,7 +81,6 @@ const mntclass = (el) =>{
 	if(isElement){
 		el = [el]
 	}
-	console.log(el)
 	for(var i=0;i<el.length;i++){
 		const arr = el[i].classList
 		const isData = arr.contains('mnt-data')
@@ -138,7 +137,34 @@ const mntsort = (arr)=>{
 	}
 	return [groupArr,dataArr,groupParent,dataParent]
 }
-
+// Side:	System or user groups check
+const mntgroupcheck = (arr)=>{
+	console.log(arr.constructor)
+	const output = []
+	const isElement = arr.constructor == Element
+	if(isElement){
+		arr=[arr]
+	}
+	for(var i=0;i<arr.length;i++){
+		let e = arr[i]
+		const isHeader = e.classList.contains('mnt-folder-header') 
+		const isContent= e.classList.contains('mnt-folder-content')
+		if(isHeader + isContent){
+			e = e.closest('mnt-folder')
+		}
+		const isUser = e.id.substring(0,8) == 'mnt-user'
+		if(isUser){
+			output[i] = false
+		}else{
+			output[i] = true
+		}
+	}
+	if(isElement){
+		return output[0]
+	}else{
+		return output
+	}
+}
 // Side:	Target class checker
 const mntcheck = (event,classname,isCurrent=false)=>{
 	if(!event){
@@ -156,7 +182,6 @@ const mntreplace = (name)=>{
 	const c = '@'
 	const isArr = name.constructor == Array
 	if(isArr){
-		console.log(name)
 		for(var i=0;i<name.length;i++){
 			name[i] = name[i].replace(/ /g,c)
 		}
@@ -291,9 +316,12 @@ const mntrename = ()=>{
 				target.removeAttribute("contenteditable")
 				const cls = mntclass(group)[1]
 				const updateArr = document.querySelectorAll('.' + cls)
-				for(var i=0;i<updateArr.length;i++){
+				const checkArr = mntgroupcheck(updateArr)
+				for(var i=0;i<updateArr.length;i++){				
 					const e = updateArr[i]
-					e.id = `mnt-user-` + newname
+					if(!checkArr[i]){
+						e.id = `mnt-user-` + newname
+					}					
 					e.children[0].innerHTML = newname
 				}
 				mntmenuAddition('create','movemenu')				
@@ -337,6 +365,7 @@ const mntrename = ()=>{
 }
 // Side:	Monitored group loader
 const mntgroupwrite = async(target,isMainExec=true) =>{
+	console.log(target)
 	const isArr = target.constructor == Array
 	if(!isArr){
 		target=[target]
@@ -386,7 +415,6 @@ const mntgroupwrite = async(target,isMainExec=true) =>{
 		updateDiv.innerHTML = groups.join('')
 		mntspan(updateDiv)
 	}
-
 }
 // Side:	Load data in monitored groups 
 const mntgroupload = ()=>{
@@ -516,7 +544,6 @@ const mntfunc = (target)=>{
 				let isUpdateGroup = false
 				if(groupArr.length){					
 					const tempArr = [...groupArr].fill(dropid)
-					console.log(544)
 					const reportArr = await window.mnt.update(tempArr,groupArr,true)
 					const pos = reportArr.indexOf(false)
 					if(pos + 1){
@@ -560,7 +587,6 @@ const mntfunc = (target)=>{
 				if(isUpdate&&isUpdateGroup){
 					if(groupArr.length){
 						[groupParent,groupArr] = extRemove(groupParent,'',groupArr)
-						console.log(589)
 						const reportArr = await window.mnt.remove(groupParent,groupArr,true)
 						if(reportArr){
 							isRemoveGroup = true
