@@ -141,7 +141,7 @@ const mntsort = (arr)=>{
 const mntgroupcheck = (arr)=>{
 	console.log(arr.constructor)
 	const output = []
-	const isElement = arr.constructor == Element
+	const isElement = arr instanceof Element
 	if(isElement){
 		arr=[arr]
 	}
@@ -365,7 +365,6 @@ const mntrename = ()=>{
 }
 // Side:	Monitored group loader
 const mntgroupwrite = async(target,isMainExec=true) =>{
-	console.log(target)
 	const isArr = target.constructor == Array
 	if(!isArr){
 		target=[target]
@@ -692,6 +691,26 @@ const mntdragfunc = ()=>{
 }
 // Side:	Contextmenu function
 const mntmenufunc = async()=>{
+	// Gerneral
+	document.getElementById('mnt-cm-move').addEventListener('mousedown',(event)=>{
+		const selected = uxSelect('mnt')
+		const nodeArr = selected['Node']
+		const isSolo = nodeArr.length-1
+		const invalidOpt = document.getElementById('mnt-movemenu-@invalid')
+		if(!isSolo){
+			const movemenu = document.getElementById('mnt-cm-movemenu')
+			const menuLen = movemenu.childElementCount
+			const hideLen = movemenu.querySelectorAll('.hide').length
+			const isValidGroups = menuLen - hideLen - 1			
+			if(isValidGroups){				
+				invalidOpt.classList.add('hide')
+			}else{
+				invalidOpt.classList.remove('hide')
+			}
+		}else{
+			invalidOpt.classList.remove('hide')
+		}
+	})
 	// Data
 		// New:							Create new monitored group.                                                        
 	document.getElementById('mnt-cm-new').addEventListener('mousedown',async(event)=>{
@@ -821,7 +840,7 @@ const mntmenufunc = async()=>{
 		}
 		const updateArr = parentArr.flat(2)
 		mntgroupwrite(updateArr)
-	})	
+	})
 	// Header
 		// Remove:						Delete this group
 	document.getElementById('mnt-cm-groupdelete').addEventListener('mousedown',async(event)=>{
@@ -963,8 +982,7 @@ const mntmenuAddition = (cmda='all',cmdb)=>{
 								const mnterror = await window.mnt.error('mntdrag-data',dupArr)
 							}
 						}
-					}
-						
+					}					
 				}
 			})
 		}

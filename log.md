@@ -35,13 +35,18 @@
 		-- finished
 	57. When dragging to a renamed group, update that group instantly
 		-- finished
+	58. Hide invalid meesage when valid in movemneu
+		-- finished
 
 ---
 	## 2023.08.16		version 0.8.1.0 - MFO-contextmenu
 	-- Function implementation
+	-- Function enhancement
 	-- Bug fix
 	# Added
 	1. Add mntgroupcheck function to handle system or user groups check
+		-- finished
+	2. Add invalid detect when there is not other monitored can be added
 		-- finished
 	# Fixed
 	1. Fix the bug that movemenu malfunction after rename function due to id not update

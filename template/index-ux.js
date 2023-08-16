@@ -31,8 +31,7 @@ const uxSelect = (funcSection,exCode=false)=>{
 		const selGroupCls=[]	 
 		const selParent	= []
 		for(let i=0;i<input.length;i++){
-			const folder = input[i].parentNode.closest('.mnt-folder')
-			
+			const folder = input[i].parentNode.closest('.mnt-folder')		
 			const isGroup = input[i].classList.contains('mnt-folder-header')
 			const group  = mntclass(folder)
 			selFolder[i] = folder.children[0].innerHTML	
@@ -41,8 +40,7 @@ const uxSelect = (funcSection,exCode=false)=>{
 			selGroup[i]	 = group[0]
 			selGroupCls[i]=group[1]
 			if(isGroup){
-				selParent[i] = folder.parentNode.closest('.mnt-folder')
-				
+				selParent[i] = folder.parentNode.closest('.mnt-folder')				
 			}else{
 				selParent[i] = folder
 			}
