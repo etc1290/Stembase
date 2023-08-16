@@ -3,8 +3,6 @@
 
 @@@ Roadmap
 	4. 	Collapse groups only works when leave parent groups or second members
-	6. 	Prevent right-click the contextmenu firing
-		-- finished
 	7. 	Merge mnt-get function into mnt-query
 	8. 	Rewrite or remove uxselect function in index-tag
 	9. 	If data is already exist in monitored group remove that from movemenu
@@ -29,11 +27,25 @@
 	51. Highlight new added or modified data
 	52. Apply new extRemove mechanism
 	53. Corrupted database recovery	
+	54. Update movemenu option when rename
+		-- finished
+	55. When move to a renamed groups, update the group instantly
+		-- processing
+	56. When remove members from a renamed group, update that group instantly
+		-- processing
 
+---
+	## 2023.08.16		version 0.8.0.2 - MFO-contextmenu
+	-- Bug fix
+	# Fixed
+	1. Fix the bug that movemenu malfunction after rename function due to id not update
+		-- finished
+	
 ---
 	## 2023.08.15		version 0.8.0.1 - MFO-contextmenu
 	-- Bug fix
 	-- Clear wasted codes
+	# Fixed
 	1. Fix the bug that data missing warning show up at wrong timing
 		-- finished
 	2. Add uxcmCheck function to prevent right click fire click event in contextmenu

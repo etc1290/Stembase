@@ -77,9 +77,11 @@ const mntclass = (el) =>{
 	const idArr = []
 	const clsArr = []
 	const isElement = el instanceof Element
+	
 	if(isElement){
 		el = [el]
 	}
+	console.log(el)
 	for(var i=0;i<el.length;i++){
 		const arr = el[i].classList
 		const isData = arr.contains('mnt-data')
@@ -291,8 +293,10 @@ const mntrename = ()=>{
 				const updateArr = document.querySelectorAll('.' + cls)
 				for(var i=0;i<updateArr.length;i++){
 					const e = updateArr[i]
+					e.id = `mnt-user-` + newname
 					e.children[0].innerHTML = newname
-				}				
+				}
+				mntmenuAddition('create','movemenu')				
 			}
 		}	
 	}
