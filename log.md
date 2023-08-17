@@ -3,11 +3,10 @@
 
 @@@ Roadmap
 	4. 	Collapse groups only works when leave parent groups or second members
-	6. 	Prevent right-click the contextmenu firing
 	7. 	Merge mnt-get function into mnt-query
 	8. 	Rewrite or remove uxselect function in index-tag
 	9. 	If data is already exist in monitored group remove that from movemenu
-		-- next next branch
+		-- finished
 	12. Non-main groups in Shortcut's highlight effect is missing
 	14. Auto detect if Shortcut is configured in the Groups db to prevent corrupted 
 	15. Adjust all Shortcut-id related function to fit the new mechanism
@@ -21,6 +20,7 @@
 	28. Duplicate data writing will show warning message
 	29. Add a small warning area on bottom-left corner
 	34. Add warning before Delete function fire
+		-- processing
 	35. Add redo function
 	39. Rewrite mnt-delete related function to adapt id-based function
 	40. Add ellipsis effect at all monitored name
@@ -28,8 +28,43 @@
 	51. Highlight new added or modified data
 	52. Apply new extRemove mechanism
 	53. Corrupted database recovery	
-	54. Display error message when db repair
+	59. Add icon
+
+---
+	## 2023.08.17		version 0.8.1.1 - MFO-contextmenu
+	-- Function enhancement
+	# Added
+	1. When open movemenu, not display current folder as a viable option
 		-- finished
+	
+---
+	## 2023.08.16		version 0.8.1.0 - MFO-contextmenu
+	-- Function implementation
+	-- Function enhancement
+	-- Bug fix
+	# Added
+	1. Add mntgroupcheck function to handle system or user groups check
+		-- finished
+	2. Add invalid detect when there is not other monitored can be added
+		-- finished
+	# Fixed
+	1. Fix the bug that movemenu malfunction after rename function due to id not update
+		-- finished
+	2. Fix a serial of bug by apply mntgroupcheck function to mntrename function
+		-- finished
+	
+---
+	## 2023.08.15		version 0.8.0.1 - MFO-contextmenu
+	-- Bug fix
+	-- Clear wasted codes
+	# Fixed
+	1. Fix the bug that data missing warning show up at wrong timing
+		-- finished
+	2. Add uxcmCheck function to prevent right click fire click event in contextmenu
+		-- finished
+---
+	## 2023.08.14		version 0.8.0.0 - MFO-contextmenu
+	-- Initialization
 ---
 	## 2023.08.14		version 0.8.0.0 - MFO-build
 	-- Function implementation

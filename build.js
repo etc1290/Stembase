@@ -116,7 +116,7 @@ const dbBuild = ()=>{
 }
 const dbError = ()=>{
 	const errid = missingArr.indexOf(undefined)
-	if(!errid + 1){
+	if(errid + 1){
 		const errArr = []
 		let n =0
 		for(var i=errid;i<missingArr.length;i++){
