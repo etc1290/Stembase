@@ -20,6 +20,7 @@
 	28. Duplicate data writing will show warning message
 	29. Add a small warning area on bottom-left corner
 	34. Add warning before Delete function fire
+		-- processing
 	35. Add redo function
 	39. Rewrite mnt-delete related function to adapt id-based function
 	40. Add ellipsis effect at all monitored name
