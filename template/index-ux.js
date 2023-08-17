@@ -1,7 +1,5 @@
 
 
-
-
 // Custom scroll unfinished
 const uxScroll = (e)=>{
 	const targetDiv = document.getElementById(e)

@@ -7,13 +7,23 @@
     <meta http-equiv="X-Content-Security-Policy" content="default-src 'self'; script-src 'self'" />
 	<link rel='stylesheet' type='text/css' href='../static/css/styles.css'>
 	<link rel='stylesheet' type='text/css' href='../static/css/index.css'>
-	<link rel='stylesheet' href='../static/css/hint.css'>
     <title>Hello from Electron renderer!</title>
 </head>
 
 <body>
 	<div id='fs-path'></div>
+	<div id='box' class='function-section'>
+		<div id='box-main'>
+			<p id='box-header'>Default header</p>
+			<p id='box-content'>Default content</p>
+			<div id='box-container'>
+				<p>Default button</p>
+			</div>
+		</div>
+		<div id='box-filter'></div>
+	</div>
 	<div id='main-function'>
+		
 		<div id='mnt' class='function-section'>
 			<div id='mnt-cm' class='context-menu'>
 				<div id='mnt-datacm'>
@@ -98,6 +108,7 @@
 </body>
 <script src="./extension.js"></script>
 <script src="./index-ux.js"></script>
+<script src="./index-box.js"></script>
 <script src="./index-tag.js"></script>
 <script src="./index-mnt.js"></script>
 <script src="./index.js"></script>

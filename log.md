@@ -27,10 +27,13 @@
 	52. Apply new extRemove mechanism
 	53. Corrupted database recovery	
 	59. Add icon
+	60. Adjust button style by js rather then css
+	61. Round border of message box
 
 ---
-	## 2023.08.17		version 0.8.1.1 - MFO-messageBox
+	## 2023.08.17		version 0.8.1.1 - Message-Box
 	-- Initialization
+	-- Structure building
 ---
 	## 2023.08.17		version 0.8.1.1 - MFO-contextmenu
 	-- Function enhancement
