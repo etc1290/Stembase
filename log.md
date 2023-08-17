@@ -31,6 +31,12 @@
 	61. Round border of message box
 
 ---
+	## 2023.08.18		version 0.8.1.2 - Message-Box
+	-- Style change
+	# Changed
+	1. Make the box center to window
+		-- finished
+---
 	## 2023.08.17		version 0.8.1.1 - Message-Box
 	-- Initialization
 	-- Structure building

@@ -27,8 +27,8 @@
 	background:		rgb(247,247,247);
 	z-index:		9998;
 	position:		fixed;
-	top:			50%;
-	left:			50%;
+	left:			calc(50vw - 200px);
+	top:			calc(50vh - 125px);
 	display:		block;
 }
 #main-function{
