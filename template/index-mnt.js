@@ -698,6 +698,14 @@ const mntmenufunc = async()=>{
 		const isSolo = nodeArr.length-1
 		const invalidOpt = document.getElementById('mnt-movemenu-@invalid')
 		if(!isSolo){
+			const node = nodeArr[0]
+			const isElement = node instanceof Element
+			if(isElement){
+				const group = selected['Folder'][0]
+				const cls = 'mnt-movemenu-' + group
+				const movemenu = document.getElementById(cls)
+				movemenu.classList.add('hide')
+			}
 			const movemenu = document.getElementById('mnt-cm-movemenu')
 			const menuLen = movemenu.childElementCount
 			const hideLen = movemenu.querySelectorAll('.hide').length

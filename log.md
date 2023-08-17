@@ -6,7 +6,7 @@
 	7. 	Merge mnt-get function into mnt-query
 	8. 	Rewrite or remove uxselect function in index-tag
 	9. 	If data is already exist in monitored group remove that from movemenu
-		-- processing
+		-- finished
 	12. Non-main groups in Shortcut's highlight effect is missing
 	14. Auto detect if Shortcut is configured in the Groups db to prevent corrupted 
 	15. Adjust all Shortcut-id related function to fit the new mechanism
@@ -27,17 +27,15 @@
 	51. Highlight new added or modified data
 	52. Apply new extRemove mechanism
 	53. Corrupted database recovery	
-	54. Update movemenu option when rename
-		-- finished
-	55. When move to a renamed group, update the group instantly
-		-- finished
-	56. When remove members from a renamed group, update that group instantly
-		-- finished
-	57. When dragging to a renamed group, update that group instantly
-		-- finished
-	58. Hide invalid meesage when valid in movemneu
-		-- finished
+	59. Add icon
 
+---
+	## 2023.08.17		version 0.8.1.1 - MFO-contextmenu
+	-- Function enhancement
+	# Added
+	1. When open movemenu, not display current folder as a viable option
+		-- finished
+	
 ---
 	## 2023.08.16		version 0.8.1.0 - MFO-contextmenu
 	-- Function implementation
