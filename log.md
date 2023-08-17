@@ -5,8 +5,6 @@
 	4. 	Collapse groups only works when leave parent groups or second members
 	7. 	Merge mnt-get function into mnt-query
 	8. 	Rewrite or remove uxselect function in index-tag
-	9. 	If data is already exist in monitored group remove that from movemenu
-		-- finished
 	12. Non-main groups in Shortcut's highlight effect is missing
 	14. Auto detect if Shortcut is configured in the Groups db to prevent corrupted 
 	15. Adjust all Shortcut-id related function to fit the new mechanism
@@ -31,12 +29,14 @@
 	59. Add icon
 
 ---
+	## 2023.08.17		version 0.8.1.1 - MFO-messageBox
+	-- Initialization
+---
 	## 2023.08.17		version 0.8.1.1 - MFO-contextmenu
 	-- Function enhancement
 	# Added
 	1. When open movemenu, not display current folder as a viable option
-		-- finished
-	
+		-- finished	
 ---
 	## 2023.08.16		version 0.8.1.0 - MFO-contextmenu
 	-- Function implementation
