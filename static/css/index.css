@@ -10,7 +10,10 @@
 	position:		fixed;
 	left:			0;
 	top:			0;
-	/*display:		none;*/
+	display:		none;
+}
+#box.visible{
+	display:		block;
 }
 #box-filter{
 	height:			100%;

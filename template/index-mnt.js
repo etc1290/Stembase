@@ -856,6 +856,10 @@ const mntmenufunc = async()=>{
 		if(iscm){
 			return
 		}
+		boxCreate('mnt-groupdelete')
+		const test = document.getElementById('box-header')
+		console.log(test.innerHTML)
+		return
 		const selected = uxSelect('mnt')
 		const updateArr = await window.mnt.delete(selected['Data'])
 		if(updateArr[0]){

@@ -29,10 +29,22 @@
 	59. Add icon
 	60. Adjust button style by js rather then css
 	61. Round border of message box
+	62. Fix ux click no property warning
+		-- processing
+	63. Close contextmenu after box display
+		-- processing
 
 ---
 	## 2023.08.18		version 0.8.1.2 - Message-Box
+	-- Function implementation
 	-- Style change
+	# Added
+	1. Add boxCreate function to decide the structure of box
+		-- finished
+	2. Add boxFunc to add box-related operation functions
+		-- finished
+	3. Add Box close machanism in boxFunc to decide which situation can turn off the box
+		-- finished
 	# Changed
 	1. Make the box center to window
 		-- finished
