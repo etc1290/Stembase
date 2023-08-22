@@ -34,6 +34,13 @@
 	63. Close contextmenu after box display
 		-- processing
 
+
+---
+	## 2023.08.22		version 0.8.1.3 - Message-Box
+	-- Bug fix
+	# Fixed
+	1. Fix the bug that when click a no class element trigger error
+		-- finished
 ---
 	## 2023.08.18		version 0.8.1.2 - Message-Box
 	-- Function implementation

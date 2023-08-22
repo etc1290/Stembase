@@ -319,7 +319,11 @@ const uxContextMenuRemove = ()=>{
 		const vsbMenu = document.querySelectorAll('.context-menu.visible')
 		const vsbSubMenu = document.querySelectorAll('.submenu.visible')
 		const hideOpt = document.querySelectorAll('.hide')
-		if(!event.target.offsetParent.classList.contains('context-menu')){
+		let isValid = event.target.classList.length
+		if(isValid){
+			isValid = event.target.offsetParent.classList.contains('context-menu')
+		}
+		if(!isValid){
 			if(!isSub){
 				for(var i=0;i<vsbMenu.length;i++){
 					vsbMenu[i].classList.remove('visible')				
