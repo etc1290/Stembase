@@ -32,9 +32,18 @@
 	62. Fix ux click no property warning
 		-- processing
 	63. Close contextmenu after box display
-		-- processing
+		-- finished
 
 
+---
+	## 2023.08.23		version 0.8.1.4 - Message-Box
+	-- Bug fix
+	# Fixed
+	1. When box shows up contextmenu will auto close
+		-- finished
+	2. Close contextmenu after any operation without interacting with submenu
+		-- finished
+	3. 
 ---
 	## 2023.08.22		version 0.8.1.3 - Message-Box
 	-- Bug fix

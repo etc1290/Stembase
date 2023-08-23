@@ -761,10 +761,11 @@ const mntmenufunc = async()=>{
 				selected['Folder'][i] =  '@All'
 			}
 		}
+		
 		const isFinished = await window.mnt.deleteM(selected['Folder'],selected['Data'])
 		if(isFinished){
 			mntgroupwrite(selected['Node'])
-		}	
+		}
 	})
 		// Remove(Remove from group):	Remove member from this monitored group
 	document.getElementById('mnt-removemenu-remove').addEventListener('mousedown',async(event)=>{		
@@ -857,9 +858,8 @@ const mntmenufunc = async()=>{
 			return
 		}
 		boxCreate('mnt-groupdelete')
-		const test = document.getElementById('box-header')
-		console.log(test.innerHTML)
-		return
+		//document.body.click()
+		
 		const selected = uxSelect('mnt')
 		const updateArr = await window.mnt.delete(selected['Data'])
 		if(updateArr[0]){

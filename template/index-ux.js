@@ -321,7 +321,8 @@ const uxContextMenuRemove = ()=>{
 		const hideOpt = document.querySelectorAll('.hide')
 		let isValid = event.target.classList.length
 		if(isValid){
-			isValid = event.target.offsetParent.classList.contains('context-menu')
+			//isValid = event.target.offsetParent.classList.contains('context-menu')
+			isValid = event.target.classList.contains('mnt-cm-submenu')
 		}
 		if(!isValid){
 			if(!isSub){
@@ -334,7 +335,7 @@ const uxContextMenuRemove = ()=>{
 			}			
 		}
 		for(var i=0;i<vsbSubMenu.length;i++){
-				vsbSubMenu[i].classList.remove('visible')
+			vsbSubMenu[i].classList.remove('visible')
 		}
 	}
 	const body = document.body

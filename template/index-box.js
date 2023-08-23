@@ -18,9 +18,12 @@ const boxCreate = (mode)=>{
 	const header = document.getElementById('box-header')
 	const content= document.getElementById('box-content')
 	const btn	 = document.getElementById('box-container')
+	const filter = document.getElementById('box-filter')
 	header.innerHTML = boxHeader[mode]
 	content.innerHTML= boxContent[mode]
-	btn.innerHTML	 = boxButton[mode]
+	btn.innerHTML	 = boxButton[mode]/*
+	const evt = new Event('click')
+	filter.dispatchEvent(evt)*/
 	
 }
 const boxFunc = ()=>{
@@ -32,6 +35,9 @@ const boxFunc = ()=>{
 			const box = document.getElementById('box')
 			box.classList.remove('visible')
 		}
+	})
+	document.getElementById('box-filter').addEventListener('click',()=>{
+		console.log('1121')
 	})
 }
 const boxInit = ()=>{
