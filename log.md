@@ -39,7 +39,11 @@
 
 ---
 	## 2023.08.24		version 0.8.1.5 - Message-Box
+	-- Function enhancement
 	-- Bug fix
+	# Added
+	1. Merge delete group function to box function
+		-- finished
 	# Fixed
 	1. Fix the bug that when funcSection not exist lead to a fatal error
 		-- finished

@@ -852,14 +852,35 @@ const mntmenufunc = async()=>{
 	})
 	// Header
 		// Remove:						Delete this group
-	document.getElementById('mnt-cm-groupdelete').addEventListener('mousedown',async(event)=>{
+	document.getElementById('mnt-cm-groupdelete').addEventListener('mousedown',(event)=>{
 		const iscm = uxcmCheck(event)
 		if(iscm){
 			return
 		}
 		boxCreate('mnt-groupdelete')
 		//document.body.click()
-		
+		const box = document.getElementById('box-yes')
+		box.addEventListener('click',async(event)=>{
+			const selected = uxSelect('mnt')
+			const updateArr = await window.mnt.delete(selected['Data'])
+			if(updateArr[0]){
+				mntgroup()
+				for(var i=0;i<updateArr.length;i++){
+					const node = updateArr[i]
+					if(node == 'Shortcut'){
+						mntgroupwrite(document.getElementById('mnt-shortcut'))
+					}else{
+						const modName = mntreplace(node)
+						const nodelist = document.getElementsByClassName(modName)
+						if(nodelist[0]){
+							mntgroupwrite(nodelist)						
+						}				
+					}
+				}
+				mntmenuAddition('create','movemenu')
+			}
+		})
+			/*
 		const selected = uxSelect('mnt')
 		const updateArr = await window.mnt.delete(selected['Data'])
 		if(updateArr[0]){
@@ -877,7 +898,7 @@ const mntmenufunc = async()=>{
 				}
 			}
 			mntmenuAddition('create','movemenu')
-		}
+		}*/
 	})
 		// Rename:						Rename this group
 	document.getElementById('mnt-cm-grouprename').addEventListener('mousedown',async(event)=>{
