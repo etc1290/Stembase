@@ -30,11 +30,19 @@
 	60. Adjust button style by js rather then css
 	61. Round border of message box
 	62. Fix ux click no property warning
+		-- no longer need
+	64. Move partial function source to box menu
 		-- processing
-	63. Close contextmenu after box display
+	65. When there is no corresponding contextmenu not showing error
 		-- finished
 
 
+---
+	## 2023.08.24		version 0.8.1.5 - Message-Box
+	-- Bug fix
+	# Fixed
+	1. Fix the bug that when funcSection not exist lead to a fatal error
+		-- finished
 ---
 	## 2023.08.23		version 0.8.1.4 - Message-Box
 	-- Bug fix

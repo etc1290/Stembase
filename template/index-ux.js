@@ -170,6 +170,9 @@ const uxContextMenuCreate = ()=>{
 		event.preventDefault()
 		// Display contextmenu
 		const funcSection = event.target.closest('.function-section')
+		if(!funcSection){
+			return false
+		}
 		const contextMenu = funcSection.querySelector('.context-menu')
 		if(!contextMenu){
 			return false
