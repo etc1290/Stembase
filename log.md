@@ -33,10 +33,17 @@
 		-- no longer need
 	64. Move partial function source to box menu
 		-- processing
-	65. When there is no corresponding contextmenu not showing error
+	66. Merge delete member function to box
 		-- finished
+	67. move function not work when target is in the All list
+		-- processing
 
-
+---
+	## 2023.08.25		version 0.8.1.6 - Message-Box
+	-- Function enhancement
+	# Added
+	1. Add box support in members delete function
+		-- finished
 ---
 	## 2023.08.24		version 0.8.1.5 - Message-Box
 	-- Function enhancement

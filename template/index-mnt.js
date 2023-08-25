@@ -747,25 +747,28 @@ const mntmenufunc = async()=>{
 		}
 	})
 		// Remove(Delete this record):	Delete all tags and meta and remove monitored status of this member
-	document.getElementById('mnt-removemenu-delete').addEventListener('mousedown',async(event)=>{
+	document.getElementById('mnt-removemenu-delete').addEventListener('mousedown',(event)=>{
 		const iscm = uxcmCheck(event)
 		if(iscm){
 			return
 		}
-		const selected = uxSelectAll('mnt')
-		const pos = selected['Folder'].indexOf('All')
-		if(pos + 1){
-			for(var i=pos;i<selected['Folder'].length;i++){
-				const node = selected['Node'][i]
-				const isMain = node.id == 'mnt-main'
-				selected['Folder'][i] =  '@All'
+		boxCreate('mnt-removemenu-delete')
+		const box = document.getElementById('box-yes')
+		box.addEventListener('click',async()=>{
+			const selected = uxSelectAll('mnt')
+			const pos = selected['Folder'].indexOf('All')
+			if(pos + 1){
+				for(var i=pos;i<selected['Folder'].length;i++){
+					const node = selected['Node'][i]
+					const isMain = node.id == 'mnt-main'
+					selected['Folder'][i] =  '@All'
+				}
+			}		
+			const isFinished = await window.mnt.deleteM(selected['Folder'],selected['Data'])
+			if(isFinished){
+				mntgroupwrite(selected['Node'])
 			}
-		}
-		
-		const isFinished = await window.mnt.deleteM(selected['Folder'],selected['Data'])
-		if(isFinished){
-			mntgroupwrite(selected['Node'])
-		}
+		})	
 	})
 		// Remove(Remove from group):	Remove member from this monitored group
 	document.getElementById('mnt-removemenu-remove').addEventListener('mousedown',async(event)=>{		
@@ -880,25 +883,6 @@ const mntmenufunc = async()=>{
 				mntmenuAddition('create','movemenu')
 			}
 		})
-			/*
-		const selected = uxSelect('mnt')
-		const updateArr = await window.mnt.delete(selected['Data'])
-		if(updateArr[0]){
-			mntgroup()
-			for(var i=0;i<updateArr.length;i++){
-				const node = updateArr[i]
-				if(node == 'Shortcut'){
-					mntgroupwrite(document.getElementById('mnt-shortcut'))
-				}else{
-					const modName = mntreplace(node)
-					const nodelist = document.getElementsByClassName(modName)
-					if(nodelist[0]){
-						mntgroupwrite(nodelist)						
-					}				
-				}
-			}
-			mntmenuAddition('create','movemenu')
-		}*/
 	})
 		// Rename:						Rename this group
 	document.getElementById('mnt-cm-grouprename').addEventListener('mousedown',async(event)=>{
