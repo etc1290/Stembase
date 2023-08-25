@@ -700,11 +700,15 @@ const mntmenufunc = async()=>{
 		if(!isSolo){
 			const node = nodeArr[0]
 			const isElement = node instanceof Element
+			
 			if(isElement){
 				const group = selected['Folder'][0]
 				const cls = 'mnt-movemenu-' + group
-				const movemenu = document.getElementById(cls)
-				movemenu.classList.add('hide')
+				const menu = document.getElementById(cls)
+				if(menu){
+					menu.classList.add('hide')
+				}
+				
 			}
 			const movemenu = document.getElementById('mnt-cm-movemenu')
 			const menuLen = movemenu.childElementCount
@@ -735,7 +739,7 @@ const mntmenufunc = async()=>{
 		const header = group.children[0].innerHTML
 		const isGroups = group.id == 'mnt-group'
 		const newGroup = await window.mnt.create()		
-		if(newGroup){
+		if(newGroup){                                                                                                     
 			if(!isGroups){
 				const isCreate = await window.mnt.update([header],[newGroup])
 				if(isCreate){

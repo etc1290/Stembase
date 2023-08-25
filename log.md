@@ -36,13 +36,19 @@
 	66. Merge delete member function to box
 		-- finished
 	67. move function not work when target is in the All list
+		-- finished
+	68. move function not update immediately
 		-- processing
 
 ---
 	## 2023.08.25		version 0.8.1.6 - Message-Box
 	-- Function enhancement
+	-- Bug fix
 	# Added
 	1. Add box support in members delete function
+		-- finished
+	# Fixed
+	1. Fix the bug that when movemenu not work in all list
 		-- finished
 ---
 	## 2023.08.24		version 0.8.1.5 - Message-Box
