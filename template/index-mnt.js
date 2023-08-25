@@ -1000,9 +1000,11 @@ const mntmenuAddition = (cmda='all',cmdb)=>{
 										dupArr[n++] = selected['Data'][i]
 									}
 								}
+								console.log(dupArr)
 								const mnterror = await window.mnt.error('mntdrag-data',dupArr)
 							}
 						}
+						mntgroupwrite(target)
 					}					
 				}
 			})

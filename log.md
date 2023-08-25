@@ -37,7 +37,9 @@
 		-- finished
 	67. move function not work when target is in the All list
 		-- finished
-	68. move function not update immediately
+	68. Bug:move function not update immediately
+		-- finished
+	69. Bug:Display error message when dragging members even though not duplicate
 		-- processing
 
 ---
@@ -49,6 +51,8 @@
 		-- finished
 	# Fixed
 	1. Fix the bug that when movemenu not work in all list
+		-- finished
+	2. Fix the bug that dragging monitored data cannot update immediately
 		-- finished
 ---
 	## 2023.08.24		version 0.8.1.5 - Message-Box
